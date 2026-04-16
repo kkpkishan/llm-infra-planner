@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LLMcalc — Design Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --color-bg-base:      #ffffff;
+  --color-bg-subtle:    #fafafa;
+  --color-bg-muted:     #f4f4f5;
+  --color-bg-emphasis:  #e4e4e7;
+  --color-fg-muted:     #71717a;
+  --color-fg-default:   #3f3f46;
+  --color-fg-primary:   #18181b;
+  --color-fg-inverse:   #ffffff;
+  --color-border-subtle:  #e4e4e7;
+  --color-border-default: #d4d4d8;
+  --color-border-strong:  #a1a1aa;
+  --color-accent-subtle:   #f5f3ff;
+  --color-accent-muted:    #ddd6fe;
+  --color-accent-default:  #7c3aed;
+  --color-accent-emphasis: #6d28d9;
+  --color-success:  #16a34a;
+  --color-warning:  #ca8a04;
+  --color-danger:   #dc2626;
+  --color-info:     #2563eb;
+  --color-viz-weights:     #7c3aed;
+  --color-viz-kv:          #0891b2;
+  --color-viz-activations: #ca8a04;
+  --color-viz-overhead:    #64748b;
+  --color-viz-free:        #e4e4e7;
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.04);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.06), 0 2px 4px -2px rgb(0 0 0 / 0.04);
+  --focus-ring: 0 0 0 2px var(--color-bg-base), 0 0 0 4px var(--color-accent-default);
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+}
+[data-theme="dark"] {
+  --color-bg-base:      #09090b;
+  --color-bg-subtle:    #0f0f12;
+  --color-bg-muted:     #18181b;
+  --color-bg-emphasis:  #27272a;
+  --color-fg-muted:     #a1a1aa;
+  --color-fg-default:   #d4d4d8;
+  --color-fg-primary:   #fafafa;
+  --color-fg-inverse:   #09090b;
+  --color-border-subtle:  #27272a;
+  --color-border-default: #3f3f46;
+  --color-border-strong:  #52525b;
+  --color-accent-subtle:   #1e1b2e;
+  --color-accent-muted:    #3b2f66;
+  --color-accent-default:  #8b5cf6;
+  --color-accent-emphasis: #a78bfa;
+  --color-success: #22c55e;
+  --color-warning: #eab308;
+  --color-danger:  #ef4444;
+  --color-info:    #3b82f6;
+  --color-viz-weights:     #8b5cf6;
+  --color-viz-kv:          #06b6d4;
+  --color-viz-activations: #eab308;
+  --color-viz-overhead:    #94a3b8;
+  --color-viz-free:        #27272a;
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.5);
+  --shadow-md: 0 4px 12px rgb(0 0 0 / 0.6);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-family: var(--font-sans); font-size: 16px; }
+body {
+  background: var(--color-bg-base);
+  color: var(--color-fg-default);
+  font-size: 13px;
+  line-height: 1.54;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mono, code, .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* ======================= TOP BAR ======================= */
+.topbar {
+  height: 48px;
+  border-bottom: 1px solid var(--color-border-subtle);
+  background: var(--color-bg-base);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  gap: 32px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.logo {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+  color: var(--color-fg-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.logo-symbol {
+  display: inline-grid;
+  grid-template-columns: repeat(3, 4px);
+  grid-template-rows: repeat(3, 4px);
+  gap: 2px;
+}
+.logo-symbol span {
+  background: var(--color-fg-muted);
+  border-radius: 1px;
+}
+.logo-symbol span:nth-child(5) { background: var(--color-accent-default); }
+
+.nav {
+  display: flex;
+  gap: 4px;
+  margin-left: 16px;
+}
+.nav a {
+  color: var(--color-fg-muted);
+  text-decoration: none;
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: all 120ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav a:hover { color: var(--color-fg-primary); background: var(--color-bg-muted); }
+.nav a.active { color: var(--color-fg-primary); background: var(--color-bg-muted); }
+
+.topbar-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.data-badge {
+  font-size: 11px;
+  color: var(--color-fg-muted);
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--color-bg-muted);
+  font-family: var(--font-mono);
+  margin-right: 8px;
+}
+.icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: var(--color-fg-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 120ms;
+}
+.icon-btn:hover { background: var(--color-bg-muted); color: var(--color-fg-primary); }
+.icon-btn svg { width: 16px; height: 16px; }
+
+/* ======================= MODE TABS ======================= */
+.mode-tabs {
+  height: 48px;
+  border-bottom: 1px solid var(--color-border-subtle);
+  background: var(--color-bg-base);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  gap: 4px;
+  position: sticky;
+  top: 48px;
+  z-index: 19;
+}
+.tab {
+  padding: 0 14px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-fg-muted);
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: color 120ms;
+}
+.tab:hover { color: var(--color-fg-default); }
+.tab.active { color: var(--color-fg-primary); }
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-accent-default);
+}
+.tab svg { width: 14px; height: 14px; }
+
+.mode-tabs-right {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+}
+
+/* ======================= BUTTONS ======================= */
+.btn {
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 120ms cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+.btn svg { width: 14px; height: 14px; }
+.btn-primary {
+  background: var(--color-accent-default);
+  color: white;
+}
+.btn-primary:hover { background: var(--color-accent-emphasis); }
+.btn-secondary {
+  background: var(--color-bg-muted);
+  border-color: var(--color-border-subtle);
+  color: var(--color-fg-primary);
+}
+.btn-secondary:hover {
+  background: var(--color-bg-emphasis);
+  border-color: var(--color-border-default);
+}
+.btn-ghost { background: transparent; color: var(--color-fg-default); }
+.btn-ghost:hover { background: var(--color-bg-muted); color: var(--color-fg-primary); }
+
+/* ======================= LAYOUT ======================= */
+.main {
+  max-width: 1760px;
+  margin: 0 auto;
+  padding: 24px;
+}
+.main-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr 380px;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+/* ======================= CARDS ======================= */
+.card {
+  background: var(--color-bg-base);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 8px;
+  padding: 20px;
+}
+.card-title {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.card-title svg { width: 14px; height: 14px; }
+
+/* ======================= INPUTS (Left panel) ======================= */
+.field { margin-bottom: 16px; }
+.field-label {
+  font-size: 12px;
+  color: var(--color-fg-default);
+  font-weight: 500;
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+}
+.field-label .hint {
+  color: var(--color-fg-muted);
+  font-family: var(--font-mono);
+  font-weight: 400;
+}
+.input {
+  width: 100%;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border-default);
+  background: var(--color-bg-base);
+  color: var(--color-fg-primary);
+  font-size: 13px;
+  font-family: var(--font-sans);
+  transition: all 120ms;
+}
+.input:focus {
+  outline: none;
+  border-color: var(--color-accent-default);
+  box-shadow: 0 0 0 3px var(--color-accent-subtle);
+}
+.input-combo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  cursor: pointer;
+}
+.input-combo .chevron { margin-left: auto; color: var(--color-fg-muted); }
+
+/* Segmented control */
+.segmented {
+  display: flex;
+  background: var(--color-bg-muted);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 6px;
+  padding: 2px;
+  gap: 2px;
+}
+.segmented button {
+  flex: 1;
+  height: 28px;
+  padding: 0 8px;
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-fg-muted);
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  transition: all 120ms;
+}
+.segmented button.active {
+  background: var(--color-bg-base);
+  color: var(--color-fg-primary);
+  box-shadow: var(--shadow-sm);
+}
+.segmented button:hover:not(.active) { color: var(--color-fg-default); }
+
+/* Slider */
+.slider-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.slider {
+  flex: 1;
+  height: 4px;
+  background: var(--color-bg-emphasis);
+  border-radius: 2px;
+  position: relative;
+}
+.slider-fill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  background: var(--color-accent-default);
+  border-radius: 2px;
+}
+.slider-thumb {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  background: var(--color-bg-base);
+  border: 2px solid var(--color-accent-default);
+  border-radius: 50%;
+  box-shadow: var(--shadow-sm);
+  cursor: grab;
+}
+.slider-value {
+  min-width: 64px;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-fg-primary);
+  background: var(--color-bg-muted);
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--color-border-subtle);
+}
+
+/* Advanced toggle */
+.advanced-toggle {
+  width: 100%;
+  height: 32px;
+  background: transparent;
+  border: none;
+  color: var(--color-fg-muted);
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 4px;
+  cursor: pointer;
+  margin-top: 8px;
+  border-radius: 6px;
+}
+.advanced-toggle:hover { color: var(--color-fg-primary); background: var(--color-bg-muted); }
+.advanced-toggle svg { width: 14px; height: 14px; }
+
+/* ======================= VRAM BREAKDOWN ======================= */
+.vram-total {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 48px;
+  letter-spacing: -0.02em;
+  color: var(--color-fg-primary);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.vram-total .unit {
+  font-size: 18px;
+  color: var(--color-fg-muted);
+  margin-left: 8px;
+  font-weight: 400;
+}
+.vram-context {
+  font-size: 12px;
+  color: var(--color-fg-muted);
+  margin-bottom: 24px;
+}
+.vram-context .pct { color: var(--color-success); font-weight: 500; }
+
+/* Stacked bar */
+.vram-bar {
+  display: flex;
+  height: 28px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--color-viz-free);
+  margin-bottom: 12px;
+  gap: 2px;
+  padding: 0;
+}
+.vram-seg {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+.vram-seg:first-child { border-top-left-radius: 6px; border-bottom-left-radius: 6px; }
+.vram-seg.weights { background: var(--color-viz-weights); }
+.vram-seg.kv { background: var(--color-viz-kv); }
+.vram-seg.acts { background: var(--color-viz-activations); }
+.vram-seg.overhead { background: var(--color-viz-overhead); }
+
+/* Legend / breakdown list */
+.vram-legend {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+  margin-bottom: 16px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.legend-label {
+  color: var(--color-fg-default);
+  flex: 1;
+}
+.legend-value {
+  color: var(--color-fg-primary);
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+/* Formula reveal */
+.formula-reveal {
+  margin-top: 16px;
+  padding: 12px 14px;
+  background: var(--color-bg-muted);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-fg-muted);
+  font-size: 12px;
+  transition: all 120ms;
+}
+.formula-reveal:hover {
+  color: var(--color-fg-primary);
+  border-color: var(--color-border-default);
+}
+.formula-reveal svg { width: 14px; height: 14px; margin-left: auto; }
+
+/* Metrics row */
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border-subtle);
+}
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.metric-label {
+  font-size: 11px;
+  color: var(--color-fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.metric-value {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--color-fg-primary);
+  line-height: 1.1;
+}
+.metric-value .small { font-size: 12px; color: var(--color-fg-muted); font-weight: 400; }
+.metric-sub {
+  font-size: 11px;
+  color: var(--color-fg-muted);
+  font-family: var(--font-mono);
+}
+
+/* ======================= GPU CARDS (right) ======================= */
+.gpu-list { display: flex; flex-direction: column; gap: 10px; }
+.gpu-card {
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 8px;
+  padding: 14px;
+  transition: all 160ms;
+  cursor: pointer;
+  background: var(--color-bg-base);
+}
+.gpu-card:hover {
+  border-color: var(--color-border-default);
+  box-shadow: var(--shadow-sm);
+}
+.gpu-card.recommended {
+  border-color: var(--color-accent-muted);
+  background: linear-gradient(to right, var(--color-accent-subtle) 0%, transparent 30%);
+}
+.gpu-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.fit-badge {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.fit-badge svg { width: 14px; height: 14px; stroke-width: 2; }
+.fit-badge.fits { background: color-mix(in srgb, var(--color-success) 15%, transparent); color: var(--color-success); }
+.fit-badge.tight { background: color-mix(in srgb, var(--color-warning) 15%, transparent); color: var(--color-warning); }
+.fit-badge.over { background: color-mix(in srgb, var(--color-danger) 15%, transparent); color: var(--color-danger); }
+.gpu-name {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--color-fg-primary);
+}
+.gpu-meta {
+  font-size: 11px;
+  color: var(--color-fg-muted);
+}
+.gpu-price {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-fg-default);
+  background: var(--color-bg-muted);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+.gpu-util-bar {
+  height: 4px;
+  background: var(--color-bg-emphasis);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+.gpu-util-fill {
+  height: 100%;
+  background: var(--color-success);
+  border-radius: 2px;
+  transition: width 400ms;
+}
+.gpu-util-fill.tight { background: var(--color-warning); }
+.gpu-util-fill.over { background: var(--color-danger); }
+.gpu-util-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--color-fg-muted);
+  font-family: var(--font-mono);
+  margin-bottom: 8px;
+}
+.gpu-stats {
+  display: flex;
+  gap: 12px;
+  font-size: 11px;
+  color: var(--color-fg-muted);
+  padding-top: 8px;
+  border-top: 1px dashed var(--color-border-subtle);
+}
+.gpu-stats span { font-family: var(--font-mono); }
+
+/* ======================= CLOUD TABLE ======================= */
+.cloud-card { padding: 0; overflow: hidden; }
+.cloud-card-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border-subtle);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.cloud-card-header h3 {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-right: auto;
+}
+.sort-picker {
+  font-size: 12px;
+  color: var(--color-fg-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.sort-picker strong { color: var(--color-fg-primary); font-weight: 500; }
+
+.cloud-table { width: 100%; border-collapse: collapse; }
+.cloud-table th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--color-border-subtle);
+  background: var(--color-bg-subtle);
+}
+.cloud-table th.num, .cloud-table td.num { text-align: right; font-family: var(--font-mono); }
+.cloud-table td {
+  padding: 12px 16px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--color-border-subtle);
+  color: var(--color-fg-default);
+}
+.cloud-table tr:last-child td { border-bottom: none; }
+.cloud-table tr:hover td { background: var(--color-bg-subtle); }
+
+.provider-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.provider-logo {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  background: var(--color-bg-muted);
+  border: 1px solid var(--color-border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--color-fg-default);
+  flex-shrink: 0;
+}
+.provider-logo.aws { background: #ff9900; color: #000; border-color: transparent; }
+.provider-logo.azure { background: #0078d4; color: white; border-color: transparent; }
+.provider-logo.gcp { background: #4285f4; color: white; border-color: transparent; }
+.provider-logo.lambda { background: #6015ee; color: white; border-color: transparent; }
+.provider-logo.runpod { background: #673ab7; color: white; border-color: transparent; }
+.provider-logo.together { background: #0f9fa8; color: white; border-color: transparent; }
+
+.provider-name { font-weight: 500; color: var(--color-fg-primary); }
+.provider-region { font-size: 11px; color: var(--color-fg-muted); font-family: var(--font-mono); }
+.best-badge {
+  display: inline-block;
+  background: color-mix(in srgb, var(--color-success) 15%, transparent);
+  color: var(--color-success);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-left: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ======================= BOTTOM ROW ======================= */
+.bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 24px;
+}
+.info-card {
+  padding: 20px;
+  background: var(--color-bg-base);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 8px;
+}
+.info-card h3 {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 14px;
+}
+.kv-list { display: flex; flex-direction: column; gap: 8px; }
+.kv-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--color-border-subtle);
+}
+.kv-item:last-child { border-bottom: none; }
+.kv-key { font-size: 12px; color: var(--color-fg-muted); }
+.kv-val { font-family: var(--font-mono); font-size: 12px; color: var(--color-fg-primary); font-weight: 500; }
+
+/* Topology mini */
+.topology-mini {
+  padding: 12px;
+  background: var(--color-bg-subtle);
+  border-radius: 6px;
+  margin-top: 10px;
+}
+
+/* ======================= FOOTER ======================= */
+.footer {
+  max-width: 1760px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  border-top: 1px solid var(--color-border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--color-fg-muted);
+  font-family: var(--font-mono);
+  margin-top: 32px;
+}
+.footer a { color: var(--color-fg-muted); text-decoration: none; margin: 0 8px; }
+.footer a:hover { color: var(--color-fg-primary); }
+
+/* Icon helpers */
+.ico { display: inline-flex; align-items: center; justify-content: center; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-default);
+  border-radius: 5px;
+  border: 2px solid var(--color-bg-base);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-border-strong); }
+
+/* Responsive */
+@media (max-width: 1280px) {
+  .main-grid { grid-template-columns: 260px 1fr 340px; gap: 16px; }
+  .main { padding: 16px; }
+}
+@media (max-width: 1024px) {
+  .main-grid { grid-template-columns: 1fr; }
+  .bottom-grid { grid-template-columns: 1fr; }
+  .nav { display: none; }
+}
+
+/* Theme switch animation */
+body, .card, .info-card, .btn, .input, .gpu-card {
+  transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+
+/* Section header chip */
+.mode-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  background: var(--color-accent-subtle);
+  color: var(--color-accent-default);
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-family: var(--font-mono);
+}
+
+</style>
+</head>
+<body>
+
+<!-- =================== TOP BAR =================== -->
+<header class="topbar">
+  <div class="logo">
+    <span class="logo-symbol">
+      <span></span><span></span><span></span>
+      <span></span><span></span><span></span>
+      <span></span><span></span><span></span>
+    </span>
+    LLMcalc
+  </div>
+
+  <nav class="nav">
+    <a href="#" class="active">Calculator</a>
+    <a href="#">Compare</a>
+    <a href="#">Reverse</a>
+    <a href="#">Models</a>
+    <a href="#">Hardware</a>
+    <a href="#">Guides</a>
+  </nav>
+
+  <div class="topbar-right">
+    <span class="data-badge">data · 4h ago</span>
+    <button class="icon-btn" title="Toggle theme" id="theme-toggle">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <button class="icon-btn" title="Keyboard shortcuts">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
+    </button>
+    <button class="icon-btn" title="GitHub">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8 0 3.2.9.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1 .9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- =================== MODE TABS =================== -->
+<div class="mode-tabs">
+  <button class="tab active">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+    Inference
+  </button>
+  <button class="tab">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M2 20h20M4 20V8l4-4 4 4v12M12 20V12l4-4 4 4v8"/></svg>
+    Scale
+  </button>
+  <button class="tab">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+    Fine-tune
+  </button>
+  <button class="tab">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M8.21 13.89 7 23l5-3 5 3-1.21-9.12M15 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM12 2v3M12 10v1"/></svg>
+    Train
+  </button>
+  <button class="tab">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+    Reverse
+  </button>
+
+  <div class="mode-tabs-right">
+    <button class="btn btn-secondary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"/></svg>
+      Share
+    </button>
+    <button class="btn btn-secondary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+      Compare
+    </button>
+  </div>
+</div>
+
+<!-- =================== MAIN =================== -->
+<main class="main">
+  <div class="main-grid">
+
+    <!-- LEFT: INPUTS -->
+    <aside class="card">
+      <div class="card-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg>
+        Configure
+      </div>
+
+      <div class="field">
+        <div class="field-label">Model <span class="hint">⌘K</span></div>
+        <div class="input input-combo">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>
+          <span style="color: var(--color-fg-primary); font-weight: 500;">Llama-3.1-70B-Instruct</span>
+          <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">Precision <span class="hint">0.61 B/param</span></div>
+        <div class="segmented">
+          <button>FP16</button>
+          <button>BF16</button>
+          <button>INT8</button>
+          <button class="active">Q4_K_M</button>
+          <button>GGUF ▾</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">Context length <span class="hint">32,768</span></div>
+        <div class="slider-wrap">
+          <div class="slider">
+            <div class="slider-fill" style="width: 55%;"></div>
+            <div class="slider-thumb" style="left: 55%;"></div>
+          </div>
+          <span class="slider-value">32k</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">Batch size <span class="hint">1 — 32</span></div>
+        <div class="slider-wrap">
+          <div class="slider">
+            <div class="slider-fill" style="width: 6%;"></div>
+            <div class="slider-thumb" style="left: 6%;"></div>
+          </div>
+          <span class="slider-value">1</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">KV cache precision</div>
+        <div class="segmented">
+          <button class="active">FP16</button>
+          <button>INT8</button>
+          <button>Q4</button>
+        </div>
+      </div>
+
+      <button class="advanced-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="9 18 15 12 9 6"/></svg>
+        Advanced: framework, overhead, tokenizer
+      </button>
+    </aside>
+
+    <!-- CENTER: VRAM BREAKDOWN -->
+    <section class="card">
+      <div class="card-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/><path d="M10 9h4M10 15h4"/></svg>
+        Memory required
+      </div>
+
+      <div class="vram-total">55.8<span class="unit">GB</span></div>
+      <div class="vram-context">
+        Fits <span class="pct">70%</span> on 1× H100 80GB · KV cache FP16 · framework: vLLM
+      </div>
+
+      <!-- Stacked bar -->
+      <div class="vram-bar">
+        <div class="vram-seg weights" style="width: 76.7%;">77%</div>
+        <div class="vram-seg kv" style="width: 19.2%;">19%</div>
+        <div class="vram-seg acts" style="width: 1.4%;"></div>
+        <div class="vram-seg overhead" style="width: 2.7%;"></div>
+      </div>
+
+      <div class="vram-legend">
+        <div class="legend-item">
+          <span class="legend-dot" style="background: var(--color-viz-weights);"></span>
+          <span class="legend-label">Weights</span>
+          <span class="legend-value">42.8 GB</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot" style="background: var(--color-viz-kv);"></span>
+          <span class="legend-label">KV cache</span>
+          <span class="legend-value">10.7 GB</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot" style="background: var(--color-viz-activations);"></span>
+          <span class="legend-label">Activations</span>
+          <span class="legend-value">0.8 GB</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot" style="background: var(--color-viz-overhead);"></span>
+          <span class="legend-label">Overhead</span>
+          <span class="legend-value">1.5 GB</span>
+        </div>
+      </div>
+
+      <button class="formula-reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M3 3h18M5 3v4l5 5-5 5v4h14v-4l-5-5 5-5V3"/></svg>
+        How is this calculated? View formulas and inputs
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+
+      <div class="metrics-row">
+        <div class="metric">
+          <span class="metric-label">Tokens / sec</span>
+          <span class="metric-value">62<span class="small"> /s</span></span>
+          <span class="metric-sub">67% of BW ceiling</span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">$ per M tokens</span>
+          <span class="metric-value">$0.80</span>
+          <span class="metric-sub">batched vLLM · H100</span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Time-to-first-token</span>
+          <span class="metric-value">310<span class="small"> ms</span></span>
+          <span class="metric-sub">prefill 32k ctx</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT: GPU RECOMMENDATIONS -->
+    <aside class="card">
+      <div class="card-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>
+        Local hardware fit
+      </div>
+
+      <div class="gpu-list">
+        <div class="gpu-card recommended">
+          <div class="gpu-card-header">
+            <div class="fit-badge fits">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <div class="gpu-name">H100 SXM 80GB</div>
+              <div class="gpu-meta">NVIDIA · Datacenter · ~$30k</div>
+            </div>
+            <span class="gpu-price">70%</span>
+          </div>
+          <div class="gpu-util-bar"><div class="gpu-util-fill" style="width: 70%;"></div></div>
+          <div class="gpu-util-label">
+            <span>24.2 GB free</span>
+            <span>62 tok/s</span>
+          </div>
+          <div class="gpu-stats">
+            <span>3350 GB/s</span>
+            <span>989 TFLOPS</span>
+            <span>700W</span>
+          </div>
+        </div>
+
+        <div class="gpu-card">
+          <div class="gpu-card-header">
+            <div class="fit-badge fits">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <div class="gpu-name">A100 80GB SXM</div>
+              <div class="gpu-meta">NVIDIA · Datacenter</div>
+            </div>
+            <span class="gpu-price">70%</span>
+          </div>
+          <div class="gpu-util-bar"><div class="gpu-util-fill" style="width: 70%;"></div></div>
+          <div class="gpu-util-label">
+            <span>24.2 GB free</span>
+            <span>38 tok/s</span>
+          </div>
+        </div>
+
+        <div class="gpu-card">
+          <div class="gpu-card-header">
+            <div class="fit-badge fits">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <div class="gpu-name">RTX 6000 Pro Blackwell</div>
+              <div class="gpu-meta">Workstation · ~$8.5k</div>
+            </div>
+            <span class="gpu-price">58%</span>
+          </div>
+          <div class="gpu-util-bar"><div class="gpu-util-fill" style="width: 58%;"></div></div>
+          <div class="gpu-util-label">
+            <span>40.2 GB free</span>
+            <span>33 tok/s</span>
+          </div>
+        </div>
+
+        <div class="gpu-card">
+          <div class="gpu-card-header">
+            <div class="fit-badge tight">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01"/></svg>
+            </div>
+            <div>
+              <div class="gpu-name">2× RTX 4090 24GB</div>
+              <div class="gpu-meta">Consumer · TP=2 required</div>
+            </div>
+            <span class="gpu-price">116%</span>
+          </div>
+          <div class="gpu-util-bar"><div class="gpu-util-fill tight" style="width: 100%;"></div></div>
+          <div class="gpu-util-label">
+            <span>needs tensor parallel</span>
+            <span>55 tok/s</span>
+          </div>
+        </div>
+
+        <div class="gpu-card">
+          <div class="gpu-card-header">
+            <div class="fit-badge over">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            </div>
+            <div>
+              <div class="gpu-name">1× RTX 4090 24GB</div>
+              <div class="gpu-meta">Overflow by 31.8 GB</div>
+            </div>
+            <span class="gpu-price">229%</span>
+          </div>
+          <div class="gpu-util-bar"><div class="gpu-util-fill over" style="width: 100%;"></div></div>
+        </div>
+
+        <div class="gpu-card">
+          <div class="gpu-card-header">
+            <div class="fit-badge fits">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <div class="gpu-name">Mac Studio M2 Ultra 192GB</div>
+              <div class="gpu-meta">Apple Silicon · unified</div>
+            </div>
+            <span class="gpu-price">29%</span>
+          </div>
+          <div class="gpu-util-bar"><div class="gpu-util-fill" style="width: 29%;"></div></div>
+          <div class="gpu-util-label">
+            <span>136 GB free</span>
+            <span>~18 tok/s (Metal)</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- CLOUD TABLE -->
+  <section class="card cloud-card" style="padding: 0; margin-top: 24px;">
+    <div class="cloud-card-header">
+      <h3><span class="ico" style="margin-right:6px;vertical-align:-2px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></span>Cloud instances</h3>
+      <span class="sort-picker">Sorted by <strong>$/M tokens ↑</strong></span>
+      <button class="btn btn-ghost" style="font-size:12px;">Filter by region ▾</button>
+    </div>
+    <table class="cloud-table">
+      <thead>
+        <tr>
+          <th>Provider</th>
+          <th>Instance</th>
+          <th>GPUs</th>
+          <th>Interconnect</th>
+          <th class="num">$/h</th>
+          <th class="num">Spot</th>
+          <th class="num">$/M tok</th>
+          <th>Region</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="provider-cell">
+              <div class="provider-logo lambda">L</div>
+              <div>
+                <div class="provider-name">Lambda Labs<span class="best-badge">best price</span></div>
+                <div class="provider-region">1-Click Cluster</div>
+              </div>
+            </div>
+          </td>
+          <td class="mono">H100 PCIe 80GB</td>
+          <td class="mono">1× H100</td>
+          <td class="mono">PCIe</td>
+          <td class="num" style="color: var(--color-fg-primary); font-weight: 500;">$2.49</td>
+          <td class="num" style="color: var(--color-fg-muted);">—</td>
+          <td class="num" style="color: var(--color-fg-primary); font-weight: 500;">$0.85</td>
+          <td class="mono">us-west, us-east</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="provider-cell">
+              <div class="provider-logo runpod">R</div>
+              <div>
+                <div class="provider-name">RunPod</div>
+                <div class="provider-region">Secure Cloud</div>
+              </div>
+            </div>
+          </td>
+          <td class="mono">H100 80GB</td>
+          <td class="mono">1× H100</td>
+          <td class="mono">PCIe</td>
+          <td class="num" style="color: var(--color-fg-primary); font-weight: 500;">$2.49</td>
+          <td class="num" style="color: var(--color-fg-muted);">—</td>
+          <td class="num" style="color: var(--color-fg-primary); font-weight: 500;">$0.85</td>
+          <td class="mono">global</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="provider-cell">
+              <div class="provider-logo together">T</div>
+              <div>
+                <div class="provider-name">Together AI</div>
+                <div class="provider-region">serverless</div>
+              </div>
+            </div>
+          </td>
+          <td class="mono">Llama-3.1-70B</td>
+          <td class="mono">managed</td>
+          <td class="mono" style="color: var(--color-fg-muted);">—</td>
+          <td class="num" style="color: var(--color-fg-muted);">—</td>
+          <td class="num" style="color: var(--color-fg-muted);">—</td>
+          <td class="num" style="color: var(--color-fg-primary); font-weight: 500;">$0.88</td>
+          <td class="mono">us, eu</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="provider-cell">
+              <div class="provider-logo aws">aws</div>
+              <div>
+                <div class="provider-name">AWS</div>
+                <div class="provider-region">ap-south-1</div>
+              </div>
+            </div>
+          </td>
+          <td class="mono">p5.48xlarge</td>
+          <td class="mono">8× H100</td>
+          <td class="mono">NVSwitch</td>
+          <td class="num" style="color: var(--color-fg-primary); font-weight: 500;">$98.32</td>
+          <td class="num" style="color: var(--color-success);">$28</td>
+          <td class="num" style="color: var(--color-fg-primary); font-weight: 500;">$1.65</td>
+          <td class="mono">Mumbai +5%</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="provider-cell">
+              <div class="provider-logo azure">Az</div>
+              <div>
+                <div class="provider-name">Azure</div>
+                <div class="provider-region">Central India</div>
+              </div>
+            </div>
+          </td>
+          <td class="mono">ND H100 v5</td>
+          <td class="mono">8× H100</td>
+          <td class="mono">NVSwitch · IB</td>
+          <td class="num" style="color: var(--color-fg-primary); font-weight: 500;">$98.32</td>
+          <td class="num" style="color: var(--color-success);">$30</td>
+          <td class="num" style="color: var(--color-fg-primary); font-weight: 500;">$1.65</td>
+          <td class="mono">IN, US, EU</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="provider-cell">
+              <div class="provider-logo gcp">G</div>
+              <div>
+                <div class="provider-name">GCP</div>
+                <div class="provider-region">asia-south1</div>
+              </div>
+            </div>
+          </td>
+          <td class="mono">a3-highgpu-8g</td>
+          <td class="mono">8× H100</td>
+          <td class="mono">NVSwitch</td>
+          <td class="num" style="color: var(--color-fg-primary); font-weight: 500;">$88.49</td>
+          <td class="num" style="color: var(--color-success);">$26</td>
+          <td class="num" style="color: var(--color-fg-primary); font-weight: 500;">$1.49</td>
+          <td class="mono">Mumbai +10%</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- BOTTOM: CLUSTER + STACK -->
+  <div class="bottom-grid">
+    <div class="info-card">
+      <h3>
+        <svg style="width:14px;height:14px;vertical-align:-2px;margin-right:4px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="9" y="2" width="6" height="6"/><rect x="16" y="16" width="6" height="6"/><rect x="2" y="16" width="6" height="6"/><path d="M5 16v-4h14v4M12 12V8"/></svg>
+        Clustering
+      </h3>
+      <div class="kv-list">
+        <div class="kv-item"><span class="kv-key">Recommended topology</span><span class="kv-val">1× H100 · no parallelism</span></div>
+        <div class="kv-item"><span class="kv-key">Alternative (consumer)</span><span class="kv-val">2× RTX 4090 · TP=2</span></div>
+        <div class="kv-item"><span class="kv-key">Framework</span><span class="kv-val" style="color: var(--color-accent-default);">vLLM 0.6+</span></div>
+        <div class="kv-item"><span class="kv-key">vLLM args</span><span class="kv-val" style="font-size: 11px;">--quantization gguf --max-model-len 32768</span></div>
+        <div class="kv-item"><span class="kv-key">Alternative runtime</span><span class="kv-val">llama.cpp CUDA (-15%)</span></div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h3>
+        <svg style="width:14px;height:14px;vertical-align:-2px;margin-right:4px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        OS / software stack
+      </h3>
+      <div class="kv-list">
+        <div class="kv-item"><span class="kv-key">OS</span><span class="kv-val">Ubuntu 24.04 LTS</span></div>
+        <div class="kv-item"><span class="kv-key">NVIDIA driver</span><span class="kv-val">550+</span></div>
+        <div class="kv-item"><span class="kv-key">CUDA</span><span class="kv-val">12.4</span></div>
+        <div class="kv-item"><span class="kv-key">PyTorch</span><span class="kv-val">2.4+ (torch.compile)</span></div>
+        <div class="kv-item"><span class="kv-key">Container</span><span class="kv-val">Docker + nvidia-ctk</span></div>
+        <div class="kv-item"><span class="kv-key">Monitoring</span><span class="kv-val">DCGM · Prometheus</span></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div>LLMcalc v1.2.3 · <a href="#">methodology</a> · <a href="#">github</a> · <a href="#">changelog</a></div>
+  <div>prices refreshed · Apr 16, 2026 · 04:00 UTC</div>
+</footer>
+
+<script>
+  // Theme toggle
+  const toggle = document.getElementById('theme-toggle');
+  toggle.addEventListener('click', () => {
+    const html = document.documentElement;
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+  });
+
+  // Tab switching (visual only)
+  document.querySelectorAll('.tab').forEach(t => {
+    t.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+    });
+  });
+
+  // Segmented control
+  document.querySelectorAll('.segmented').forEach(seg => {
+    seg.querySelectorAll('button').forEach(b => {
+      b.addEventListener('click', () => {
+        seg.querySelectorAll('button').forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

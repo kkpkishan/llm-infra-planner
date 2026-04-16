@@ -1,0 +1,95 @@
+/* Design Tokens — Light Mode (default) */
+:root {
+  /* Neutral palette */
+  --bg-base: #ffffff;
+  --bg-subtle: #fafafa;
+  --bg-muted: #f4f4f5;
+  --bg-emphasis: #e4e4e7;
+
+  /* Foreground */
+  --fg-muted: #71717a;
+  --fg-default: #3f3f46;
+  --fg-primary: #18181b;
+  --fg-inverse: #ffffff;
+
+  /* Borders */
+  --border-subtle: #e4e4e7;
+  --border-default: #d4d4d8;
+  --border-strong: #a1a1aa;
+
+  /* Accent violet */
+  --accent-subtle: #f5f3ff;
+  --accent-muted: #ddd6fe;
+  --accent-default: #7c3aed;
+  --accent-emphasis: #6d28d9;
+  --accent-strong: #5b21b6;
+
+  /* Semantic */
+  --success: #16a34a;
+  --warning: #ca8a04;
+  --danger: #dc2626;
+  --info: #2563eb;
+
+  /* Data visualization */
+  --viz-weights: #7c3aed;
+  --viz-kv: #0891b2;
+  --viz-activations: #ca8a04;
+  --viz-gradients: #db2777;
+  --viz-optimizer: #ea580c;
+  --viz-overhead: #64748b;
+  --viz-free: #e4e4e7;
+
+  /* Focus ring */
+  --ring: #7c3aed;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  /* Font families */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+  --bg-base: #09090b;
+  --bg-subtle: #0f0f12;
+  --bg-muted: #18181b;
+  --bg-emphasis: #27272a;
+
+  --fg-muted: #a1a1aa;
+  --fg-default: #d4d4d8;
+  --fg-primary: #fafafa;
+  --fg-inverse: #09090b;
+
+  --border-subtle: #27272a;
+  --border-default: #3f3f46;
+  --border-strong: #52525b;
+
+  --accent-subtle: #1e1b2e;
+  --accent-muted: #3b2f66;
+  --accent-default: #8b5cf6;
+  --accent-emphasis: #a78bfa;
+  --accent-strong: #c4b5fd;
+
+  --success: #22c55e;
+  --warning: #eab308;
+  --danger: #ef4444;
+  --info: #3b82f6;
+
+  --viz-weights: #8b5cf6;
+  --viz-kv: #06b6d4;
+  --viz-activations: #eab308;
+  --viz-gradients: #ec4899;
+  --viz-optimizer: #f97316;
+  --viz-overhead: #94a3b8;
+  --viz-free: #27272a;
+
+  --ring: #8b5cf6;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+}

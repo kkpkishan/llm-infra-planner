@@ -1,0 +1,34 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runner
+    image: llm-hardware-calculator:latest
+    container_name: llm-hardware-calculator
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:80/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # Development service — hot reload via Vite dev server
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: llm-hardware-calculator:dev
+    container_name: llm-hardware-calculator-dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    profiles:
+      - dev
