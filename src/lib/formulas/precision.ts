@@ -1,23 +1,27 @@
 import type { PrecisionConfig } from './types';
+import { QUANTIZATION_TYPES } from '@/data/quantization-types';
 
-// PRECISION_MAP — weight precision
+// PRECISION_MAP — weight precision (built from QUANTIZATION_TYPES + legacy aliases)
 export const PRECISION_MAP: Record<string, { bytesPerParam: number; label: string }> = {
-  fp32:   { bytesPerParam: 4.0,    label: "FP32" },
-  fp16:   { bytesPerParam: 2.0,    label: "FP16" },
-  bf16:   { bytesPerParam: 2.0,    label: "BF16" },
-  fp8:    { bytesPerParam: 1.0,    label: "FP8" },
-  int8:   { bytesPerParam: 1.0,    label: "INT8" },
-  int4:   { bytesPerParam: 0.5,    label: "INT4" },
-  q4_k_m: { bytesPerParam: 0.606,  label: "GGUF Q4_K_M" },
-  q5_k_m: { bytesPerParam: 0.711,  label: "GGUF Q5_K_M" },
-  q8_0:   { bytesPerParam: 1.0625, label: "GGUF Q8_0" },
+  // Build from canonical quantization types
+  ...Object.fromEntries(
+    QUANTIZATION_TYPES.map(q => [q.key, { bytesPerParam: q.bytesPerParam, label: q.label }])
+  ),
+  // Legacy aliases kept for backward compatibility
+  fp8:  { bytesPerParam: 1.0,    label: "FP8" },
+  q4:   { bytesPerParam: 0.5,    label: "Q4" },
 };
 
 // KV_PRECISION_MAP — KV cache precision (independent of weight precision)
 export const KV_PRECISION_MAP: Record<string, { bytesPerParam: number; label: string }> = {
-  fp16: { bytesPerParam: 2.0, label: "FP16" },
-  int8: { bytesPerParam: 1.0, label: "INT8" },
-  q4:   { bytesPerParam: 0.5, label: "Q4" },
+  fp32:     { bytesPerParam: 4.0, label: "FP32" },
+  fp16:     { bytesPerParam: 2.0, label: "FP16/BF16" },
+  fp8_e4m3: { bytesPerParam: 1.0, label: "FP8 E4M3" },
+  fp8_e5m2: { bytesPerParam: 1.0, label: "FP8 E5M2" },
+  int8:     { bytesPerParam: 1.0, label: "INT8" },
+  int4:     { bytesPerParam: 0.5, label: "INT4" },
+  // Legacy aliases
+  q4:       { bytesPerParam: 0.5, label: "Q4" },
 };
 
 // Default precision keys

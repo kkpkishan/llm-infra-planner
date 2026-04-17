@@ -49,7 +49,7 @@ export function parseState(
   const rawPrecision = params.get('precision') ?? DEFAULT_PRECISION;
   const precision = rawPrecision in PRECISION_MAP ? rawPrecision : DEFAULT_PRECISION;
 
-  // KV precision
+  // KV precision — fall back to default for unknown keys (graceful degradation)
   const rawKV = params.get('kv') ?? DEFAULT_KV_PRECISION;
   const kvPrecision = rawKV in KV_PRECISION_MAP ? rawKV : DEFAULT_KV_PRECISION;
 

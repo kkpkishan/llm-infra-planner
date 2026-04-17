@@ -6,7 +6,8 @@ import { ModelPicker } from '@/components/calculator/ModelPicker';
 import { PrecisionPicker } from '@/components/calculator/PrecisionPicker';
 import { KVPrecisionPicker } from '@/components/calculator/KVPrecisionPicker';
 import { ContextSlider } from '@/components/calculator/ContextSlider';
-import { BatchSlider } from '@/components/calculator/BatchSlider';
+import { BatchConfig } from '@/components/calculator/BatchConfig';
+import { KVCurveChart } from '@/components/calculator/KVCurveChart';
 import { AdvancedPanel } from '@/components/calculator/AdvancedPanel';
 import { VRAMBreakdown } from '@/components/calculator/VRAMBreakdown';
 import { MetricsRow } from '@/components/calculator/MetricsRow';
@@ -61,9 +62,17 @@ export function Home({ modelSearchOpen, onModelSearchClose }: HomeProps) {
       <ModelPicker models={modelDb} value={selectedModel} onSelect={setModel}
         open={modelSearchOpen} onOpenChange={o => { if (!o) onModelSearchClose?.(); }} />
       <PrecisionPicker value={precision} onChange={setPrecision} />
-      <KVPrecisionPicker value={kvPrecision} onChange={setKVPrecision} />
+      <KVPrecisionPicker value={kvPrecision} onChange={setKVPrecision} fp16KvCacheGB={breakdown?.kvCacheGB} />
+      {selectedModel && (
+        <KVCurveChart
+          model={selectedModel}
+          kvPrecision={kvPrecision}
+          currentContext={contextLength}
+          batchSize={batchSize}
+        />
+      )}
       <ContextSlider value={contextLength} max={selectedModel?.architecture.maxContextLength ?? 131072} onChange={setContextLength} />
-      <BatchSlider value={batchSize} onChange={setBatchSize} />
+      <BatchConfig value={batchSize} onChange={setBatchSize} />
       <AdvancedPanel mode={mode} advancedSettings={advancedSettings} trainingOptions={trainingOptions}
         onAdvancedSettingsChange={setAdvancedSettings} onTrainingOptionsChange={setTrainingOptions} />
     </div>

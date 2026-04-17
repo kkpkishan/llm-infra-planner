@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { cn } from '@/lib/utils';
 import { InfoTooltip } from '@/components/primitives/InfoTooltip';
+import {
+  QUANTIZATION_TYPES, DEFAULT_QUANT_KEYS, FAMILY_LABELS,
+  type QuantType,
+} from '@/data/quantization-types';
 
 interface PrecisionPickerProps {
   value: string;
@@ -8,29 +12,44 @@ interface PrecisionPickerProps {
   className?: string;
 }
 
-const PRECISION_OPTIONS = [
-  { key: 'fp16', label: 'FP16', bytes: 2.0 },
-  { key: 'bf16', label: 'BF16', bytes: 2.0 },
-  { key: 'int8', label: 'INT8', bytes: 1.0 },
-  { key: 'int4', label: 'INT4', bytes: 0.5 },
-  { key: 'q4_k_m', label: 'Q4_K_M', bytes: 0.606, isGGUF: true },
-  { key: 'q5_k_m', label: 'Q5_K_M', bytes: 0.711, isGGUF: true },
-  { key: 'q8_0', label: 'Q8_0', bytes: 1.0625, isGGUF: true },
+function Stars({ count }: { count: number }) {
+  return (
+    <span className="text-[9px] leading-none" aria-label={`${count} out of 5 quality stars`}>
+      {'⭐'.repeat(count)}{'☆'.repeat(5 - count)}
+    </span>
+  );
+}
+
+const FAMILY_ORDER: QuantType['family'][] = [
+  'native', 'gguf-k', 'gguf-i', 'gguf-t', 'gptq', 'awq', 'bnb',
 ];
 
 export function PrecisionPicker({ value, onChange, className }: PrecisionPickerProps) {
+  const [showAll, setShowAll] = React.useState(false);
+
+  const defaultQuants = QUANTIZATION_TYPES.filter(q => DEFAULT_QUANT_KEYS.includes(q.key));
+
+  // Build grouped list for expanded view
+  const groupedQuants = FAMILY_ORDER.map(family => ({
+    family,
+    label: FAMILY_LABELS[family],
+    items: QUANTIZATION_TYPES.filter(q => q.family === family),
+  })).filter(g => g.items.length > 0);
+
+  // All visible quants in flat order (for keyboard nav)
+  const visibleQuants = showAll
+    ? groupedQuants.flatMap(g => g.items)
+    : defaultQuants;
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    const keys = PRECISION_OPTIONS.map(o => o.key);
+    const keys = visibleQuants.map(q => q.key);
     const currentIndex = keys.indexOf(value);
-    
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
       e.preventDefault();
-      const nextIndex = (currentIndex + 1) % keys.length;
-      onChange(keys[nextIndex]);
+      onChange(keys[(currentIndex + 1) % keys.length]);
     } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
       e.preventDefault();
-      const prevIndex = (currentIndex - 1 + keys.length) % keys.length;
-      onChange(keys[prevIndex]);
+      onChange(keys[(currentIndex - 1 + keys.length) % keys.length]);
     } else if (e.key === 'Home') {
       e.preventDefault();
       onChange(keys[0]);
@@ -39,6 +58,11 @@ export function PrecisionPicker({ value, onChange, className }: PrecisionPickerP
       onChange(keys[keys.length - 1]);
     }
   };
+
+  // If current value is not in default list, auto-expand
+  React.useEffect(() => {
+    if (!DEFAULT_QUANT_KEYS.includes(value)) setShowAll(true);
+  }, [value]);
 
   return (
     <div className={cn('flex flex-col gap-1.5', className)}>
@@ -53,69 +77,68 @@ export function PrecisionPicker({ value, onChange, className }: PrecisionPickerP
         className="flex flex-col gap-1"
         onKeyDown={handleKeyDown}
       >
-        {/* Standard precisions */}
-        <div className="flex gap-1">
-          {PRECISION_OPTIONS.filter(opt => !opt.isGGUF).map(option => {
-            const isSelected = value === option.key;
-            return (
-              <button
-                key={option.key}
-                role="radio"
-                aria-checked={isSelected}
-                tabIndex={isSelected ? 0 : -1}
-                onClick={() => onChange(option.key)}
-                className={cn(
-                  'flex-1 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-fast',
-                  'border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-                  isSelected
-                    ? 'bg-accent text-white border-accent'
-                    : 'bg-bg-muted border-border-subtle text-fg-default hover:bg-bg-emphasis hover:border-border-default'
-                )}
-              >
-                <div className="flex flex-col items-center gap-0.5">
-                  <span>{option.label}</span>
-                  <span className="text-[10px] font-mono opacity-70">
-                    {option.bytes}B
-                  </span>
-                </div>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* GGUF precisions */}
-        <div className="flex gap-1">
-          <span className="text-[10px] font-medium text-fg-muted px-2 py-2 flex items-center">
-            GGUF
-          </span>
-          {PRECISION_OPTIONS.filter(opt => opt.isGGUF).map(option => {
-            const isSelected = value === option.key;
-            return (
-              <button
-                key={option.key}
-                role="radio"
-                aria-checked={isSelected}
-                tabIndex={isSelected ? 0 : -1}
-                onClick={() => onChange(option.key)}
-                className={cn(
-                  'flex-1 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-fast',
-                  'border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-                  isSelected
-                    ? 'bg-accent text-white border-accent'
-                    : 'bg-bg-muted border-border-subtle text-fg-default hover:bg-bg-emphasis hover:border-border-default'
-                )}
-              >
-                <div className="flex flex-col items-center gap-0.5">
-                  <span>{option.label}</span>
-                  <span className="text-[10px] font-mono opacity-70">
-                    {option.bytes.toFixed(3)}B
-                  </span>
-                </div>
-              </button>
-            );
-          })}
-        </div>
+        {showAll ? (
+          // Expanded: grouped view
+          groupedQuants.map(group => (
+            <div key={group.family} className="flex flex-col gap-0.5">
+              <span className="text-[10px] font-semibold text-fg-muted uppercase tracking-wider px-1 pt-1">
+                {group.label}
+              </span>
+              <div className="flex flex-wrap gap-1">
+                {group.items.map(quant => (
+                  <QuantButton key={quant.key} quant={quant} isSelected={value === quant.key} onSelect={onChange} />
+                ))}
+              </div>
+            </div>
+          ))
+        ) : (
+          // Collapsed: default options in a single row
+          <div className="flex flex-wrap gap-1">
+            {defaultQuants.map(quant => (
+              <QuantButton key={quant.key} quant={quant} isSelected={value === quant.key} onSelect={onChange} />
+            ))}
+          </div>
+        )}
       </div>
+
+      <button
+        type="button"
+        onClick={() => setShowAll(v => !v)}
+        className="text-[11px] text-accent hover:underline self-start mt-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
+      >
+        {showAll ? '▲ Show less' : '▼ Show all quantizations'}
+      </button>
     </div>
+  );
+}
+
+interface QuantButtonProps {
+  quant: QuantType;
+  isSelected: boolean;
+  onSelect: (key: string) => void;
+}
+
+function QuantButton({ quant, isSelected, onSelect }: QuantButtonProps) {
+  return (
+    <button
+      role="radio"
+      aria-checked={isSelected}
+      tabIndex={isSelected ? 0 : -1}
+      onClick={() => onSelect(quant.key)}
+      title={quant.hardwareNote}
+      className={cn(
+        'px-2.5 py-1.5 rounded-md text-xs font-medium transition-colors duration-fast',
+        'border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+        isSelected
+          ? 'bg-accent text-white border-accent'
+          : 'bg-bg-muted border-border-subtle text-fg-default hover:bg-bg-emphasis hover:border-border-default'
+      )}
+    >
+      <div className="flex flex-col items-center gap-0.5">
+        <span>{quant.label}</span>
+        <span className="text-[9px] font-mono opacity-70">{quant.bytesPerParam}B</span>
+        <Stars count={quant.qualityStars} />
+      </div>
+    </button>
   );
 }
