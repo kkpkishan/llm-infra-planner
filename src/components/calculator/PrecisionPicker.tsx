@@ -21,7 +21,7 @@ function Stars({ count }: { count: number }) {
 }
 
 const FAMILY_ORDER: QuantType['family'][] = [
-  'native', 'gguf-k', 'gguf-i', 'gguf-t', 'gptq', 'awq', 'bnb',
+  'native', 'gguf-k', 'gguf-i', 'gguf-t', 'gptq', 'awq', 'bnb', 'exl2', 'other',
 ];
 
 export function PrecisionPicker({ value, onChange, className }: PrecisionPickerProps) {

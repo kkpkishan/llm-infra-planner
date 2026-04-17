@@ -56,15 +56,15 @@ Expand all input parameters to their full range and variety — context length u
 
 ## Tasks
 
-- [ ] 1. Update `src/lib/formulas/vram.ts` — support all quantization bytes-per-param values
-- [ ] 2. Create `src/data/quantization-types.ts` — comprehensive typed constant with all quant types, bytes/param, quality rating, hardware requirements
-- [ ] 3. Update `src/components/calculator/PrecisionPicker.tsx` — grouped expandable picker for all quant families
-- [ ] 4. Update `src/components/calculator/ContextSlider.tsx` — extend to 10M, add model-max indicator, context extension method dropdown
-- [ ] 5. Create `src/components/calculator/BatchConfig.tsx` — static vs continuous batching toggle, max_concurrent_seqs, chunked prefill
-- [ ] 6. Create `src/components/calculator/KVPrecisionPicker.tsx` — independent KV precision selector with savings display
-- [ ] 7. Create `src/components/calculator/KVCurveChart.tsx` — small chart showing KV memory vs context length for current config
-- [ ] 8. Update URL state to include: quantType, kvPrecision, batchMode, maxConcurrent, contextExtension
-- [ ] 9. Write tests: Q4_K_M should compute 0.606 B/param, IQ2_XXS should compute 0.26 B/param, EXL2 4.65bpw should compute 0.581 B/param
-- [ ] 10. Write test: KV cache at 128K context FP16 vs FP8 should show exactly 2× difference
+- [x] 1. Update `src/lib/formulas/vram.ts` — support all quantization bytes-per-param values
+- [x] 2. Create `src/data/quantization-types.ts` — comprehensive typed constant with all quant types, bytes/param, quality rating, hardware requirements
+- [x] 3. Update `src/components/calculator/PrecisionPicker.tsx` — grouped expandable picker for all quant families
+- [x] 4. Update `src/components/calculator/ContextSlider.tsx` — extend to 10M, add model-max indicator, context extension method dropdown
+- [x] 5. Create `src/components/calculator/BatchConfig.tsx` — static vs continuous batching toggle, max_concurrent_seqs, chunked prefill
+- [x] 6. Create `src/components/calculator/KVPrecisionPicker.tsx` — independent KV precision selector with savings display
+- [x] 7. Create `src/components/calculator/KVCurveChart.tsx` — small chart showing KV memory vs context length for current config
+- [x] 8. Update URL state to include: quantType, kvPrecision, batchMode, maxConcurrent, contextExtension
+- [x] 9. Write tests: Q4_K_M should compute 0.606 B/param, IQ2_XXS should compute 0.26 B/param, EXL2 4.65bpw should compute 0.581 B/param
+- [x] 10. Write test: KV cache at 128K context FP16 vs FP8 should show exactly 2× difference
 
 

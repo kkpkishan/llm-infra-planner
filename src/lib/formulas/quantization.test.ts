@@ -100,3 +100,44 @@ describe('QUANTIZATION_TYPES data integrity', () => {
     expect(unique.size).toBe(keys.length);
   });
 });
+
+// ── EXL2 4.65bpw ─────────────────────────────────────────────────────────────
+
+describe('EXL2 4.65bpw quantization', () => {
+  it('has bytesPerParam of 0.581', () => {
+    const q = getQuantType('exl2_4.65bpw');
+    expect(q).toBeDefined();
+    expect(q!.bytesPerParam).toBe(0.581);
+  });
+
+  it('computes weightGB for 7B model at EXL2 4.65bpw', () => {
+    // 7B × 0.581 = 4.067 GB → rounds to 4.1
+    const result = computeWeightMemory({ numParams: 7_000_000_000, bytesPerParam: 0.581 });
+    expect(result.weightGB).toBe(4.1);
+  });
+
+  it('EXL2 family entries all have isVariable=true', () => {
+    const exl2 = QUANTIZATION_TYPES.filter(q => q.family === 'exl2');
+    expect(exl2.length).toBeGreaterThan(0);
+    for (const q of exl2) {
+      expect(q.isVariable).toBe(true);
+    }
+  });
+});
+
+// ── SmoothQuant and HQQ ───────────────────────────────────────────────────────
+
+describe('Other quant types', () => {
+  it('SmoothQuant W8A8 has bytesPerParam of 1.0', () => {
+    const q = getQuantType('smoothquant_w8a8');
+    expect(q).toBeDefined();
+    expect(q!.bytesPerParam).toBe(1.0);
+    expect(q!.family).toBe('other');
+  });
+
+  it('HQQ 4-bit has bytesPerParam of 0.5', () => {
+    const q = getQuantType('hqq_4bit');
+    expect(q).toBeDefined();
+    expect(q!.bytesPerParam).toBe(0.5);
+  });
+});

@@ -1,10 +1,12 @@
 export interface QuantType {
   key: string;
   label: string;
-  family: 'native' | 'gguf-k' | 'gguf-i' | 'gguf-t' | 'gptq' | 'awq' | 'bnb' | 'other';
+  family: 'native' | 'gguf-k' | 'gguf-i' | 'gguf-t' | 'gptq' | 'awq' | 'bnb' | 'exl2' | 'other';
   bytesPerParam: number;
   qualityStars: 1 | 2 | 3 | 4 | 5; // 5=best
   hardwareNote?: string;
+  /** EXL2: variable BPW — bytesPerParam is computed from bpw at runtime */
+  isVariable?: boolean;
 }
 
 export const QUANTIZATION_TYPES: QuantType[] = [
@@ -65,8 +67,23 @@ export const QUANTIZATION_TYPES: QuantType[] = [
   { key: 'tq2_0',      label: 'TQ2_0',      family: 'gguf-t', bytesPerParam: 0.26,   qualityStars: 1, hardwareNote: 'CPU/GPU via llama.cpp' },
 
   // ── bitsandbytes ─────────────────────────────────────────────────────────────
-  { key: 'nf4',        label: 'NF4',        family: 'bnb',    bytesPerParam: 0.5,    qualityStars: 3, hardwareNote: 'NVIDIA GPU (bitsandbytes)' },
-  { key: 'int8_llm',   label: 'INT8-LLM',   family: 'bnb',    bytesPerParam: 1.0,    qualityStars: 4, hardwareNote: 'NVIDIA GPU (bitsandbytes)' },
+  { key: 'nf4',             label: 'NF4',             family: 'bnb',   bytesPerParam: 0.5,   qualityStars: 3, hardwareNote: 'NVIDIA GPU (bitsandbytes)' },
+  { key: 'int8_llm',        label: 'INT8-LLM',        family: 'bnb',   bytesPerParam: 1.0,   qualityStars: 4, hardwareNote: 'NVIDIA GPU (bitsandbytes)' },
+
+  // ── EXL2 (variable BPW) ──────────────────────────────────────────────────────
+  // Representative fixed points; actual BPW is set via slider (2.0–8.0, step 0.25)
+  { key: 'exl2_2bpw',      label: 'EXL2 2.0bpw',    family: 'exl2',  bytesPerParam: 0.25,  qualityStars: 1, hardwareNote: 'NVIDIA GPU (ExLlamaV2)', isVariable: true },
+  { key: 'exl2_3bpw',      label: 'EXL2 3.0bpw',    family: 'exl2',  bytesPerParam: 0.375, qualityStars: 2, hardwareNote: 'NVIDIA GPU (ExLlamaV2)', isVariable: true },
+  { key: 'exl2_4bpw',      label: 'EXL2 4.0bpw',    family: 'exl2',  bytesPerParam: 0.5,   qualityStars: 3, hardwareNote: 'NVIDIA GPU (ExLlamaV2)', isVariable: true },
+  { key: 'exl2_4.65bpw',   label: 'EXL2 4.65bpw',   family: 'exl2',  bytesPerParam: 0.581, qualityStars: 3, hardwareNote: 'NVIDIA GPU (ExLlamaV2)', isVariable: true },
+  { key: 'exl2_5bpw',      label: 'EXL2 5.0bpw',    family: 'exl2',  bytesPerParam: 0.625, qualityStars: 4, hardwareNote: 'NVIDIA GPU (ExLlamaV2)', isVariable: true },
+  { key: 'exl2_6bpw',      label: 'EXL2 6.0bpw',    family: 'exl2',  bytesPerParam: 0.75,  qualityStars: 4, hardwareNote: 'NVIDIA GPU (ExLlamaV2)', isVariable: true },
+  { key: 'exl2_8bpw',      label: 'EXL2 8.0bpw',    family: 'exl2',  bytesPerParam: 1.0,   qualityStars: 5, hardwareNote: 'NVIDIA GPU (ExLlamaV2)', isVariable: true },
+
+  // ── Other ────────────────────────────────────────────────────────────────────
+  { key: 'smoothquant_w8a8', label: 'SmoothQuant W8A8', family: 'other', bytesPerParam: 1.0, qualityStars: 4, hardwareNote: 'NVIDIA GPU (TRT-LLM, vLLM)' },
+  { key: 'hqq_4bit',         label: 'HQQ 4-bit',        family: 'other', bytesPerParam: 0.5, qualityStars: 3, hardwareNote: 'NVIDIA/AMD GPU (HQQ)' },
+  { key: 'hqq_2bit',         label: 'HQQ 2-bit',        family: 'other', bytesPerParam: 0.25, qualityStars: 2, hardwareNote: 'NVIDIA/AMD GPU (HQQ)' },
 ];
 
 /** Lookup a quant type by key, returns undefined if not found */
@@ -91,5 +108,6 @@ export const FAMILY_LABELS: Record<QuantType['family'], string> = {
   'gptq':    'GPTQ',
   'awq':     'AWQ',
   'bnb':     'bitsandbytes',
+  'exl2':    'EXL2',
   'other':   'Other',
 };

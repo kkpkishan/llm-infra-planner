@@ -18,6 +18,8 @@ export function BatchConfig({ value, onChange, freeVRAMGB, kvPerSeqGB, className
   const [inputValue, setInputValue] = React.useState(value.toString());
   const [maxConcurrent, setMaxConcurrent] = React.useState(64);
   const [avgOutputTokens, setAvgOutputTokens] = React.useState(256);
+  const [chunkedPrefill, setChunkedPrefill] = React.useState(false);
+  const [maxBatchedTokens, setMaxBatchedTokens] = React.useState(8192);
 
   // Max achievable concurrency from free VRAM
   const maxAchievable = React.useMemo(() => {
@@ -164,6 +166,52 @@ export function BatchConfig({ value, onChange, freeVRAMGB, kvPerSeqGB, className
                 <span className="text-amber-500 ml-1">(VRAM limited)</span>
               )}
             </p>
+          )}
+        </div>
+      )}
+
+      {/* Chunked prefill toggle — shown in continuous batching mode */}
+      {continuous && (
+        <div className="flex flex-col gap-2 mt-1">
+          <div className="flex items-center justify-between">
+            <div className="flex flex-col gap-0.5">
+              <span className="text-[10px] font-medium text-fg-default">Chunked Prefill</span>
+              <span className="text-[9px] text-fg-muted">Splits long prefills into chunks to reduce latency spikes</span>
+            </div>
+            <button
+              role="switch"
+              aria-checked={chunkedPrefill}
+              onClick={() => setChunkedPrefill(v => !v)}
+              className={cn(
+                'relative inline-flex h-4 w-7 items-center rounded-full transition-colors flex-shrink-0',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                chunkedPrefill ? 'bg-accent' : 'bg-bg-emphasis'
+              )}
+            >
+              <span className={cn(
+                'inline-block h-3 w-3 rounded-full bg-white shadow transition-transform',
+                chunkedPrefill ? 'translate-x-3.5' : 'translate-x-0.5'
+              )} />
+            </button>
+          </div>
+
+          {chunkedPrefill && (
+            <div className="flex items-center gap-2">
+              <label htmlFor="max-batched-tokens" className="text-[10px] text-fg-muted whitespace-nowrap">
+                max_num_batched_tokens:
+              </label>
+              <Input
+                id="max-batched-tokens"
+                type="number"
+                min={2048}
+                max={65536}
+                step={1024}
+                value={maxBatchedTokens}
+                onChange={e => setMaxBatchedTokens(Math.max(2048, Math.min(65536, parseInt(e.target.value, 10) || 8192)))}
+                className="flex-1 font-mono text-xs"
+                aria-label="Max number of batched tokens"
+              />
+            </div>
           )}
         </div>
       )}
