@@ -73,16 +73,30 @@ Add network bandwidth, disk throughput, and storage capacity calculations for di
 
 ## Tasks
 
-- [ ] 1. Create `src/lib/formulas/network.ts` — all-reduce, TP comm, PP comm, ZeRO-3 comm, MoE EP comm formulas
-- [ ] 2. Create `src/lib/formulas/storage.ts` — checkpoint size, data size, total storage formulas
-- [ ] 3. Create `src/lib/formulas/disk-iops.ts` — checkpoint write bandwidth, data loading bandwidth, tier recommendation
-- [ ] 4. Create `src/types/network.ts` — InterconnectSpec interface, interconnect database as typed constant
-- [ ] 5. Create `src/lib/formulas/topology.ts` — decision tree for topology recommendation based on cluster size + workload
-- [ ] 6. Update `src/components/calculator/ClusterTopology.tsx` — render network topology with interconnect labels and bandwidth annotations
-- [ ] 7. Create `src/components/calculator/NetworkPanel.tsx` — shows required bandwidth, recommended interconnect, comm overhead %
-- [ ] 8. Create `src/components/calculator/StoragePanel.tsx` — shows disk capacity breakdown (data + checkpoints + logs), storage tier recommendation
-- [ ] 9. Update Zustand store with network/storage state fields
-- [ ] 10. Write unit tests for all network and storage formulas with worked examples from the addendum (7B/8×H100, 70B/128GPU, 405B/1024GPU)
-- [ ] 11. Add interconnect column to CloudTable component
+- [x] 1. Create `src/lib/formulas/network.ts` — all-reduce, TP comm, PP comm, ZeRO-3 comm, MoE EP comm formulas
+- [x] 2. Create `src/lib/formulas/storage.ts` — checkpoint size, data size, total storage formulas
+- [x] 3. Create `src/lib/formulas/disk-iops.ts` — checkpoint write bandwidth, data loading bandwidth, tier recommendation
+- [x] 4. Create `src/types/network.ts` — InterconnectSpec interface, interconnect database as typed constant
+- [x] 5. Create `src/lib/formulas/topology.ts` — decision tree for topology recommendation based on cluster size + workload
+- [x] 6. Update `src/components/calculator/ClusterTopology.tsx` — render network topology with interconnect labels and bandwidth annotations
+- [x] 7. Create `src/components/calculator/NetworkPanel.tsx` — shows required bandwidth, recommended interconnect, comm overhead %
+- [x] 8. Create `src/components/calculator/StoragePanel.tsx` — shows disk capacity breakdown (data + checkpoints + logs), storage tier recommendation
+- [x] 9. Update Zustand store with network/storage state fields
+- [x] 10. Write unit tests for all network and storage formulas with worked examples from the addendum (7B/8×H100, 70B/128GPU, 405B/1024GPU)
+- [x] 11. Add interconnect column to CloudTable component
 
 
+
+## Tasks
+
+- [x] 1. Create `src/lib/formulas/network.ts` — all-reduce, TP comm, PP comm, ZeRO-3 comm, MoE EP comm formulas
+- [x] 2. Create `src/lib/formulas/storage.ts` — checkpoint size, data size, total storage formulas
+- [x] 3. Create `src/lib/formulas/disk-iops.ts` — checkpoint write bandwidth, data loading bandwidth, tier recommendation
+- [x] 4. Create `src/types/network.ts` — InterconnectSpec interface, interconnect database as typed constant
+- [x] 5. Create `src/lib/formulas/topology.ts` — decision tree for topology recommendation based on cluster size + workload
+- [x] 6. Update `src/components/calculator/ClusterTopology.tsx` — render network topology with interconnect labels and bandwidth annotations
+- [x] 7. Create `src/components/calculator/NetworkPanel.tsx` — shows required bandwidth, recommended interconnect, comm overhead %
+- [x] 8. Create `src/components/calculator/StoragePanel.tsx` — shows disk capacity breakdown (data + checkpoints + logs), storage tier recommendation
+- [x] 9. Update Zustand store with network/storage state fields
+- [x] 10. Write unit tests for all network and storage formulas with worked examples from the addendum (7B/8×H100, 70B/128GPU, 405B/1024GPU)
+- [x] 11. Add interconnect column to CloudTable component

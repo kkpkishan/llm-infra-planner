@@ -42,6 +42,10 @@ export interface CalculatorStore {
   trainingOptions: TrainingOptions;
   advancedSettings: AdvancedSettings;
 
+  // ── Network / Storage inputs
+  numGPUs: number;
+  parallelismType: 'tp' | 'pp' | 'zero3' | 'moe';
+
   // ── Computed results
   breakdown: VRAMBreakdown | null;
   gpuRecommendations: GPURecommendations | null;
@@ -62,6 +66,8 @@ export interface CalculatorStore {
   setMode: (mode: WorkloadMode) => void;
   setTrainingOptions: (opts: Partial<TrainingOptions>) => void;
   setAdvancedSettings: (settings: Partial<AdvancedSettings>) => void;
+  setNumGPUs: (n: number) => void;
+  setParallelismType: (t: 'tp' | 'pp' | 'zero3' | 'moe') => void;
   addCompareConfig: () => void;
   removeCompareConfig: (index: number) => void;
   loadFromURL: (queryString: string) => void;
@@ -102,6 +108,10 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
     mode: initialState.mode,
     trainingOptions: defaultTrainingOptions,
     advancedSettings: defaultAdvancedSettings,
+
+    // Network / Storage
+    numGPUs: 1,
+    parallelismType: 'tp' as const,
 
     // Computed (null until first recompute)
     breakdown: null,
@@ -159,6 +169,14 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
     setAdvancedSettings: (settings) => {
       set(state => ({ advancedSettings: { ...state.advancedSettings, ...settings } }));
       get().recompute();
+    },
+
+    setNumGPUs: (n) => {
+      set({ numGPUs: Math.max(1, n) });
+    },
+
+    setParallelismType: (t) => {
+      set({ parallelismType: t });
     },
 
     addCompareConfig: () => {
