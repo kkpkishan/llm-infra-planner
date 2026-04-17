@@ -53,16 +53,16 @@ Add comprehensive KV cache optimization techniques, a serving framework comparis
 
 ## Tasks
 
-- [ ] 1. Create `src/lib/formulas/kv-cache.ts` — all KV variants: standard, GQA, MQA, MLA, sliding-window, paged, prefix-cache, quantized
-- [ ] 2. Create `src/lib/formulas/speculative.ts` — draft model VRAM, KV overhead, speedup estimates
-- [ ] 3. Create `src/lib/formulas/tokenizer.ts` — embedding VRAM, vocab % of model, fertility lookup
-- [ ] 4. Create `src/data/serving-frameworks.ts` — typed constant with framework matrix data
-- [ ] 5. Create `src/components/calculator/KVCacheConfig.tsx` — KV variant selector (auto-detected + manual override), KV quant picker
-- [ ] 6. Create `src/components/calculator/FrameworkPicker.tsx` — framework recommendation with comparison table
-- [ ] 7. Create `src/components/calculator/SpeculativeConfig.tsx` — toggle + draft method picker + overhead display
-- [ ] 8. Create `src/components/calculator/TokenizerInfo.tsx` — shows tokenizer stats, embedding VRAM, fertility
-- [ ] 9. Update VRAMBreakdown to show KV cache with variant-specific formula
-- [ ] 10. Update throughput formula to use framework-specific efficiency factor
-- [ ] 11. Write tests: Llama-3 8B KV at 32k should be ~1.0 GB (GQA), DeepSeek-V3 KV at 8k should be ~550 MB (MLA), Mistral 7B SWA at 32k should cap at ~512 MB
+- [x] 1. Create `src/lib/formulas/kv-cache.ts` — all KV variants: standard, GQA, MQA, MLA, sliding-window, paged, prefix-cache, quantized
+- [x] 2. Create `src/lib/formulas/speculative.ts` — draft model VRAM, KV overhead, speedup estimates
+- [x] 3. Create `src/lib/formulas/tokenizer.ts` — embedding VRAM, vocab % of model, fertility lookup
+- [x] 4. Create `src/data/serving-frameworks.ts` — typed constant with framework matrix data
+- [x] 5. Create `src/components/calculator/KVCacheConfig.tsx` — KV variant selector (auto-detected + manual override), KV quant picker
+- [x] 6. Create `src/components/calculator/FrameworkPicker.tsx` — framework recommendation with comparison table
+- [x] 7. Create `src/components/calculator/SpeculativeConfig.tsx` — toggle + draft method picker + overhead display
+- [x] 8. Create `src/components/calculator/TokenizerInfo.tsx` — shows tokenizer stats, embedding VRAM, fertility
+- [x] 9. Update VRAMBreakdown to show KV cache with variant-specific formula
+- [x] 10. Update throughput formula to use framework-specific efficiency factor
+- [x] 11. Write tests: Llama-3 8B KV at 32k should be ~1.0 GB (GQA), DeepSeek-V3 KV at 8k should be ~550 MB (MLA), Mistral 7B SWA at 32k should cap at ~512 MB
 
 
