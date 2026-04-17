@@ -1,0 +1,26 @@
+name: Refresh Cloud Prices
+on:
+  schedule:
+    - cron: '0 4 * * *'  # daily 4:00 UTC
+  workflow_dispatch:
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npx tsx scripts/refresh-cloud-prices.ts
+      - run: npx tsx scripts/refresh-hardware.ts
+      - run: npm run validate
+      - uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: 'chore(data): refresh cloud prices and hardware specs'
+          title: 'chore(data): refresh prices — ${{ github.run_id }}'
+          branch: 'auto/price-refresh'
+          delete-branch: true

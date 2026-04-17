@@ -111,3 +111,21 @@ Build automated pipelines to fetch GPU/accelerator specs and cloud instance pric
 - [ ] 15. Add `public/data/meta.json` with `{ modelsVersion, gpusVersion, cloudVersion, exchangeRatesVersion, builtAt }` — UI shows "Prices updated X hours ago"
 
 
+
+## Tasks
+
+- [x] 1. Create `src/types/cloud.ts` with `CloudInstance` + `GPUSpec` TypeScript interfaces + Zod schemas
+- [x] 2. Create `scripts/lib/aws-pricer.ts` — fetches on-demand from Bulk API, spot from DescribeSpotPriceHistory, specs from DescribeInstanceTypes
+- [x] 3. Create `scripts/lib/azure-pricer.ts` — fetches Consumption + Spot + Reservation prices via Retail Prices API with OData filters
+- [x] 4. Create `scripts/lib/gcp-pricer.ts` — fetches from Cloud Billing Catalog, parses tiered rates, maps SKUs to GPU types
+- [x] 5. Create `scripts/lib/specialty-pricers.ts` — individual fetchers for Lambda, RunPod (GraphQL), Vast.ai, Crusoe, Replicate, TensorDock, Hyperstack
+- [x] 6. Create `scripts/lib/currency.ts` — fetches Frankfurter API, caches rates, provides `convertUSD(amount, targetCurrency)` utility
+- [x] 7. Create `scripts/refresh-cloud-prices.ts` — orchestrator: runs all pricers, merges, validates, writes `public/data/cloud.json` + `exchange-rates.json`
+- [x] 8. Create `scripts/refresh-hardware.ts` — updates `public/data/gpus.json` from hardware YAML + newsroom RSS checks
+- [x] 9. Create `data/hardware.yml` — comprehensive GPU spec database with all vendors, verified against datasheets
+- [x] 10. Create `data/cloud-overrides.yml` — curated cloud pricing for all providers
+- [x] 11. Create `.github/workflows/refresh-prices.yml` — daily cron, commits if diff, includes spot history aggregation
+- [x] 12. Create `src/components/calculator/CurrencyPicker.tsx` — dropdown for currency selection, persists preference
+- [x] 13. Create `src/lib/currency.ts` — client-side conversion utility using cached exchange rates
+- [x] 14. Write tests for each pricer with mocked API responses
+- [x] 15. Add `public/data/meta.json` with `{ modelsVersion, gpusVersion, cloudVersion, exchangeRatesVersion, builtAt }`
