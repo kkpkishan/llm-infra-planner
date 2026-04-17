@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ChevronDown, ChevronUp, Settings } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { AdvancedSettings, TrainingOptions, WorkloadMode } from '@/lib/formulas/types';
+import { InfoTooltip } from '@/components/primitives/InfoTooltip';
 
 interface AdvancedPanelProps {
   mode: WorkloadMode;
@@ -65,8 +66,9 @@ export function AdvancedPanel({
         <div id="advanced-panel-content" className="px-4 py-3 border-t border-border-subtle space-y-4">
           {/* Framework Selection */}
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="framework-select" className="text-xs font-medium text-fg-default">
+            <label htmlFor="framework-select" className="text-xs font-medium text-fg-default flex items-center gap-1.5">
               Serving Framework
+              <InfoTooltip paramKey="servingFramework" />
             </label>
             <select
               id="framework-select"
@@ -84,8 +86,9 @@ export function AdvancedPanel({
 
           {/* Overhead Multiplier */}
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="overhead-input" className="text-xs font-medium text-fg-default">
+            <label htmlFor="overhead-input" className="text-xs font-medium text-fg-default flex items-center gap-1.5">
               Overhead Multiplier
+              <InfoTooltip paramKey="overheadMultiplier" />
             </label>
             <div className="flex items-center gap-2">
               <input
@@ -136,7 +139,10 @@ export function AdvancedPanel({
 
                 {/* Training Mode */}
                 <div className="flex flex-col gap-1.5 mb-4">
-                  <label className="text-xs font-medium text-fg-default">Training Mode</label>
+                  <label className="text-xs font-medium text-fg-default flex items-center gap-1.5">
+                    Training Mode
+                    <InfoTooltip paramKey="trainingMode" />
+                  </label>
                   <div className="flex gap-1">
                     {TRAINING_MODE_OPTIONS.map(opt => {
                       const isSelected = trainingOptions.mode === opt.value;
@@ -161,8 +167,9 @@ export function AdvancedPanel({
 
                 {/* Gradient Checkpointing */}
                 <div className="flex items-center justify-between mb-4">
-                  <label htmlFor="gradient-checkpoint" className="text-xs font-medium text-fg-default">
+                  <label htmlFor="gradient-checkpoint" className="text-xs font-medium text-fg-default flex items-center gap-1.5">
                     Gradient Checkpointing
+                    <InfoTooltip paramKey="gradientCheckpointing" />
                   </label>
                   <button
                     id="gradient-checkpoint"
@@ -191,8 +198,9 @@ export function AdvancedPanel({
                 {/* LoRA Rank (only for LoRA/QLoRA) */}
                 {(trainingOptions.mode === 'lora' || trainingOptions.mode === 'qlora') && (
                   <div className="flex flex-col gap-1.5">
-                    <label htmlFor="lora-rank" className="text-xs font-medium text-fg-default">
+                    <label htmlFor="lora-rank" className="text-xs font-medium text-fg-default flex items-center gap-1.5">
                       LoRA Rank
+                      <InfoTooltip paramKey="loraRank" />
                     </label>
                     <input
                       id="lora-rank"

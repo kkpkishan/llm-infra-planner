@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { cn } from '@/lib/utils';
+import { InfoTooltip } from '@/components/primitives/InfoTooltip';
 
 interface PrecisionPickerProps {
   value: string;
@@ -41,8 +42,9 @@ export function PrecisionPicker({ value, onChange, className }: PrecisionPickerP
 
   return (
     <div className={cn('flex flex-col gap-1.5', className)}>
-      <label className="text-xs font-medium text-fg-default">
+      <label className="text-xs font-medium text-fg-default flex items-center gap-1.5">
         Weight Precision
+        <InfoTooltip paramKey="weightPrecision" />
       </label>
 
       <div

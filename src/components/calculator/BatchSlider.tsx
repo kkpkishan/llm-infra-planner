@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { cn } from '@/lib/utils';
 import { Input } from '@/components/primitives/input';
+import { InfoTooltip } from '@/components/primitives/InfoTooltip';
 
 interface BatchSliderProps {
   value: number;
@@ -49,8 +50,9 @@ export function BatchSlider({ value, onChange, className }: BatchSliderProps) {
 
   return (
     <div className={cn('flex flex-col gap-1.5', className)}>
-      <label htmlFor="batch-slider" className="text-xs font-medium text-fg-default">
+      <label htmlFor="batch-slider" className="text-xs font-medium text-fg-default flex items-center gap-1.5">
         Batch Size
+        <InfoTooltip paramKey="batchSize" />
       </label>
 
       <div className="flex items-center gap-3">

@@ -3,6 +3,7 @@ import { Check, ChevronsUpDown, Cpu } from 'lucide-react';
 import Fuse from 'fuse.js';
 import { cn } from '@/lib/utils';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/primitives/popover';
+import { InfoTooltip } from '@/components/primitives/InfoTooltip';
 import {
   Command,
   CommandEmpty,
@@ -124,6 +125,7 @@ export function ModelPicker({ models, value, onSelect, open: controlledOpen, onO
       >
         <Cpu size={14} className="text-fg-muted" />
         Model
+        <InfoTooltip paramKey="model" />
         <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-border bg-bg-muted px-1.5 font-mono text-[10px] font-medium text-fg-muted">
           ⌘K
         </kbd>

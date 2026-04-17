@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { cn } from '@/lib/utils';
+import { InfoTooltip } from '@/components/primitives/InfoTooltip';
 
 interface KVPrecisionPickerProps {
   value: string;
@@ -37,8 +38,9 @@ export function KVPrecisionPicker({ value, onChange, className }: KVPrecisionPic
 
   return (
     <div className={cn('flex flex-col gap-1.5', className)}>
-      <label className="text-xs font-medium text-fg-default">
+      <label className="text-xs font-medium text-fg-default flex items-center gap-1.5">
         KV Cache Precision
+        <InfoTooltip paramKey="kvCachePrecision" />
       </label>
 
       <div

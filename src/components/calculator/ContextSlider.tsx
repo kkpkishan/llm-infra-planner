@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { cn } from '@/lib/utils';
 import { Input } from '@/components/primitives/input';
+import { InfoTooltip } from '@/components/primitives/InfoTooltip';
 
 interface ContextSliderProps {
   value: number;
@@ -77,8 +78,9 @@ export function ContextSlider({ value, max, onChange, className }: ContextSlider
 
   return (
     <div className={cn('flex flex-col gap-1.5', className)}>
-      <label htmlFor="context-slider" className="text-xs font-medium text-fg-default">
+      <label htmlFor="context-slider" className="text-xs font-medium text-fg-default flex items-center gap-1.5">
         Context Length
+        <InfoTooltip paramKey="contextLength" />
       </label>
 
       <div className="relative">
