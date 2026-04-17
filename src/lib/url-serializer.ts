@@ -23,6 +23,7 @@ export function serializeState(state: CalculatorState): string {
   if (state.compare && state.compare.length > 0) {
     params.set('compare', state.compare.join(','));
   }
+  if (state.trainingMethod) params.set('tm', state.trainingMethod);
   return '?' + params.toString();
 }
 
@@ -77,6 +78,9 @@ export function parseState(
   const compareRaw = params.get('compare');
   const compare = compareRaw ? compareRaw.split(',').filter(Boolean) : undefined;
 
+  // Training method (optional)
+  const trainingMethod = params.get('tm') ?? undefined;
+
   return {
     model: resolvedModel,
     precision,
@@ -86,6 +90,7 @@ export function parseState(
     mode,
     gpu,
     compare,
+    trainingMethod,
     fallbackModel,
   };
 }

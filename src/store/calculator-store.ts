@@ -192,11 +192,19 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
         batchSize: parsed.batch,
         mode: parsed.mode,
       });
+      if (parsed.trainingMethod) {
+        set(state => ({
+          trainingOptions: {
+            ...state.trainingOptions,
+            trainingMethodId: parsed.trainingMethod,
+          },
+        }));
+      }
       get().recompute();
     },
 
     getShareURL: () => {
-      const { selectedModel, precision, kvPrecision, contextLength, batchSize, mode } = get();
+      const { selectedModel, precision, kvPrecision, contextLength, batchSize, mode, trainingOptions } = get();
       if (!selectedModel) return window.location.href;
       const state: CalculatorState = {
         model: selectedModel.id,
@@ -205,6 +213,7 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
         ctx: contextLength,
         batch: batchSize,
         mode,
+        trainingMethod: trainingOptions.trainingMethodId,
       };
       return window.location.origin + window.location.pathname + serializeState(state);
     },

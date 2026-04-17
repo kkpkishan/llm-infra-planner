@@ -3,11 +3,20 @@ import { ChevronDown, ChevronUp, Settings } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { AdvancedSettings, TrainingOptions, WorkloadMode } from '@/lib/formulas/types';
 import { InfoTooltip } from '@/components/primitives/InfoTooltip';
+import { TrainingMethodPicker } from './TrainingMethodPicker';
+import { LoRAConfig } from './LoRAConfig';
+import { DatasetEstimator } from './DatasetEstimator';
+import { FormatRecommendation } from './FormatRecommendation';
+import { computeTrainingMethodMemory } from '@/lib/formulas/training-methods';
+import type { TrainingMethodId } from '@/lib/formulas/training-methods';
+import type { ModelSpec } from '@/lib/formulas/types';
+import type { LoRAModuleName } from '@/lib/formulas/lora';
 
 interface AdvancedPanelProps {
   mode: WorkloadMode;
   advancedSettings: AdvancedSettings;
   trainingOptions: TrainingOptions;
+  selectedModel?: ModelSpec | null;
   onAdvancedSettingsChange: (settings: Partial<AdvancedSettings>) => void;
   onTrainingOptionsChange: (options: Partial<TrainingOptions>) => void;
   className?: string;
@@ -37,13 +46,45 @@ export function AdvancedPanel({
   mode,
   advancedSettings,
   trainingOptions,
+  selectedModel,
   onAdvancedSettingsChange,
   onTrainingOptionsChange,
   className,
 }: AdvancedPanelProps) {
   const [isExpanded, setIsExpanded] = React.useState(false);
+  const [loraModules, setLoraModules] = React.useState<LoRAModuleName[]>(['q_proj', 'k_proj', 'v_proj', 'o_proj']);
 
   const isTrainingMode = mode === 'finetune' || mode === 'train';
+
+  const trainingMethodId = (trainingOptions.trainingMethodId ?? '') as TrainingMethodId | '';
+  const isLoRAMethod = trainingMethodId === 'sft_lora' || trainingMethodId === 'sft_qlora';
+
+  // Compute method memory for display
+  const methodMemory = React.useMemo(() => {
+    if (!trainingMethodId || !selectedModel) return null;
+    const numParams = selectedModel.paramsTotal;
+    const arch = selectedModel.architecture;
+    // Simple trainable params estimate for display
+    const loraRank = trainingOptions.loraRank ?? 8;
+    const trainableParams = loraModules.reduce((sum, name) => {
+      const h = arch.hiddenSize;
+      const i = arch.intermediateSize;
+      const shapes: Record<LoRAModuleName, { dIn: number; dOut: number }> = {
+        q_proj: { dIn: h, dOut: h }, k_proj: { dIn: h, dOut: h },
+        v_proj: { dIn: h, dOut: h }, o_proj: { dIn: h, dOut: h },
+        gate_proj: { dIn: h, dOut: i }, up_proj: { dIn: h, dOut: i },
+        down_proj: { dIn: i, dOut: h },
+      };
+      return sum + loraRank * (shapes[name].dIn + shapes[name].dOut);
+    }, 0) * arch.numLayers;
+    return computeTrainingMethodMemory(
+      trainingMethodId as TrainingMethodId,
+      numParams,
+      trainableParams,
+      2, // placeholder activations
+      2  // BF16
+    );
+  }, [trainingMethodId, selectedModel, trainingOptions.loraRank, loraModules]);
 
   return (
     <div className={cn('flex flex-col border border-border-subtle rounded-lg', className)}>
@@ -137,6 +178,15 @@ export function AdvancedPanel({
               <div className="border-t border-border-subtle pt-4">
                 <h4 className="text-xs font-semibold text-fg-default mb-3">Training Options</h4>
 
+                {/* Training Method Picker */}
+                <div className="mb-4">
+                  <TrainingMethodPicker
+                    value={trainingMethodId}
+                    memory={methodMemory}
+                    onChange={(id) => onTrainingOptionsChange({ trainingMethodId: id || undefined })}
+                  />
+                </div>
+
                 {/* Training Mode */}
                 <div className="flex flex-col gap-1.5 mb-4">
                   <label className="text-xs font-medium text-fg-default flex items-center gap-1.5">
@@ -195,9 +245,28 @@ export function AdvancedPanel({
                   </button>
                 </div>
 
-                {/* LoRA Rank (only for LoRA/QLoRA) */}
-                {(trainingOptions.mode === 'lora' || trainingOptions.mode === 'qlora') && (
-                  <div className="flex flex-col gap-1.5">
+                {/* LoRA Config (for LoRA/QLoRA methods) */}
+                {(isLoRAMethod || trainingOptions.mode === 'lora' || trainingOptions.mode === 'qlora') && selectedModel && (
+                  <div className="mb-4">
+                    <LoRAConfig
+                      rank={trainingOptions.loraRank ?? 8}
+                      alpha={trainingOptions.loraRank ?? 8}
+                      selectedModules={loraModules}
+                      hiddenSize={selectedModel.architecture.hiddenSize}
+                      intermediateSize={selectedModel.architecture.intermediateSize}
+                      numLayers={selectedModel.architecture.numLayers}
+                      numParams={selectedModel.paramsTotal}
+                      fullFinetuneGB={(selectedModel.paramsTotal * 16) / 1e9}
+                      onRankChange={(rank) => onTrainingOptionsChange({ loraRank: rank })}
+                      onAlphaChange={() => {/* alpha stored locally */}}
+                      onModulesChange={setLoraModules}
+                    />
+                  </div>
+                )}
+
+                {/* Legacy LoRA Rank input (when no method selected) */}
+                {!trainingMethodId && (trainingOptions.mode === 'lora' || trainingOptions.mode === 'qlora') && (
+                  <div className="flex flex-col gap-1.5 mb-4">
                     <label htmlFor="lora-rank" className="text-xs font-medium text-fg-default flex items-center gap-1.5">
                       LoRA Rank
                       <InfoTooltip paramKey="loraRank" />
@@ -221,6 +290,27 @@ export function AdvancedPanel({
                     </p>
                   </div>
                 )}
+
+                {/* Dataset Estimator */}
+                {selectedModel && (
+                  <div className="border-t border-border-subtle pt-4 mb-4">
+                    <h4 className="text-xs font-semibold text-fg-default mb-3">Dataset Estimator</h4>
+                    <DatasetEstimator
+                      numParams={selectedModel.paramsTotal}
+                      trainingMethod={
+                        trainingOptions.mode === 'lora' || trainingOptions.mode === 'qlora' || isLoRAMethod
+                          ? 'lora'
+                          : 'full'
+                      }
+                    />
+                  </div>
+                )}
+
+                {/* Format Recommendation */}
+                <div className="border-t border-border-subtle pt-4">
+                  <h4 className="text-xs font-semibold text-fg-default mb-3">Export Format</h4>
+                  <FormatRecommendation />
+                </div>
               </div>
             </>
           )}

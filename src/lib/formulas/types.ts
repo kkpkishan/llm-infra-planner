@@ -120,6 +120,8 @@ export interface CalculatorState {
   mode: WorkloadMode;
   gpu?: string;
   compare?: string[];
+  /** Training method ID — empty string means no method selected */
+  trainingMethod?: string;
 }
 
 // ─── Training Options ────────────────────────────────────────────────
@@ -129,6 +131,8 @@ export interface TrainingOptions {
   gradientCheckpointing: boolean;
   loraRank?: number;
   loraTargetModules?: { dIn: number; dOut: number }[];
+  /** Optional explicit training method — overrides mode-based dispatch */
+  trainingMethodId?: string;
 }
 
 // ─── Advanced Settings ───────────────────────────────────────────────

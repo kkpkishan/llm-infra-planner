@@ -47,15 +47,28 @@ Extend the training mode to support all major training methodologies (SFT, LoRA,
 
 ## Tasks
 
-- [ ] 1. Create `src/lib/formulas/training-methods.ts` — memory formulas for each method (pretrain, SFT, LoRA, QLoRA, DPO, GRPO, PPO, ORPO, distill)
-- [ ] 2. Create `src/lib/formulas/lora.ts` — LoRA trainable param computation from rank, target modules, model architecture
-- [ ] 3. Create `src/lib/formulas/dataset.ts` — dataset size estimation (raw, tokenized, compressed), preprocessing time, training FLOPs
-- [ ] 4. Create `src/components/calculator/TrainingMethodPicker.tsx` — dropdown with method descriptions, shows memory formula summary
-- [ ] 5. Create `src/components/calculator/LoRAConfig.tsx` — rank slider, target module checkboxes, trainable param count display
-- [ ] 6. Create `src/components/calculator/DatasetEstimator.tsx` — inputs for dataset size, shows storage + preprocessing estimates
-- [ ] 7. Create `src/components/calculator/FormatRecommendation.tsx` — shows available export formats with conversion cost
-- [ ] 8. Update `src/lib/formulas/vram.ts` to dispatch to correct training-method memory formula
-- [ ] 9. Write tests for PPO memory (7B should show ~252 GB), DPO (7B ~126 GB), QLoRA 70B (~48 GB)
-- [ ] 10. Add training method to URL state serialization
+- [x] 1. Create `src/lib/formulas/training-methods.ts` — memory formulas for each method (pretrain, SFT, LoRA, QLoRA, DPO, GRPO, PPO, ORPO, distill)
+- [x] 2. Create `src/lib/formulas/lora.ts` — LoRA trainable param computation from rank, target modules, model architecture
+- [x] 3. Create `src/lib/formulas/dataset.ts` — dataset size estimation (raw, tokenized, compressed), preprocessing time, training FLOPs
+- [x] 4. Create `src/components/calculator/TrainingMethodPicker.tsx` — dropdown with method descriptions, shows memory formula summary
+- [x] 5. Create `src/components/calculator/LoRAConfig.tsx` — rank slider, target module checkboxes, trainable param count display
+- [x] 6. Create `src/components/calculator/DatasetEstimator.tsx` — inputs for dataset size, shows storage + preprocessing estimates
+- [x] 7. Create `src/components/calculator/FormatRecommendation.tsx` — shows available export formats with conversion cost
+- [x] 8. Update `src/lib/formulas/vram.ts` to dispatch to correct training-method memory formula
+- [x] 9. Write tests for PPO memory (7B should show ~252 GB), DPO (7B ~126 GB), QLoRA 70B (~48 GB)
+- [x] 10. Add training method to URL state serialization
 
 
+
+## Tasks
+
+- [x] 1. Create `src/lib/formulas/training-methods.ts` — memory formulas for each method (pretrain, SFT, LoRA, QLoRA, DPO, GRPO, PPO, ORPO, distill)
+- [x] 2. Create `src/lib/formulas/lora.ts` — LoRA trainable param computation from rank, target modules, model architecture
+- [x] 3. Create `src/lib/formulas/dataset.ts` — dataset size estimation (raw, tokenized, compressed), preprocessing time, training FLOPs
+- [x] 4. Create `src/components/calculator/TrainingMethodPicker.tsx` — dropdown with method descriptions, shows memory formula summary
+- [x] 5. Create `src/components/calculator/LoRAConfig.tsx` — rank slider, target module checkboxes, trainable param count display
+- [x] 6. Create `src/components/calculator/DatasetEstimator.tsx` — inputs for dataset size, shows storage + preprocessing estimates
+- [x] 7. Create `src/components/calculator/FormatRecommendation.tsx` — shows available export formats with conversion cost
+- [x] 8. Update `src/lib/formulas/vram.ts` to dispatch to correct training-method memory formula
+- [x] 9. Write tests for PPO memory (7B should show ~252 GB), DPO (7B ~126 GB), QLoRA 70B (~48 GB)
+- [x] 10. Add training method to URL state serialization
