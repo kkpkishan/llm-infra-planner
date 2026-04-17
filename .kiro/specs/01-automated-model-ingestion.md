@@ -99,20 +99,20 @@ Build an automated pipeline that discovers, validates, and ingests new LLM model
 
 ## Tasks
 
-- [ ] 1. Create `src/types/model.ts` with full `ModelSpec` TypeScript interface + Zod schema including all MoE, MLA, VLM, SSM, hybrid fields
-- [ ] 2. Create `scripts/lib/hf-client.ts` — HuggingFace Hub API client with auth, pagination, rate-limit retry, expand params
-- [ ] 3. Create `scripts/lib/config-parser.ts` — parses config.json into normalized `ModelSpec.architecture`, handles all nested config patterns
-- [ ] 4. Create `scripts/lib/arch-detector.ts` — classifies architecture type (dense/MoE/MLA/VLM/SSM/hybrid) from parsed config, computes total vs active params for MoE
-- [ ] 5. Create `scripts/lib/safetensors-parser.ts` — extracts param counts from safetensors metadata (API expand, Range header, index.json fallback)
-- [ ] 6. Create `scripts/lib/gguf-parser.ts` — parses GGUF binary header via Range request, extracts arch/quant/tokenizer metadata
-- [ ] 7. Create `scripts/lib/param-estimator.ts` — computes params from config fields using dense and MoE formulas, cross-validates against safetensors count
-- [ ] 8. Create `scripts/lib/model-validator.ts` — Zod validation + sanity checks + dedup + quantized-variant grouping
-- [ ] 9. Create `scripts/ingest-models.ts` — main orchestrator: reads `data/models.yml` allowlist, discovers via HF API, parses, validates, writes `public/data/models.json` + `data/.model-cache.json`
-- [ ] 10. Create `data/models.yml` — curated list of ~100 model HF IDs across all families (Llama, Mistral, Qwen, DeepSeek, Gemma, Phi, Yi, Cohere, Grok, VLMs, embeddings)
-- [ ] 11. Create `data/models-override.yml` — manual overrides for fields not in config (MoE active params, MLA d_c, training tokens) with `source:` URL
-- [ ] 12. Create `.github/workflows/ingest-models.yml` — daily cron + manual dispatch, incremental/full modes, auto-PR
-- [ ] 13. Write unit tests for config-parser covering: Llama-3.1-8B (dense GQA), Mixtral-8x22B (MoE), DeepSeek-V3 (MLA+MoE), Llama-4-Scout (MoE+iRoPE), Qwen2-VL-7B (VLM), Phi-3.5-MoE, Mamba-2.8B (SSM), Jamba-1.5 (hybrid)
-- [ ] 14. Write integration test: run full pipeline on 10 models, compare output against hand-verified golden file
-- [ ] 15. Create `scripts/validate-data.ts` — CI validation step: JSON Schema check + sanity ranges + cross-model consistency
+- [x] 1. Create `src/types/model.ts` with full `ModelSpec` TypeScript interface + Zod schema including all MoE, MLA, VLM, SSM, hybrid fields
+- [x] 2. Create `scripts/lib/hf-client.ts` — HuggingFace Hub API client with auth, pagination, rate-limit retry, expand params
+- [x] 3. Create `scripts/lib/config-parser.ts` — parses config.json into normalized `ModelSpec.architecture`, handles all nested config patterns
+- [x] 4. Create `scripts/lib/arch-detector.ts` — classifies architecture type (dense/MoE/MLA/VLM/SSM/hybrid) from parsed config, computes total vs active params for MoE
+- [x] 5. Create `scripts/lib/safetensors-parser.ts` — extracts param counts from safetensors metadata (API expand, Range header, index.json fallback)
+- [x] 6. Create `scripts/lib/gguf-parser.ts` — parses GGUF binary header via Range request, extracts arch/quant/tokenizer metadata
+- [x] 7. Create `scripts/lib/param-estimator.ts` — computes params from config fields using dense and MoE formulas, cross-validates against safetensors count
+- [x] 8. Create `scripts/lib/model-validator.ts` — Zod validation + sanity checks + dedup + quantized-variant grouping
+- [x] 9. Create `scripts/ingest-models.ts` — main orchestrator: reads `data/models.yml` allowlist, discovers via HF API, parses, validates, writes `public/data/models.json` + `data/.model-cache.json`
+- [x] 10. Create `data/models.yml` — curated list of ~100 model HF IDs across all families (Llama, Mistral, Qwen, DeepSeek, Gemma, Phi, Yi, Cohere, Grok, VLMs, embeddings)
+- [x] 11. Create `data/models-override.yml` — manual overrides for fields not in config (MoE active params, MLA d_c, training tokens) with `source:` URL
+- [x] 12. Create `.github/workflows/ingest-models.yml` — daily cron + manual dispatch, incremental/full modes, auto-PR
+- [x] 13. Write unit tests for config-parser covering: Llama-3.1-8B (dense GQA), Mixtral-8x22B (MoE), DeepSeek-V3 (MLA+MoE), Llama-4-Scout (MoE+iRoPE), Qwen2-VL-7B (VLM), Phi-3.5-MoE, Mamba-2.8B (SSM), Jamba-1.5 (hybrid)
+- [x] 14. Write integration test: run full pipeline on 10 models, compare output against hand-verified golden file
+- [x] 15. Create `scripts/validate-data.ts` — CI validation step: JSON Schema check + sanity ranges + cross-model consistency
 
 

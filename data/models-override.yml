@@ -1,0 +1,17 @@
+# Manual overrides for fields not available in config.json.
+# These values take precedence over auto-detected values.
+# source: URL to the paper or announcement that documents the value.
+
+overrides:
+  "deepseek-ai/DeepSeek-V3":
+    mlaCompressedDim: 512
+    paramsActive: 37000000000
+    notes: "MoE with MLA attention"
+  "mistralai/Mixtral-8x7B-v0.1":
+    paramsActive: 12900000000
+    notes: "MoE, 2 experts active per token"
+  "mistralai/Mixtral-8x22B-v0.1":
+    paramsActive: 39000000000
+    notes: "MoE, 2 experts active per token"
+  "CohereForAI/c4ai-command-r-plus-08-2024":
+    notes: "Command R+ 104B dense model"

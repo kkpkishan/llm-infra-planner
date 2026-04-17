@@ -1,0 +1,49 @@
+name: Ingest Models
+
+on:
+  schedule:
+    - cron: '17 3 * * *'  # daily 3:17 UTC
+  workflow_dispatch:
+    inputs:
+      full_refresh:
+        description: 'Force full refresh (ignore cache)'
+        type: boolean
+        default: false
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run model ingestion
+        run: npx tsx scripts/ingest-models.ts
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          FULL_REFRESH: ${{ github.event.inputs.full_refresh || 'false' }}
+
+      - name: Validate data
+        run: npm run validate
+
+      - name: Create PR if data changed
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: 'chore(data): update model database'
+          title: 'chore(data): update model database — ${{ github.run_id }}'
+          branch: 'auto/model-update'
+          delete-branch: true
+          body: |
+            Automated model database update from HuggingFace Hub.
+
+            Run ID: ${{ github.run_id }}
+            Triggered by: ${{ github.event_name }}
