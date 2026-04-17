@@ -9,6 +9,10 @@ import { ContextSlider } from '@/components/calculator/ContextSlider';
 import { BatchConfig } from '@/components/calculator/BatchConfig';
 import { KVCurveChart } from '@/components/calculator/KVCurveChart';
 import { AdvancedPanel } from '@/components/calculator/AdvancedPanel';
+import { KVCacheConfig } from '@/components/calculator/KVCacheConfig';
+import { FrameworkPicker } from '@/components/calculator/FrameworkPicker';
+import { SpeculativeConfig } from '@/components/calculator/SpeculativeConfig';
+import { TokenizerInfo } from '@/components/calculator/TokenizerInfo';
 import { VRAMBreakdown } from '@/components/calculator/VRAMBreakdown';
 import { MetricsRow } from '@/components/calculator/MetricsRow';
 import { FormulaReveal } from '@/components/calculator/FormulaReveal';
@@ -57,6 +61,11 @@ export function Home({ modelSearchOpen, onModelSearchClose }: HomeProps) {
     showToast('Added to compare', 'success');
   };
 
+  const PRECISION_BYTES: Record<string, number> = {
+    fp32: 4, fp16: 2, bf16: 2, fp8: 1, int8: 1, int4: 0.5, nf4: 0.5,
+  };
+  const bytesPerParam = PRECISION_BYTES[precision] ?? 2;
+
   const InputPanel = (
     <div className="flex flex-col gap-5">
       <ModelPicker models={modelDb} value={selectedModel} onSelect={setModel}
@@ -75,6 +84,25 @@ export function Home({ modelSearchOpen, onModelSearchClose }: HomeProps) {
       <BatchConfig value={batchSize} onChange={setBatchSize} />
       <AdvancedPanel mode={mode} advancedSettings={advancedSettings} trainingOptions={trainingOptions}
         onAdvancedSettingsChange={setAdvancedSettings} onTrainingOptionsChange={setTrainingOptions} />
+      {selectedModel && (
+        <div className="flex flex-col gap-4 border border-border-subtle rounded-lg p-4">
+          <KVCacheConfig
+            model={selectedModel}
+            kvPrecision={kvPrecision}
+            contextLength={contextLength}
+            batchSize={batchSize}
+          />
+          <div className="border-t border-border-subtle pt-4">
+            <SpeculativeConfig batchSize={batchSize} contextLength={contextLength} />
+          </div>
+          <div className="border-t border-border-subtle pt-4">
+            <TokenizerInfo model={selectedModel} bytesPerParam={bytesPerParam} />
+          </div>
+          <div className="border-t border-border-subtle pt-4">
+            <FrameworkPicker gpu={topGPU?.gpu} quantization={kvPrecision} mode={mode} />
+          </div>
+        </div>
+      )}
     </div>
   );
 

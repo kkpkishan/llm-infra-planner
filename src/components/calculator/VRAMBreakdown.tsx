@@ -100,6 +100,9 @@ export function VRAMBreakdown({ breakdown, gpuRef, kvPrecisionLabel = 'FP16', fr
                     <div className="font-medium text-fg-primary">{segment.label}</div>
                     <div className="font-mono text-fg-muted">{formatGB(breakdown[segment.key])} GB</div>
                     <div className="font-mono text-fg-muted">{pct.toFixed(1)}%</div>
+                    {segment.key === 'weightsGB' && (
+                      <div className="text-fg-muted mt-0.5" style={{ fontSize: '9px' }}>includes embedding layer</div>
+                    )}
                   </div>
                 </div>
               )}

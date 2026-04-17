@@ -1,4 +1,5 @@
 import type { ThroughputInput, ThroughputResult } from './types';
+import { SERVING_FRAMEWORKS } from '@/data/serving-frameworks';
 
 /**
  * Estimate inference throughput using the roofline model.
@@ -19,4 +20,13 @@ export function computeThroughput(input: ThroughputInput): ThroughputResult {
   );
 
   return { tokensPerSecond };
+}
+
+/**
+ * Returns the efficiency factor range for a given framework ID.
+ * Falls back to vLLM defaults if the framework is not found.
+ */
+export function getFrameworkEfficiency(frameworkId: string): { min: number; max: number } {
+  const fw = SERVING_FRAMEWORKS.find(f => f.id === frameworkId.toLowerCase());
+  return fw?.efficiencyFactor ?? { min: 0.75, max: 0.90 };
 }
