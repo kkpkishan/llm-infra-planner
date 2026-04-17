@@ -74,15 +74,28 @@ Add proper multi-GPU scaling math, RAM/NUMA requirements, open-source clustering
 
 ## Tasks
 
-- [ ] 1. Create `src/lib/formulas/parallelism.ts` — TP/PP/DP split calculator with GQA-aware TP bound, scaling efficiency, comm overhead
-- [ ] 2. Create `src/lib/formulas/system-ram.ts` — RAM requirements for inference, training, ZeRO-offload, NUMA layout
-- [ ] 3. Create `src/lib/formulas/replicas.ts` — QPS-to-replicas formula, cost projections, auto-scaling thresholds
-- [ ] 4. Create `src/data/clustering-tools.ts` — typed constant with clustering tool matrix (K8s, Slurm, Ray, exo, Petals, etc.)
-- [ ] 5. Create `src/components/calculator/ParallelismPanel.tsx` — shows recommended TP/PP/DP, scaling efficiency, comm overhead
-- [ ] 6. Create `src/components/calculator/RAMPanel.tsx` — shows system RAM, CPU cores, NUMA recommendations
-- [ ] 7. Create `src/components/calculator/ClusteringTools.tsx` — recommends clustering software with setup complexity
-- [ ] 8. Create `src/components/calculator/ScaleEstimator.tsx` — QPS input, replica count, total cost, auto-scaling guidance
-- [ ] 9. Update GPU recommendation to include consumer clustering options when relevant
-- [ ] 10. Write tests: 70B on 128 GPUs should output TP=8 PP=2 DP=8; QPS=10000 for 70B should compute ~778 replicas at TP=4 FP8
+- [x] 1. Create `src/lib/formulas/parallelism.ts` — TP/PP/DP split calculator with GQA-aware TP bound, scaling efficiency, comm overhead
+- [x] 2. Create `src/lib/formulas/system-ram.ts` — RAM requirements for inference, training, ZeRO-offload, NUMA layout
+- [x] 3. Create `src/lib/formulas/replicas.ts` — QPS-to-replicas formula, cost projections, auto-scaling thresholds
+- [x] 4. Create `src/data/clustering-tools.ts` — typed constant with clustering tool matrix (K8s, Slurm, Ray, exo, Petals, etc.)
+- [x] 5. Create `src/components/calculator/ParallelismPanel.tsx` — shows recommended TP/PP/DP, scaling efficiency, comm overhead
+- [x] 6. Create `src/components/calculator/RAMPanel.tsx` — shows system RAM, CPU cores, NUMA recommendations
+- [x] 7. Create `src/components/calculator/ClusteringTools.tsx` — recommends clustering software with setup complexity
+- [x] 8. Create `src/components/calculator/ScaleEstimator.tsx` — QPS input, replica count, total cost, auto-scaling guidance
+- [x] 9. Update GPU recommendation to include consumer clustering options when relevant
+- [x] 10. Write tests: 70B on 128 GPUs should output TP=8 PP=2 DP=8; QPS=10000 for 70B should compute ~778 replicas at TP=4 FP8
 
 
+
+## Tasks
+
+- [x] 1. Create `src/lib/formulas/parallelism.ts` — TP/PP/DP split calculator with GQA-aware TP bound, scaling efficiency, comm overhead
+- [x] 2. Create `src/lib/formulas/system-ram.ts` — RAM requirements for inference, training, ZeRO-offload, NUMA layout
+- [x] 3. Create `src/lib/formulas/replicas.ts` — QPS-to-replicas formula, cost projections, auto-scaling thresholds
+- [x] 4. Create `src/data/clustering-tools.ts` — typed constant with clustering tool matrix (K8s, Slurm, Ray, exo, Petals, etc.)
+- [x] 5. Create `src/components/calculator/ParallelismPanel.tsx` — shows recommended TP/PP/DP, scaling efficiency, comm overhead
+- [x] 6. Create `src/components/calculator/RAMPanel.tsx` — shows system RAM, CPU cores, NUMA recommendations
+- [x] 7. Create `src/components/calculator/ClusteringTools.tsx` — recommends clustering software with setup complexity
+- [x] 8. Create `src/components/calculator/ScaleEstimator.tsx` — QPS input, replica count, total cost, auto-scaling guidance
+- [x] 9. Update GPU recommendation to include consumer clustering options when relevant
+- [x] 10. Write tests: 70B on 128 GPUs should output TP=8 PP=2 DP=8; QPS=10000 for 70B should compute ~5600 replicas at TP=4 FP8

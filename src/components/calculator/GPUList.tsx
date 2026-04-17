@@ -4,6 +4,7 @@ import type { GPURecommendations } from '@/lib/formulas/types';
 
 interface GPUListProps {
   recommendations: GPURecommendations;
+  numGPUs?: number;
   className?: string;
 }
 
@@ -13,8 +14,18 @@ const TIERS = [
   { key: 'performance' as const, label: 'Performance', description: '$3k+' },
 ];
 
-export function GPUList({ recommendations, className }: GPUListProps) {
+/** Returns true if the GPU is consumer-grade (not datacenter/workstation) */
+function isConsumerGPU(category: string): boolean {
+  return category === 'consumer' || category === 'apple-silicon';
+}
+
+export function GPUList({ recommendations, numGPUs = 1, className }: GPUListProps) {
   const hasTierRecs = TIERS.some(t => recommendations[t.key] !== null);
+
+  // Check if any recommended GPU is consumer-grade
+  const topFit = recommendations.budget ?? recommendations.balanced ?? recommendations.performance;
+  const showConsumerClusterNote =
+    numGPUs > 1 && topFit != null && isConsumerGPU(topFit.gpu.category);
 
   return (
     <div className={cn('flex flex-col gap-4', className)}>
@@ -63,6 +74,16 @@ export function GPUList({ recommendations, className }: GPUListProps) {
       {recommendations.allFits.length === 0 && !hasTierRecs && (
         <div className="text-sm text-fg-muted text-center py-8">
           No GPU recommendations available
+        </div>
+      )}
+
+      {showConsumerClusterNote && (
+        <div className="rounded border border-amber-300/40 bg-amber-50/50 dark:bg-amber-950/20 p-3 text-[11px] text-amber-700 dark:text-amber-400 leading-relaxed">
+          <span className="font-semibold">Consumer clustering options:</span> For multi-GPU setups with consumer hardware, consider{' '}
+          <a href="https://github.com/exo-explore/exo" target="_blank" rel="noopener noreferrer" className="underline hover:no-underline">exo</a>{' '}
+          (ring pipeline, mDNS discovery, TB5 RDMA) or{' '}
+          <a href="https://github.com/bigscience-workshop/petals" target="_blank" rel="noopener noreferrer" className="underline hover:no-underline">Petals</a>{' '}
+          (public swarm). Note: consumer clustering has 5–20× latency overhead vs NVLink — best for experimentation, not production.
         </div>
       )}
     </div>
