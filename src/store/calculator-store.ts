@@ -109,14 +109,11 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
     ? parseState(window.location.search, MODEL_DB)
     : null;
   const rawInitState = urlState ?? getDefaultState(MODEL_DB);
-  // Force inference if mode is reverse (reverse has its own page)
-  // Also map legacy modes: finetune → train, scale → inference
+  // Force inference if mode is reverse/scale/finetune (legacy modes)
   const initialState = {
     ...rawInitState,
-    mode: (rawInitState.mode === 'reverse' || rawInitState.mode === 'finetune' || rawInitState.mode === 'scale'
-      ? rawInitState.mode === 'finetune' ? 'train'
-        : rawInitState.mode === 'scale' ? 'inference'
-        : 'inference'
+    mode: (['reverse', 'finetune', 'scale'].includes(rawInitState.mode)
+      ? rawInitState.mode === 'finetune' ? 'train' : 'inference'
       : rawInitState.mode) as WorkloadMode,
   };
   const initialModel = MODEL_DB.find(m => m.id === initialState.model) ?? MODEL_DB[0] ?? null;

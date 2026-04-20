@@ -14,7 +14,7 @@ export const SHORTCUT_DEFS: ShortcutDef[] = [
   { keys: 'Esc',      description: 'Close dialog / drawer',   category: 'Navigation' },
   { keys: 'i',        description: 'Inference mode',          category: 'Modes' },
   { keys: 't',        description: 'Train mode',              category: 'Modes' },
-  { keys: 'r',        description: 'Reverse mode',            category: 'Modes' },
+  { keys: 'r',        description: 'Go to Reverse page',      category: 'Go to' },
   { keys: 'c',        description: 'Add config to compare',   category: 'Actions' },
   { keys: 'g m',      description: 'Go to Models page',       category: 'Go to' },
   { keys: 'g h',      description: 'Go to Hardware page',     category: 'Go to' },
@@ -23,7 +23,6 @@ export const SHORTCUT_DEFS: ShortcutDef[] = [
 const MODE_KEY_MAP: Record<string, WorkloadMode> = {
   i: 'inference',
   t: 'train',
-  r: 'reverse',
 };
 
 interface ShortcutHandlers {
@@ -100,6 +99,13 @@ export function registerKeyboardShortcuts(handlers: ShortcutHandlers): () => voi
       if (gTimer) clearTimeout(gTimer);
       if (e.key === 'm') { e.preventDefault(); handlers.navigate('/models'); return; }
       if (e.key === 'h') { e.preventDefault(); handlers.navigate('/hardware'); return; }
+    }
+
+    // ── r — go to Reverse page ───────────────────────────────────────
+    if (e.key === 'r') {
+      e.preventDefault();
+      handlers.navigate('/reverse');
+      return;
     }
 
     // ── Mode switching ───────────────────────────────────────────────
