@@ -2,6 +2,8 @@ import * as React from 'react';
 import { ChevronDown, ChevronUp, Share2, ArrowLeftRight, Cpu } from 'lucide-react';
 import { useCalculatorStore } from '@/store/calculator-store';
 import { useToast } from '@/components/feedback/Toast';
+
+// ── Input components ──────────────────────────────────────────────────────────
 import { ModelPicker } from '@/components/calculator/ModelPicker';
 import { PrecisionPicker } from '@/components/calculator/PrecisionPicker';
 import { KVPrecisionPicker } from '@/components/calculator/KVPrecisionPicker';
@@ -9,10 +11,21 @@ import { ContextSlider } from '@/components/calculator/ContextSlider';
 import { BatchConfig } from '@/components/calculator/BatchConfig';
 import { KVCurveChart } from '@/components/calculator/KVCurveChart';
 import { AdvancedPanel } from '@/components/calculator/AdvancedPanel';
+
+// ── Spec 05: KV Cache / Serving ───────────────────────────────────────────────
 import { KVCacheConfig } from '@/components/calculator/KVCacheConfig';
 import { FrameworkPicker } from '@/components/calculator/FrameworkPicker';
 import { SpeculativeConfig } from '@/components/calculator/SpeculativeConfig';
 import { TokenizerInfo } from '@/components/calculator/TokenizerInfo';
+
+// ── Spec 04: Training Methodologies ──────────────────────────────────────────
+import { TrainingMethodPicker } from '@/components/calculator/TrainingMethodPicker';
+import { LoRAConfig } from '@/components/calculator/LoRAConfig';
+import { DatasetEstimator } from '@/components/calculator/DatasetEstimator';
+import { FormatRecommendation } from '@/components/calculator/FormatRecommendation';
+import { AdvancedTrainingPanel } from '@/components/calculator/AdvancedTrainingPanel';
+
+// ── Output components ─────────────────────────────────────────────────────────
 import { VRAMBreakdown } from '@/components/calculator/VRAMBreakdown';
 import { MetricsRow } from '@/components/calculator/MetricsRow';
 import { FormulaReveal } from '@/components/calculator/FormulaReveal';
@@ -20,8 +33,53 @@ import { GPUList } from '@/components/calculator/GPUList';
 import { CloudTable } from '@/components/calculator/CloudTable';
 import { ClusterPanel } from '@/components/calculator/ClusterPanel';
 import { StackPanel } from '@/components/calculator/StackPanel';
+
+// ── Spec 03: Network / Storage ────────────────────────────────────────────────
+import { NetworkPanel } from '@/components/calculator/NetworkPanel';
+import { StoragePanel } from '@/components/calculator/StoragePanel';
+import { ClusterTopology } from '@/components/calculator/ClusterTopology';
+
+// ── Spec 07: Scale-Out Clustering ─────────────────────────────────────────────
+import { ParallelismPanel } from '@/components/calculator/ParallelismPanel';
+import { RAMPanel } from '@/components/calculator/RAMPanel';
+import { ClusteringTools } from '@/components/calculator/ClusteringTools';
+import { ScaleEstimator } from '@/components/calculator/ScaleEstimator';
+
+// ── Spec 08: Missing Parameters ───────────────────────────────────────────────
+import { PowerPanel } from '@/components/calculator/PowerPanel';
+import { TCOPanel } from '@/components/calculator/TCOPanel';
+import { MultimodalPanel } from '@/components/calculator/MultimodalPanel';
+import { WarmupPanel } from '@/components/calculator/WarmupPanel';
+import { FailoverPanel } from '@/components/calculator/FailoverPanel';
+
+// ── Spec 02: Currency ─────────────────────────────────────────────────────────
+import { CurrencyPicker } from '@/components/calculator/CurrencyPicker';
+
+// ── Feedback ──────────────────────────────────────────────────────────────────
 import { SkeletonVRAMBreakdown, SkeletonGPUCard } from '@/components/feedback/Skeleton';
 import { EmptyState } from '@/components/feedback/EmptyState';
+
+// ── Collapsible section wrapper ───────────────────────────────────────────────
+function Section({ title, defaultOpen = false, children }: {
+  title: string;
+  defaultOpen?: boolean;
+  children: React.ReactNode;
+}) {
+  const [open, setOpen] = React.useState(defaultOpen);
+  return (
+    <div className="border border-border-subtle rounded-lg overflow-hidden">
+      <button
+        onClick={() => setOpen(o => !o)}
+        className="w-full flex items-center justify-between px-4 py-3 bg-bg-subtle text-sm font-medium text-fg-default hover:bg-bg-muted transition-colors"
+        aria-expanded={open}
+      >
+        <span>{title}</span>
+        {open ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+      </button>
+      {open && <div className="p-4 flex flex-col gap-4">{children}</div>}
+    </div>
+  );
+}
 
 interface HomeProps {
   modelSearchOpen?: boolean;
@@ -36,6 +94,7 @@ export function Home({ modelSearchOpen, onModelSearchClose }: HomeProps) {
     setModel, setPrecision, setKVPrecision, setContextLength, setBatchSize,
     setTrainingOptions, setAdvancedSettings, recompute,
     addCompareConfig, compareConfigs, getShareURL,
+    numGPUs, setNumGPUs,
   } = useCalculatorStore();
   const { showToast } = useToast();
   const [inputsExpanded, setInputsExpanded] = React.useState(true);
@@ -44,6 +103,16 @@ export function Home({ modelSearchOpen, onModelSearchClose }: HomeProps) {
 
   const topGPU = gpuRecommendations?.allFits.find(f => f.fitStatus !== 'red');
   const kvPrecisionLabel = kvPrecision.toUpperCase();
+  const isTrainingMode = mode === 'finetune' || mode === 'train';
+  const isVLM = !!(selectedModel as any)?.architecture?.visionConfig;
+
+  const PRECISION_BYTES: Record<string, number> = {
+    fp32: 4, fp16: 2, bf16: 2, fp8: 1, fp8_e4m3: 1, fp8_e5m2: 1,
+    int8: 1, int4: 0.5, nf4: 0.5,
+  };
+  const bytesPerParam = PRECISION_BYTES[precision] ?? 2;
+  const modelBytes = (selectedModel?.paramsTotal ?? 0) * bytesPerParam;
+  const modelGB = modelBytes / 1e9;
 
   const mobileSummary = selectedModel
     ? `${selectedModel.displayName} · ${precision.toUpperCase()} · ${contextLength >= 1024 ? `${contextLength / 1024}k` : contextLength} · batch ${batchSize}`
@@ -61,11 +130,7 @@ export function Home({ modelSearchOpen, onModelSearchClose }: HomeProps) {
     showToast('Added to compare', 'success');
   };
 
-  const PRECISION_BYTES: Record<string, number> = {
-    fp32: 4, fp16: 2, bf16: 2, fp8: 1, int8: 1, int4: 0.5, nf4: 0.5,
-  };
-  const bytesPerParam = PRECISION_BYTES[precision] ?? 2;
-
+  // ── Input panel ─────────────────────────────────────────────────────────────
   const InputPanel = (
     <div className="flex flex-col gap-5">
       <ModelPicker models={modelDb} value={selectedModel} onSelect={setModel}
@@ -73,39 +138,73 @@ export function Home({ modelSearchOpen, onModelSearchClose }: HomeProps) {
       <PrecisionPicker value={precision} onChange={setPrecision} />
       <KVPrecisionPicker value={kvPrecision} onChange={setKVPrecision} fp16KvCacheGB={breakdown?.kvCacheGB} />
       {selectedModel && (
-        <KVCurveChart
-          model={selectedModel}
-          kvPrecision={kvPrecision}
-          currentContext={contextLength}
-          batchSize={batchSize}
-        />
+        <KVCurveChart model={selectedModel} kvPrecision={kvPrecision} currentContext={contextLength} batchSize={batchSize} />
       )}
       <ContextSlider value={contextLength} max={selectedModel?.architecture.maxContextLength ?? 131072} onChange={setContextLength} />
       <BatchConfig value={batchSize} onChange={setBatchSize} />
       <AdvancedPanel mode={mode} advancedSettings={advancedSettings} trainingOptions={trainingOptions}
         onAdvancedSettingsChange={setAdvancedSettings} onTrainingOptionsChange={setTrainingOptions} />
+
+      {/* Spec 05: KV Cache / Serving */}
       {selectedModel && (
-        <div className="flex flex-col gap-4 border border-border-subtle rounded-lg p-4">
-          <KVCacheConfig
-            model={selectedModel}
-            kvPrecision={kvPrecision}
-            contextLength={contextLength}
+        <Section title="KV Cache & Serving">
+          <KVCacheConfig model={selectedModel} kvPrecision={kvPrecision} contextLength={contextLength} batchSize={batchSize} />
+          <SpeculativeConfig batchSize={batchSize} contextLength={contextLength} />
+          <TokenizerInfo model={selectedModel} bytesPerParam={bytesPerParam} />
+          <FrameworkPicker gpu={topGPU?.gpu} quantization={precision} mode={mode} />
+        </Section>
+      )}
+
+      {isTrainingMode && selectedModel && (
+        <Section title="Training Configuration">
+          <TrainingMethodPicker
+            value={trainingOptions.trainingMethodId as any ?? ''}
+            onChange={(method) => setTrainingOptions({ trainingMethodId: method || undefined })}
+          />
+          <LoRAConfig
+            rank={trainingOptions.loraRank ?? 8}
+            alpha={trainingOptions.loraRank ?? 8}
+            selectedModules={['q_proj', 'k_proj', 'v_proj', 'o_proj']}
+            hiddenSize={selectedModel.architecture.hiddenSize}
+            intermediateSize={selectedModel.architecture.intermediateSize}
+            numLayers={selectedModel.architecture.numLayers}
+            numParams={selectedModel.paramsTotal}
+            fullFinetuneGB={(selectedModel.paramsTotal * 16) / 1e9}
+            onRankChange={(rank) => setTrainingOptions({ loraRank: rank })}
+            onAlphaChange={() => {}}
+            onModulesChange={() => {}}
+          />
+          <AdvancedTrainingPanel
+            numLayers={selectedModel.architecture.numLayers}
+            numHeads={selectedModel.architecture.numAttentionHeads}
+            seqLen={contextLength}
+            batchSize={batchSize}
+            bytesPerParam={bytesPerParam}
+            activationsGB={breakdown?.activationsGB ?? 0}
+          />
+          <DatasetEstimator
+            numParams={selectedModel.paramsTotal}
+            trainingMethod={trainingOptions.mode === 'full' ? 'full' : 'lora'}
+          />
+          <FormatRecommendation />
+        </Section>
+      )}
+
+      {isVLM && selectedModel && (
+        <Section title="Multimodal">
+          <MultimodalPanel
+            numLayers={selectedModel.architecture.numLayers}
+            numKVHeads={selectedModel.architecture.numKeyValueHeads}
+            headDim={selectedModel.architecture.headDim}
+            bytesPerParam={bytesPerParam}
             batchSize={batchSize}
           />
-          <div className="border-t border-border-subtle pt-4">
-            <SpeculativeConfig batchSize={batchSize} contextLength={contextLength} />
-          </div>
-          <div className="border-t border-border-subtle pt-4">
-            <TokenizerInfo model={selectedModel} bytesPerParam={bytesPerParam} />
-          </div>
-          <div className="border-t border-border-subtle pt-4">
-            <FrameworkPicker gpu={topGPU?.gpu} quantization={kvPrecision} mode={mode} />
-          </div>
-        </div>
+        </Section>
       )}
     </div>
   );
 
+  // ── Output section ──────────────────────────────────────────────────────────
   const OutputSection = (
     <div className="flex flex-col gap-6 min-w-0">
       {breakdown ? (
@@ -136,7 +235,9 @@ export function Home({ modelSearchOpen, onModelSearchClose }: HomeProps) {
 
   const GPUSection = (
     <aside className="flex flex-col gap-4">
-      {gpuRecommendations ? <GPUList recommendations={gpuRecommendations} /> : <><SkeletonGPUCard /><SkeletonGPUCard /></>}
+      {gpuRecommendations
+        ? <GPUList recommendations={gpuRecommendations} numGPUs={numGPUs} />
+        : <><SkeletonGPUCard /><SkeletonGPUCard /></>}
     </aside>
   );
 
@@ -161,7 +262,6 @@ export function Home({ modelSearchOpen, onModelSearchClose }: HomeProps) {
 
       {/* ── Mobile: single-column ────────────────────────────────────── */}
       <div className="flex flex-col gap-4 md:hidden">
-        {/* Collapsible inputs with summary */}
         <div className="rounded-lg border border-border-subtle overflow-hidden">
           <button onClick={() => setInputsExpanded(e => !e)}
             className="w-full flex items-center justify-between px-4 py-3 bg-bg-muted text-sm"
@@ -171,19 +271,15 @@ export function Home({ modelSearchOpen, onModelSearchClose }: HomeProps) {
           </button>
           {inputsExpanded && <div id="mobile-inputs" className="p-4">{InputPanel}</div>}
         </div>
-
         {breakdown ? (
           <VRAMBreakdown breakdown={breakdown} gpuRef={topGPU?.gpu} kvPrecisionLabel={kvPrecisionLabel} framework={advancedSettings.framework} />
         ) : <SkeletonVRAMBreakdown />}
-
         {breakdown && <MetricsRow tokensPerSecond={topGPU?.tokensPerSecond} costMetrics={costMetrics} gpuName={topGPU?.gpu.name} contextLength={contextLength} />}
-
-        {/* Top 3 GPU cards on mobile */}
         {gpuRecommendations && (
           <div className="flex flex-col gap-2">
             <h3 className="text-xs font-semibold uppercase tracking-wider text-fg-muted">Recommended GPUs</h3>
             {[gpuRecommendations.budget, gpuRecommendations.balanced, gpuRecommendations.performance]
-              .filter(Boolean).slice(0, 3)
+              .filter((fit): fit is NonNullable<typeof fit> => fit !== null).slice(0, 3)
               .map(fit => fit && (
                 <div key={fit.gpu.id} className="rounded-lg border border-border-subtle p-3 flex items-center justify-between gap-3 min-h-[44px]">
                   <div>
@@ -197,10 +293,13 @@ export function Home({ modelSearchOpen, onModelSearchClose }: HomeProps) {
         )}
       </div>
 
-      {/* ── Cloud Table (all breakpoints) ────────────────────────────── */}
+      {/* ── Cloud Table ───────────────────────────────────────────────── */}
       {cloudRecommendations && cloudRecommendations.length > 0 && (
         <section className="mt-8">
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-fg-muted mb-3">Cloud Instances</h2>
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-fg-muted">Cloud Instances</h2>
+            <CurrencyPicker />
+          </div>
           <CloudTable recommendations={cloudRecommendations} />
         </section>
       )}
@@ -210,11 +309,132 @@ export function Home({ modelSearchOpen, onModelSearchClose }: HomeProps) {
         </section>
       )}
 
-      {/* ── Cluster + Stack panels ────────────────────────────────────── */}
+      {/* ── Cluster + Stack ───────────────────────────────────────────── */}
       {(clusterRecommendation || stackRecommendation) && (
         <section className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
           {clusterRecommendation && <ClusterPanel cluster={clusterRecommendation} />}
           {stackRecommendation && <StackPanel stack={stackRecommendation} />}
+        </section>
+      )}
+
+      {/* ── Spec 07: Parallelism + RAM + Scale ───────────────────────── */}
+      {selectedModel && breakdown && (
+        <section className="mt-6">
+          <Section title="Parallelism & Cluster Sizing" defaultOpen={numGPUs > 1}>
+            <div className="flex flex-col gap-2 mb-2">
+              <label className="text-xs font-medium text-fg-default">Number of GPUs</label>
+              <div className="flex items-center gap-3">
+                <input type="range" min={1} max={512} step={1} value={numGPUs}
+                  onChange={e => setNumGPUs(parseInt(e.target.value))}
+                  className="flex-1 cursor-pointer appearance-none bg-transparent [&::-webkit-slider-runnable-track]:h-1.5 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-bg-emphasis [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-accent [&::-webkit-slider-thumb]:-mt-[7px]"
+                  aria-label="Number of GPUs" />
+                <span className="text-sm font-mono text-fg-primary w-12 text-right">{numGPUs}</span>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <ParallelismPanel
+                totalGPUs={numGPUs}
+                gpusPerNode={Math.min(8, numGPUs)}
+                gpuMemGB={topGPU?.gpu.memoryGB ?? 80}
+                modelGB={modelGB}
+                numKVHeads={selectedModel.architecture.numKeyValueHeads}
+              />
+              <RAMPanel
+                mode={isTrainingMode ? 'training' : 'inference'}
+                modelBytes={modelBytes}
+                numGPUsPerNode={Math.min(8, numGPUs)}
+                vramPerGPUGB={topGPU?.gpu.memoryGB ?? 80}
+              />
+            </div>
+            {numGPUs > 1 && (
+              <ClusterTopology
+                numGPUs={numGPUs}
+                workload={isTrainingMode ? 'training' : 'inference'}
+              />
+            )}
+          </Section>
+        </section>
+      )}
+
+      {/* Spec 07: Scale Estimator (inference/scale modes) */}
+      {(mode === 'inference' || mode === 'scale') && topGPU && costMetrics && (
+        <section className="mt-4">
+          <Section title="Scale Estimator — QPS Sizing">
+            <ScaleEstimator
+              tokensPerSecond={topGPU.tokensPerSecond ?? 100}
+              gpusPerReplica={numGPUs}
+              costPerGPUHour={cloudRecommendations?.[0]?.onDemandPerHour ?? 2.49}
+            />
+          </Section>
+        </section>
+      )}
+
+      {/* Spec 07: Clustering Tools */}
+      <section className="mt-4">
+        <Section title="Clustering Software Recommendations">
+          <ClusteringTools />
+        </Section>
+      </section>
+
+      {/* ── Spec 03: Network + Storage ────────────────────────────────── */}
+      {selectedModel && breakdown && (
+        <section className="mt-4">
+          <Section title="Network Bandwidth & Storage">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <NetworkPanel
+                numGPUs={numGPUs}
+                numParams={selectedModel.paramsTotal}
+                numLayers={selectedModel.architecture.numLayers}
+                hiddenSize={selectedModel.architecture.hiddenSize}
+                batchSize={batchSize}
+                seqLen={contextLength}
+                bytesPerParam={bytesPerParam}
+                parallelismType="tp"
+                stepTimeBudgetMs={500}
+              />
+              <StoragePanel
+                numTokens={1e9}
+                numCheckpoints={5}
+                numParams={selectedModel.paramsTotal}
+              />
+            </div>
+          </Section>
+        </section>
+      )}
+
+      {/* ── Spec 08: Power + TCO ──────────────────────────────────────── */}
+      {topGPU && (
+        <section className="mt-4">
+          <Section title="Power, Cooling & TCO">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <PowerPanel
+                gpuCount={numGPUs}
+                gpuTDPWatts={topGPU.gpu.tdpWatts}
+              />
+              <TCOPanel
+                cloudHourlyCostUSD={cloudRecommendations?.[0]?.onDemandPerHour ?? 2.49}
+                gpuCount={numGPUs}
+                gpuTDPWatts={topGPU.gpu.tdpWatts}
+              />
+            </div>
+          </Section>
+        </section>
+      )}
+
+      {/* ── Spec 08: Warmup + Failover ────────────────────────────────── */}
+      {selectedModel && (
+        <section className="mt-4">
+          <Section title="Deployment: Warmup & Failover">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <WarmupPanel
+                modelBytes={modelBytes}
+                numParams={selectedModel.paramsTotal}
+              />
+              <FailoverPanel
+                baseCostPerHour={cloudRecommendations?.[0]?.onDemandPerHour ?? 2.49}
+              />
+            </div>
+          </Section>
         </section>
       )}
 
