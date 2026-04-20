@@ -276,7 +276,7 @@ Add a comprehensive concurrent-user capacity planner that shows exactly how many
 
 ## Tasks
 
-- [ ] 1. Create `src/lib/formulas/prefill.ts` — prefill throughput formula (compute-bound roofline: `GPU_FLOPS / (2 × params_active)`), TTFT computation, chunked-prefill adjustment
+- [x] 1. Create `src/lib/formulas/prefill.ts` — prefill throughput formula (compute-bound roofline: `GPU_FLOPS / (2 × params_active)`), TTFT computation, chunked-prefill adjustment
 - [ ] 2. Create `src/lib/formulas/decode.ts` — decode throughput formula (memory-bandwidth roofline: `BW / model_size_active × efficiency`), TPOT computation, batch-scaling curve (memory-bound → compute-bound transition)
 - [ ] 3. Create `src/lib/formulas/concurrency.ts` — three-constraint concurrent-user calculator (KV memory, decode throughput, prefill compute), bottleneck identifier, PagedAttention adjustment
 - [ ] 4. Create `src/lib/formulas/latency-curve.ts` — TPOT(n) model: memory-bound linear region → transition → compute-bound quadratic region; compute sweet-spot and max-capacity points

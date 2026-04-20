@@ -122,6 +122,13 @@ export interface CalculatorState {
   compare?: string[];
   /** Training method ID — empty string means no method selected */
   trainingMethod?: string;
+  // Spec 10: Concurrent user capacity
+  users?: number;
+  avgPrompt?: number;
+  avgOutput?: number;
+  sloTtft?: number;
+  sloTpot?: number;
+  batch10?: boolean;
 }
 
 // ─── Training Options ────────────────────────────────────────────────

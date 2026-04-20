@@ -24,6 +24,13 @@ export function serializeState(state: CalculatorState): string {
     params.set('compare', state.compare.join(','));
   }
   if (state.trainingMethod) params.set('tm', state.trainingMethod);
+  // Spec 10: Concurrent user capacity
+  if (state.users !== undefined) params.set('users', String(state.users));
+  if (state.avgPrompt !== undefined) params.set('prompt', String(state.avgPrompt));
+  if (state.avgOutput !== undefined) params.set('output', String(state.avgOutput));
+  if (state.sloTtft !== undefined) params.set('sloTtft', String(state.sloTtft));
+  if (state.sloTpot !== undefined) params.set('sloTpot', String(state.sloTpot));
+  if (state.batch10) params.set('batch', '1');
   return '?' + params.toString();
 }
 
@@ -81,6 +88,24 @@ export function parseState(
   // Training method (optional)
   const trainingMethod = params.get('tm') ?? undefined;
 
+  // Spec 10: Concurrent user capacity
+  const rawUsers = params.get('users');
+  const users = rawUsers ? Math.max(1, Math.min(10000, parseInt(rawUsers, 10))) : undefined;
+
+  const rawPrompt = params.get('prompt');
+  const avgPrompt = rawPrompt ? Math.max(32, Math.min(131072, parseInt(rawPrompt, 10))) : undefined;
+
+  const rawOutput = params.get('output');
+  const avgOutput = rawOutput ? Math.max(16, Math.min(8192, parseInt(rawOutput, 10))) : undefined;
+
+  const rawSloTtft = params.get('sloTtft');
+  const sloTtft = rawSloTtft ? parseInt(rawSloTtft, 10) : undefined;
+
+  const rawSloTpot = params.get('sloTpot');
+  const sloTpot = rawSloTpot ? parseInt(rawSloTpot, 10) : undefined;
+
+  const batch10 = params.get('batch') === '1' ? true : undefined;
+
   return {
     model: resolvedModel,
     precision,
@@ -91,6 +116,12 @@ export function parseState(
     gpu,
     compare,
     trainingMethod,
+    users,
+    avgPrompt,
+    avgOutput,
+    sloTtft,
+    sloTpot,
+    batch10,
     fallbackModel,
   };
 }

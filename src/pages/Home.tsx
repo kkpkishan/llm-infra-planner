@@ -55,6 +55,25 @@ import { FailoverPanel } from '@/components/calculator/FailoverPanel';
 // ── Spec 02: Currency ─────────────────────────────────────────────────────────
 import { CurrencyPicker } from '@/components/calculator/CurrencyPicker';
 
+// ── Spec 10: Concurrent User Capacity ────────────────────────────────────────
+import { UserExperienceSummary } from '@/components/calculator/UserExperienceSummary';
+import { PrefillDecodeBreakdown } from '@/components/calculator/PrefillDecodeBreakdown';
+import { ConcurrentUserSlider } from '@/components/calculator/ConcurrentUserSlider';
+import { PromptOutputConfig } from '@/components/calculator/PromptOutputConfig';
+import { SLOConfig } from '@/components/calculator/SLOConfig';
+import { LatencyCurveChart } from '@/components/calculator/LatencyCurveChart';
+import { BottleneckIndicator } from '@/components/calculator/BottleneckIndicator';
+import { ReplicaScalingTable } from '@/components/calculator/ReplicaScalingTable';
+import { RequestCostPanel } from '@/components/calculator/RequestCostPanel';
+import { BatchModeToggle } from '@/components/calculator/BatchModeToggle';
+import { computePrefill } from '@/lib/formulas/prefill';
+import { computeDecode } from '@/lib/formulas/decode';
+import { computeMaxConcurrentUsers } from '@/lib/formulas/concurrency';
+import { computeLatencyCurve } from '@/lib/formulas/latency-curve';
+import { computeRequestCost } from '@/lib/formulas/request-cost';
+import { computeBatchMode } from '@/lib/formulas/batch-processing';
+import { computeScalingTable } from '@/lib/formulas/auto-scale';
+
 // ── Feedback ──────────────────────────────────────────────────────────────────
 import { SkeletonVRAMBreakdown, SkeletonGPUCard } from '@/components/feedback/Skeleton';
 import { EmptyState } from '@/components/feedback/EmptyState';
@@ -95,6 +114,8 @@ export function Home({ modelSearchOpen, onModelSearchClose }: HomeProps) {
     setTrainingOptions, setAdvancedSettings, recompute,
     addCompareConfig, compareConfigs, getShareURL,
     numGPUs, setNumGPUs,
+    concurrentUsers, avgPromptTokens, avgOutputTokens, sloTTFTMs, sloTPOTMs, batchMode,
+    setConcurrentUsers, setAvgPromptTokens, setAvgOutputTokens, setSloTTFT, setSloTPOT, setBatchMode,
   } = useCalculatorStore();
   const { showToast } = useToast();
   const [inputsExpanded, setInputsExpanded] = React.useState(true);
@@ -113,6 +134,105 @@ export function Home({ modelSearchOpen, onModelSearchClose }: HomeProps) {
   const bytesPerParam = PRECISION_BYTES[precision] ?? 2;
   const modelBytes = (selectedModel?.paramsTotal ?? 0) * bytesPerParam;
   const modelGB = modelBytes / 1e9;
+
+  // ── Spec 10: Concurrent user capacity computations ──────────────────────────
+  const concurrencyData = React.useMemo(() => {
+    if (!selectedModel || !topGPU) return null;
+    const gpu = topGPU.gpu;
+    const activeParams = selectedModel.paramsActive ?? selectedModel.paramsTotal;
+    const activeWeightsGB = (activeParams * bytesPerParam) / 1e9;
+    const weightsGB = (selectedModel.paramsTotal * bytesPerParam) / 1e9;
+    const overheadGB = Math.max(1, weightsGB * 0.05); // ~5% overhead
+    const kvBytesPerParam = PRECISION_BYTES[kvPrecision] ?? 2;
+
+    const prefillResult = computePrefill(
+      gpu.flops.fp16,
+      activeParams,
+      avgPromptTokens,
+    );
+
+    const decodeResult = computeDecode(
+      gpu.memoryBandwidthGBs,
+      activeWeightsGB,
+      0.80,
+      gpu.flops.fp16,
+      bytesPerParam,
+    );
+
+    const concurrencyResult = computeMaxConcurrentUsers(
+      gpu.memoryGB,
+      weightsGB,
+      overheadGB,
+      selectedModel.architecture.numLayers,
+      selectedModel.architecture.numKeyValueHeads,
+      selectedModel.architecture.headDim,
+      avgPromptTokens,
+      avgOutputTokens,
+      kvBytesPerParam,
+      decodeResult.decodeTokensPerSecPerUser,
+      sloTPOTMs,
+      gpu.flops.fp16,
+      activeParams,
+      sloTTFTMs,
+    );
+
+    const tpotAtCurrentUsers = decodeResult.tpotMs * (1 + 0.02 * Math.max(0, concurrentUsers - 1));
+    const aggregateThroughput = concurrentUsers * decodeResult.decodeTokensPerSecPerUser * 0.85;
+
+    const latencyCurve = computeLatencyCurve(
+      decodeResult,
+      gpu.flops.fp16,
+      activeParams,
+      bytesPerParam,
+      concurrencyResult.maxConcurrentUsers,
+    );
+
+    const hourlyCloudCost = cloudRecommendations?.[0]?.onDemandPerHour ?? 2.49;
+
+    const requestCost = computeRequestCost(
+      hourlyCloudCost,
+      concurrentUsers,
+      prefillResult.ttftMs,
+      tpotAtCurrentUsers,
+      avgOutputTokens,
+      prefillResult.prefillThroughputTokensPerSec,
+      aggregateThroughput,
+    );
+
+    const batchResult = computeBatchMode(
+      concurrencyResult.freeVRAMForKVGB,
+      concurrencyResult.kvPerUserGB,
+      decodeResult.decodeTokensPerSecPerUser,
+      hourlyCloudCost,
+    );
+
+    const scalingRows = computeScalingTable(
+      concurrencyResult.maxConcurrentUsers,
+      tpotAtCurrentUsers,
+      numGPUs,
+      hourlyCloudCost / numGPUs,
+      decodeResult.decodeTokensPerSecPerUser,
+      avgOutputTokens,
+    );
+
+    const usedVRAMGB = weightsGB + overheadGB + concurrencyResult.kvPerUserGB * concurrentUsers;
+
+    return {
+      prefillResult,
+      decodeResult,
+      concurrencyResult,
+      tpotAtCurrentUsers,
+      aggregateThroughput,
+      latencyCurve,
+      requestCost,
+      batchResult,
+      scalingRows,
+      usedVRAMGB,
+      hourlyCloudCost,
+      weightsGB,
+    };
+  }, [selectedModel, topGPU, bytesPerParam, kvPrecision, avgPromptTokens, avgOutputTokens,
+    sloTPOTMs, sloTTFTMs, concurrentUsers, cloudRecommendations, numGPUs]);
 
   const mobileSummary = selectedModel
     ? `${selectedModel.displayName} · ${precision.toUpperCase()} · ${contextLength >= 1024 ? `${contextLength / 1024}k` : contextLength} · batch ${batchSize}`
@@ -375,6 +495,89 @@ export function Home({ modelSearchOpen, onModelSearchClose }: HomeProps) {
           <ClusteringTools />
         </Section>
       </section>
+
+      {/* ── Spec 10: Concurrent User Capacity ────────────────────────── */}
+      {selectedModel && topGPU && concurrencyData && (
+        <section className="mt-4">
+          <Section title="Concurrent User Capacity" defaultOpen={false}>
+            <UserExperienceSummary
+              modelName={selectedModel.displayName}
+              gpuName={topGPU.gpu.name}
+              concurrentUsers={concurrentUsers}
+              ttftMs={concurrencyData.prefillResult.ttftMs}
+              tpotMs={concurrencyData.tpotAtCurrentUsers}
+              avgOutputTokens={avgOutputTokens}
+              aggregateThroughput={concurrencyData.aggregateThroughput}
+              maxConcurrentUsers={concurrencyData.concurrencyResult.maxConcurrentUsers}
+              totalVRAMGB={topGPU.gpu.memoryGB}
+              usedVRAMGB={concurrencyData.usedVRAMGB}
+              costPerUserPerHour={concurrencyData.requestCost.costPerUserPerHour}
+              costPerMTokens={concurrencyData.requestCost.costPerMOutputTokens}
+              costPerRequest={concurrencyData.requestCost.costPerRequest}
+              bottleneck={concurrencyData.concurrencyResult.bottleneck}
+              sloTTFTMs={sloTTFTMs}
+              sloTPOTMs={sloTPOTMs}
+              doubleGPUMaxUsers={concurrencyData.concurrencyResult.maxConcurrentUsers * 2}
+              doubleGPUCostPerHour={concurrencyData.hourlyCloudCost * 2}
+            />
+            <PrefillDecodeBreakdown
+              ttftMs={concurrencyData.prefillResult.ttftMs}
+              tpotMs={concurrencyData.tpotAtCurrentUsers}
+              avgOutputTokens={avgOutputTokens}
+            />
+            <ConcurrentUserSlider
+              value={concurrentUsers}
+              onChange={setConcurrentUsers}
+              maxCapacity={concurrencyData.concurrencyResult.maxConcurrentUsers}
+              totalVRAMGB={topGPU.gpu.memoryGB}
+              usedVRAMGB={concurrencyData.usedVRAMGB}
+            />
+            <PromptOutputConfig
+              promptTokens={avgPromptTokens}
+              outputTokens={avgOutputTokens}
+              onPromptChange={setAvgPromptTokens}
+              onOutputChange={setAvgOutputTokens}
+            />
+            <SLOConfig
+              sloTTFTMs={sloTTFTMs}
+              sloTPOTMs={sloTPOTMs}
+              actualTTFTMs={concurrencyData.prefillResult.ttftMs}
+              actualTPOTMs={concurrencyData.tpotAtCurrentUsers}
+              onSloTTFTChange={setSloTTFT}
+              onSloTPOTChange={setSloTPOT}
+            />
+            <LatencyCurveChart
+              points={concurrencyData.latencyCurve.points}
+              currentUsers={concurrentUsers}
+              sloTpotMs={sloTPOTMs}
+              sweetSpotUsers={concurrencyData.latencyCurve.sweetSpotUsers}
+              maxCapacityUsers={concurrencyData.latencyCurve.maxCapacityUsers}
+            />
+            <BottleneckIndicator
+              maxUsersMemory={concurrencyData.concurrencyResult.maxUsersMemory}
+              maxUsersThroughput={concurrencyData.concurrencyResult.maxUsersThroughput}
+              maxUsersPrefill={concurrencyData.concurrencyResult.maxUsersPrefill}
+              bottleneck={concurrencyData.concurrencyResult.bottleneck}
+              currentUsers={concurrentUsers}
+            />
+            <ReplicaScalingTable
+              rows={concurrencyData.scalingRows}
+              currentReplicas={1}
+              gpusPerReplica={numGPUs}
+              gpuName={topGPU.gpu.name}
+            />
+            <RequestCostPanel
+              result={concurrencyData.requestCost}
+              hourlyCloudCost={concurrencyData.hourlyCloudCost}
+            />
+            <BatchModeToggle
+              batchMode={batchMode}
+              onToggle={setBatchMode}
+              batchResult={concurrencyData.batchResult}
+            />
+          </Section>
+        </section>
+      )}
 
       {/* ── Spec 03: Network + Storage ────────────────────────────────── */}
       {selectedModel && breakdown && (

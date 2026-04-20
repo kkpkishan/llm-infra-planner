@@ -54,6 +54,14 @@ export interface CalculatorStore {
   clusterRecommendation: ClusterRecommendation | null;
   stackRecommendation: StackRecommendation | null;
 
+  // ── Concurrent user capacity (Spec 10)
+  concurrentUsers: number;
+  avgPromptTokens: number;
+  avgOutputTokens: number;
+  sloTTFTMs: number;
+  sloTPOTMs: number;
+  batchMode: boolean;
+
   // ── Compare configs (up to 3)
   compareConfigs: CalculatorState[];
 
@@ -68,6 +76,12 @@ export interface CalculatorStore {
   setAdvancedSettings: (settings: Partial<AdvancedSettings>) => void;
   setNumGPUs: (n: number) => void;
   setParallelismType: (t: 'tp' | 'pp' | 'zero3' | 'moe') => void;
+  setConcurrentUsers: (n: number) => void;
+  setAvgPromptTokens: (n: number) => void;
+  setAvgOutputTokens: (n: number) => void;
+  setSloTTFT: (ms: number) => void;
+  setSloTPOT: (ms: number) => void;
+  setBatchMode: (b: boolean) => void;
   addCompareConfig: () => void;
   removeCompareConfig: (index: number) => void;
   loadFromURL: (queryString: string) => void;
@@ -112,6 +126,14 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
     // Network / Storage
     numGPUs: 1,
     parallelismType: 'tp' as const,
+
+    // Concurrent user capacity (Spec 10)
+    concurrentUsers: 10,
+    avgPromptTokens: 1024,
+    avgOutputTokens: 256,
+    sloTTFTMs: 500,
+    sloTPOTMs: 50,
+    batchMode: false,
 
     // Computed (null until first recompute)
     breakdown: null,
@@ -179,6 +201,30 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
       set({ parallelismType: t });
     },
 
+    setConcurrentUsers: (n) => {
+      set({ concurrentUsers: Math.max(1, Math.min(10000, n)) });
+    },
+
+    setAvgPromptTokens: (n) => {
+      set({ avgPromptTokens: Math.max(32, Math.min(131072, n)) });
+    },
+
+    setAvgOutputTokens: (n) => {
+      set({ avgOutputTokens: Math.max(16, Math.min(8192, n)) });
+    },
+
+    setSloTTFT: (ms) => {
+      set({ sloTTFTMs: ms });
+    },
+
+    setSloTPOT: (ms) => {
+      set({ sloTPOTMs: ms });
+    },
+
+    setBatchMode: (b) => {
+      set({ batchMode: b });
+    },
+
     addCompareConfig: () => {
       const { compareConfigs, selectedModel, precision, kvPrecision, contextLength, batchSize, mode } = get();
       if (compareConfigs.length >= 3 || !selectedModel) return;
@@ -218,11 +264,19 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
           },
         }));
       }
+      // Spec 10: Concurrent user capacity
+      if (parsed.users !== undefined) set({ concurrentUsers: parsed.users });
+      if (parsed.avgPrompt !== undefined) set({ avgPromptTokens: parsed.avgPrompt });
+      if (parsed.avgOutput !== undefined) set({ avgOutputTokens: parsed.avgOutput });
+      if (parsed.sloTtft !== undefined) set({ sloTTFTMs: parsed.sloTtft });
+      if (parsed.sloTpot !== undefined) set({ sloTPOTMs: parsed.sloTpot });
+      if (parsed.batch10 !== undefined) set({ batchMode: parsed.batch10 });
       get().recompute();
     },
 
     getShareURL: () => {
-      const { selectedModel, precision, kvPrecision, contextLength, batchSize, mode, trainingOptions } = get();
+      const { selectedModel, precision, kvPrecision, contextLength, batchSize, mode, trainingOptions,
+        concurrentUsers, avgPromptTokens, avgOutputTokens, sloTTFTMs, sloTPOTMs, batchMode } = get();
       if (!selectedModel) return window.location.href;
       const state: CalculatorState = {
         model: selectedModel.id,
@@ -232,6 +286,12 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
         batch: batchSize,
         mode,
         trainingMethod: trainingOptions.trainingMethodId,
+        users: concurrentUsers !== 10 ? concurrentUsers : undefined,
+        avgPrompt: avgPromptTokens !== 1024 ? avgPromptTokens : undefined,
+        avgOutput: avgOutputTokens !== 256 ? avgOutputTokens : undefined,
+        sloTtft: sloTTFTMs !== 500 ? sloTTFTMs : undefined,
+        sloTpot: sloTPOTMs !== 50 ? sloTPOTMs : undefined,
+        batch10: batchMode || undefined,
       };
       return window.location.origin + window.location.pathname + serializeState(state);
     },
