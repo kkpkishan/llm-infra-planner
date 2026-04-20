@@ -132,13 +132,13 @@ function AdvancedTabs({
   }, [mode]);
 
   const tabs = [
-    { id: 'parallelism', label: 'Parallelism', showFor: ['inference', 'scale', 'finetune', 'train'] },
-    { id: 'scale', label: 'Scale / QPS', showFor: ['inference', 'scale'] },
-    { id: 'clustering', label: 'Clustering', showFor: ['inference', 'scale', 'finetune', 'train'] },
-    { id: 'concurrency', label: 'Concurrency', showFor: ['inference', 'scale'] },
-    { id: 'network', label: 'Network & Storage', showFor: ['inference', 'scale', 'finetune', 'train'] },
-    { id: 'power', label: 'Power & TCO', showFor: ['inference', 'scale', 'finetune', 'train'] },
-    { id: 'deployment', label: 'Deployment', showFor: ['inference', 'scale'] },
+    { id: 'parallelism', label: 'Parallelism', showFor: ['inference', 'train'] },
+    { id: 'scale', label: 'Scale / QPS', showFor: ['inference'] },
+    { id: 'clustering', label: 'Clustering', showFor: ['inference', 'train'] },
+    { id: 'concurrency', label: 'Concurrency', showFor: ['inference'] },
+    { id: 'network', label: 'Network & Storage', showFor: ['inference', 'train'] },
+    { id: 'power', label: 'Power & TCO', showFor: ['inference', 'train'] },
+    { id: 'deployment', label: 'Deployment', showFor: ['inference'] },
   ].filter(t => t.showFor.includes(mode));
 
   return (
@@ -188,10 +188,10 @@ function AdvancedTabs({
           </TabsContent>
 
           <TabsContent value="scale">
-            {(mode === 'inference' || mode === 'scale') && topGPU && costMetrics ? (
+            {topGPU && costMetrics ? (
               <ScaleEstimator tokensPerSecond={topGPU.tokensPerSecond ?? 100}
                 gpusPerReplica={numGPUs} costPerGPUHour={cloudRecommendations?.[0]?.onDemandPerHour ?? 2.49} />
-            ) : <p className="text-sm text-fg-muted">Switch to Inference or Scale mode to see QPS sizing.</p>}
+            ) : <p className="text-sm text-fg-muted">Select a model to see QPS sizing.</p>}
           </TabsContent>
 
           <TabsContent value="clustering">
@@ -430,26 +430,26 @@ export function Home() {
       <ModelPicker models={modelDb} value={selectedModel} onSelect={setModel} />
       <PrecisionPicker value={precision} onChange={setPrecision} />
 
-      {/* KV precision + curve — inference & scale only */}
-      {(mode === 'inference' || mode === 'scale') && (
+      {/* KV precision + curve — inference only */}
+      {mode === 'inference' && (
         <KVPrecisionPicker value={kvPrecision} onChange={setKVPrecision} fp16KvCacheGB={breakdown?.kvCacheGB} />
       )}
-      {(mode === 'inference' || mode === 'scale') && selectedModel && (
+      {mode === 'inference' && selectedModel && (
         <KVCurveChart model={selectedModel} kvPrecision={kvPrecision} currentContext={contextLength} batchSize={batchSize} />
       )}
 
       <ContextSlider value={contextLength} max={selectedModel?.architecture.maxContextLength ?? 131072} onChange={setContextLength} />
 
-      {/* Batch size — inference & scale only */}
-      {(mode === 'inference' || mode === 'scale') && (
+      {/* Batch size — inference only */}
+      {mode === 'inference' && (
         <BatchConfig value={batchSize} onChange={setBatchSize} />
       )}
 
       <AdvancedPanel mode={mode} advancedSettings={advancedSettings} trainingOptions={trainingOptions}
         onAdvancedSettingsChange={setAdvancedSettings} onTrainingOptionsChange={setTrainingOptions} />
 
-      {/* KV Cache & Serving — inference & scale only */}
-      {(mode === 'inference' || mode === 'scale') && selectedModel && (
+      {/* KV Cache & Serving — inference only */}
+      {mode === 'inference' && selectedModel && (
         <Section title="KV Cache & Serving">
           <KVCacheConfig model={selectedModel} kvPrecision={kvPrecision} contextLength={contextLength} batchSize={batchSize} />
           <SpeculativeConfig batchSize={batchSize} contextLength={contextLength} />

@@ -49,6 +49,7 @@ export function ContextSlider({ value, max, onChange, className }: ContextSlider
   const [inputValue, setInputValue] = React.useState(value.toString());
   const [contextExtension, setContextExtension] = React.useState('none');
   const [ringAttention, setRingAttention] = React.useState(false);
+  const [isFocused, setIsFocused] = React.useState(false);
 
   let maxStepIdx = -1;
   for (let i = CONTEXT_STEPS.length - 1; i >= 0; i--) {
@@ -68,21 +69,59 @@ export function ContextSlider({ value, max, onChange, className }: ContextSlider
 
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const idx = parseInt(e.target.value, 10);
-    onChange(CONTEXT_STEPS[Math.min(idx, effectiveMaxIndex)]);
+    // Allow full range — going beyond model max shows a warning but is valid
+    const newVal = CONTEXT_STEPS[idx];
+    onChange(newVal);
+    setInputValue(newVal.toString());
+  };
+
+  // Live update as user types — apply immediately if valid
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const raw = e.target.value.replace(/[^0-9]/g, '');
+    setInputValue(raw);
+    const parsed = parseInt(raw, 10);
+    if (!isNaN(parsed) && parsed >= 512) {
+      onChange(Math.min(parsed, 10_485_760));
+    }
   };
 
   const handleInputBlur = () => {
+    setIsFocused(false);
     const parsed = parseInt(inputValue, 10);
-    if (!isNaN(parsed) && parsed > 0) {
-      const snapped = findNearestStep(Math.max(CONTEXT_STEPS[0], Math.min(parsed, effectiveMax)));
-      onChange(snapped);
-      setInputValue(snapped.toString());
+    if (!isNaN(parsed) && parsed >= 512) {
+      const clamped = Math.min(parsed, 10_485_760);
+      onChange(clamped);
+      setInputValue(clamped.toString());
     } else {
       setInputValue(value.toString());
     }
   };
 
-  React.useEffect(() => { setInputValue(value.toString()); }, [value]);
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      (e.target as HTMLInputElement).blur();
+    }
+    // Arrow up/down to step through snap points
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      const idx = Math.min(valueToSliderIndex(value) + 1, effectiveMaxIndex);
+      const newVal = CONTEXT_STEPS[idx];
+      onChange(newVal);
+      setInputValue(newVal.toString());
+    }
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const idx = Math.max(valueToSliderIndex(value) - 1, 0);
+      const newVal = CONTEXT_STEPS[idx];
+      onChange(newVal);
+      setInputValue(newVal.toString());
+    }
+  };
+
+  // Sync input display when value changes externally (e.g. model change clamps ctx)
+  React.useEffect(() => {
+    if (!isFocused) setInputValue(value.toString());
+  }, [value, isFocused]);
 
   return (
     <div className={cn('flex flex-col gap-1.5', className)}>
@@ -150,14 +189,18 @@ export function ContextSlider({ value, max, onChange, className }: ContextSlider
         <div className="flex items-center gap-2 mt-2">
           <Input
             type="text"
+            inputMode="numeric"
             value={inputValue}
-            onChange={e => setInputValue(e.target.value)}
+            onChange={handleInputChange}
+            onFocus={() => setIsFocused(true)}
             onBlur={handleInputBlur}
-            onKeyDown={e => e.key === 'Enter' && handleInputBlur()}
+            onKeyDown={handleKeyDown}
             className="w-28 font-mono text-sm"
             aria-label="Context length numeric input"
+            placeholder="e.g. 4096"
           />
           <span className="text-xs text-fg-muted">tokens</span>
+          <span className="text-xs text-fg-muted ml-auto">max {formatContextLabel(effectiveMax)}</span>
         </div>
 
         {/* Warning + context extension method */}

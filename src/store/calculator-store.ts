@@ -110,11 +110,13 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
     : null;
   const rawInitState = urlState ?? getDefaultState(MODEL_DB);
   // Force inference if mode is reverse (reverse has its own page)
-  // Also map legacy 'finetune' → 'train'
+  // Also map legacy modes: finetune → train, scale → inference
   const initialState = {
     ...rawInitState,
-    mode: (rawInitState.mode === 'reverse' || rawInitState.mode === 'finetune'
-      ? rawInitState.mode === 'finetune' ? 'train' : 'inference'
+    mode: (rawInitState.mode === 'reverse' || rawInitState.mode === 'finetune' || rawInitState.mode === 'scale'
+      ? rawInitState.mode === 'finetune' ? 'train'
+        : rawInitState.mode === 'scale' ? 'inference'
+        : 'inference'
       : rawInitState.mode) as WorkloadMode,
   };
   const initialModel = MODEL_DB.find(m => m.id === initialState.model) ?? MODEL_DB[0] ?? null;
@@ -180,8 +182,10 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
 
     setContextLength: (ctx) => {
       const { selectedModel } = get();
-      const max = selectedModel?.architecture.maxContextLength ?? 131072;
-      set({ contextLength: Math.max(1024, Math.min(ctx, max)) });
+      // Allow values beyond model's native max (user gets a warning in UI)
+      // Hard cap at 10M tokens (largest step)
+      const hardMax = 10_485_760;
+      set({ contextLength: Math.max(512, Math.min(ctx, hardMax)) });
       get().recompute();
     },
 
@@ -191,8 +195,10 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
     },
 
     setMode: (mode) => {
-      // Map legacy finetune → train
-      const resolved = mode === 'finetune' ? 'train' : mode;
+      // Map legacy modes: finetune → train, scale → inference
+      const resolved = mode === 'finetune' ? 'train'
+        : mode === 'scale' ? 'inference'
+        : mode;
       set({ mode: resolved });
       get().recompute();
     },
