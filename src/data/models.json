@@ -306,10 +306,10 @@
   {
     "id": "mistralai/Mistral-7B-v0.3",
     "family": "mistral",
-    "displayName": "Mistral 7B v0.3",
-    "releaseDate": "2024-05-22",
-    "license": "Apache-2.0",
-    "paramsTotal": 7250000000,
+    "displayName": "Mistral-7B-v0.3",
+    "releaseDate": "2026-04-20",
+    "license": "unknown",
+    "paramsTotal": 8053063680,
     "architecture": {
       "numLayers": 32,
       "hiddenSize": 4096,
@@ -514,10 +514,10 @@
   {
     "id": "Qwen/Qwen2.5-7B",
     "family": "qwen",
-    "displayName": "Qwen 2.5 7B",
-    "releaseDate": "2024-09-19",
-    "license": "Apache-2.0",
-    "paramsTotal": 7610000000,
+    "displayName": "Qwen2.5-7B",
+    "releaseDate": "2026-04-20",
+    "license": "unknown",
+    "paramsTotal": 8231845888,
     "architecture": {
       "numLayers": 28,
       "hiddenSize": 3584,
@@ -525,7 +525,7 @@
       "numAttentionHeads": 28,
       "numKeyValueHeads": 4,
       "headDim": 128,
-      "vocabSize": 151936,
+      "vocabSize": 152064,
       "tieWordEmbeddings": false,
       "attentionType": "gqa",
       "maxContextLength": 131072,
@@ -536,10 +536,10 @@
   {
     "id": "Qwen/Qwen2.5-14B",
     "family": "qwen",
-    "displayName": "Qwen 2.5 14B",
-    "releaseDate": "2024-09-19",
-    "license": "Apache-2.0",
-    "paramsTotal": 14700000000,
+    "displayName": "Qwen2.5-14B",
+    "releaseDate": "2026-04-20",
+    "license": "unknown",
+    "paramsTotal": 16782458880,
     "architecture": {
       "numLayers": 48,
       "hiddenSize": 5120,
@@ -547,7 +547,7 @@
       "numAttentionHeads": 40,
       "numKeyValueHeads": 8,
       "headDim": 128,
-      "vocabSize": 151936,
+      "vocabSize": 152064,
       "tieWordEmbeddings": false,
       "attentionType": "gqa",
       "maxContextLength": 131072,
@@ -580,10 +580,10 @@
   {
     "id": "Qwen/Qwen2.5-72B",
     "family": "qwen",
-    "displayName": "Qwen 2.5 72B",
-    "releaseDate": "2024-09-19",
-    "license": "Qwen Research License",
-    "paramsTotal": 72700000000,
+    "displayName": "Qwen2.5-72B",
+    "releaseDate": "2026-04-20",
+    "license": "unknown",
+    "paramsTotal": 82099306496,
     "architecture": {
       "numLayers": 80,
       "hiddenSize": 8192,
@@ -591,7 +591,7 @@
       "numAttentionHeads": 64,
       "numKeyValueHeads": 8,
       "headDim": 128,
-      "vocabSize": 151936,
+      "vocabSize": 152064,
       "tieWordEmbeddings": false,
       "attentionType": "gqa",
       "maxContextLength": 131072,
@@ -685,31 +685,31 @@
   {
     "id": "deepseek-ai/DeepSeek-V3",
     "family": "deepseek",
-    "displayName": "DeepSeek V3",
-    "releaseDate": "2024-12-26",
-    "license": "DeepSeek License",
-    "paramsTotal": 671000000000,
-    "paramsActive": 37000000000,
+    "displayName": "DeepSeek-V3",
+    "releaseDate": "2026-04-20",
+    "license": "unknown",
+    "paramsTotal": 669487988736,
     "architecture": {
       "numLayers": 61,
       "hiddenSize": 7168,
       "intermediateSize": 18432,
       "numAttentionHeads": 128,
       "numKeyValueHeads": 128,
-      "headDim": 128,
-      "vocabSize": 102400,
+      "headDim": 56,
+      "vocabSize": 129280,
       "tieWordEmbeddings": false,
       "attentionType": "mla",
-      "maxContextLength": 131072,
+      "maxContextLength": 163840,
       "positionalEmbedding": "rope"
     },
+    "paramsActive": 37000000000,
     "moe": {
       "numExperts": 256,
       "expertsPerToken": 8,
       "sharedExperts": 1
     },
     "mlaCompressedDim": 512,
-    "notes": "FP8-trained",
+    "notes": "MoE with MLA attention",
     "huggingfaceId": "deepseek-ai/DeepSeek-V3"
   },
   {
@@ -993,10 +993,10 @@
   {
     "id": "microsoft/Phi-4",
     "family": "phi",
-    "displayName": "Phi 4 (14.7B)",
-    "releaseDate": "2024-12-12",
-    "license": "MIT",
-    "paramsTotal": 14700000000,
+    "displayName": "Phi-4",
+    "releaseDate": "2026-04-20",
+    "license": "unknown",
+    "paramsTotal": 16231956480,
     "architecture": {
       "numLayers": 40,
       "hiddenSize": 5120,
@@ -1004,12 +1004,134 @@
       "numAttentionHeads": 40,
       "numKeyValueHeads": 10,
       "headDim": 128,
-      "vocabSize": 32064,
+      "vocabSize": 100352,
       "tieWordEmbeddings": false,
       "attentionType": "gqa",
       "maxContextLength": 16384,
       "positionalEmbedding": "rope"
     },
-    "huggingfaceId": "microsoft/phi-4"
+    "huggingfaceId": "microsoft/Phi-4"
+  },
+  {
+    "id": "mistralai/Mixtral-8x7B-v0.1",
+    "family": "mistral",
+    "displayName": "Mixtral-8x7B-v0.1",
+    "releaseDate": "2026-04-20",
+    "license": "unknown",
+    "paramsTotal": 8046772224,
+    "architecture": {
+      "numLayers": 32,
+      "hiddenSize": 4096,
+      "intermediateSize": 14336,
+      "numAttentionHeads": 32,
+      "numKeyValueHeads": 8,
+      "headDim": 128,
+      "vocabSize": 32000,
+      "tieWordEmbeddings": false,
+      "attentionType": "gqa",
+      "maxContextLength": 32768,
+      "positionalEmbedding": "rope"
+    },
+    "paramsActive": 12900000000,
+    "moe": {
+      "numExperts": 8,
+      "expertsPerToken": 2
+    },
+    "notes": "MoE, 2 experts active per token",
+    "huggingfaceId": "mistralai/Mixtral-8x7B-v0.1"
+  },
+  {
+    "id": "mistralai/Mixtral-8x22B-v0.1",
+    "family": "mistral",
+    "displayName": "Mixtral-8x22B-v0.1",
+    "releaseDate": "2026-04-20",
+    "license": "unknown",
+    "paramsTotal": 25760366592,
+    "architecture": {
+      "numLayers": 56,
+      "hiddenSize": 6144,
+      "intermediateSize": 16384,
+      "numAttentionHeads": 48,
+      "numKeyValueHeads": 8,
+      "headDim": 128,
+      "vocabSize": 32000,
+      "tieWordEmbeddings": false,
+      "attentionType": "gqa",
+      "maxContextLength": 65536,
+      "positionalEmbedding": "rope"
+    },
+    "paramsActive": 39000000000,
+    "moe": {
+      "numExperts": 8,
+      "expertsPerToken": 2
+    },
+    "notes": "MoE, 2 experts active per token",
+    "huggingfaceId": "mistralai/Mixtral-8x22B-v0.1"
+  },
+  {
+    "id": "microsoft/Phi-3.5-mini-instruct",
+    "family": "phi",
+    "displayName": "Phi-3.5-mini-instruct",
+    "releaseDate": "2026-04-20",
+    "license": "unknown",
+    "paramsTotal": 3820879872,
+    "architecture": {
+      "numLayers": 32,
+      "hiddenSize": 3072,
+      "intermediateSize": 8192,
+      "numAttentionHeads": 32,
+      "numKeyValueHeads": 32,
+      "headDim": 96,
+      "vocabSize": 32064,
+      "tieWordEmbeddings": false,
+      "attentionType": "mha",
+      "maxContextLength": 131072,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "microsoft/Phi-3.5-mini-instruct"
+  },
+  {
+    "id": "allenai/OLMo-2-1124-7B",
+    "family": "olmo",
+    "displayName": "OLMo-2-1124-7B",
+    "releaseDate": "2026-04-20",
+    "license": "unknown",
+    "paramsTotal": 7298088960,
+    "architecture": {
+      "numLayers": 32,
+      "hiddenSize": 4096,
+      "intermediateSize": 11008,
+      "numAttentionHeads": 32,
+      "numKeyValueHeads": 32,
+      "headDim": 128,
+      "vocabSize": 100352,
+      "tieWordEmbeddings": false,
+      "attentionType": "mha",
+      "maxContextLength": 4096,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "allenai/OLMo-2-1124-7B"
+  },
+  {
+    "id": "nvidia/Llama-3.1-Nemotron-70B-Instruct-HF",
+    "family": "llama",
+    "displayName": "Llama-3.1-Nemotron-70B-Instruct-HF",
+    "releaseDate": "2026-04-20",
+    "license": "unknown",
+    "paramsTotal": 79947628544,
+    "architecture": {
+      "numLayers": 80,
+      "hiddenSize": 8192,
+      "intermediateSize": 28672,
+      "numAttentionHeads": 64,
+      "numKeyValueHeads": 8,
+      "headDim": 128,
+      "vocabSize": 128256,
+      "tieWordEmbeddings": false,
+      "attentionType": "gqa",
+      "maxContextLength": 131072,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "nvidia/Llama-3.1-Nemotron-70B-Instruct-HF"
   }
 ]

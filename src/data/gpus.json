@@ -6,7 +6,11 @@
     "category": "consumer",
     "memoryGB": 12,
     "memoryBandwidthGBs": 360,
-    "flops": { "fp32": 12.7, "fp16": 25.6, "int8": 51.2 },
+    "flops": {
+      "fp32": 12.7,
+      "fp16": 25.6,
+      "int8": 51.2
+    },
     "tdpWatts": 170,
     "formFactor": "pcie",
     "msrpUSD": 329,
@@ -21,7 +25,11 @@
     "category": "consumer",
     "memoryGB": 24,
     "memoryBandwidthGBs": 936,
-    "flops": { "fp32": 35.6, "fp16": 71, "int8": 142 },
+    "flops": {
+      "fp32": 35.6,
+      "fp16": 71,
+      "int8": 142
+    },
     "tdpWatts": 350,
     "formFactor": "pcie",
     "msrpUSD": 1499,
@@ -36,7 +44,11 @@
     "category": "consumer",
     "memoryGB": 24,
     "memoryBandwidthGBs": 1008,
-    "flops": { "fp32": 40, "fp16": 80, "int8": 160 },
+    "flops": {
+      "fp32": 40,
+      "fp16": 80,
+      "int8": 160
+    },
     "tdpWatts": 450,
     "formFactor": "pcie",
     "msrpUSD": 1999,
@@ -50,7 +62,11 @@
     "category": "consumer",
     "memoryGB": 16,
     "memoryBandwidthGBs": 288,
-    "flops": { "fp32": 22, "fp16": 22, "int8": 44 },
+    "flops": {
+      "fp32": 22,
+      "fp16": 22,
+      "int8": 44
+    },
     "tdpWatts": 165,
     "formFactor": "pcie",
     "msrpUSD": 499,
@@ -64,7 +80,11 @@
     "category": "consumer",
     "memoryGB": 12,
     "memoryBandwidthGBs": 504,
-    "flops": { "fp32": 29, "fp16": 29, "int8": 58 },
+    "flops": {
+      "fp32": 29,
+      "fp16": 29,
+      "int8": 58
+    },
     "tdpWatts": 200,
     "formFactor": "pcie",
     "msrpUSD": 599,
@@ -78,12 +98,34 @@
     "category": "consumer",
     "memoryGB": 16,
     "memoryBandwidthGBs": 672,
-    "flops": { "fp32": 44, "fp16": 44, "int8": 88 },
+    "flops": {
+      "fp32": 44,
+      "fp16": 44,
+      "int8": 88
+    },
     "tdpWatts": 285,
     "formFactor": "pcie",
     "msrpUSD": 799,
     "streetUSD": 750,
     "releaseYear": 2024
+  },
+  {
+    "id": "nvidia-rtx-4080",
+    "vendor": "nvidia",
+    "name": "RTX 4080",
+    "category": "consumer",
+    "memoryGB": 16,
+    "memoryBandwidthGBs": 717,
+    "flops": {
+      "fp32": 48.7,
+      "fp16": 49,
+      "int8": 98
+    },
+    "tdpWatts": 320,
+    "formFactor": "pcie",
+    "msrpUSD": 1199,
+    "streetUSD": 950,
+    "releaseYear": 2022
   },
   {
     "id": "nvidia-rtx-4080-super",
@@ -92,7 +134,11 @@
     "category": "consumer",
     "memoryGB": 16,
     "memoryBandwidthGBs": 736,
-    "flops": { "fp32": 52, "fp16": 52, "int8": 104 },
+    "flops": {
+      "fp32": 52,
+      "fp16": 52,
+      "int8": 104
+    },
     "tdpWatts": 320,
     "formFactor": "pcie",
     "msrpUSD": 999,
@@ -106,7 +152,11 @@
     "category": "consumer",
     "memoryGB": 24,
     "memoryBandwidthGBs": 1008,
-    "flops": { "fp32": 82.6, "fp16": 83, "int8": 166 },
+    "flops": {
+      "fp32": 82.6,
+      "fp16": 83,
+      "int8": 166
+    },
     "tdpWatts": 450,
     "formFactor": "pcie",
     "msrpUSD": 1599,
@@ -120,7 +170,11 @@
     "category": "consumer",
     "memoryGB": 16,
     "memoryBandwidthGBs": 960,
-    "flops": { "fp32": 56, "fp16": 56, "int8": 112 },
+    "flops": {
+      "fp32": 56,
+      "fp16": 56,
+      "int8": 112
+    },
     "tdpWatts": 360,
     "formFactor": "pcie",
     "msrpUSD": 999,
@@ -134,7 +188,11 @@
     "category": "consumer",
     "memoryGB": 32,
     "memoryBandwidthGBs": 1792,
-    "flops": { "fp32": 105, "fp16": 105, "int8": 210 },
+    "flops": {
+      "fp32": 105,
+      "fp16": 105,
+      "int8": 210
+    },
     "tdpWatts": 575,
     "formFactor": "pcie",
     "msrpUSD": 1999,
@@ -148,24 +206,15 @@
     "category": "workstation",
     "memoryGB": 48,
     "memoryBandwidthGBs": 768,
-    "flops": { "fp32": 38.7, "fp16": 38.7, "int8": 77.4 },
+    "flops": {
+      "fp32": 38.7,
+      "fp16": 38.7,
+      "int8": 77.4
+    },
     "tdpWatts": 300,
     "formFactor": "pcie",
     "streetUSD": 4000,
     "releaseYear": 2020
-  },
-  {
-    "id": "nvidia-rtx-6000-ada",
-    "vendor": "nvidia",
-    "name": "RTX 6000 Ada",
-    "category": "workstation",
-    "memoryGB": 48,
-    "memoryBandwidthGBs": 960,
-    "flops": { "fp32": 91.1, "fp16": 91.1, "int8": 182.2 },
-    "tdpWatts": 300,
-    "formFactor": "pcie",
-    "streetUSD": 6800,
-    "releaseYear": 2023
   },
   {
     "id": "nvidia-rtx-5000-ada",
@@ -174,10 +223,31 @@
     "category": "workstation",
     "memoryGB": 32,
     "memoryBandwidthGBs": 576,
-    "flops": { "fp32": 65.3, "fp16": 65.3, "int8": 130.6 },
+    "flops": {
+      "fp32": 65.3,
+      "fp16": 65.3,
+      "int8": 130.6
+    },
     "tdpWatts": 250,
     "formFactor": "pcie",
     "streetUSD": 4500,
+    "releaseYear": 2023
+  },
+  {
+    "id": "nvidia-rtx-6000-ada",
+    "vendor": "nvidia",
+    "name": "RTX 6000 Ada",
+    "category": "workstation",
+    "memoryGB": 48,
+    "memoryBandwidthGBs": 960,
+    "flops": {
+      "fp32": 91.1,
+      "fp16": 91.1,
+      "int8": 182.2
+    },
+    "tdpWatts": 300,
+    "formFactor": "pcie",
+    "streetUSD": 6800,
     "releaseYear": 2023
   },
   {
@@ -187,7 +257,11 @@
     "category": "workstation",
     "memoryGB": 96,
     "memoryBandwidthGBs": 1792,
-    "flops": { "fp32": 125, "fp16": 125, "int8": 250 },
+    "flops": {
+      "fp32": 125,
+      "fp16": 125,
+      "int8": 250
+    },
     "tdpWatts": 600,
     "formFactor": "pcie",
     "streetUSD": 8500,
@@ -200,7 +274,11 @@
     "category": "datacenter",
     "memoryGB": 16,
     "memoryBandwidthGBs": 320,
-    "flops": { "fp32": 8.1, "fp16": 65, "int8": 130 },
+    "flops": {
+      "fp32": 8.1,
+      "fp16": 65,
+      "int8": 130
+    },
     "tdpWatts": 70,
     "formFactor": "pcie",
     "releaseYear": 2018,
@@ -213,7 +291,12 @@
     "category": "datacenter",
     "memoryGB": 24,
     "memoryBandwidthGBs": 300,
-    "flops": { "fp32": 30.3, "fp16": 121, "fp8": 242, "int8": 242 },
+    "flops": {
+      "fp32": 30.3,
+      "fp16": 121,
+      "fp8": 242,
+      "int8": 242
+    },
     "tdpWatts": 72,
     "formFactor": "pcie",
     "releaseYear": 2023,
@@ -226,7 +309,12 @@
     "category": "datacenter",
     "memoryGB": 48,
     "memoryBandwidthGBs": 864,
-    "flops": { "fp32": 91.6, "fp16": 362, "fp8": 733, "int8": 733 },
+    "flops": {
+      "fp32": 91.6,
+      "fp16": 362,
+      "fp8": 733,
+      "int8": 733
+    },
     "tdpWatts": 350,
     "formFactor": "pcie",
     "releaseYear": 2023,
@@ -239,7 +327,11 @@
     "category": "datacenter",
     "memoryGB": 24,
     "memoryBandwidthGBs": 600,
-    "flops": { "fp32": 31.2, "fp16": 125, "int8": 250 },
+    "flops": {
+      "fp32": 31.2,
+      "fp16": 125,
+      "int8": 250
+    },
     "tdpWatts": 150,
     "formFactor": "pcie",
     "releaseYear": 2021
@@ -251,9 +343,15 @@
     "category": "datacenter",
     "memoryGB": 40,
     "memoryBandwidthGBs": 1555,
-    "flops": { "fp32": 19.5, "fp16": 312, "int8": 624 },
+    "flops": {
+      "fp32": 19.5,
+      "fp16": 312,
+      "int8": 624
+    },
     "tdpWatts": 400,
-    "nvlink": { "perGPU_GBs": 600 },
+    "nvlink": {
+      "perGPU_GBs": 600
+    },
     "formFactor": "sxm",
     "releaseYear": 2020
   },
@@ -264,9 +362,15 @@
     "category": "datacenter",
     "memoryGB": 80,
     "memoryBandwidthGBs": 2039,
-    "flops": { "fp32": 19.5, "fp16": 312, "int8": 624 },
+    "flops": {
+      "fp32": 19.5,
+      "fp16": 312,
+      "int8": 624
+    },
     "tdpWatts": 400,
-    "nvlink": { "perGPU_GBs": 600 },
+    "nvlink": {
+      "perGPU_GBs": 600
+    },
     "formFactor": "sxm",
     "releaseYear": 2021
   },
@@ -277,7 +381,12 @@
     "category": "datacenter",
     "memoryGB": 80,
     "memoryBandwidthGBs": 2000,
-    "flops": { "fp32": 51.2, "fp16": 756, "fp8": 1513, "int8": 1513 },
+    "flops": {
+      "fp32": 51.2,
+      "fp16": 756,
+      "fp8": 1513,
+      "int8": 1513
+    },
     "tdpWatts": 350,
     "formFactor": "pcie",
     "releaseYear": 2023
@@ -289,9 +398,16 @@
     "category": "datacenter",
     "memoryGB": 80,
     "memoryBandwidthGBs": 3350,
-    "flops": { "fp32": 66.9, "fp16": 989, "fp8": 1979, "int8": 1979 },
+    "flops": {
+      "fp32": 66.9,
+      "fp16": 989,
+      "fp8": 1979,
+      "int8": 1979
+    },
     "tdpWatts": 700,
-    "nvlink": { "perGPU_GBs": 900 },
+    "nvlink": {
+      "perGPU_GBs": 900
+    },
     "formFactor": "sxm",
     "releaseYear": 2023
   },
@@ -302,9 +418,16 @@
     "category": "datacenter",
     "memoryGB": 141,
     "memoryBandwidthGBs": 4800,
-    "flops": { "fp32": 66.9, "fp16": 989, "fp8": 1979, "int8": 1979 },
+    "flops": {
+      "fp32": 66.9,
+      "fp16": 989,
+      "fp8": 1979,
+      "int8": 1979
+    },
     "tdpWatts": 700,
-    "nvlink": { "perGPU_GBs": 900 },
+    "nvlink": {
+      "perGPU_GBs": 900
+    },
     "formFactor": "sxm",
     "releaseYear": 2024,
     "notes": "H100 with more HBM3e memory"
@@ -316,12 +439,62 @@
     "category": "datacenter",
     "memoryGB": 192,
     "memoryBandwidthGBs": 8000,
-    "flops": { "fp32": 180, "fp16": 2250, "fp8": 4500, "int8": 4500 },
+    "flops": {
+      "fp32": 180,
+      "fp16": 2250,
+      "fp8": 4500,
+      "int8": 4500
+    },
     "tdpWatts": 1000,
-    "nvlink": { "perGPU_GBs": 1800 },
+    "nvlink": {
+      "perGPU_GBs": 1800
+    },
     "formFactor": "sxm",
     "releaseYear": 2025,
     "notes": "Blackwell architecture"
+  },
+  {
+    "id": "nvidia-b100-sxm",
+    "vendor": "nvidia",
+    "name": "B100 SXM",
+    "category": "datacenter",
+    "memoryGB": 192,
+    "memoryBandwidthGBs": 8000,
+    "flops": {
+      "fp32": 140,
+      "fp16": 1800,
+      "fp8": 3500,
+      "fp4": 15000,
+      "int8": 3500
+    },
+    "tdpWatts": 700,
+    "nvlink": {
+      "perGPU_GBs": 1800
+    },
+    "formFactor": "sxm",
+    "releaseYear": 2025,
+    "notes": "Blackwell B100: 192GB HBM3e, 8TB/s bandwidth, FP4 15 PFLOPS"
+  },
+  {
+    "id": "nvidia-gb200-nvl72",
+    "vendor": "nvidia",
+    "name": "GB200 NVL72",
+    "category": "datacenter",
+    "memoryGB": 192,
+    "memoryBandwidthGBs": 8000,
+    "flops": {
+      "fp32": 180,
+      "fp16": 2250,
+      "fp8": 4500,
+      "int8": 4500
+    },
+    "tdpWatts": 1000,
+    "nvlink": {
+      "perGPU_GBs": 1800
+    },
+    "formFactor": "sxm",
+    "releaseYear": 2025,
+    "notes": "GB200 NVL72 rack-scale system placeholder. 72 GPUs per rack, NVLink 5.0."
   },
   {
     "id": "amd-rx-7900-xtx",
@@ -330,77 +503,15 @@
     "category": "consumer",
     "memoryGB": 24,
     "memoryBandwidthGBs": 960,
-    "flops": { "fp32": 61, "fp16": 122, "int8": 244 },
+    "flops": {
+      "fp32": 61,
+      "fp16": 122,
+      "int8": 244
+    },
     "tdpWatts": 355,
     "formFactor": "pcie",
     "msrpUSD": 999,
     "streetUSD": 900,
-    "releaseYear": 2022
-  },
-  {
-    "id": "amd-mi300x",
-    "vendor": "amd",
-    "name": "MI300X",
-    "category": "datacenter",
-    "memoryGB": 192,
-    "memoryBandwidthGBs": 5300,
-    "flops": { "fp32": 163.4, "fp16": 1307, "fp8": 2615, "int8": 2615 },
-    "tdpWatts": 750,
-    "formFactor": "oam",
-    "releaseYear": 2024,
-    "notes": "AMD datacenter GPU, ROCm support"
-  },
-  {
-    "id": "apple-m1-max-64gb",
-    "vendor": "apple",
-    "name": "M1 Max 64GB",
-    "category": "apple-silicon",
-    "memoryGB": 64,
-    "memoryBandwidthGBs": 400,
-    "flops": { "fp32": 10.4, "fp16": 21, "int8": 42 },
-    "tdpWatts": 60,
-    "formFactor": "integrated",
-    "releaseYear": 2021,
-    "notes": "Unified memory, great for local inference"
-  },
-  {
-    "id": "apple-m2-ultra-192gb",
-    "vendor": "apple",
-    "name": "M2 Ultra 192GB",
-    "category": "apple-silicon",
-    "memoryGB": 192,
-    "memoryBandwidthGBs": 800,
-    "flops": { "fp32": 27.2, "fp16": 54, "int8": 108 },
-    "tdpWatts": 120,
-    "formFactor": "integrated",
-    "releaseYear": 2023,
-    "notes": "Largest unified memory pool, runs 70B+ models"
-  },
-  {
-    "id": "apple-m4-max-128gb",
-    "vendor": "apple",
-    "name": "M4 Max 128GB",
-    "category": "apple-silicon",
-    "memoryGB": 128,
-    "memoryBandwidthGBs": 546,
-    "flops": { "fp32": 17.4, "fp16": 34, "int8": 68 },
-    "tdpWatts": 60,
-    "formFactor": "integrated",
-    "releaseYear": 2024,
-    "notes": "Latest Apple Silicon, excellent for local LLM inference"
-  },
-  {
-    "id": "nvidia-rtx-4080",
-    "vendor": "nvidia",
-    "name": "RTX 4080",
-    "category": "consumer",
-    "memoryGB": 16,
-    "memoryBandwidthGBs": 717,
-    "flops": { "fp32": 48.7, "fp16": 49, "int8": 98 },
-    "tdpWatts": 320,
-    "formFactor": "pcie",
-    "msrpUSD": 1199,
-    "streetUSD": 950,
     "releaseYear": 2022
   },
   {
@@ -410,7 +521,11 @@
     "category": "workstation",
     "memoryGB": 48,
     "memoryBandwidthGBs": 864,
-    "flops": { "fp32": 61, "fp16": 122, "int8": 244 },
+    "flops": {
+      "fp32": 61,
+      "fp16": 122,
+      "int8": 244
+    },
     "tdpWatts": 295,
     "formFactor": "pcie",
     "streetUSD": 3999,
@@ -424,11 +539,85 @@
     "category": "datacenter",
     "memoryGB": 128,
     "memoryBandwidthGBs": 3277,
-    "flops": { "fp32": 47.9, "fp16": 383, "int8": 383 },
+    "flops": {
+      "fp32": 47.9,
+      "fp16": 383,
+      "int8": 383
+    },
     "tdpWatts": 560,
     "formFactor": "oam",
     "releaseYear": 2021,
     "notes": "AMD datacenter GPU, dual-GCD design"
+  },
+  {
+    "id": "amd-mi300x",
+    "vendor": "amd",
+    "name": "MI300X",
+    "category": "datacenter",
+    "memoryGB": 192,
+    "memoryBandwidthGBs": 5300,
+    "flops": {
+      "fp32": 163.4,
+      "fp16": 1307,
+      "fp8": 2615,
+      "int8": 2615
+    },
+    "tdpWatts": 750,
+    "formFactor": "oam",
+    "releaseYear": 2024,
+    "notes": "AMD datacenter GPU, ROCm support"
+  },
+  {
+    "id": "amd-mi355x",
+    "vendor": "amd",
+    "name": "MI355X",
+    "category": "datacenter",
+    "memoryGB": 288,
+    "memoryBandwidthGBs": 8000,
+    "flops": {
+      "fp32": 192,
+      "fp16": 1536,
+      "fp8": 3072,
+      "int8": 3072
+    },
+    "tdpWatts": 750,
+    "formFactor": "oam",
+    "releaseYear": 2025,
+    "notes": "AMD MI355X: 288GB HBM3e, 8TB/s bandwidth, next-gen ROCm"
+  },
+  {
+    "id": "apple-m1-max-64gb",
+    "vendor": "apple",
+    "name": "M1 Max 64GB",
+    "category": "apple-silicon",
+    "memoryGB": 64,
+    "memoryBandwidthGBs": 400,
+    "flops": {
+      "fp32": 10.4,
+      "fp16": 21,
+      "int8": 42
+    },
+    "tdpWatts": 60,
+    "formFactor": "integrated",
+    "releaseYear": 2021,
+    "notes": "Unified memory, great for local inference"
+  },
+  {
+    "id": "apple-m2-ultra-192gb",
+    "vendor": "apple",
+    "name": "M2 Ultra 192GB",
+    "category": "apple-silicon",
+    "memoryGB": 192,
+    "memoryBandwidthGBs": 800,
+    "flops": {
+      "fp32": 27.2,
+      "fp16": 54,
+      "int8": 108
+    },
+    "tdpWatts": 120,
+    "formFactor": "integrated",
+    "releaseYear": 2023,
+    "notes": "Largest unified memory pool, runs 70B+ models"
   },
   {
     "id": "apple-m4-pro-48gb",
@@ -437,10 +626,82 @@
     "category": "apple-silicon",
     "memoryGB": 48,
     "memoryBandwidthGBs": 273,
-    "flops": { "fp32": 8.5, "fp16": 17, "int8": 34 },
+    "flops": {
+      "fp32": 8.5,
+      "fp16": 17,
+      "int8": 34
+    },
     "tdpWatts": 40,
     "formFactor": "integrated",
     "releaseYear": 2024,
     "notes": "Mid-range Apple Silicon for local inference"
+  },
+  {
+    "id": "apple-m4-max-128gb",
+    "vendor": "apple",
+    "name": "M4 Max 128GB",
+    "category": "apple-silicon",
+    "memoryGB": 128,
+    "memoryBandwidthGBs": 546,
+    "flops": {
+      "fp32": 17.4,
+      "fp16": 34,
+      "int8": 68
+    },
+    "tdpWatts": 60,
+    "formFactor": "integrated",
+    "releaseYear": 2024,
+    "notes": "Latest Apple Silicon, excellent for local LLM inference"
+  },
+  {
+    "id": "google-tpu-v7-ironwood",
+    "vendor": "google-tpu",
+    "name": "TPU v7 Ironwood",
+    "category": "tpu",
+    "memoryGB": 192,
+    "memoryBandwidthGBs": 7400,
+    "flops": {
+      "fp32": 918,
+      "fp16": 4614,
+      "int8": 4614
+    },
+    "tdpWatts": 600,
+    "formFactor": "oam",
+    "releaseYear": 2025,
+    "notes": "Google TPU v7 Ironwood: 192GB HBM, 7.4TB/s, 4614 INT8 TOPS per chip"
+  },
+  {
+    "id": "groq-lpu-gen2",
+    "vendor": "nvidia",
+    "name": "Groq LPU Gen2",
+    "category": "datacenter",
+    "memoryGB": 230,
+    "memoryBandwidthGBs": 80000,
+    "flops": {
+      "fp32": 188,
+      "fp16": 750,
+      "int8": 1500
+    },
+    "tdpWatts": 300,
+    "formFactor": "pcie",
+    "releaseYear": 2024,
+    "notes": "Groq LPU: deterministic inference, extremely high memory bandwidth. Placeholder specs."
+  },
+  {
+    "id": "tenstorrent-blackhole",
+    "vendor": "intel",
+    "name": "Tenstorrent Blackhole",
+    "category": "datacenter",
+    "memoryGB": 32,
+    "memoryBandwidthGBs": 768,
+    "flops": {
+      "fp32": 32,
+      "fp16": 256,
+      "int8": 512
+    },
+    "tdpWatts": 300,
+    "formFactor": "pcie",
+    "releaseYear": 2025,
+    "notes": "Tenstorrent Blackhole: RISC-V based AI accelerator. Placeholder specs."
   }
 ]
