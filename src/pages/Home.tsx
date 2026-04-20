@@ -298,7 +298,7 @@ export function Home() {
 
   const topGPU = gpuRecommendations?.allFits.find(f => f.fitStatus !== 'red');
   const kvPrecisionLabel = kvPrecision.toUpperCase();
-  const isTrainingMode = mode === 'finetune' || mode === 'train';
+  const isTrainingMode = mode === 'train';
   const isVLM = !!(selectedModel as any)?.architecture?.visionConfig;
 
   const PRECISION_BYTES: Record<string, number> = {
@@ -460,6 +460,23 @@ export function Home() {
 
       {isTrainingMode && selectedModel && (
         <Section title="Training Configuration" defaultOpen={true}>
+          {/* Method sub-toggle: Full Fine-tune / LoRA / QLoRA */}
+          <div className="flex gap-1 p-1 bg-bg-subtle rounded-lg border border-border-subtle">
+            {(['full', 'lora', 'qlora'] as const).map(m => (
+              <button
+                key={m}
+                type="button"
+                onClick={() => setTrainingOptions({ mode: m })}
+                className={`flex-1 py-1.5 text-xs font-medium rounded-md transition-colors ${
+                  trainingOptions.mode === m
+                    ? 'bg-bg-base text-fg-primary shadow-sm'
+                    : 'text-fg-muted hover:text-fg-default'
+                }`}
+              >
+                {m === 'full' ? 'Full Fine-tune' : m === 'lora' ? 'LoRA' : 'QLoRA'}
+              </button>
+            ))}
+          </div>
           <TrainingMethodPicker
             value={trainingOptions.trainingMethodId as any ?? ''}
             onChange={(method) => setTrainingOptions({ trainingMethodId: method || undefined })}

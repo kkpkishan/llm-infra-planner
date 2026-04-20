@@ -110,9 +110,12 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
     : null;
   const rawInitState = urlState ?? getDefaultState(MODEL_DB);
   // Force inference if mode is reverse (reverse has its own page)
+  // Also map legacy 'finetune' → 'train'
   const initialState = {
     ...rawInitState,
-    mode: (rawInitState.mode === 'reverse' ? 'inference' : rawInitState.mode) as WorkloadMode,
+    mode: (rawInitState.mode === 'reverse' || rawInitState.mode === 'finetune'
+      ? rawInitState.mode === 'finetune' ? 'train' : 'inference'
+      : rawInitState.mode) as WorkloadMode,
   };
   const initialModel = MODEL_DB.find(m => m.id === initialState.model) ?? MODEL_DB[0] ?? null;
 
@@ -188,7 +191,9 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
     },
 
     setMode: (mode) => {
-      set({ mode });
+      // Map legacy finetune → train
+      const resolved = mode === 'finetune' ? 'train' : mode;
+      set({ mode: resolved });
       get().recompute();
     },
 

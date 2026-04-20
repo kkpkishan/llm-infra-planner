@@ -1,4 +1,4 @@
-import { Zap, BarChart2, Wrench, Trophy, Repeat, Share2, ArrowLeftRight } from 'lucide-react';
+import { Zap, BarChart2, Wrench, Repeat, Share2, ArrowLeftRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useCalculatorStore } from '@/store/calculator-store';
 import type { WorkloadMode } from '@/lib/formulas/types';
@@ -6,8 +6,7 @@ import type { WorkloadMode } from '@/lib/formulas/types';
 const TABS: { mode: WorkloadMode; label: string; icon: React.ReactNode; key: string }[] = [
   { mode: 'inference', label: 'Inference', icon: <Zap size={14} />, key: 'i' },
   { mode: 'scale',     label: 'Scale',     icon: <BarChart2 size={14} />, key: 's' },
-  { mode: 'finetune',  label: 'Fine-tune', icon: <Wrench size={14} />, key: 'f' },
-  { mode: 'train',     label: 'Train',     icon: <Trophy size={14} />, key: 't' },
+  { mode: 'train',     label: 'Train',     icon: <Wrench size={14} />, key: 't' },
   { mode: 'reverse',   label: 'Reverse',   icon: <Repeat size={14} />, key: 'r' },
 ];
 

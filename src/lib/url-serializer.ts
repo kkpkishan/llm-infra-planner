@@ -72,10 +72,11 @@ export function parseState(
   const rawBatch = parseInt(params.get('batch') ?? String(DEFAULT_BATCH), 10);
   const batch = isNaN(rawBatch) ? DEFAULT_BATCH : Math.max(1, Math.min(32, rawBatch));
 
-  // Mode — fall back to default if unrecognized
+  // Mode — fall back to default if unrecognized; map legacy 'finetune' → 'train'
   const rawMode = params.get('mode') ?? DEFAULT_MODE;
-  const mode: WorkloadMode = VALID_MODES.includes(rawMode as WorkloadMode)
-    ? (rawMode as WorkloadMode)
+  const normalizedMode = rawMode === 'finetune' ? 'train' : rawMode;
+  const mode: WorkloadMode = VALID_MODES.includes(normalizedMode as WorkloadMode)
+    ? (normalizedMode as WorkloadMode)
     : DEFAULT_MODE;
 
   // GPU (optional, for reverse mode)

@@ -14,7 +14,6 @@ export const SHORTCUT_DEFS: ShortcutDef[] = [
   { keys: 'Esc',      description: 'Close dialog / drawer',   category: 'Navigation' },
   { keys: 'i',        description: 'Inference mode',          category: 'Modes' },
   { keys: 's',        description: 'Scale mode',              category: 'Modes' },
-  { keys: 'f',        description: 'Fine-tune mode',          category: 'Modes' },
   { keys: 't',        description: 'Train mode',              category: 'Modes' },
   { keys: 'r',        description: 'Reverse mode',            category: 'Modes' },
   { keys: 'c',        description: 'Add config to compare',   category: 'Actions' },
@@ -25,7 +24,6 @@ export const SHORTCUT_DEFS: ShortcutDef[] = [
 const MODE_KEY_MAP: Record<string, WorkloadMode> = {
   i: 'inference',
   s: 'scale',
-  f: 'finetune',
   t: 'train',
   r: 'reverse',
 };
