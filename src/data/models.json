@@ -715,31 +715,30 @@
   {
     "id": "deepseek-ai/DeepSeek-R1",
     "family": "deepseek",
-    "displayName": "DeepSeek R1",
-    "releaseDate": "2025-01-20",
-    "license": "MIT",
-    "paramsTotal": 671000000000,
-    "paramsActive": 37000000000,
+    "displayName": "DeepSeek-R1",
+    "releaseDate": "2026-04-20",
+    "license": "unknown",
+    "paramsTotal": 669487988736,
     "architecture": {
       "numLayers": 61,
       "hiddenSize": 7168,
       "intermediateSize": 18432,
       "numAttentionHeads": 128,
       "numKeyValueHeads": 128,
-      "headDim": 128,
-      "vocabSize": 102400,
+      "headDim": 56,
+      "vocabSize": 129280,
       "tieWordEmbeddings": false,
       "attentionType": "mla",
-      "maxContextLength": 131072,
+      "maxContextLength": 163840,
       "positionalEmbedding": "rope"
     },
+    "paramsActive": 35087187968,
     "moe": {
       "numExperts": 256,
       "expertsPerToken": 8,
       "sharedExperts": 1
     },
-    "mlaCompressedDim": 512,
-    "notes": "Reasoning model",
+    "mlaCompressedDim": 576,
     "huggingfaceId": "deepseek-ai/DeepSeek-R1"
   },
   {
@@ -1133,5 +1132,276 @@
       "positionalEmbedding": "rope"
     },
     "huggingfaceId": "nvidia/Llama-3.1-Nemotron-70B-Instruct-HF"
+  },
+  {
+    "id": "mistralai/Mistral-Nemo-Base-2407",
+    "family": "mistral",
+    "displayName": "Mistral-Nemo-Base-2407",
+    "releaseDate": "2026-04-20",
+    "license": "unknown",
+    "paramsTotal": 14344519680,
+    "architecture": {
+      "numLayers": 40,
+      "hiddenSize": 5120,
+      "intermediateSize": 14336,
+      "numAttentionHeads": 32,
+      "numKeyValueHeads": 8,
+      "headDim": 128,
+      "vocabSize": 131072,
+      "tieWordEmbeddings": false,
+      "attentionType": "gqa",
+      "maxContextLength": 131072,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "mistralai/Mistral-Nemo-Base-2407"
+  },
+  {
+    "id": "Qwen/Qwen2.5-Coder-32B-Instruct",
+    "family": "qwen",
+    "displayName": "Qwen2.5-Coder-32B-Instruct",
+    "releaseDate": "2026-04-20",
+    "license": "unknown",
+    "paramsTotal": 35447111680,
+    "architecture": {
+      "numLayers": 64,
+      "hiddenSize": 5120,
+      "intermediateSize": 27648,
+      "numAttentionHeads": 40,
+      "numKeyValueHeads": 8,
+      "headDim": 128,
+      "vocabSize": 152064,
+      "tieWordEmbeddings": false,
+      "attentionType": "gqa",
+      "maxContextLength": 32768,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "Qwen/Qwen2.5-Coder-32B-Instruct"
+  },
+  {
+    "id": "Qwen/QwQ-32B",
+    "family": "qwen",
+    "displayName": "QwQ-32B",
+    "releaseDate": "2026-04-20",
+    "license": "unknown",
+    "paramsTotal": 35447111680,
+    "architecture": {
+      "numLayers": 64,
+      "hiddenSize": 5120,
+      "intermediateSize": 27648,
+      "numAttentionHeads": 40,
+      "numKeyValueHeads": 8,
+      "headDim": 128,
+      "vocabSize": 152064,
+      "tieWordEmbeddings": false,
+      "attentionType": "gqa",
+      "maxContextLength": 40960,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "Qwen/QwQ-32B"
+  },
+  {
+    "id": "deepseek-ai/DeepSeek-V2.5",
+    "family": "deepseek",
+    "displayName": "DeepSeek-V2.5",
+    "releaseDate": "2026-04-20",
+    "license": "unknown",
+    "paramsTotal": 230246318080,
+    "architecture": {
+      "numLayers": 60,
+      "hiddenSize": 5120,
+      "intermediateSize": 12288,
+      "numAttentionHeads": 128,
+      "numKeyValueHeads": 128,
+      "headDim": 40,
+      "vocabSize": 102400,
+      "tieWordEmbeddings": false,
+      "attentionType": "mla",
+      "maxContextLength": 163840,
+      "positionalEmbedding": "rope"
+    },
+    "paramsActive": 15356395520,
+    "moe": {
+      "numExperts": 160,
+      "expertsPerToken": 6,
+      "sharedExperts": 2
+    },
+    "mlaCompressedDim": 576,
+    "huggingfaceId": "deepseek-ai/DeepSeek-V2.5"
+  },
+  {
+    "id": "microsoft/phi-4-mini-instruct",
+    "family": "phi",
+    "displayName": "phi-4-mini-instruct",
+    "releaseDate": "2026-04-20",
+    "license": "unknown",
+    "paramsTotal": 4238475264,
+    "architecture": {
+      "numLayers": 32,
+      "hiddenSize": 3072,
+      "intermediateSize": 8192,
+      "numAttentionHeads": 24,
+      "numKeyValueHeads": 8,
+      "headDim": 128,
+      "vocabSize": 200064,
+      "tieWordEmbeddings": true,
+      "attentionType": "gqa",
+      "maxContextLength": 131072,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "microsoft/phi-4-mini-instruct"
+  },
+  {
+    "id": "allenai/OLMo-2-1124-13B",
+    "family": "olmo",
+    "displayName": "OLMo-2-1124-13B",
+    "releaseDate": "2026-04-20",
+    "license": "unknown",
+    "paramsTotal": 13715374080,
+    "architecture": {
+      "numLayers": 40,
+      "hiddenSize": 5120,
+      "intermediateSize": 13824,
+      "numAttentionHeads": 40,
+      "numKeyValueHeads": 40,
+      "headDim": 128,
+      "vocabSize": 100352,
+      "tieWordEmbeddings": false,
+      "attentionType": "mha",
+      "maxContextLength": 4096,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "allenai/OLMo-2-1124-13B"
+  },
+  {
+    "id": "01-ai/Yi-1.5-34B",
+    "family": "yi",
+    "displayName": "Yi-1.5-34B",
+    "releaseDate": "2026-04-20",
+    "license": "unknown",
+    "paramsTotal": 39672872960,
+    "architecture": {
+      "numLayers": 60,
+      "hiddenSize": 7168,
+      "intermediateSize": 20480,
+      "numAttentionHeads": 56,
+      "numKeyValueHeads": 8,
+      "headDim": 128,
+      "vocabSize": 64000,
+      "tieWordEmbeddings": false,
+      "attentionType": "gqa",
+      "maxContextLength": 4096,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "01-ai/Yi-1.5-34B"
+  },
+  {
+    "id": "01-ai/Yi-1.5-9B",
+    "family": "yi",
+    "displayName": "Yi-1.5-9B",
+    "releaseDate": "2026-04-20",
+    "license": "unknown",
+    "paramsTotal": 10238296064,
+    "architecture": {
+      "numLayers": 48,
+      "hiddenSize": 4096,
+      "intermediateSize": 11008,
+      "numAttentionHeads": 32,
+      "numKeyValueHeads": 4,
+      "headDim": 128,
+      "vocabSize": 64000,
+      "tieWordEmbeddings": false,
+      "attentionType": "gqa",
+      "maxContextLength": 4096,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "01-ai/Yi-1.5-9B"
+  },
+  {
+    "id": "tiiuae/falcon-40b",
+    "family": "falcon",
+    "displayName": "falcon-40b",
+    "releaseDate": "2026-04-20",
+    "license": "unknown",
+    "paramsTotal": 65489862656,
+    "architecture": {
+      "numLayers": 60,
+      "hiddenSize": 8192,
+      "intermediateSize": 0,
+      "numAttentionHeads": 128,
+      "numKeyValueHeads": 128,
+      "headDim": 64,
+      "vocabSize": 65024,
+      "tieWordEmbeddings": false,
+      "attentionType": "mha",
+      "maxContextLength": 0,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "tiiuae/falcon-40b"
+  },
+  {
+    "id": "tiiuae/falcon-mamba-7b-instruct",
+    "family": "mamba",
+    "displayName": "falcon-mamba-7b-instruct",
+    "releaseDate": "2026-04-20",
+    "license": "unknown",
+    "paramsTotal": 11270094848,
+    "architecture": {
+      "numLayers": 64,
+      "hiddenSize": 4096,
+      "intermediateSize": 8192,
+      "numAttentionHeads": 0,
+      "numKeyValueHeads": 0,
+      "headDim": 0,
+      "vocabSize": 65024,
+      "tieWordEmbeddings": false,
+      "attentionType": "mha",
+      "maxContextLength": 0,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "tiiuae/falcon-mamba-7b-instruct"
+  },
+  {
+    "id": "BAAI/bge-m3",
+    "family": "bge",
+    "displayName": "bge-m3",
+    "releaseDate": "2026-04-20",
+    "license": "unknown",
+    "paramsTotal": 914657280,
+    "architecture": {
+      "numLayers": 24,
+      "hiddenSize": 1024,
+      "intermediateSize": 4096,
+      "numAttentionHeads": 16,
+      "numKeyValueHeads": 16,
+      "headDim": 64,
+      "vocabSize": 250002,
+      "tieWordEmbeddings": false,
+      "attentionType": "mha",
+      "maxContextLength": 8194,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "BAAI/bge-m3"
+  },
+  {
+    "id": "nomic-ai/nomic-embed-text-v1.5",
+    "family": "nomic",
+    "displayName": "nomic-embed-text-v1.5",
+    "releaseDate": "2026-04-20",
+    "license": "unknown",
+    "paramsTotal": 160137216,
+    "architecture": {
+      "numLayers": 12,
+      "hiddenSize": 768,
+      "intermediateSize": 3072,
+      "numAttentionHeads": 12,
+      "numKeyValueHeads": 12,
+      "headDim": 64,
+      "vocabSize": 30528,
+      "tieWordEmbeddings": false,
+      "attentionType": "mha",
+      "maxContextLength": 2048,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "nomic-ai/nomic-embed-text-v1.5"
   }
 ]
