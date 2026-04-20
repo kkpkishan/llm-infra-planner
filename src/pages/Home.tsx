@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ChevronDown, ChevronUp, Share2, ArrowLeftRight, Cpu } from 'lucide-react';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/primitives/tabs';
 import { useCalculatorStore } from '@/store/calculator-store';
 import { useToast } from '@/components/feedback/Toast';
 
@@ -103,6 +104,177 @@ function Section({ title, defaultOpen = false, children }: {
 interface HomeProps {
   modelSearchOpen?: boolean;
   onModelSearchClose?: () => void;
+}
+
+// ── Advanced Panels Tabbed Interface ─────────────────────────────────────────
+function AdvancedTabs({
+  selectedModel, breakdown, topGPU, numGPUs, setNumGPUs,
+  modelGB, modelBytes, bytesPerParam, isTrainingMode, mode,
+  costMetrics, cloudRecommendations, contextLength, batchSize,
+  concurrencyData, concurrentUsers, setConcurrentUsers,
+  avgPromptTokens, avgOutputTokens, setAvgPromptTokens, setAvgOutputTokens,
+  sloTTFTMs, sloTPOTMs, setSloTTFT, setSloTPOT, batchMode, setBatchMode,
+}: {
+  selectedModel: any; breakdown: any; topGPU: any; numGPUs: number;
+  setNumGPUs: (n: number) => void; modelGB: number; modelBytes: number;
+  bytesPerParam: number; isTrainingMode: boolean; mode: string;
+  costMetrics: any; cloudRecommendations: any; contextLength: number;
+  batchSize: number; concurrencyData: any; concurrentUsers: number;
+  setConcurrentUsers: (n: number) => void; avgPromptTokens: number;
+  avgOutputTokens: number; setAvgPromptTokens: (n: number) => void;
+  setAvgOutputTokens: (n: number) => void; sloTTFTMs: number;
+  sloTPOTMs: number; setSloTTFT: (n: number) => void;
+  setSloTPOT: (n: number) => void; batchMode: boolean;
+  setBatchMode: (b: boolean) => void;
+}) {
+  const [activeTab, setActiveTab] = React.useState('parallelism');
+
+  const tabs = [
+    { id: 'parallelism', label: 'Parallelism' },
+    { id: 'scale', label: 'Scale / QPS' },
+    { id: 'clustering', label: 'Clustering' },
+    { id: 'concurrency', label: 'Concurrency' },
+    { id: 'network', label: 'Network & Storage' },
+    { id: 'power', label: 'Power & TCO' },
+    { id: 'deployment', label: 'Deployment' },
+  ];
+
+  return (
+    <section className="mt-6">
+      <Tabs value={activeTab} onValueChange={setActiveTab}>
+        <div className="overflow-x-auto">
+          <TabsList className="flex flex-row w-full border-b border-border-subtle">
+            {tabs.map(t => (
+              <TabsTrigger
+                key={t.id}
+                value={t.id}
+                className="flex-shrink-0 px-4 py-2.5 text-xs font-medium whitespace-nowrap"
+              >
+                {t.label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </div>
+
+        <div className="mt-3 border border-border-subtle rounded-lg p-4">
+
+          <TabsContent value="parallelism">
+            {breakdown ? (
+              <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-2">
+                  <label className="text-xs font-medium text-fg-default">Number of GPUs</label>
+                  <div className="flex items-center gap-3">
+                    <input type="range" min={1} max={512} step={1} value={numGPUs}
+                      onChange={e => setNumGPUs(parseInt(e.target.value))}
+                      className="flex-1 cursor-pointer appearance-none bg-transparent [&::-webkit-slider-runnable-track]:h-1.5 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-bg-emphasis [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-accent [&::-webkit-slider-thumb]:-mt-[7px]"
+                      aria-label="Number of GPUs" />
+                    <span className="text-sm font-mono text-fg-primary w-12 text-right">{numGPUs}</span>
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <ParallelismPanel totalGPUs={numGPUs} gpusPerNode={Math.min(8, numGPUs)}
+                    gpuMemGB={topGPU?.gpu.memoryGB ?? 80} modelGB={modelGB}
+                    numKVHeads={selectedModel.architecture.numKeyValueHeads} />
+                  <RAMPanel mode={isTrainingMode ? 'training' : 'inference'} modelBytes={modelBytes}
+                    numGPUsPerNode={Math.min(8, numGPUs)} vramPerGPUGB={topGPU?.gpu.memoryGB ?? 80} />
+                </div>
+                {numGPUs > 1 && (
+                  <ClusterTopology numGPUs={numGPUs} workload={isTrainingMode ? 'training' : 'inference'} />
+                )}
+              </div>
+            ) : <p className="text-sm text-fg-muted">Select a model to see parallelism options.</p>}
+          </TabsContent>
+
+          <TabsContent value="scale">
+            {(mode === 'inference' || mode === 'scale') && topGPU && costMetrics ? (
+              <ScaleEstimator tokensPerSecond={topGPU.tokensPerSecond ?? 100}
+                gpusPerReplica={numGPUs} costPerGPUHour={cloudRecommendations?.[0]?.onDemandPerHour ?? 2.49} />
+            ) : <p className="text-sm text-fg-muted">Switch to Inference or Scale mode to see QPS sizing.</p>}
+          </TabsContent>
+
+          <TabsContent value="clustering">
+            <ClusteringTools />
+          </TabsContent>
+
+          <TabsContent value="concurrency">
+            {topGPU && concurrencyData ? (
+              <div className="flex flex-col gap-4">
+                <UserExperienceSummary modelName={selectedModel.displayName} gpuName={topGPU.gpu.name}
+                  concurrentUsers={concurrentUsers} ttftMs={concurrencyData.prefillResult.ttftMs}
+                  tpotMs={concurrencyData.tpotAtCurrentUsers} avgOutputTokens={avgOutputTokens}
+                  aggregateThroughput={concurrencyData.aggregateThroughput}
+                  maxConcurrentUsers={concurrencyData.concurrencyResult.maxConcurrentUsers}
+                  totalVRAMGB={topGPU.gpu.memoryGB} usedVRAMGB={concurrencyData.usedVRAMGB}
+                  costPerUserPerHour={concurrencyData.requestCost.costPerUserPerHour}
+                  costPerMTokens={concurrencyData.requestCost.costPerMOutputTokens}
+                  costPerRequest={concurrencyData.requestCost.costPerRequest}
+                  bottleneck={concurrencyData.concurrencyResult.bottleneck}
+                  sloTTFTMs={sloTTFTMs} sloTPOTMs={sloTPOTMs}
+                  doubleGPUMaxUsers={concurrencyData.concurrencyResult.maxConcurrentUsers * 2}
+                  doubleGPUCostPerHour={concurrencyData.hourlyCloudCost * 2} />
+                <PrefillDecodeBreakdown ttftMs={concurrencyData.prefillResult.ttftMs}
+                  tpotMs={concurrencyData.tpotAtCurrentUsers} avgOutputTokens={avgOutputTokens} />
+                <ConcurrentUserSlider value={concurrentUsers} onChange={setConcurrentUsers}
+                  maxCapacity={concurrencyData.concurrencyResult.maxConcurrentUsers}
+                  totalVRAMGB={topGPU.gpu.memoryGB} usedVRAMGB={concurrencyData.usedVRAMGB} />
+                <PromptOutputConfig promptTokens={avgPromptTokens} outputTokens={avgOutputTokens}
+                  onPromptChange={setAvgPromptTokens} onOutputChange={setAvgOutputTokens} />
+                <SLOConfig sloTTFTMs={sloTTFTMs} sloTPOTMs={sloTPOTMs}
+                  actualTTFTMs={concurrencyData.prefillResult.ttftMs}
+                  actualTPOTMs={concurrencyData.tpotAtCurrentUsers}
+                  onSloTTFTChange={setSloTTFT} onSloTPOTChange={setSloTPOT} />
+                <LatencyCurveChart points={concurrencyData.latencyCurve.points}
+                  currentUsers={concurrentUsers} sloTpotMs={sloTPOTMs}
+                  sweetSpotUsers={concurrencyData.latencyCurve.sweetSpotUsers}
+                  maxCapacityUsers={concurrencyData.latencyCurve.maxCapacityUsers} />
+                <BottleneckIndicator maxUsersMemory={concurrencyData.concurrencyResult.maxUsersMemory}
+                  maxUsersThroughput={concurrencyData.concurrencyResult.maxUsersThroughput}
+                  maxUsersPrefill={concurrencyData.concurrencyResult.maxUsersPrefill}
+                  bottleneck={concurrencyData.concurrencyResult.bottleneck} currentUsers={concurrentUsers} />
+                <ReplicaScalingTable rows={concurrencyData.scalingRows} currentReplicas={1}
+                  gpusPerReplica={numGPUs} gpuName={topGPU.gpu.name} />
+                <RequestCostPanel result={concurrencyData.requestCost}
+                  hourlyCloudCost={concurrencyData.hourlyCloudCost} />
+                <BatchModeToggle batchMode={batchMode} onToggle={setBatchMode}
+                  batchResult={concurrencyData.batchResult} />
+              </div>
+            ) : <p className="text-sm text-fg-muted">Select a model and GPU to see concurrency estimates.</p>}
+          </TabsContent>
+
+          <TabsContent value="network">
+            {breakdown ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <NetworkPanel numGPUs={numGPUs} numParams={selectedModel.paramsTotal}
+                  numLayers={selectedModel.architecture.numLayers}
+                  hiddenSize={selectedModel.architecture.hiddenSize}
+                  batchSize={batchSize} seqLen={contextLength} bytesPerParam={bytesPerParam}
+                  parallelismType="tp" stepTimeBudgetMs={500} />
+                <StoragePanel numTokens={1e9} numCheckpoints={5} numParams={selectedModel.paramsTotal} />
+              </div>
+            ) : <p className="text-sm text-fg-muted">Select a model to see network and storage estimates.</p>}
+          </TabsContent>
+
+          <TabsContent value="power">
+            {topGPU ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <PowerPanel gpuCount={numGPUs} gpuTDPWatts={topGPU.gpu.tdpWatts} />
+                <TCOPanel cloudHourlyCostUSD={cloudRecommendations?.[0]?.onDemandPerHour ?? 2.49}
+                  gpuCount={numGPUs} gpuTDPWatts={topGPU.gpu.tdpWatts} />
+              </div>
+            ) : <p className="text-sm text-fg-muted">Select a model to see power and TCO estimates.</p>}
+          </TabsContent>
+
+          <TabsContent value="deployment">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <WarmupPanel modelBytes={modelBytes} numParams={selectedModel.paramsTotal} />
+              <FailoverPanel baseCostPerHour={cloudRecommendations?.[0]?.onDemandPerHour ?? 2.49} />
+            </div>
+          </TabsContent>
+
+        </div>
+      </Tabs>
+    </section>
+  );
 }
 
 export function Home({ modelSearchOpen, onModelSearchClose }: HomeProps) {
@@ -413,6 +585,47 @@ export function Home({ modelSearchOpen, onModelSearchClose }: HomeProps) {
         )}
       </div>
 
+      {/* ── Cluster + Stack ───────────────────────────────────────────── */}
+      {(clusterRecommendation || stackRecommendation) && (
+        <section className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+          {clusterRecommendation && <ClusterPanel cluster={clusterRecommendation} />}
+          {stackRecommendation && <StackPanel stack={stackRecommendation} />}
+        </section>
+      )}
+
+      {/* ── Advanced Panels — Tabbed ─────────────────────────────────── */}
+      {selectedModel && (
+        <AdvancedTabs
+          selectedModel={selectedModel}
+          breakdown={breakdown}
+          topGPU={topGPU}
+          numGPUs={numGPUs}
+          setNumGPUs={setNumGPUs}
+          modelGB={modelGB}
+          modelBytes={modelBytes}
+          bytesPerParam={bytesPerParam}
+          isTrainingMode={isTrainingMode}
+          mode={mode}
+          costMetrics={costMetrics}
+          cloudRecommendations={cloudRecommendations}
+          contextLength={contextLength}
+          batchSize={batchSize}
+          concurrencyData={concurrencyData}
+          concurrentUsers={concurrentUsers}
+          setConcurrentUsers={setConcurrentUsers}
+          avgPromptTokens={avgPromptTokens}
+          avgOutputTokens={avgOutputTokens}
+          setAvgPromptTokens={setAvgPromptTokens}
+          setAvgOutputTokens={setAvgOutputTokens}
+          sloTTFTMs={sloTTFTMs}
+          sloTPOTMs={sloTPOTMs}
+          setSloTTFT={setSloTTFT}
+          setSloTPOT={setSloTPOT}
+          batchMode={batchMode}
+          setBatchMode={setBatchMode}
+        />
+      )}
+
       {/* ── Cloud Table ───────────────────────────────────────────────── */}
       {cloudRecommendations && cloudRecommendations.length > 0 && (
         <section className="mt-8">
@@ -426,218 +639,6 @@ export function Home({ modelSearchOpen, onModelSearchClose }: HomeProps) {
       {cloudRecommendations?.length === 0 && (
         <section className="mt-8">
           <EmptyState icon={<Cpu size={32} />} title="No cloud instances found" description="Try reducing context length or using a smaller model." />
-        </section>
-      )}
-
-      {/* ── Cluster + Stack ───────────────────────────────────────────── */}
-      {(clusterRecommendation || stackRecommendation) && (
-        <section className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-          {clusterRecommendation && <ClusterPanel cluster={clusterRecommendation} />}
-          {stackRecommendation && <StackPanel stack={stackRecommendation} />}
-        </section>
-      )}
-
-      {/* ── Spec 07: Parallelism + RAM + Scale ───────────────────────── */}
-      {selectedModel && breakdown && (
-        <section className="mt-6">
-          <Section title="Parallelism & Cluster Sizing" defaultOpen={numGPUs > 1}>
-            <div className="flex flex-col gap-2 mb-2">
-              <label className="text-xs font-medium text-fg-default">Number of GPUs</label>
-              <div className="flex items-center gap-3">
-                <input type="range" min={1} max={512} step={1} value={numGPUs}
-                  onChange={e => setNumGPUs(parseInt(e.target.value))}
-                  className="flex-1 cursor-pointer appearance-none bg-transparent [&::-webkit-slider-runnable-track]:h-1.5 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-bg-emphasis [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-accent [&::-webkit-slider-thumb]:-mt-[7px]"
-                  aria-label="Number of GPUs" />
-                <span className="text-sm font-mono text-fg-primary w-12 text-right">{numGPUs}</span>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <ParallelismPanel
-                totalGPUs={numGPUs}
-                gpusPerNode={Math.min(8, numGPUs)}
-                gpuMemGB={topGPU?.gpu.memoryGB ?? 80}
-                modelGB={modelGB}
-                numKVHeads={selectedModel.architecture.numKeyValueHeads}
-              />
-              <RAMPanel
-                mode={isTrainingMode ? 'training' : 'inference'}
-                modelBytes={modelBytes}
-                numGPUsPerNode={Math.min(8, numGPUs)}
-                vramPerGPUGB={topGPU?.gpu.memoryGB ?? 80}
-              />
-            </div>
-            {numGPUs > 1 && (
-              <ClusterTopology
-                numGPUs={numGPUs}
-                workload={isTrainingMode ? 'training' : 'inference'}
-              />
-            )}
-          </Section>
-        </section>
-      )}
-
-      {/* Spec 07: Scale Estimator (inference/scale modes) */}
-      {(mode === 'inference' || mode === 'scale') && topGPU && costMetrics && (
-        <section className="mt-4">
-          <Section title="Scale Estimator — QPS Sizing">
-            <ScaleEstimator
-              tokensPerSecond={topGPU.tokensPerSecond ?? 100}
-              gpusPerReplica={numGPUs}
-              costPerGPUHour={cloudRecommendations?.[0]?.onDemandPerHour ?? 2.49}
-            />
-          </Section>
-        </section>
-      )}
-
-      {/* Spec 07: Clustering Tools */}
-      <section className="mt-4">
-        <Section title="Clustering Software Recommendations">
-          <ClusteringTools />
-        </Section>
-      </section>
-
-      {/* ── Spec 10: Concurrent User Capacity ────────────────────────── */}
-      {selectedModel && topGPU && concurrencyData && (
-        <section className="mt-4">
-          <Section title="Concurrent User Capacity" defaultOpen={false}>
-            <UserExperienceSummary
-              modelName={selectedModel.displayName}
-              gpuName={topGPU.gpu.name}
-              concurrentUsers={concurrentUsers}
-              ttftMs={concurrencyData.prefillResult.ttftMs}
-              tpotMs={concurrencyData.tpotAtCurrentUsers}
-              avgOutputTokens={avgOutputTokens}
-              aggregateThroughput={concurrencyData.aggregateThroughput}
-              maxConcurrentUsers={concurrencyData.concurrencyResult.maxConcurrentUsers}
-              totalVRAMGB={topGPU.gpu.memoryGB}
-              usedVRAMGB={concurrencyData.usedVRAMGB}
-              costPerUserPerHour={concurrencyData.requestCost.costPerUserPerHour}
-              costPerMTokens={concurrencyData.requestCost.costPerMOutputTokens}
-              costPerRequest={concurrencyData.requestCost.costPerRequest}
-              bottleneck={concurrencyData.concurrencyResult.bottleneck}
-              sloTTFTMs={sloTTFTMs}
-              sloTPOTMs={sloTPOTMs}
-              doubleGPUMaxUsers={concurrencyData.concurrencyResult.maxConcurrentUsers * 2}
-              doubleGPUCostPerHour={concurrencyData.hourlyCloudCost * 2}
-            />
-            <PrefillDecodeBreakdown
-              ttftMs={concurrencyData.prefillResult.ttftMs}
-              tpotMs={concurrencyData.tpotAtCurrentUsers}
-              avgOutputTokens={avgOutputTokens}
-            />
-            <ConcurrentUserSlider
-              value={concurrentUsers}
-              onChange={setConcurrentUsers}
-              maxCapacity={concurrencyData.concurrencyResult.maxConcurrentUsers}
-              totalVRAMGB={topGPU.gpu.memoryGB}
-              usedVRAMGB={concurrencyData.usedVRAMGB}
-            />
-            <PromptOutputConfig
-              promptTokens={avgPromptTokens}
-              outputTokens={avgOutputTokens}
-              onPromptChange={setAvgPromptTokens}
-              onOutputChange={setAvgOutputTokens}
-            />
-            <SLOConfig
-              sloTTFTMs={sloTTFTMs}
-              sloTPOTMs={sloTPOTMs}
-              actualTTFTMs={concurrencyData.prefillResult.ttftMs}
-              actualTPOTMs={concurrencyData.tpotAtCurrentUsers}
-              onSloTTFTChange={setSloTTFT}
-              onSloTPOTChange={setSloTPOT}
-            />
-            <LatencyCurveChart
-              points={concurrencyData.latencyCurve.points}
-              currentUsers={concurrentUsers}
-              sloTpotMs={sloTPOTMs}
-              sweetSpotUsers={concurrencyData.latencyCurve.sweetSpotUsers}
-              maxCapacityUsers={concurrencyData.latencyCurve.maxCapacityUsers}
-            />
-            <BottleneckIndicator
-              maxUsersMemory={concurrencyData.concurrencyResult.maxUsersMemory}
-              maxUsersThroughput={concurrencyData.concurrencyResult.maxUsersThroughput}
-              maxUsersPrefill={concurrencyData.concurrencyResult.maxUsersPrefill}
-              bottleneck={concurrencyData.concurrencyResult.bottleneck}
-              currentUsers={concurrentUsers}
-            />
-            <ReplicaScalingTable
-              rows={concurrencyData.scalingRows}
-              currentReplicas={1}
-              gpusPerReplica={numGPUs}
-              gpuName={topGPU.gpu.name}
-            />
-            <RequestCostPanel
-              result={concurrencyData.requestCost}
-              hourlyCloudCost={concurrencyData.hourlyCloudCost}
-            />
-            <BatchModeToggle
-              batchMode={batchMode}
-              onToggle={setBatchMode}
-              batchResult={concurrencyData.batchResult}
-            />
-          </Section>
-        </section>
-      )}
-
-      {/* ── Spec 03: Network + Storage ────────────────────────────────── */}
-      {selectedModel && breakdown && (
-        <section className="mt-4">
-          <Section title="Network Bandwidth & Storage">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <NetworkPanel
-                numGPUs={numGPUs}
-                numParams={selectedModel.paramsTotal}
-                numLayers={selectedModel.architecture.numLayers}
-                hiddenSize={selectedModel.architecture.hiddenSize}
-                batchSize={batchSize}
-                seqLen={contextLength}
-                bytesPerParam={bytesPerParam}
-                parallelismType="tp"
-                stepTimeBudgetMs={500}
-              />
-              <StoragePanel
-                numTokens={1e9}
-                numCheckpoints={5}
-                numParams={selectedModel.paramsTotal}
-              />
-            </div>
-          </Section>
-        </section>
-      )}
-
-      {/* ── Spec 08: Power + TCO ──────────────────────────────────────── */}
-      {topGPU && (
-        <section className="mt-4">
-          <Section title="Power, Cooling & TCO">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <PowerPanel
-                gpuCount={numGPUs}
-                gpuTDPWatts={topGPU.gpu.tdpWatts}
-              />
-              <TCOPanel
-                cloudHourlyCostUSD={cloudRecommendations?.[0]?.onDemandPerHour ?? 2.49}
-                gpuCount={numGPUs}
-                gpuTDPWatts={topGPU.gpu.tdpWatts}
-              />
-            </div>
-          </Section>
-        </section>
-      )}
-
-      {/* ── Spec 08: Warmup + Failover ────────────────────────────────── */}
-      {selectedModel && (
-        <section className="mt-4">
-          <Section title="Deployment: Warmup & Failover">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <WarmupPanel
-                modelBytes={modelBytes}
-                numParams={selectedModel.paramsTotal}
-              />
-              <FailoverPanel
-                baseCostPerHour={cloudRecommendations?.[0]?.onDemandPerHour ?? 2.49}
-              />
-            </div>
-          </Section>
         </section>
       )}
 

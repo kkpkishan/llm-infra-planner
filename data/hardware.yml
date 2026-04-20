@@ -1,7 +1,7 @@
 # Comprehensive GPU/accelerator spec database.
 # Run `npx tsx scripts/refresh-hardware.ts` to update src/data/gpus.json.
 # Sources: NVIDIA, AMD, Apple, Google datasheets and official announcements.
-# Last updated: 2026-04-16
+# Last updated: 2026-04-20
 
 gpus:
   # ─── NVIDIA Consumer ────────────────────────────────────────────────
@@ -182,6 +182,74 @@ gpus:
     msrpUSD: 1999
     streetUSD: 2200
     releaseYear: 2025
+
+  - id: nvidia-rtx-5070-ti
+    vendor: nvidia
+    name: RTX 5070 Ti
+    category: consumer
+    memoryGB: 16
+    memoryBandwidthGBs: 896
+    flops:
+      fp32: 43.9
+      fp16: 43.9
+      int8: 87.8
+    tdpWatts: 300
+    formFactor: pcie
+    msrpUSD: 749
+    streetUSD: 800
+    releaseYear: 2025
+    notes: Blackwell mid-high, 8960 CUDA cores, GDDR7
+
+  - id: nvidia-rtx-5070
+    vendor: nvidia
+    name: RTX 5070
+    category: consumer
+    memoryGB: 12
+    memoryBandwidthGBs: 672
+    flops:
+      fp32: 30.8
+      fp16: 30.8
+      int8: 61.6
+    tdpWatts: 250
+    formFactor: pcie
+    msrpUSD: 549
+    streetUSD: 600
+    releaseYear: 2025
+    notes: Blackwell mid-range, 6144 CUDA cores, GDDR7
+
+  - id: nvidia-rtx-5060-ti-16gb
+    vendor: nvidia
+    name: RTX 5060 Ti 16GB
+    category: consumer
+    memoryGB: 16
+    memoryBandwidthGBs: 448
+    flops:
+      fp32: 23.7
+      fp16: 23.7
+      int8: 47.4
+    tdpWatts: 180
+    formFactor: pcie
+    msrpUSD: 429
+    streetUSD: 450
+    releaseYear: 2025
+    notes: Blackwell entry-high, 16GB GDDR7, best value for local LLM inference
+
+  - id: nvidia-rtx-5060-ti-8gb
+    vendor: nvidia
+    name: RTX 5060 Ti 8GB
+    category: consumer
+    memoryGB: 8
+    memoryBandwidthGBs: 448
+    flops:
+      fp32: 23.7
+      fp16: 23.7
+      int8: 47.4
+    tdpWatts: 180
+    formFactor: pcie
+    msrpUSD: 379
+    streetUSD: 400
+    releaseYear: 2025
+    notes: Blackwell entry-high, 8GB GDDR7, limited VRAM for LLMs
 
   # ─── NVIDIA Workstation ──────────────────────────────────────────────
   - id: nvidia-rtx-a6000
@@ -511,7 +579,23 @@ gpus:
     releaseYear: 2024
     notes: AMD datacenter GPU, ROCm support
 
-  # NEW: AMD MI355X
+  - id: amd-mi325x
+    vendor: amd
+    name: MI325X
+    category: datacenter
+    memoryGB: 256
+    memoryBandwidthGBs: 6000
+    flops:
+      fp32: 163.4
+      fp16: 1307
+      fp8: 2615
+      int8: 2615
+    tdpWatts: 1000
+    formFactor: oam
+    releaseYear: 2024
+    notes: "CDNA3 memory bump over MI300X: 256GB HBM3e, 6TB/s bandwidth, 1.3x memory improvement"
+
+  # AMD MI355X (CDNA 4, 2025)
   - id: amd-mi355x
     vendor: amd
     name: MI355X
@@ -526,7 +610,7 @@ gpus:
     tdpWatts: 750
     formFactor: oam
     releaseYear: 2025
-    notes: "AMD MI355X: 288GB HBM3e, 8TB/s bandwidth, next-gen ROCm"
+    notes: "AMD MI355X CDNA4: 288GB HBM3e, 8TB/s bandwidth, next-gen ROCm"
 
   # ─── Apple Silicon ───────────────────────────────────────────────────
   - id: apple-m1-max-64gb
@@ -587,7 +671,37 @@ gpus:
     tdpWatts: 60
     formFactor: integrated
     releaseYear: 2024
-    notes: Latest Apple Silicon, excellent for local LLM inference
+    notes: MacBook Pro M4 Max, 546GB/s bandwidth
+
+  - id: apple-m4-ultra-192gb
+    vendor: apple
+    name: M4 Ultra 192GB
+    category: apple-silicon
+    memoryGB: 192
+    memoryBandwidthGBs: 819
+    flops:
+      fp32: 34.8
+      fp16: 69.6
+      int8: 139.2
+    tdpWatts: 120
+    formFactor: integrated
+    releaseYear: 2025
+    notes: "Mac Studio 2025 M4 Ultra: 192GB unified memory, 819GB/s bandwidth, runs 70B+ models"
+
+  - id: apple-m3-ultra-512gb
+    vendor: apple
+    name: M3 Ultra 512GB
+    category: apple-silicon
+    memoryGB: 512
+    memoryBandwidthGBs: 819
+    flops:
+      fp32: 34.8
+      fp16: 69.6
+      int8: 139.2
+    tdpWatts: 150
+    formFactor: integrated
+    releaseYear: 2025
+    notes: "Mac Studio 2025 M3 Ultra: up to 512GB unified memory, runs 600B+ parameter models"
 
   # ─── Google TPU ──────────────────────────────────────────────────────
   # NEW: Google TPU v7 Ironwood

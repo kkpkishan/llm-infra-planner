@@ -1,7 +1,7 @@
 # Cloud instance pricing overrides.
 # This file is the source of truth for all cloud provider pricing.
 # Run `npx tsx scripts/refresh-cloud-prices.ts` to update src/data/cloud.json.
-# Last updated: 2026-04-16
+# Last updated: 2026-04-20
 
 instances:
   # ─── AWS ────────────────────────────────────────────────────────────
@@ -164,7 +164,47 @@ instances:
       - us-east-1
       - us-west-2
     notes: H200-based instance for large model training and inference
-    lastPriceUpdate: "2026-04-16"
+    lastPriceUpdate: "2026-04-20"
+
+  - id: aws-p5en.48xlarge
+    provider: aws
+    instanceType: p5en.48xlarge
+    gpus:
+      - id: nvidia-h200-sxm-141gb
+        count: 8
+    vcpus: 192
+    ramGB: 2048
+    storageGB: 8000
+    networkGbps: 3200
+    interconnect: nvswitch
+    pricing:
+      onDemandUSDPerHour: 63.30
+      spotUSDPerHour: 20.00
+    regions:
+      - us-east-1
+      - us-west-2
+    notes: Enhanced networking H200 instance
+    lastPriceUpdate: "2026-04-20"
+
+  - id: aws-p6-b200.48xlarge
+    provider: aws
+    instanceType: p6-b200.48xlarge
+    gpus:
+      - id: nvidia-b200-sxm
+        count: 8
+    vcpus: 192
+    ramGB: 2048
+    storageGB: 8000
+    networkGbps: 3200
+    interconnect: nvswitch
+    pricing:
+      onDemandUSDPerHour: 113.93
+      spotUSDPerHour: 40.00
+    regions:
+      - us-east-1
+      - us-west-2
+    notes: Blackwell B200 instance, latest generation
+    lastPriceUpdate: "2026-04-20"
 
   # ─── Azure ──────────────────────────────────────────────────────────
   - id: azure-nc24ads-a100-v4
@@ -245,7 +285,27 @@ instances:
       - eastus
       - westus2
       - westeurope
-    lastPriceUpdate: "2026-04-16"
+    lastPriceUpdate: "2026-04-20"
+
+  - id: azure-nd-b200-v6
+    provider: azure
+    instanceType: ND B200 v6
+    gpus:
+      - id: nvidia-b200-sxm
+        count: 8
+    vcpus: 192
+    ramGB: 2048
+    storageGB: 8000
+    networkGbps: 3200
+    interconnect: nvswitch
+    pricing:
+      onDemandUSDPerHour: 120.00
+      spotUSDPerHour: 40.00
+    regions:
+      - eastus
+      - westus2
+    notes: Blackwell B200 Azure instance
+    lastPriceUpdate: "2026-04-20"
 
   # ─── GCP ────────────────────────────────────────────────────────────
   - id: gcp-g2-standard-4
@@ -325,7 +385,47 @@ instances:
     regions:
       - us-central1
       - us-east1
-    lastPriceUpdate: "2026-04-16"
+    lastPriceUpdate: "2026-04-20"
+
+  - id: gcp-a3-megagpu-8g
+    provider: gcp
+    instanceType: a3-megagpu-8g
+    gpus:
+      - id: nvidia-h100-sxm-80gb
+        count: 8
+    vcpus: 208
+    ramGB: 1872
+    storageGB: 6000
+    networkGbps: 3200
+    interconnect: nvswitch
+    pricing:
+      onDemandUSDPerHour: 112.00
+      spotUSDPerHour: 35.00
+    regions:
+      - us-central1
+      - us-east1
+    notes: High-bandwidth H100 cluster instance
+    lastPriceUpdate: "2026-04-20"
+
+  - id: gcp-a4-highgpu-8g
+    provider: gcp
+    instanceType: a4-highgpu-8g
+    gpus:
+      - id: nvidia-h200-sxm-141gb
+        count: 8
+    vcpus: 208
+    ramGB: 1872
+    storageGB: 6000
+    networkGbps: 3200
+    interconnect: nvswitch
+    pricing:
+      onDemandUSDPerHour: 130.00
+      spotUSDPerHour: 42.00
+    regions:
+      - us-central1
+      - us-east1
+    notes: H200-based GCP instance
+    lastPriceUpdate: "2026-04-20"
 
   # ─── Lambda Labs ─────────────────────────────────────────────────────
   - id: lambda-1xh100
@@ -379,7 +479,42 @@ instances:
       onDemandUSDPerHour: 28.80
     regions:
       - us-tx-3
-    lastPriceUpdate: "2026-04-16"
+    lastPriceUpdate: "2026-04-20"
+
+  - id: lambda-1xb200
+    provider: lambda
+    instanceType: "1x B200 192GB"
+    gpus:
+      - id: nvidia-b200-sxm
+        count: 1
+    vcpus: 26
+    ramGB: 256
+    storageGB: 1000
+    networkGbps: 100
+    pricing:
+      onDemandUSDPerHour: 4.50
+    regions:
+      - us-tx-3
+    notes: Blackwell B200, latest generation
+    lastPriceUpdate: "2026-04-20"
+
+  - id: lambda-8xb200
+    provider: lambda
+    instanceType: "8x B200 192GB"
+    gpus:
+      - id: nvidia-b200-sxm
+        count: 8
+    vcpus: 208
+    ramGB: 2048
+    storageGB: 8000
+    networkGbps: 3200
+    interconnect: nvswitch
+    pricing:
+      onDemandUSDPerHour: 36.00
+    regions:
+      - us-tx-3
+    notes: Blackwell B200 cluster
+    lastPriceUpdate: "2026-04-20"
 
   # ─── RunPod ──────────────────────────────────────────────────────────
   - id: runpod-1x4090
@@ -470,7 +605,24 @@ instances:
       onDemandUSDPerHour: 3.39
     regions:
       - us-east
-    lastPriceUpdate: "2026-04-16"
+    lastPriceUpdate: "2026-04-20"
+
+  - id: runpod-1xb200
+    provider: runpod
+    instanceType: "1x B200 192GB"
+    gpus:
+      - id: nvidia-b200-sxm
+        count: 1
+    vcpus: 16
+    ramGB: 256
+    storageGB: 500
+    networkGbps: 25
+    pricing:
+      onDemandUSDPerHour: 4.99
+    regions:
+      - us-east
+    notes: Blackwell B200, Secure Cloud
+    lastPriceUpdate: "2026-04-20"
 
   # ─── Vast.ai ─────────────────────────────────────────────────────────
   - id: vast-1xh100
@@ -511,7 +663,47 @@ instances:
       - us-east
       - us-west
     notes: Enterprise, reserved pricing available
-    lastPriceUpdate: "2026-04-16"
+    lastPriceUpdate: "2026-04-20"
+
+  - id: coreweave-8xh200
+    provider: coreweave
+    instanceType: "8x H200 141GB"
+    gpus:
+      - id: nvidia-h200-sxm-141gb
+        count: 8
+    vcpus: 192
+    ramGB: 1800
+    storageGB: 8000
+    networkGbps: 3200
+    interconnect: nvswitch
+    pricing:
+      onDemandUSDPerHour: 50.00
+      reserved1yUSDPerHour: 40.00
+    regions:
+      - us-east
+      - us-west
+    notes: H200 cluster, enterprise reserved pricing available
+    lastPriceUpdate: "2026-04-20"
+
+  - id: coreweave-8xb200
+    provider: coreweave
+    instanceType: "8x B200 192GB"
+    gpus:
+      - id: nvidia-b200-sxm
+        count: 8
+    vcpus: 192
+    ramGB: 2048
+    storageGB: 8000
+    networkGbps: 3200
+    interconnect: nvswitch
+    pricing:
+      onDemandUSDPerHour: 72.00
+      reserved1yUSDPerHour: 58.00
+    regions:
+      - us-east
+      - us-west
+    notes: Blackwell B200 cluster, latest generation
+    lastPriceUpdate: "2026-04-20"
 
   # ─── Together AI ─────────────────────────────────────────────────────
   - id: together-llama-3.1-70b-serverless
