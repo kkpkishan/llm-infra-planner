@@ -46,7 +46,8 @@ export function useKeyboardShortcuts({
           return;
         }
         addCompareConfig();
-        showToast('Added to compare', 'success');
+        showToast('Added to compare — opening compare page', 'success');
+        navigate('/compare');
       },
       navigate: (path) => navigate(path),
     });
