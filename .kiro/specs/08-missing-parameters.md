@@ -62,18 +62,18 @@ Add all remaining parameters that affect hardware requirements: power/cooling (P
 
 ## Tasks
 
-- [ ] 1. Create `src/lib/formulas/power.ts` — power draw, cooling, PUE, electricity cost, PSU sizing
-- [ ] 2. Create `src/lib/formulas/tco.ts` — buy-vs-rent TCO, breakeven month, utilization-adjusted hourly cost
-- [ ] 3. Create `src/lib/formulas/training-advanced.ts` — grad accumulation, sequence packing efficiency, FlashAttention savings, activation checkpointing
-- [ ] 4. Create `src/lib/formulas/multimodal.ts` — vision/audio encoder VRAM, image token count
-- [ ] 5. Create `src/lib/formulas/warmup.ts` — load time, compile time, cold-start total
-- [ ] 6. Create `src/lib/formulas/failover.ts` — redundancy cost multiplier, checkpoint frequency
-- [ ] 7. Create `src/components/calculator/PowerPanel.tsx` — power/cooling/electricity inputs and outputs
-- [ ] 8. Create `src/components/calculator/TCOPanel.tsx` — buy-vs-rent comparison with breakeven chart
-- [ ] 9. Create `src/components/calculator/AdvancedTrainingPanel.tsx` — grad accum, packing, FA, checkpointing toggles
-- [ ] 10. Create `src/components/calculator/MultimodalPanel.tsx` — vision/audio encoder VRAM display (auto for VLMs)
-- [ ] 11. Create `src/components/calculator/WarmupPanel.tsx` — cold-start estimate
-- [ ] 12. Create `src/components/calculator/FailoverPanel.tsx` — redundancy selector with cost impact
-- [ ] 13. Write tests for TCO: H100 on-prem at $30k should breakeven vs $2.49/h Lambda at ~14-18 months at 70% util
+- [x] 1. Create `src/lib/formulas/power.ts` — power draw, cooling, PUE, electricity cost, PSU sizing
+- [x] 2. Create `src/lib/formulas/tco.ts` — buy-vs-rent TCO, breakeven month, utilization-adjusted hourly cost
+- [x] 3. Create `src/lib/formulas/training-advanced.ts` — grad accumulation, sequence packing efficiency, FlashAttention savings, activation checkpointing
+- [x] 4. Create `src/lib/formulas/multimodal.ts` — vision/audio encoder VRAM, image token count
+- [x] 5. Create `src/lib/formulas/warmup.ts` — load time, compile time, cold-start total
+- [x] 6. Create `src/lib/formulas/failover.ts` — redundancy cost multiplier, checkpoint frequency
+- [x] 7. Create `src/components/calculator/PowerPanel.tsx` — power/cooling/electricity inputs and outputs
+- [x] 8. Create `src/components/calculator/TCOPanel.tsx` — buy-vs-rent comparison with breakeven chart
+- [x] 9. Create `src/components/calculator/AdvancedTrainingPanel.tsx` — grad accum, packing, FA, checkpointing toggles
+- [x] 10. Create `src/components/calculator/MultimodalPanel.tsx` — vision/audio encoder VRAM display (auto for VLMs)
+- [x] 11. Create `src/components/calculator/WarmupPanel.tsx` — cold-start estimate
+- [x] 12. Create `src/components/calculator/FailoverPanel.tsx` — redundancy selector with cost impact
+- [x] 13. Write tests for TCO: H100 on-prem at $30k should breakeven vs $2.49/h Lambda at ~14-18 months at 70% util
 
 
