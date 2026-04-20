@@ -2,8 +2,12 @@
 export function Compare() {
   return (
     <div className="max-w-[1760px] mx-auto px-6 py-8">
-      <h1 className="text-2xl font-semibold text-fg-primary mb-6">Compare Configurations</h1>
-      {/* Inline compare content (drawer content reused without the slide-in) */}
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-semibold text-fg-primary">Compare Configurations</h1>
+          <p className="text-sm text-fg-muted mt-1">Side-by-side comparison of model + hardware configurations</p>
+        </div>
+      </div>
       <CompareInline />
     </div>
   );
@@ -68,7 +72,7 @@ function DeltaBadge({ value, unit = '', lowerIsBetter = false }: { value: number
 }
 
 function CompareInline() {
-  const { compareConfigs, removeCompareConfig, modelDb, gpuDb, cloudDb, addCompareConfig } = useCalculatorStore();
+  const { compareConfigs, removeCompareConfig, modelDb, gpuDb, cloudDb, addCompareConfig, selectedModel } = useCalculatorStore();
   const { showToast } = useToast();
 
   const computed = React.useMemo(
@@ -89,11 +93,54 @@ function CompareInline() {
 
   if (computed.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center gap-4 py-24 text-center">
-        <ArrowLeftRight size={40} className="text-fg-muted" />
-        <div>
-          <p className="text-sm font-medium text-fg-default mb-1">No configurations yet</p>
-          <p className="text-xs text-fg-muted">Go to the Calculator and press <kbd className="px-1.5 py-0.5 rounded border border-border-default bg-bg-muted font-mono text-[10px]">c</kbd> to add configs.</p>
+      <div className="flex flex-col gap-8">
+        {/* Empty state */}
+        <div className="flex flex-col items-center justify-center gap-5 py-16 text-center rounded-xl border border-dashed border-border-subtle bg-bg-subtle">
+          <ArrowLeftRight size={36} className="text-fg-muted" />
+          <div className="flex flex-col gap-1">
+            <p className="text-base font-semibold text-fg-default">No configurations to compare yet</p>
+            <p className="text-sm text-fg-muted max-w-sm">
+              Add your current calculator setup, then change the model or settings and add another to compare side-by-side.
+            </p>
+          </div>
+          <div className="flex items-center gap-3">
+            {selectedModel ? (
+              <button
+                onClick={handleAdd}
+                className="flex items-center gap-2 h-9 px-4 rounded-md bg-accent text-white text-sm font-medium hover:bg-accent/90 transition-colors"
+              >
+                <Plus size={15} />
+                Add current config ({selectedModel.displayName})
+              </button>
+            ) : (
+              <a
+                href="/"
+                className="flex items-center gap-2 h-9 px-4 rounded-md bg-accent text-white text-sm font-medium hover:bg-accent/90 transition-colors"
+              >
+                Go to Calculator
+              </a>
+            )}
+          </div>
+          <p className="text-xs text-fg-muted">
+            Or press <kbd className="px-1.5 py-0.5 rounded border border-border-default bg-bg-muted font-mono text-[10px]">c</kbd> anywhere in the calculator to add a config
+          </p>
+        </div>
+
+        {/* How it works */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {[
+            { step: '1', title: 'Select a model', desc: 'Pick a model and configure precision, context length, and batch size in the calculator.' },
+            { step: '2', title: 'Add to compare', desc: 'Press C or click Compare to snapshot the current configuration.' },
+            { step: '3', title: 'Change & compare', desc: 'Switch to a different model or settings, add again, and see the differences here.' },
+          ].map(item => (
+            <div key={item.step} className="flex gap-3 p-4 rounded-lg border border-border-subtle bg-bg-muted">
+              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/10 text-accent text-xs font-bold flex items-center justify-center">{item.step}</span>
+              <div>
+                <p className="text-sm font-medium text-fg-default mb-0.5">{item.title}</p>
+                <p className="text-xs text-fg-muted">{item.desc}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     );
