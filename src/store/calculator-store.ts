@@ -104,7 +104,16 @@ const defaultAdvancedSettings: AdvancedSettings = {
 
 // ── Store implementation ──────────────────────────────────────────────────────
 export const useCalculatorStore = create<CalculatorStore>((set, get) => {
-  const initialState = getDefaultState(MODEL_DB);
+  // Read URL on init — but never default to 'reverse' (that's a separate page)
+  const urlState = typeof window !== 'undefined' && window.location.search
+    ? parseState(window.location.search, MODEL_DB)
+    : null;
+  const rawInitState = urlState ?? getDefaultState(MODEL_DB);
+  // Force inference if mode is reverse (reverse has its own page)
+  const initialState = {
+    ...rawInitState,
+    mode: (rawInitState.mode === 'reverse' ? 'inference' : rawInitState.mode) as WorkloadMode,
+  };
   const initialModel = MODEL_DB.find(m => m.id === initialState.model) ?? MODEL_DB[0] ?? null;
 
   return {
@@ -195,10 +204,12 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
 
     setNumGPUs: (n) => {
       set({ numGPUs: Math.max(1, n) });
+      get().recompute();
     },
 
     setParallelismType: (t) => {
       set({ parallelismType: t });
+      get().recompute();
     },
 
     setConcurrentUsers: (n) => {
@@ -299,7 +310,7 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
     recompute: () => {
       const {
         selectedModel, precision, kvPrecision, contextLength, batchSize,
-        mode, trainingOptions, gpuDb, cloudDb,
+        mode, trainingOptions, gpuDb, cloudDb, numGPUs,
       } = get();
 
       if (!selectedModel) return;
@@ -307,7 +318,7 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
       const precisionConfig = getPrecisionConfig(precision);
       const kvPrecisionConfig = getKVPrecisionConfig(kvPrecision);
 
-      // VRAM breakdown
+      // VRAM breakdown (total across all GPUs)
       const breakdown = computeTotalVRAM(
         selectedModel,
         precisionConfig,
@@ -318,25 +329,29 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
         trainingOptions
       );
 
+      // Per-GPU VRAM needed (tensor parallelism splits weights evenly)
+      const vramPerGPU = breakdown.totalGB / Math.max(1, numGPUs);
+
       // Active weights for throughput (use paramsActive for MoE)
       const activeParams = selectedModel.paramsActive ?? selectedModel.paramsTotal;
       const activeWeightsGB = (activeParams * precisionConfig.bytesPerParam) / 1e9;
+      const activeWeightsPerGPU = activeWeightsGB / Math.max(1, numGPUs);
 
-      // GPU recommendations
+      // GPU recommendations — based on per-GPU VRAM requirement
       const gpuRecommendations = recommendGPUs(
-        breakdown.totalGB,
+        vramPerGPU,
         gpuDb,
-        { activeWeightsGB, efficiencyFactor: DEFAULT_EFFICIENCY }
+        { activeWeightsGB: activeWeightsPerGPU, efficiencyFactor: DEFAULT_EFFICIENCY }
       );
 
-      // Cloud recommendations
+      // Cloud recommendations — based on total VRAM (multi-GPU instances)
       const cloudRecommendations = recommendCloudInstances(
         breakdown.totalGB,
         cloudDb,
         gpuDb
       );
 
-      // Cost metrics (use cheapest cloud instance)
+      // Cost metrics (use cheapest cloud instance, scale throughput by numGPUs)
       const cheapestCloud = cloudRecommendations[0];
       const topGPU = gpuRecommendations.allFits.find(f => f.fitStatus !== 'red');
       let costMetrics: CostMetricsResult | null = null;
@@ -344,15 +359,17 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
       if (topGPU && cheapestCloud) {
         const throughput = computeThroughput({
           memoryBandwidthGBs: topGPU.gpu.memoryBandwidthGBs,
-          activeWeightsGB,
+          activeWeightsGB: activeWeightsPerGPU,
           efficiencyFactor: DEFAULT_EFFICIENCY,
         });
+        // Scale throughput by number of GPUs (tensor parallel scales linearly)
+        const scaledThroughput = throughput.tokensPerSecond * numGPUs;
         costMetrics = computeCostMetrics({
-          tokensPerSecond: throughput.tokensPerSecond,
+          tokensPerSecond: scaledThroughput,
           hourlyCloudCost: cheapestCloud.onDemandPerHour,
           contextLength,
           activeWeightsGB,
-          computeTFLOPS: topGPU.gpu.flops.fp16,
+          computeTFLOPS: topGPU.gpu.flops.fp16 * numGPUs,
         });
       }
 

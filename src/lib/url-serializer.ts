@@ -30,7 +30,7 @@ export function serializeState(state: CalculatorState): string {
   if (state.avgOutput !== undefined) params.set('output', String(state.avgOutput));
   if (state.sloTtft !== undefined) params.set('sloTtft', String(state.sloTtft));
   if (state.sloTpot !== undefined) params.set('sloTpot', String(state.sloTpot));
-  if (state.batch10) params.set('batch', '1');
+  if (state.batch10) params.set('batchMode', '1');  // fixed: was overwriting 'batch'
   return '?' + params.toString();
 }
 
@@ -104,7 +104,7 @@ export function parseState(
   const rawSloTpot = params.get('sloTpot');
   const sloTpot = rawSloTpot ? parseInt(rawSloTpot, 10) : undefined;
 
-  const batch10 = params.get('batch') === '1' ? true : undefined;
+  const batch10 = params.get('batchMode') === '1' ? true : undefined;
 
   return {
     model: resolvedModel,

@@ -62,7 +62,8 @@ export function registerKeyboardShortcuts(handlers: ShortcutHandlers): () => voi
     // ── ⌘K — open model search ──────────────────────────────────────
     if (meta && e.key === 'k') {
       e.preventDefault();
-      handlers.openModelSearch();
+      // Dispatch a custom event so only the visible ModelPicker responds
+      document.dispatchEvent(new CustomEvent('llmcalc:open-model-search'));
       return;
     }
 

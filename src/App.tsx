@@ -18,11 +18,10 @@ function AppContent() {
   const { getShareURL, addCompareConfig, compareConfigs } = useCalculatorStore();
   const { showToast } = useToast();
   const [shortcutsOpen, setShortcutsOpen] = React.useState(false);
-  const [modelSearchOpen, setModelSearchOpen] = React.useState(false);
   const [compareOpen, setCompareOpen] = React.useState(false);
 
   useKeyboardShortcuts({
-    onOpenModelSearch: () => setModelSearchOpen(true),
+    onOpenModelSearch: () => document.dispatchEvent(new CustomEvent('llmcalc:open-model-search')),
     onOpenShortcutsModal: () => setShortcutsOpen(true),
   });
 
@@ -64,7 +63,7 @@ function AppContent() {
         onOpenShortcuts={() => setShortcutsOpen(true)}
       >
         <Routes>
-          <Route path="/" element={<Home modelSearchOpen={modelSearchOpen} onModelSearchClose={() => setModelSearchOpen(false)} />} />
+          <Route path="/" element={<Home />} />
           <Route path="/compare" element={<Compare />} />
           <Route path="/reverse" element={<Reverse />} />
           <Route path="/models" element={<Models />} />

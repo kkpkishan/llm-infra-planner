@@ -7,6 +7,7 @@ interface VRAMBreakdownProps {
   gpuRef?: GPUSpec | null;
   kvPrecisionLabel?: string;
   framework?: string;
+  numGPUs?: number;
   className?: string;
 }
 
@@ -26,7 +27,7 @@ function formatGB(value: number): string {
   return value.toFixed(2);
 }
 
-export function VRAMBreakdown({ breakdown, gpuRef, kvPrecisionLabel = 'FP16', framework = 'vLLM', className }: VRAMBreakdownProps) {
+export function VRAMBreakdown({ breakdown, gpuRef, kvPrecisionLabel = 'FP16', framework = 'vLLM', numGPUs = 1, className }: VRAMBreakdownProps) {
   const [hoveredSegment, setHoveredSegment] = React.useState<string | null>(null);
   const prefersReducedMotion = React.useMemo(
     () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
@@ -34,8 +35,11 @@ export function VRAMBreakdown({ breakdown, gpuRef, kvPrecisionLabel = 'FP16', fr
   );
 
   const total = breakdown.totalGB;
+  const n = Math.max(1, numGPUs);
+  const perGPU = total / n;
   const gpuMemory = gpuRef?.memoryGB ?? null;
-  const utilizationPct = gpuMemory ? Math.round((total / gpuMemory) * 100) : null;
+  // When multi-GPU, check if per-GPU fits; single GPU checks total
+  const utilizationPct = gpuMemory ? Math.round((perGPU / gpuMemory) * 100) : null;
 
   // Active segments (non-zero)
   const activeSegments = SEGMENTS.filter(s => breakdown[s.key] > 0);
@@ -43,7 +47,7 @@ export function VRAMBreakdown({ breakdown, gpuRef, kvPrecisionLabel = 'FP16', fr
   return (
     <div className={cn('flex flex-col gap-4', className)}>
       {/* Hero total */}
-      <div className="flex items-baseline gap-2">
+      <div className="flex items-baseline gap-2 flex-wrap">
         <span
           className="font-mono font-semibold text-[48px] leading-none tracking-tight text-fg-primary"
           aria-live="polite"
@@ -52,12 +56,19 @@ export function VRAMBreakdown({ breakdown, gpuRef, kvPrecisionLabel = 'FP16', fr
           {total.toFixed(1)}
         </span>
         <span className="text-xl text-fg-muted font-mono ml-1">GB</span>
+        {n > 1 && (
+          <span className="text-sm font-mono text-fg-muted ml-2">
+            ({formatGB(perGPU)} GB × {n} GPUs)
+          </span>
+        )}
       </div>
 
       {/* Context line */}
       {gpuMemory && utilizationPct !== null && (
         <p className="text-xs text-fg-muted font-mono -mt-2">
-          Fits {utilizationPct}% on 1× {gpuRef?.name ?? 'GPU'}
+          {n > 1
+            ? `${formatGB(perGPU)} GB per GPU · Fits ${utilizationPct}% on ${gpuRef?.name ?? 'GPU'}`
+            : `Fits ${utilizationPct}% on 1× ${gpuRef?.name ?? 'GPU'}`}
           {' · '}KV {kvPrecisionLabel}
           {' · '}{framework}
         </p>
@@ -110,12 +121,12 @@ export function VRAMBreakdown({ breakdown, gpuRef, kvPrecisionLabel = 'FP16', fr
           );
         })}
 
-        {/* GPU overflow indicator */}
-        {gpuMemory && total > gpuMemory && (
+        {/* GPU overflow indicator — based on per-GPU VRAM */}
+        {gpuMemory && perGPU > gpuMemory && (
           <div
             className="absolute top-0 bottom-0 w-0.5 bg-red-500 z-10"
-            style={{ left: `${(gpuMemory / total) * 100}%` }}
-            title={`GPU limit: ${gpuMemory} GB`}
+            style={{ left: `${(gpuMemory / perGPU) * 100}%` }}
+            title={`GPU limit: ${gpuMemory} GB per GPU`}
           />
         )}
       </div>
@@ -133,15 +144,27 @@ export function VRAMBreakdown({ breakdown, gpuRef, kvPrecisionLabel = 'FP16', fr
             <span className="text-xs text-fg-muted flex-1 truncate">{segment.label}</span>
             <span className="text-xs font-mono text-fg-default tabular-nums">
               {formatGB(breakdown[segment.key])} GB
+              {n > 1 && (
+                <span className="text-fg-muted ml-1">
+                  ({formatGB(breakdown[segment.key] / n)}/GPU)
+                </span>
+              )}
             </span>
           </div>
         ))}
         {/* Total row */}
         <div className="col-span-2 flex items-center gap-2 pt-1 border-t border-border-subtle mt-1">
           <span className="w-2.5 h-2.5 flex-shrink-0" />
-          <span className="text-xs font-medium text-fg-default flex-1">Total</span>
+          <span className="text-xs font-medium text-fg-default flex-1">
+            Total{n > 1 ? ` (${n} GPUs)` : ''}
+          </span>
           <span className="text-xs font-mono font-semibold text-fg-primary tabular-nums">
             {formatGB(total)} GB
+            {n > 1 && (
+              <span className="text-fg-muted font-normal ml-1">
+                ({formatGB(perGPU)}/GPU)
+              </span>
+            )}
           </span>
         </div>
       </div>

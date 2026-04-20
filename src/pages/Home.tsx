@@ -101,11 +101,6 @@ function Section({ title, defaultOpen = false, children }: {
   );
 }
 
-interface HomeProps {
-  modelSearchOpen?: boolean;
-  onModelSearchClose?: () => void;
-}
-
 // ── Advanced Panels Tabbed Interface ─────────────────────────────────────────
 function AdvancedTabs({
   selectedModel, breakdown, topGPU, numGPUs, setNumGPUs,
@@ -129,15 +124,22 @@ function AdvancedTabs({
 }) {
   const [activeTab, setActiveTab] = React.useState('parallelism');
 
+  // Reset to first available tab when mode changes
+  React.useEffect(() => {
+    const available = tabs.map(t => t.id);
+    if (!available.includes(activeTab)) setActiveTab(available[0] ?? 'parallelism');
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mode]);
+
   const tabs = [
-    { id: 'parallelism', label: 'Parallelism' },
-    { id: 'scale', label: 'Scale / QPS' },
-    { id: 'clustering', label: 'Clustering' },
-    { id: 'concurrency', label: 'Concurrency' },
-    { id: 'network', label: 'Network & Storage' },
-    { id: 'power', label: 'Power & TCO' },
-    { id: 'deployment', label: 'Deployment' },
-  ];
+    { id: 'parallelism', label: 'Parallelism', showFor: ['inference', 'scale', 'finetune', 'train'] },
+    { id: 'scale', label: 'Scale / QPS', showFor: ['inference', 'scale'] },
+    { id: 'clustering', label: 'Clustering', showFor: ['inference', 'scale', 'finetune', 'train'] },
+    { id: 'concurrency', label: 'Concurrency', showFor: ['inference', 'scale'] },
+    { id: 'network', label: 'Network & Storage', showFor: ['inference', 'scale', 'finetune', 'train'] },
+    { id: 'power', label: 'Power & TCO', showFor: ['inference', 'scale', 'finetune', 'train'] },
+    { id: 'deployment', label: 'Deployment', showFor: ['inference', 'scale'] },
+  ].filter(t => t.showFor.includes(mode));
 
   return (
     <section className="mt-6">
@@ -277,7 +279,7 @@ function AdvancedTabs({
   );
 }
 
-export function Home({ modelSearchOpen, onModelSearchClose }: HomeProps) {
+export function Home() {
   const {
     modelDb, selectedModel, precision, kvPrecision, contextLength, batchSize,
     mode, trainingOptions, advancedSettings, breakdown, gpuRecommendations,
@@ -425,20 +427,29 @@ export function Home({ modelSearchOpen, onModelSearchClose }: HomeProps) {
   // ── Input panel ─────────────────────────────────────────────────────────────
   const InputPanel = (
     <div className="flex flex-col gap-5">
-      <ModelPicker models={modelDb} value={selectedModel} onSelect={setModel}
-        open={modelSearchOpen} onOpenChange={o => { if (!o) onModelSearchClose?.(); }} />
+      <ModelPicker models={modelDb} value={selectedModel} onSelect={setModel} />
       <PrecisionPicker value={precision} onChange={setPrecision} />
-      <KVPrecisionPicker value={kvPrecision} onChange={setKVPrecision} fp16KvCacheGB={breakdown?.kvCacheGB} />
-      {selectedModel && (
+
+      {/* KV precision + curve — inference & scale only */}
+      {(mode === 'inference' || mode === 'scale') && (
+        <KVPrecisionPicker value={kvPrecision} onChange={setKVPrecision} fp16KvCacheGB={breakdown?.kvCacheGB} />
+      )}
+      {(mode === 'inference' || mode === 'scale') && selectedModel && (
         <KVCurveChart model={selectedModel} kvPrecision={kvPrecision} currentContext={contextLength} batchSize={batchSize} />
       )}
+
       <ContextSlider value={contextLength} max={selectedModel?.architecture.maxContextLength ?? 131072} onChange={setContextLength} />
-      <BatchConfig value={batchSize} onChange={setBatchSize} />
+
+      {/* Batch size — inference & scale only */}
+      {(mode === 'inference' || mode === 'scale') && (
+        <BatchConfig value={batchSize} onChange={setBatchSize} />
+      )}
+
       <AdvancedPanel mode={mode} advancedSettings={advancedSettings} trainingOptions={trainingOptions}
         onAdvancedSettingsChange={setAdvancedSettings} onTrainingOptionsChange={setTrainingOptions} />
 
-      {/* Spec 05: KV Cache / Serving */}
-      {selectedModel && (
+      {/* KV Cache & Serving — inference & scale only */}
+      {(mode === 'inference' || mode === 'scale') && selectedModel && (
         <Section title="KV Cache & Serving">
           <KVCacheConfig model={selectedModel} kvPrecision={kvPrecision} contextLength={contextLength} batchSize={batchSize} />
           <SpeculativeConfig batchSize={batchSize} contextLength={contextLength} />
@@ -448,7 +459,7 @@ export function Home({ modelSearchOpen, onModelSearchClose }: HomeProps) {
       )}
 
       {isTrainingMode && selectedModel && (
-        <Section title="Training Configuration">
+        <Section title="Training Configuration" defaultOpen={true}>
           <TrainingMethodPicker
             value={trainingOptions.trainingMethodId as any ?? ''}
             onChange={(method) => setTrainingOptions({ trainingMethodId: method || undefined })}
@@ -501,7 +512,7 @@ export function Home({ modelSearchOpen, onModelSearchClose }: HomeProps) {
     <div className="flex flex-col gap-6 min-w-0">
       {breakdown ? (
         <>
-          <VRAMBreakdown breakdown={breakdown} gpuRef={topGPU?.gpu} kvPrecisionLabel={kvPrecisionLabel} framework={advancedSettings.framework} />
+          <VRAMBreakdown breakdown={breakdown} gpuRef={topGPU?.gpu} kvPrecisionLabel={kvPrecisionLabel} framework={advancedSettings.framework} numGPUs={numGPUs} />
           <MetricsRow tokensPerSecond={topGPU?.tokensPerSecond} costMetrics={costMetrics} gpuName={topGPU?.gpu.name} contextLength={contextLength} />
           <div className="flex flex-col gap-2">
             <FormulaReveal title="Weight Memory" formula={`W = \\frac{N_{params} \\times B_{precision}}{10^9}`}
@@ -536,11 +547,20 @@ export function Home({ modelSearchOpen, onModelSearchClose }: HomeProps) {
   return (
     <div className="max-w-[1760px] mx-auto px-4 md:px-6 py-6 pb-20 md:pb-6">
 
-      {/* ── Desktop xl: 3-column ─────────────────────────────────────── */}
-      <div className="hidden xl:grid xl:grid-cols-[280px_1fr_380px] gap-6">
+      {/* ── Desktop xl: adaptive layout ──────────────────────────────── */}
+      <div className={`hidden xl:grid gap-6 ${isTrainingMode ? 'xl:grid-cols-[420px_1fr]' : 'xl:grid-cols-[280px_1fr_380px]'}`}>
         <aside>{InputPanel}</aside>
-        {OutputSection}
-        {GPUSection}
+        {isTrainingMode ? (
+          /* Training: full-width output (no GPU sidebar) */
+          <div className="flex flex-col gap-6 min-w-0">
+            {OutputSection}
+          </div>
+        ) : (
+          <>
+            {OutputSection}
+            {GPUSection}
+          </>
+        )}
       </div>
 
       {/* ── Tablet md: 2-column ──────────────────────────────────────── */}
@@ -548,7 +568,7 @@ export function Home({ modelSearchOpen, onModelSearchClose }: HomeProps) {
         <aside>{InputPanel}</aside>
         <div className="flex flex-col gap-6">
           {OutputSection}
-          {GPUSection}
+          {!isTrainingMode && GPUSection}
         </div>
       </div>
 
@@ -564,7 +584,7 @@ export function Home({ modelSearchOpen, onModelSearchClose }: HomeProps) {
           {inputsExpanded && <div id="mobile-inputs" className="p-4">{InputPanel}</div>}
         </div>
         {breakdown ? (
-          <VRAMBreakdown breakdown={breakdown} gpuRef={topGPU?.gpu} kvPrecisionLabel={kvPrecisionLabel} framework={advancedSettings.framework} />
+          <VRAMBreakdown breakdown={breakdown} gpuRef={topGPU?.gpu} kvPrecisionLabel={kvPrecisionLabel} framework={advancedSettings.framework} numGPUs={numGPUs} />
         ) : <SkeletonVRAMBreakdown />}
         {breakdown && <MetricsRow tokensPerSecond={topGPU?.tokensPerSecond} costMetrics={costMetrics} gpuName={topGPU?.gpu.name} contextLength={contextLength} />}
         {gpuRecommendations && (
