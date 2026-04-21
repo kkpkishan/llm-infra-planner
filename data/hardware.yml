@@ -1,10 +1,60 @@
-# Comprehensive GPU/accelerator spec database.
+# Comprehensive GPU/accelerator spec database for LLM workloads.
 # Run `npx tsx scripts/refresh-hardware.ts` to update src/data/gpus.json.
-# Sources: NVIDIA, AMD, Apple, Google datasheets and official announcements.
-# Last updated: 2026-04-20
+# Sources: NVIDIA, AMD, Apple, Google, Intel, AWS, Huawei, Cerebras, Groq,
+#          SambaNova, Tenstorrent, Qualcomm official datasheets & announcements.
+# Last updated: 2026-04-21
+#
+# Notes on fields:
+#   vendor: nvidia | amd | apple | google-tpu | intel | aws | huawei |
+#           cerebras | groq | sambanova | tenstorrent | qualcomm
+#   category: consumer | workstation | datacenter | apple-silicon | tpu |
+#             edge | wafer-scale
+#   flops: TFLOPS for fp32/fp16/bf16/fp8/fp4, TOPS for int8/int4
+#          (dense numbers unless noted; sparse ~2x where applicable)
+#   Entries marked "placeholder" use estimated specs where vendor numbers
+#   are partial or unreleased.
 
 gpus:
-  # ─── NVIDIA Consumer ────────────────────────────────────────────────
+  # ══════════════════════════════════════════════════════════════════════
+  # NVIDIA CONSUMER — Turing (RTX 20xx)
+  # ══════════════════════════════════════════════════════════════════════
+  - id: nvidia-rtx-2060-12gb
+    vendor: nvidia
+    name: RTX 2060 12GB
+    category: consumer
+    memoryGB: 12
+    memoryBandwidthGBs: 336
+    flops:
+      fp32: 7.2
+      fp16: 14.4
+      int8: 57.4
+    tdpWatts: 184
+    formFactor: pcie
+    msrpUSD: 299
+    streetUSD: 250
+    releaseYear: 2021
+    notes: Turing refresh, 12GB VRAM useful for small LLMs
+
+  - id: nvidia-rtx-2080-ti
+    vendor: nvidia
+    name: RTX 2080 Ti
+    category: consumer
+    memoryGB: 11
+    memoryBandwidthGBs: 616
+    flops:
+      fp32: 13.4
+      fp16: 26.9
+      int8: 107.6
+    tdpWatts: 250
+    formFactor: pcie
+    msrpUSD: 999
+    streetUSD: 350
+    releaseYear: 2018
+    notes: Popular used card, 11GB VRAM limiting for modern LLMs
+
+  # ══════════════════════════════════════════════════════════════════════
+  # NVIDIA CONSUMER — Ampere (RTX 30xx)
+  # ══════════════════════════════════════════════════════════════════════
   - id: nvidia-rtx-3060-12gb
     vendor: nvidia
     name: RTX 3060 12GB
@@ -21,6 +71,103 @@ gpus:
     streetUSD: 260
     releaseYear: 2021
     notes: Entry-level for local LLM inference
+
+  - id: nvidia-rtx-3060-ti
+    vendor: nvidia
+    name: RTX 3060 Ti
+    category: consumer
+    memoryGB: 8
+    memoryBandwidthGBs: 448
+    flops:
+      fp32: 16.2
+      fp16: 32.4
+      int8: 64.8
+    tdpWatts: 200
+    formFactor: pcie
+    msrpUSD: 399
+    streetUSD: 300
+    releaseYear: 2020
+    notes: 8GB limits LLM capacity
+
+  - id: nvidia-rtx-3070
+    vendor: nvidia
+    name: RTX 3070
+    category: consumer
+    memoryGB: 8
+    memoryBandwidthGBs: 448
+    flops:
+      fp32: 20.3
+      fp16: 40.6
+      int8: 81.2
+    tdpWatts: 220
+    formFactor: pcie
+    msrpUSD: 499
+    streetUSD: 350
+    releaseYear: 2020
+
+  - id: nvidia-rtx-3070-ti
+    vendor: nvidia
+    name: RTX 3070 Ti
+    category: consumer
+    memoryGB: 8
+    memoryBandwidthGBs: 608
+    flops:
+      fp32: 21.7
+      fp16: 43.4
+      int8: 86.8
+    tdpWatts: 290
+    formFactor: pcie
+    msrpUSD: 599
+    streetUSD: 420
+    releaseYear: 2021
+
+  - id: nvidia-rtx-3080-10gb
+    vendor: nvidia
+    name: RTX 3080 10GB
+    category: consumer
+    memoryGB: 10
+    memoryBandwidthGBs: 760
+    flops:
+      fp32: 29.8
+      fp16: 59.6
+      int8: 119.2
+    tdpWatts: 320
+    formFactor: pcie
+    msrpUSD: 699
+    streetUSD: 500
+    releaseYear: 2020
+
+  - id: nvidia-rtx-3080-12gb
+    vendor: nvidia
+    name: RTX 3080 12GB
+    category: consumer
+    memoryGB: 12
+    memoryBandwidthGBs: 912
+    flops:
+      fp32: 30.6
+      fp16: 61.2
+      int8: 122.4
+    tdpWatts: 350
+    formFactor: pcie
+    msrpUSD: 799
+    streetUSD: 600
+    releaseYear: 2022
+
+  - id: nvidia-rtx-3080-ti
+    vendor: nvidia
+    name: RTX 3080 Ti
+    category: consumer
+    memoryGB: 12
+    memoryBandwidthGBs: 912
+    flops:
+      fp32: 34.1
+      fp16: 68.2
+      int8: 136.4
+    tdpWatts: 350
+    formFactor: pcie
+    msrpUSD: 1199
+    streetUSD: 650
+    releaseYear: 2021
 
   - id: nvidia-rtx-3090
     vendor: nvidia
@@ -55,6 +202,41 @@ gpus:
     streetUSD: 800
     releaseYear: 2022
 
+  # ══════════════════════════════════════════════════════════════════════
+  # NVIDIA CONSUMER — Ada Lovelace (RTX 40xx)
+  # ══════════════════════════════════════════════════════════════════════
+  - id: nvidia-rtx-4060
+    vendor: nvidia
+    name: RTX 4060
+    category: consumer
+    memoryGB: 8
+    memoryBandwidthGBs: 272
+    flops:
+      fp32: 15.1
+      fp16: 15.1
+      int8: 30.2
+    tdpWatts: 115
+    formFactor: pcie
+    msrpUSD: 299
+    streetUSD: 290
+    releaseYear: 2023
+
+  - id: nvidia-rtx-4060-ti-8gb
+    vendor: nvidia
+    name: RTX 4060 Ti 8GB
+    category: consumer
+    memoryGB: 8
+    memoryBandwidthGBs: 288
+    flops:
+      fp32: 22
+      fp16: 22
+      int8: 44
+    tdpWatts: 160
+    formFactor: pcie
+    msrpUSD: 399
+    streetUSD: 380
+    releaseYear: 2023
+
   - id: nvidia-rtx-4060-ti-16gb
     vendor: nvidia
     name: RTX 4060 Ti 16GB
@@ -85,6 +267,38 @@ gpus:
     formFactor: pcie
     msrpUSD: 599
     streetUSD: 540
+    releaseYear: 2023
+
+  - id: nvidia-rtx-4070-super
+    vendor: nvidia
+    name: RTX 4070 Super
+    category: consumer
+    memoryGB: 12
+    memoryBandwidthGBs: 504
+    flops:
+      fp32: 35.5
+      fp16: 35.5
+      int8: 71
+    tdpWatts: 220
+    formFactor: pcie
+    msrpUSD: 599
+    streetUSD: 600
+    releaseYear: 2024
+
+  - id: nvidia-rtx-4070-ti
+    vendor: nvidia
+    name: RTX 4070 Ti
+    category: consumer
+    memoryGB: 12
+    memoryBandwidthGBs: 504
+    flops:
+      fp32: 40.1
+      fp16: 40.1
+      int8: 80.2
+    tdpWatts: 285
+    formFactor: pcie
+    msrpUSD: 799
+    streetUSD: 780
     releaseYear: 2023
 
   - id: nvidia-rtx-4070-ti-super
@@ -151,6 +365,128 @@ gpus:
     streetUSD: 1800
     releaseYear: 2022
 
+  # Aftermarket China-market 48GB mod
+  - id: nvidia-rtx-4090-48gb-mod
+    vendor: nvidia
+    name: RTX 4090 48GB (Chinese mod)
+    category: consumer
+    memoryGB: 48
+    memoryBandwidthGBs: 1008
+    flops:
+      fp32: 82.6
+      fp16: 83
+      int8: 166
+    tdpWatts: 450
+    formFactor: pcie
+    streetUSD: 3500
+    releaseYear: 2024
+    notes: Unofficial aftermarket mod; unsupported but popular for LLM work
+
+  # ══════════════════════════════════════════════════════════════════════
+  # NVIDIA CONSUMER — Blackwell (RTX 50xx)
+  # ══════════════════════════════════════════════════════════════════════
+  - id: nvidia-rtx-5050
+    vendor: nvidia
+    name: RTX 5050
+    category: consumer
+    memoryGB: 8
+    memoryBandwidthGBs: 320
+    flops:
+      fp32: 13.7
+      fp16: 13.7
+      int8: 27.4
+    tdpWatts: 130
+    formFactor: pcie
+    msrpUSD: 249
+    streetUSD: 260
+    releaseYear: 2025
+    notes: Blackwell entry level, 8GB GDDR6
+
+  - id: nvidia-rtx-5060
+    vendor: nvidia
+    name: RTX 5060
+    category: consumer
+    memoryGB: 8
+    memoryBandwidthGBs: 448
+    flops:
+      fp32: 19.2
+      fp16: 19.2
+      int8: 38.4
+    tdpWatts: 150
+    formFactor: pcie
+    msrpUSD: 299
+    streetUSD: 310
+    releaseYear: 2025
+    notes: Blackwell, 8GB GDDR7
+
+  - id: nvidia-rtx-5060-ti-8gb
+    vendor: nvidia
+    name: RTX 5060 Ti 8GB
+    category: consumer
+    memoryGB: 8
+    memoryBandwidthGBs: 448
+    flops:
+      fp32: 23.7
+      fp16: 23.7
+      int8: 47.4
+    tdpWatts: 180
+    formFactor: pcie
+    msrpUSD: 379
+    streetUSD: 400
+    releaseYear: 2025
+    notes: Blackwell entry-high, 8GB GDDR7, limited VRAM for LLMs
+
+  - id: nvidia-rtx-5060-ti-16gb
+    vendor: nvidia
+    name: RTX 5060 Ti 16GB
+    category: consumer
+    memoryGB: 16
+    memoryBandwidthGBs: 448
+    flops:
+      fp32: 23.7
+      fp16: 23.7
+      int8: 47.4
+    tdpWatts: 180
+    formFactor: pcie
+    msrpUSD: 429
+    streetUSD: 450
+    releaseYear: 2025
+    notes: Blackwell entry-high, 16GB GDDR7, best value for local LLM inference
+
+  - id: nvidia-rtx-5070
+    vendor: nvidia
+    name: RTX 5070
+    category: consumer
+    memoryGB: 12
+    memoryBandwidthGBs: 672
+    flops:
+      fp32: 30.8
+      fp16: 30.8
+      int8: 61.6
+    tdpWatts: 250
+    formFactor: pcie
+    msrpUSD: 549
+    streetUSD: 600
+    releaseYear: 2025
+    notes: Blackwell mid-range, 6144 CUDA cores, GDDR7
+
+  - id: nvidia-rtx-5070-ti
+    vendor: nvidia
+    name: RTX 5070 Ti
+    category: consumer
+    memoryGB: 16
+    memoryBandwidthGBs: 896
+    flops:
+      fp32: 43.9
+      fp16: 43.9
+      int8: 87.8
+    tdpWatts: 300
+    formFactor: pcie
+    msrpUSD: 749
+    streetUSD: 800
+    releaseYear: 2025
+    notes: Blackwell mid-high, 8960 CUDA cores, GDDR7
+
   - id: nvidia-rtx-5080
     vendor: nvidia
     name: RTX 5080
@@ -183,75 +519,85 @@ gpus:
     streetUSD: 2200
     releaseYear: 2025
 
-  - id: nvidia-rtx-5070-ti
+  # ══════════════════════════════════════════════════════════════════════
+  # NVIDIA WORKSTATION — Ampere, Ada, Blackwell
+  # ══════════════════════════════════════════════════════════════════════
+  - id: nvidia-rtx-a2000-12gb
     vendor: nvidia
-    name: RTX 5070 Ti
-    category: consumer
-    memoryGB: 16
-    memoryBandwidthGBs: 896
-    flops:
-      fp32: 43.9
-      fp16: 43.9
-      int8: 87.8
-    tdpWatts: 300
-    formFactor: pcie
-    msrpUSD: 749
-    streetUSD: 800
-    releaseYear: 2025
-    notes: Blackwell mid-high, 8960 CUDA cores, GDDR7
-
-  - id: nvidia-rtx-5070
-    vendor: nvidia
-    name: RTX 5070
-    category: consumer
+    name: RTX A2000 12GB
+    category: workstation
     memoryGB: 12
-    memoryBandwidthGBs: 672
+    memoryBandwidthGBs: 288
     flops:
-      fp32: 30.8
-      fp16: 30.8
-      int8: 61.6
-    tdpWatts: 250
+      fp32: 8
+      fp16: 16
+      int8: 32
+    tdpWatts: 70
     formFactor: pcie
-    msrpUSD: 549
-    streetUSD: 600
-    releaseYear: 2025
-    notes: Blackwell mid-range, 6144 CUDA cores, GDDR7
+    streetUSD: 650
+    releaseYear: 2021
+    notes: Low-profile workstation card
 
-  - id: nvidia-rtx-5060-ti-16gb
+  - id: nvidia-rtx-a4000
     vendor: nvidia
-    name: RTX 5060 Ti 16GB
-    category: consumer
+    name: RTX A4000
+    category: workstation
     memoryGB: 16
     memoryBandwidthGBs: 448
     flops:
-      fp32: 23.7
-      fp16: 23.7
-      int8: 47.4
-    tdpWatts: 180
+      fp32: 19.2
+      fp16: 38.4
+      int8: 76.8
+    tdpWatts: 140
     formFactor: pcie
-    msrpUSD: 429
-    streetUSD: 450
-    releaseYear: 2025
-    notes: Blackwell entry-high, 16GB GDDR7, best value for local LLM inference
+    streetUSD: 1000
+    releaseYear: 2021
 
-  - id: nvidia-rtx-5060-ti-8gb
+  - id: nvidia-rtx-a4500
     vendor: nvidia
-    name: RTX 5060 Ti 8GB
-    category: consumer
-    memoryGB: 8
-    memoryBandwidthGBs: 448
+    name: RTX A4500
+    category: workstation
+    memoryGB: 20
+    memoryBandwidthGBs: 640
     flops:
       fp32: 23.7
-      fp16: 23.7
-      int8: 47.4
-    tdpWatts: 180
+      fp16: 47.4
+      int8: 94.8
+    tdpWatts: 200
     formFactor: pcie
-    msrpUSD: 379
-    streetUSD: 400
-    releaseYear: 2025
-    notes: Blackwell entry-high, 8GB GDDR7, limited VRAM for LLMs
+    streetUSD: 2000
+    releaseYear: 2021
 
-  # ─── NVIDIA Workstation ──────────────────────────────────────────────
+  - id: nvidia-rtx-a5000
+    vendor: nvidia
+    name: RTX A5000
+    category: workstation
+    memoryGB: 24
+    memoryBandwidthGBs: 768
+    flops:
+      fp32: 27.8
+      fp16: 55.6
+      int8: 111.2
+    tdpWatts: 230
+    formFactor: pcie
+    streetUSD: 2500
+    releaseYear: 2021
+
+  - id: nvidia-rtx-a5500
+    vendor: nvidia
+    name: RTX A5500
+    category: workstation
+    memoryGB: 24
+    memoryBandwidthGBs: 768
+    flops:
+      fp32: 34.1
+      fp16: 68.2
+      int8: 136.4
+    tdpWatts: 230
+    formFactor: pcie
+    streetUSD: 2900
+    releaseYear: 2022
+
   - id: nvidia-rtx-a6000
     vendor: nvidia
     name: RTX A6000
@@ -266,6 +612,68 @@ gpus:
     formFactor: pcie
     streetUSD: 4000
     releaseYear: 2020
+
+  - id: nvidia-rtx-2000-ada
+    vendor: nvidia
+    name: RTX 2000 Ada
+    category: workstation
+    memoryGB: 16
+    memoryBandwidthGBs: 224
+    flops:
+      fp32: 12
+      fp16: 12
+      int8: 24
+    tdpWatts: 70
+    formFactor: pcie
+    streetUSD: 650
+    releaseYear: 2024
+    notes: Low-profile Ada workstation card
+
+  - id: nvidia-rtx-4000-sff-ada
+    vendor: nvidia
+    name: RTX 4000 SFF Ada
+    category: workstation
+    memoryGB: 20
+    memoryBandwidthGBs: 280
+    flops:
+      fp32: 19.2
+      fp16: 19.2
+      int8: 38.4
+    tdpWatts: 70
+    formFactor: pcie
+    streetUSD: 1250
+    releaseYear: 2023
+    notes: Small form factor, 70W, 20GB VRAM
+
+  - id: nvidia-rtx-4000-ada
+    vendor: nvidia
+    name: RTX 4000 Ada
+    category: workstation
+    memoryGB: 20
+    memoryBandwidthGBs: 360
+    flops:
+      fp32: 26.7
+      fp16: 26.7
+      int8: 53.4
+    tdpWatts: 130
+    formFactor: pcie
+    streetUSD: 1500
+    releaseYear: 2023
+
+  - id: nvidia-rtx-4500-ada
+    vendor: nvidia
+    name: RTX 4500 Ada
+    category: workstation
+    memoryGB: 24
+    memoryBandwidthGBs: 432
+    flops:
+      fp32: 39.6
+      fp16: 39.6
+      int8: 79.2
+    tdpWatts: 210
+    formFactor: pcie
+    streetUSD: 2500
+    releaseYear: 2023
 
   - id: nvidia-rtx-5000-ada
     vendor: nvidia
@@ -297,6 +705,36 @@ gpus:
     streetUSD: 6800
     releaseYear: 2023
 
+  - id: nvidia-rtx-pro-4000-blackwell
+    vendor: nvidia
+    name: RTX Pro 4000 Blackwell
+    category: workstation
+    memoryGB: 24
+    memoryBandwidthGBs: 432
+    flops:
+      fp32: 40
+      fp16: 40
+      int8: 80
+    tdpWatts: 140
+    formFactor: pcie
+    streetUSD: 1500
+    releaseYear: 2025
+
+  - id: nvidia-rtx-pro-5000-blackwell
+    vendor: nvidia
+    name: RTX Pro 5000 Blackwell
+    category: workstation
+    memoryGB: 48
+    memoryBandwidthGBs: 1344
+    flops:
+      fp32: 65
+      fp16: 65
+      int8: 130
+    tdpWatts: 300
+    formFactor: pcie
+    streetUSD: 4500
+    releaseYear: 2025
+
   - id: nvidia-rtx-6000-pro-blackwell
     vendor: nvidia
     name: RTX 6000 Pro Blackwell
@@ -312,7 +750,41 @@ gpus:
     streetUSD: 8500
     releaseYear: 2025
 
-  # ─── NVIDIA Datacenter ───────────────────────────────────────────────
+  # ══════════════════════════════════════════════════════════════════════
+  # NVIDIA DATACENTER — Volta / Turing
+  # ══════════════════════════════════════════════════════════════════════
+  - id: nvidia-v100-16gb
+    vendor: nvidia
+    name: V100 16GB
+    category: datacenter
+    memoryGB: 16
+    memoryBandwidthGBs: 900
+    flops:
+      fp32: 15.7
+      fp16: 125
+      int8: 62
+    tdpWatts: 300
+    nvlink:
+      perGPU_GBs: 300
+    formFactor: sxm
+    releaseYear: 2017
+
+  - id: nvidia-v100-32gb
+    vendor: nvidia
+    name: V100 32GB
+    category: datacenter
+    memoryGB: 32
+    memoryBandwidthGBs: 900
+    flops:
+      fp32: 15.7
+      fp16: 125
+      int8: 62
+    tdpWatts: 300
+    nvlink:
+      perGPU_GBs: 300
+    formFactor: sxm
+    releaseYear: 2018
+
   - id: nvidia-t4
     vendor: nvidia
     name: T4
@@ -328,37 +800,23 @@ gpus:
     releaseYear: 2018
     notes: Widely available in cloud, low power
 
-  - id: nvidia-l4
+  # ══════════════════════════════════════════════════════════════════════
+  # NVIDIA DATACENTER — Ampere
+  # ══════════════════════════════════════════════════════════════════════
+  - id: nvidia-a2
     vendor: nvidia
-    name: L4
+    name: A2
     category: datacenter
-    memoryGB: 24
-    memoryBandwidthGBs: 300
+    memoryGB: 16
+    memoryBandwidthGBs: 200
     flops:
-      fp32: 30.3
-      fp16: 121
-      fp8: 242
-      int8: 242
-    tdpWatts: 72
+      fp32: 4.5
+      fp16: 18
+      int8: 36
+    tdpWatts: 60
     formFactor: pcie
-    releaseYear: 2023
-    notes: Low-power inference accelerator
-
-  - id: nvidia-l40s
-    vendor: nvidia
-    name: L40S
-    category: datacenter
-    memoryGB: 48
-    memoryBandwidthGBs: 864
-    flops:
-      fp32: 91.6
-      fp16: 362
-      fp8: 733
-      int8: 733
-    tdpWatts: 350
-    formFactor: pcie
-    releaseYear: 2023
-    notes: Versatile datacenter GPU for inference and fine-tuning
+    releaseYear: 2021
+    notes: Entry-level edge/inference
 
   - id: nvidia-a10
     vendor: nvidia
@@ -373,6 +831,49 @@ gpus:
     tdpWatts: 150
     formFactor: pcie
     releaseYear: 2021
+
+  - id: nvidia-a16
+    vendor: nvidia
+    name: A16
+    category: datacenter
+    memoryGB: 64
+    memoryBandwidthGBs: 800
+    flops:
+      fp32: 17.9
+      fp16: 71.6
+      int8: 143
+    tdpWatts: 250
+    formFactor: pcie
+    releaseYear: 2021
+    notes: 4x GPU card for VDI, 4x16GB
+
+  - id: nvidia-a30
+    vendor: nvidia
+    name: A30
+    category: datacenter
+    memoryGB: 24
+    memoryBandwidthGBs: 933
+    flops:
+      fp32: 10.3
+      fp16: 165
+      int8: 330
+    tdpWatts: 165
+    formFactor: pcie
+    releaseYear: 2021
+
+  - id: nvidia-a40
+    vendor: nvidia
+    name: A40
+    category: datacenter
+    memoryGB: 48
+    memoryBandwidthGBs: 696
+    flops:
+      fp32: 37.4
+      fp16: 149.7
+      int8: 299.3
+    tdpWatts: 300
+    formFactor: pcie
+    releaseYear: 2020
 
   - id: nvidia-a100-40gb
     vendor: nvidia
@@ -390,6 +891,20 @@ gpus:
     formFactor: sxm
     releaseYear: 2020
 
+  - id: nvidia-a100-80gb-pcie
+    vendor: nvidia
+    name: A100 80GB PCIe
+    category: datacenter
+    memoryGB: 80
+    memoryBandwidthGBs: 1935
+    flops:
+      fp32: 19.5
+      fp16: 312
+      int8: 624
+    tdpWatts: 300
+    formFactor: pcie
+    releaseYear: 2021
+
   - id: nvidia-a100-80gb-sxm
     vendor: nvidia
     name: A100 80GB SXM
@@ -406,6 +921,59 @@ gpus:
     formFactor: sxm
     releaseYear: 2021
 
+  # ══════════════════════════════════════════════════════════════════════
+  # NVIDIA DATACENTER — Ada (datacenter inference)
+  # ══════════════════════════════════════════════════════════════════════
+  - id: nvidia-l4
+    vendor: nvidia
+    name: L4
+    category: datacenter
+    memoryGB: 24
+    memoryBandwidthGBs: 300
+    flops:
+      fp32: 30.3
+      fp16: 121
+      fp8: 242
+      int8: 242
+    tdpWatts: 72
+    formFactor: pcie
+    releaseYear: 2023
+    notes: Low-power inference accelerator
+
+  - id: nvidia-l40
+    vendor: nvidia
+    name: L40
+    category: datacenter
+    memoryGB: 48
+    memoryBandwidthGBs: 864
+    flops:
+      fp32: 90.5
+      fp16: 181
+      fp8: 362
+      int8: 362
+    tdpWatts: 300
+    formFactor: pcie
+    releaseYear: 2022
+
+  - id: nvidia-l40s
+    vendor: nvidia
+    name: L40S
+    category: datacenter
+    memoryGB: 48
+    memoryBandwidthGBs: 864
+    flops:
+      fp32: 91.6
+      fp16: 362
+      fp8: 733
+      int8: 733
+    tdpWatts: 350
+    formFactor: pcie
+    releaseYear: 2023
+    notes: Versatile datacenter GPU for inference and fine-tuning
+
+  # ══════════════════════════════════════════════════════════════════════
+  # NVIDIA DATACENTER — Hopper
+  # ══════════════════════════════════════════════════════════════════════
   - id: nvidia-h100-pcie-80gb
     vendor: nvidia
     name: H100 PCIe 80GB
@@ -438,6 +1006,24 @@ gpus:
     formFactor: sxm
     releaseYear: 2023
 
+  - id: nvidia-h100-nvl
+    vendor: nvidia
+    name: H100 NVL
+    category: datacenter
+    memoryGB: 94
+    memoryBandwidthGBs: 3938
+    flops:
+      fp32: 67
+      fp16: 835
+      fp8: 1671
+      int8: 1671
+    tdpWatts: 400
+    nvlink:
+      perGPU_GBs: 600
+    formFactor: pcie
+    releaseYear: 2023
+    notes: 2-GPU NVLink-bridged variant optimized for LLM serving (per-GPU specs)
+
   - id: nvidia-h200-sxm-141gb
     vendor: nvidia
     name: H200 SXM 141GB
@@ -456,25 +1042,102 @@ gpus:
     releaseYear: 2024
     notes: H100 with more HBM3e memory
 
-  - id: nvidia-b200-sxm
+  - id: nvidia-h200-nvl
     vendor: nvidia
-    name: B200 SXM
+    name: H200 NVL
     category: datacenter
-    memoryGB: 192
-    memoryBandwidthGBs: 8000
+    memoryGB: 141
+    memoryBandwidthGBs: 4800
     flops:
-      fp32: 180
-      fp16: 2250
-      fp8: 4500
-      int8: 4500
+      fp32: 60
+      fp16: 835
+      fp8: 1671
+      int8: 1671
+    tdpWatts: 600
+    nvlink:
+      perGPU_GBs: 900
+    formFactor: pcie
+    releaseYear: 2024
+
+  # China-market Hopper SKUs
+  - id: nvidia-h800-sxm
+    vendor: nvidia
+    name: H800 SXM
+    category: datacenter
+    memoryGB: 80
+    memoryBandwidthGBs: 3350
+    flops:
+      fp32: 51
+      fp16: 756
+      fp8: 1513
+      int8: 1513
+    tdpWatts: 700
+    nvlink:
+      perGPU_GBs: 400
+    formFactor: sxm
+    releaseYear: 2023
+    notes: China-market H100 with reduced NVLink bandwidth
+
+  - id: nvidia-h20
+    vendor: nvidia
+    name: H20
+    category: datacenter
+    memoryGB: 96
+    memoryBandwidthGBs: 4000
+    flops:
+      fp32: 44
+      fp16: 148
+      fp8: 296
+      int8: 296
+    tdpWatts: 400
+    nvlink:
+      perGPU_GBs: 900
+    formFactor: sxm
+    releaseYear: 2024
+    notes: China-market Hopper SKU, heavily cut compute
+
+  # ══════════════════════════════════════════════════════════════════════
+  # NVIDIA DATACENTER — Grace Hopper / Grace Blackwell
+  # ══════════════════════════════════════════════════════════════════════
+  - id: nvidia-gh200-96gb
+    vendor: nvidia
+    name: GH200 Grace Hopper 96GB
+    category: datacenter
+    memoryGB: 96
+    memoryBandwidthGBs: 4000
+    flops:
+      fp32: 66.9
+      fp16: 989
+      fp8: 1979
+      int8: 1979
     tdpWatts: 1000
     nvlink:
-      perGPU_GBs: 1800
+      perGPU_GBs: 900
     formFactor: sxm
-    releaseYear: 2025
-    notes: Blackwell architecture
+    releaseYear: 2023
+    notes: Grace CPU + H100 GPU superchip; includes 480GB LPDDR5X on CPU side
 
-  # NEW: NVIDIA B100
+  - id: nvidia-gh200-144gb
+    vendor: nvidia
+    name: GH200 Grace Hopper 144GB
+    category: datacenter
+    memoryGB: 144
+    memoryBandwidthGBs: 4900
+    flops:
+      fp32: 66.9
+      fp16: 989
+      fp8: 1979
+      int8: 1979
+    tdpWatts: 1000
+    nvlink:
+      perGPU_GBs: 900
+    formFactor: sxm
+    releaseYear: 2024
+    notes: HBM3e refresh of GH200; 480GB LPDDR5X CPU memory
+
+  # ══════════════════════════════════════════════════════════════════════
+  # NVIDIA DATACENTER — Blackwell
+  # ══════════════════════════════════════════════════════════════════════
   - id: nvidia-b100-sxm
     vendor: nvidia
     name: B100 SXM
@@ -494,10 +1157,9 @@ gpus:
     releaseYear: 2025
     notes: "Blackwell B100: 192GB HBM3e, 8TB/s bandwidth, FP4 15 PFLOPS"
 
-  # NEW: NVIDIA GB200 NVL72 (placeholder)
-  - id: nvidia-gb200-nvl72
+  - id: nvidia-b200-sxm
     vendor: nvidia
-    name: GB200 NVL72
+    name: B200 SXM
     category: datacenter
     memoryGB: 192
     memoryBandwidthGBs: 8000
@@ -505,15 +1167,322 @@ gpus:
       fp32: 180
       fp16: 2250
       fp8: 4500
+      fp4: 18000
       int8: 4500
     tdpWatts: 1000
     nvlink:
       perGPU_GBs: 1800
     formFactor: sxm
     releaseYear: 2025
-    notes: "GB200 NVL72 rack-scale system placeholder. 72 GPUs per rack, NVLink 5.0."
+    notes: Blackwell architecture, flagship datacenter GPU
 
-  # ─── AMD Consumer ────────────────────────────────────────────────────
+  - id: nvidia-b300-sxm
+    vendor: nvidia
+    name: B300 (Blackwell Ultra) SXM
+    category: datacenter
+    memoryGB: 288
+    memoryBandwidthGBs: 8000
+    flops:
+      fp32: 200
+      fp16: 2500
+      fp8: 5000
+      fp4: 20000
+      int8: 5000
+    tdpWatts: 1400
+    nvlink:
+      perGPU_GBs: 1800
+    formFactor: sxm
+    releaseYear: 2025
+    notes: Blackwell Ultra refresh with 288GB HBM3e (placeholder specs)
+
+  - id: nvidia-gb200-superchip
+    vendor: nvidia
+    name: GB200 Grace Blackwell Superchip
+    category: datacenter
+    memoryGB: 384
+    memoryBandwidthGBs: 16000
+    flops:
+      fp32: 360
+      fp16: 4500
+      fp8: 9000
+      fp4: 36000
+      int8: 9000
+    tdpWatts: 2700
+    nvlink:
+      perGPU_GBs: 1800
+    formFactor: sxm
+    releaseYear: 2025
+    notes: 1x Grace CPU + 2x B200 GPUs; totals are for both GPUs combined
+
+  - id: nvidia-gb200-nvl72
+    vendor: nvidia
+    name: GB200 NVL72
+    category: datacenter
+    memoryGB: 13824
+    memoryBandwidthGBs: 576000
+    flops:
+      fp32: 12960
+      fp16: 162000
+      fp8: 324000
+      fp4: 1296000
+      int8: 324000
+    tdpWatts: 120000
+    nvlink:
+      perGPU_GBs: 1800
+    formFactor: sxm
+    releaseYear: 2025
+    notes: "Rack-scale system: 36 Grace CPUs + 72 B200 GPUs, NVLink 5.0 switch fabric. Totals are for the full rack."
+
+  - id: nvidia-gb300-nvl72
+    vendor: nvidia
+    name: GB300 NVL72
+    category: datacenter
+    memoryGB: 20736
+    memoryBandwidthGBs: 576000
+    flops:
+      fp32: 14400
+      fp16: 180000
+      fp8: 360000
+      fp4: 1440000
+      int8: 360000
+    tdpWatts: 140000
+    nvlink:
+      perGPU_GBs: 1800
+    formFactor: sxm
+    releaseYear: 2026
+    notes: "Blackwell Ultra rack: 72 B300 GPUs, 288GB HBM each. Placeholder specs."
+
+  # ══════════════════════════════════════════════════════════════════════
+  # NVIDIA EDGE / JETSON
+  # ══════════════════════════════════════════════════════════════════════
+  - id: nvidia-jetson-nano
+    vendor: nvidia
+    name: Jetson Nano
+    category: edge
+    memoryGB: 4
+    memoryBandwidthGBs: 25.6
+    flops:
+      fp32: 0.5
+      fp16: 0.5
+      int8: 2
+    tdpWatts: 10
+    formFactor: integrated
+    streetUSD: 150
+    releaseYear: 2019
+
+  - id: nvidia-jetson-xavier-nx
+    vendor: nvidia
+    name: Jetson Xavier NX
+    category: edge
+    memoryGB: 8
+    memoryBandwidthGBs: 59.7
+    flops:
+      fp32: 0.8
+      fp16: 6
+      int8: 21
+    tdpWatts: 15
+    formFactor: integrated
+    streetUSD: 400
+    releaseYear: 2020
+
+  - id: nvidia-jetson-orin-nano
+    vendor: nvidia
+    name: Jetson Orin Nano 8GB
+    category: edge
+    memoryGB: 8
+    memoryBandwidthGBs: 68
+    flops:
+      fp32: 1.28
+      fp16: 5.1
+      int8: 40
+    tdpWatts: 15
+    formFactor: integrated
+    streetUSD: 499
+    releaseYear: 2023
+
+  - id: nvidia-jetson-orin-nx
+    vendor: nvidia
+    name: Jetson Orin NX 16GB
+    category: edge
+    memoryGB: 16
+    memoryBandwidthGBs: 102
+    flops:
+      fp32: 3.3
+      fp16: 13.3
+      int8: 100
+    tdpWatts: 25
+    formFactor: integrated
+    streetUSD: 700
+    releaseYear: 2023
+
+  - id: nvidia-jetson-agx-orin-64gb
+    vendor: nvidia
+    name: Jetson AGX Orin 64GB
+    category: edge
+    memoryGB: 64
+    memoryBandwidthGBs: 205
+    flops:
+      fp32: 5.3
+      fp16: 21.3
+      int8: 275
+    tdpWatts: 60
+    formFactor: integrated
+    streetUSD: 2000
+    releaseYear: 2022
+    notes: High-end edge inference, great for edge LLMs
+
+  - id: nvidia-jetson-agx-thor
+    vendor: nvidia
+    name: Jetson AGX Thor
+    category: edge
+    memoryGB: 128
+    memoryBandwidthGBs: 273
+    flops:
+      fp32: 15
+      fp16: 60
+      fp8: 1000
+      int8: 1000
+    tdpWatts: 130
+    formFactor: integrated
+    streetUSD: 3500
+    releaseYear: 2025
+    notes: Blackwell-based edge module, 128GB LPDDR5X, targets humanoid/robotics
+
+  - id: nvidia-digits-dgx-spark
+    vendor: nvidia
+    name: DGX Spark (Project DIGITS)
+    category: edge
+    memoryGB: 128
+    memoryBandwidthGBs: 273
+    flops:
+      fp32: 15
+      fp16: 60
+      fp8: 1000
+      int8: 1000
+    tdpWatts: 170
+    formFactor: integrated
+    streetUSD: 3999
+    releaseYear: 2025
+    notes: GB10 Grace Blackwell, 128GB unified, positioned for local LLM dev
+
+  # ══════════════════════════════════════════════════════════════════════
+  # AMD CONSUMER — RDNA 2
+  # ══════════════════════════════════════════════════════════════════════
+  - id: amd-rx-6700-xt
+    vendor: amd
+    name: RX 6700 XT
+    category: consumer
+    memoryGB: 12
+    memoryBandwidthGBs: 384
+    flops:
+      fp32: 13.2
+      fp16: 26.4
+      int8: 52.8
+    tdpWatts: 230
+    formFactor: pcie
+    msrpUSD: 479
+    streetUSD: 320
+    releaseYear: 2021
+
+  - id: amd-rx-6800
+    vendor: amd
+    name: RX 6800
+    category: consumer
+    memoryGB: 16
+    memoryBandwidthGBs: 512
+    flops:
+      fp32: 16.2
+      fp16: 32.3
+      int8: 64.6
+    tdpWatts: 250
+    formFactor: pcie
+    msrpUSD: 579
+    streetUSD: 420
+    releaseYear: 2020
+
+  - id: amd-rx-6800-xt
+    vendor: amd
+    name: RX 6800 XT
+    category: consumer
+    memoryGB: 16
+    memoryBandwidthGBs: 512
+    flops:
+      fp32: 20.7
+      fp16: 41.5
+      int8: 83
+    tdpWatts: 300
+    formFactor: pcie
+    msrpUSD: 649
+    streetUSD: 500
+    releaseYear: 2020
+
+  - id: amd-rx-6900-xt
+    vendor: amd
+    name: RX 6900 XT
+    category: consumer
+    memoryGB: 16
+    memoryBandwidthGBs: 512
+    flops:
+      fp32: 23
+      fp16: 46
+      int8: 92
+    tdpWatts: 300
+    formFactor: pcie
+    msrpUSD: 999
+    streetUSD: 600
+    releaseYear: 2020
+
+  # ══════════════════════════════════════════════════════════════════════
+  # AMD CONSUMER — RDNA 3
+  # ══════════════════════════════════════════════════════════════════════
+  - id: amd-rx-7800-xt
+    vendor: amd
+    name: RX 7800 XT
+    category: consumer
+    memoryGB: 16
+    memoryBandwidthGBs: 624
+    flops:
+      fp32: 37.3
+      fp16: 74.6
+      int8: 149.2
+    tdpWatts: 263
+    formFactor: pcie
+    msrpUSD: 499
+    streetUSD: 500
+    releaseYear: 2023
+
+  - id: amd-rx-7900-gre
+    vendor: amd
+    name: RX 7900 GRE
+    category: consumer
+    memoryGB: 16
+    memoryBandwidthGBs: 576
+    flops:
+      fp32: 46
+      fp16: 92
+      int8: 184
+    tdpWatts: 260
+    formFactor: pcie
+    msrpUSD: 549
+    streetUSD: 550
+    releaseYear: 2024
+
+  - id: amd-rx-7900-xt
+    vendor: amd
+    name: RX 7900 XT
+    category: consumer
+    memoryGB: 20
+    memoryBandwidthGBs: 800
+    flops:
+      fp32: 51.6
+      fp16: 103
+      int8: 206
+    tdpWatts: 315
+    formFactor: pcie
+    msrpUSD: 899
+    streetUSD: 700
+    releaseYear: 2022
+
   - id: amd-rx-7900-xtx
     vendor: amd
     name: RX 7900 XTX
@@ -530,7 +1499,78 @@ gpus:
     streetUSD: 900
     releaseYear: 2022
 
-  # ─── AMD Workstation ─────────────────────────────────────────────────
+  # ══════════════════════════════════════════════════════════════════════
+  # AMD CONSUMER — RDNA 4
+  # ══════════════════════════════════════════════════════════════════════
+  - id: amd-rx-9070
+    vendor: amd
+    name: RX 9070
+    category: consumer
+    memoryGB: 16
+    memoryBandwidthGBs: 640
+    flops:
+      fp32: 36.1
+      fp16: 72.3
+      fp8: 779
+      int8: 779
+    tdpWatts: 220
+    formFactor: pcie
+    msrpUSD: 549
+    streetUSD: 600
+    releaseYear: 2025
+    notes: RDNA4, improved AI performance with FP8 support
+
+  - id: amd-rx-9070-xt
+    vendor: amd
+    name: RX 9070 XT
+    category: consumer
+    memoryGB: 16
+    memoryBandwidthGBs: 640
+    flops:
+      fp32: 48.7
+      fp16: 97.3
+      fp8: 1557
+      int8: 1557
+    tdpWatts: 304
+    formFactor: pcie
+    msrpUSD: 599
+    streetUSD: 700
+    releaseYear: 2025
+    notes: RDNA4 flagship, strong matrix performance
+
+  # ══════════════════════════════════════════════════════════════════════
+  # AMD WORKSTATION
+  # ══════════════════════════════════════════════════════════════════════
+  - id: amd-w6800
+    vendor: amd
+    name: Radeon PRO W6800
+    category: workstation
+    memoryGB: 32
+    memoryBandwidthGBs: 512
+    flops:
+      fp32: 17.8
+      fp16: 35.6
+      int8: 71.2
+    tdpWatts: 250
+    formFactor: pcie
+    streetUSD: 2200
+    releaseYear: 2021
+
+  - id: amd-w7800
+    vendor: amd
+    name: Radeon PRO W7800
+    category: workstation
+    memoryGB: 32
+    memoryBandwidthGBs: 576
+    flops:
+      fp32: 45.2
+      fp16: 90.4
+      int8: 180.8
+    tdpWatts: 260
+    formFactor: pcie
+    streetUSD: 2499
+    releaseYear: 2023
+
   - id: amd-w7900
     vendor: amd
     name: Radeon PRO W7900
@@ -547,7 +1587,53 @@ gpus:
     releaseYear: 2023
     notes: AMD workstation GPU with 48GB VRAM
 
-  # ─── AMD Datacenter ──────────────────────────────────────────────────
+  # ══════════════════════════════════════════════════════════════════════
+  # AMD DATACENTER — CDNA 1/2/3/4
+  # ══════════════════════════════════════════════════════════════════════
+  - id: amd-mi100
+    vendor: amd
+    name: MI100
+    category: datacenter
+    memoryGB: 32
+    memoryBandwidthGBs: 1229
+    flops:
+      fp32: 23.1
+      fp16: 184.6
+      int8: 184.6
+    tdpWatts: 300
+    formFactor: pcie
+    releaseYear: 2020
+    notes: First CDNA architecture GPU
+
+  - id: amd-mi210
+    vendor: amd
+    name: MI210
+    category: datacenter
+    memoryGB: 64
+    memoryBandwidthGBs: 1638
+    flops:
+      fp32: 22.6
+      fp16: 181
+      int8: 181
+    tdpWatts: 300
+    formFactor: pcie
+    releaseYear: 2022
+    notes: CDNA2 PCIe, single-GCD variant
+
+  - id: amd-mi250
+    vendor: amd
+    name: MI250
+    category: datacenter
+    memoryGB: 128
+    memoryBandwidthGBs: 3277
+    flops:
+      fp32: 45.3
+      fp16: 362.1
+      int8: 362.1
+    tdpWatts: 500
+    formFactor: oam
+    releaseYear: 2021
+
   - id: amd-mi250x
     vendor: amd
     name: MI250X
@@ -562,6 +1648,22 @@ gpus:
     formFactor: oam
     releaseYear: 2021
     notes: AMD datacenter GPU, dual-GCD design
+
+  - id: amd-mi300a
+    vendor: amd
+    name: MI300A APU
+    category: datacenter
+    memoryGB: 128
+    memoryBandwidthGBs: 5300
+    flops:
+      fp32: 122.6
+      fp16: 980
+      fp8: 1960
+      int8: 1960
+    tdpWatts: 550
+    formFactor: oam
+    releaseYear: 2024
+    notes: CPU+GPU unified APU, used in El Capitan
 
   - id: amd-mi300x
     vendor: amd
@@ -595,7 +1697,6 @@ gpus:
     releaseYear: 2024
     notes: "CDNA3 memory bump over MI300X: 256GB HBM3e, 6TB/s bandwidth, 1.3x memory improvement"
 
-  # AMD MI355X (CDNA 4, 2025)
   - id: amd-mi355x
     vendor: amd
     name: MI355X
@@ -606,13 +1707,61 @@ gpus:
       fp32: 192
       fp16: 1536
       fp8: 3072
+      fp4: 6144
       int8: 3072
     tdpWatts: 750
     formFactor: oam
     releaseYear: 2025
     notes: "AMD MI355X CDNA4: 288GB HBM3e, 8TB/s bandwidth, next-gen ROCm"
 
-  # ─── Apple Silicon ───────────────────────────────────────────────────
+  - id: amd-mi400
+    vendor: amd
+    name: MI400 (preview)
+    category: datacenter
+    memoryGB: 432
+    memoryBandwidthGBs: 19600
+    flops:
+      fp32: 250
+      fp16: 2000
+      fp8: 4000
+      fp4: 8000
+      int8: 4000
+    tdpWatts: 1000
+    formFactor: oam
+    releaseYear: 2026
+    notes: "MI400 CDNA Next preview: 432GB HBM4, ~19.6TB/s. Placeholder specs."
+
+  # ══════════════════════════════════════════════════════════════════════
+  # APPLE SILICON — M1 family
+  # ══════════════════════════════════════════════════════════════════════
+  - id: apple-m1-16gb
+    vendor: apple
+    name: M1 16GB
+    category: apple-silicon
+    memoryGB: 16
+    memoryBandwidthGBs: 68.25
+    flops:
+      fp32: 2.6
+      fp16: 5.2
+      int8: 10.4
+    tdpWatts: 20
+    formFactor: integrated
+    releaseYear: 2020
+
+  - id: apple-m1-pro-32gb
+    vendor: apple
+    name: M1 Pro 32GB
+    category: apple-silicon
+    memoryGB: 32
+    memoryBandwidthGBs: 200
+    flops:
+      fp32: 5.2
+      fp16: 10.4
+      int8: 20.8
+    tdpWatts: 30
+    formFactor: integrated
+    releaseYear: 2021
+
   - id: apple-m1-max-64gb
     vendor: apple
     name: M1 Max 64GB
@@ -628,6 +1777,65 @@ gpus:
     releaseYear: 2021
     notes: Unified memory, great for local inference
 
+  - id: apple-m1-ultra-128gb
+    vendor: apple
+    name: M1 Ultra 128GB
+    category: apple-silicon
+    memoryGB: 128
+    memoryBandwidthGBs: 800
+    flops:
+      fp32: 21
+      fp16: 42
+      int8: 84
+    tdpWatts: 100
+    formFactor: integrated
+    releaseYear: 2022
+
+  # ══════════════════════════════════════════════════════════════════════
+  # APPLE SILICON — M2 family
+  # ══════════════════════════════════════════════════════════════════════
+  - id: apple-m2-24gb
+    vendor: apple
+    name: M2 24GB
+    category: apple-silicon
+    memoryGB: 24
+    memoryBandwidthGBs: 100
+    flops:
+      fp32: 3.6
+      fp16: 7.2
+      int8: 14.4
+    tdpWatts: 20
+    formFactor: integrated
+    releaseYear: 2022
+
+  - id: apple-m2-pro-32gb
+    vendor: apple
+    name: M2 Pro 32GB
+    category: apple-silicon
+    memoryGB: 32
+    memoryBandwidthGBs: 200
+    flops:
+      fp32: 6.8
+      fp16: 13.6
+      int8: 27.2
+    tdpWatts: 30
+    formFactor: integrated
+    releaseYear: 2023
+
+  - id: apple-m2-max-96gb
+    vendor: apple
+    name: M2 Max 96GB
+    category: apple-silicon
+    memoryGB: 96
+    memoryBandwidthGBs: 400
+    flops:
+      fp32: 13.6
+      fp16: 27.2
+      int8: 54.4
+    tdpWatts: 60
+    formFactor: integrated
+    releaseYear: 2023
+
   - id: apple-m2-ultra-192gb
     vendor: apple
     name: M2 Ultra 192GB
@@ -641,7 +1849,84 @@ gpus:
     tdpWatts: 120
     formFactor: integrated
     releaseYear: 2023
-    notes: Largest unified memory pool, runs 70B+ models
+    notes: Largest M2 unified memory pool, runs 70B+ models
+
+  # ══════════════════════════════════════════════════════════════════════
+  # APPLE SILICON — M3 family
+  # ══════════════════════════════════════════════════════════════════════
+  - id: apple-m3-24gb
+    vendor: apple
+    name: M3 24GB
+    category: apple-silicon
+    memoryGB: 24
+    memoryBandwidthGBs: 100
+    flops:
+      fp32: 4.1
+      fp16: 8.2
+      int8: 16.4
+    tdpWatts: 20
+    formFactor: integrated
+    releaseYear: 2023
+
+  - id: apple-m3-pro-36gb
+    vendor: apple
+    name: M3 Pro 36GB
+    category: apple-silicon
+    memoryGB: 36
+    memoryBandwidthGBs: 150
+    flops:
+      fp32: 7.4
+      fp16: 14.8
+      int8: 29.6
+    tdpWatts: 30
+    formFactor: integrated
+    releaseYear: 2023
+
+  - id: apple-m3-max-128gb
+    vendor: apple
+    name: M3 Max 128GB
+    category: apple-silicon
+    memoryGB: 128
+    memoryBandwidthGBs: 400
+    flops:
+      fp32: 14.2
+      fp16: 28.4
+      int8: 56.8
+    tdpWatts: 60
+    formFactor: integrated
+    releaseYear: 2023
+
+  - id: apple-m3-ultra-512gb
+    vendor: apple
+    name: M3 Ultra 512GB
+    category: apple-silicon
+    memoryGB: 512
+    memoryBandwidthGBs: 819
+    flops:
+      fp32: 34.8
+      fp16: 69.6
+      int8: 139.2
+    tdpWatts: 150
+    formFactor: integrated
+    releaseYear: 2025
+    notes: "Mac Studio 2025 M3 Ultra: up to 512GB unified memory, runs 600B+ parameter models"
+
+  # ══════════════════════════════════════════════════════════════════════
+  # APPLE SILICON — M4 family
+  # ══════════════════════════════════════════════════════════════════════
+  - id: apple-m4-32gb
+    vendor: apple
+    name: M4 32GB
+    category: apple-silicon
+    memoryGB: 32
+    memoryBandwidthGBs: 120
+    flops:
+      fp32: 4.3
+      fp16: 8.6
+      int8: 17.2
+    tdpWatts: 22
+    formFactor: integrated
+    releaseYear: 2024
 
   - id: apple-m4-pro-48gb
     vendor: apple
@@ -688,23 +1973,68 @@ gpus:
     releaseYear: 2025
     notes: "Mac Studio 2025 M4 Ultra: 192GB unified memory, 819GB/s bandwidth, runs 70B+ models"
 
-  - id: apple-m3-ultra-512gb
-    vendor: apple
-    name: M3 Ultra 512GB
-    category: apple-silicon
-    memoryGB: 512
+  # ══════════════════════════════════════════════════════════════════════
+  # GOOGLE TPU
+  # ══════════════════════════════════════════════════════════════════════
+  - id: google-tpu-v4
+    vendor: google-tpu
+    name: TPU v4
+    category: tpu
+    memoryGB: 32
+    memoryBandwidthGBs: 1200
+    flops:
+      fp32: 19.5
+      fp16: 275
+      int8: 275
+    tdpWatts: 200
+    formFactor: oam
+    releaseYear: 2021
+
+  - id: google-tpu-v5e
+    vendor: google-tpu
+    name: TPU v5e
+    category: tpu
+    memoryGB: 16
     memoryBandwidthGBs: 819
     flops:
-      fp32: 34.8
-      fp16: 69.6
-      int8: 139.2
-    tdpWatts: 150
-    formFactor: integrated
-    releaseYear: 2025
-    notes: "Mac Studio 2025 M3 Ultra: up to 512GB unified memory, runs 600B+ parameter models"
+      fp32: 27
+      fp16: 197
+      int8: 393
+    tdpWatts: 170
+    formFactor: oam
+    releaseYear: 2023
+    notes: Cost-optimized inference TPU
 
-  # ─── Google TPU ──────────────────────────────────────────────────────
-  # NEW: Google TPU v7 Ironwood
+  - id: google-tpu-v5p
+    vendor: google-tpu
+    name: TPU v5p
+    category: tpu
+    memoryGB: 95
+    memoryBandwidthGBs: 2765
+    flops:
+      fp32: 30
+      fp16: 459
+      int8: 918
+    tdpWatts: 300
+    formFactor: oam
+    releaseYear: 2023
+    notes: Training-optimized TPU, largest pod 8960 chips
+
+  - id: google-tpu-v6e-trillium
+    vendor: google-tpu
+    name: TPU v6e Trillium
+    category: tpu
+    memoryGB: 32
+    memoryBandwidthGBs: 1640
+    flops:
+      fp32: 50
+      fp16: 918
+      int8: 1836
+    tdpWatts: 220
+    formFactor: oam
+    releaseYear: 2024
+    notes: 4.7x compute improvement over v5e
+
   - id: google-tpu-v7-ironwood
     vendor: google-tpu
     name: TPU v7 Ironwood
@@ -720,13 +2050,259 @@ gpus:
     releaseYear: 2025
     notes: "Google TPU v7 Ironwood: 192GB HBM, 7.4TB/s, 4614 INT8 TOPS per chip"
 
-  # ─── Emerging / Specialty ────────────────────────────────────────────
-  # Groq LPU (placeholder)
+  # ══════════════════════════════════════════════════════════════════════
+  # INTEL — Arc (consumer), Data Center GPU Max, Gaudi
+  # ══════════════════════════════════════════════════════════════════════
+  - id: intel-arc-a770-16gb
+    vendor: intel
+    name: Arc A770 16GB
+    category: consumer
+    memoryGB: 16
+    memoryBandwidthGBs: 560
+    flops:
+      fp32: 19.7
+      fp16: 39.3
+      int8: 157.3
+    tdpWatts: 225
+    formFactor: pcie
+    msrpUSD: 349
+    streetUSD: 290
+    releaseYear: 2022
+    notes: 16GB VRAM at budget price point
+
+  - id: intel-arc-b580
+    vendor: intel
+    name: Arc B580
+    category: consumer
+    memoryGB: 12
+    memoryBandwidthGBs: 456
+    flops:
+      fp32: 13.4
+      fp16: 26.9
+      int8: 233
+    tdpWatts: 190
+    formFactor: pcie
+    msrpUSD: 249
+    streetUSD: 270
+    releaseYear: 2024
+    notes: Battlemage architecture
+
+  - id: intel-arc-b770
+    vendor: intel
+    name: Arc B770 (rumored)
+    category: consumer
+    memoryGB: 16
+    memoryBandwidthGBs: 672
+    flops:
+      fp32: 22
+      fp16: 44
+      int8: 350
+    tdpWatts: 225
+    formFactor: pcie
+    msrpUSD: 349
+    releaseYear: 2025
+    notes: Placeholder specs, unreleased at time of writing
+
+  - id: intel-max-1100
+    vendor: intel
+    name: Data Center GPU Max 1100
+    category: datacenter
+    memoryGB: 48
+    memoryBandwidthGBs: 1228
+    flops:
+      fp32: 22
+      fp16: 180
+      int8: 360
+    tdpWatts: 300
+    formFactor: pcie
+    releaseYear: 2023
+    notes: Ponte Vecchio Xe-HPC architecture
+
+  - id: intel-max-1550
+    vendor: intel
+    name: Data Center GPU Max 1550
+    category: datacenter
+    memoryGB: 128
+    memoryBandwidthGBs: 3276
+    flops:
+      fp32: 52
+      fp16: 419
+      int8: 839
+    tdpWatts: 600
+    formFactor: oam
+    releaseYear: 2023
+    notes: Flagship Ponte Vecchio OAM
+
+  - id: intel-gaudi-2
+    vendor: intel
+    name: Gaudi 2
+    category: datacenter
+    memoryGB: 96
+    memoryBandwidthGBs: 2450
+    flops:
+      fp32: 54
+      fp16: 432
+      fp8: 865
+      int8: 865
+    tdpWatts: 600
+    formFactor: oam
+    releaseYear: 2022
+    notes: Habana Labs / Intel AI training accelerator
+
+  - id: intel-gaudi-3
+    vendor: intel
+    name: Gaudi 3
+    category: datacenter
+    memoryGB: 128
+    memoryBandwidthGBs: 3675
+    flops:
+      fp32: 229
+      fp16: 1835
+      fp8: 1835
+      int8: 1835
+    tdpWatts: 900
+    formFactor: oam
+    releaseYear: 2024
+    notes: 128GB HBM2e, 1.8 PFLOPs BF16
+
+  # ══════════════════════════════════════════════════════════════════════
+  # AWS SILICON
+  # ══════════════════════════════════════════════════════════════════════
+  - id: aws-trainium
+    vendor: aws
+    name: Trainium (Trn1)
+    category: datacenter
+    memoryGB: 32
+    memoryBandwidthGBs: 820
+    flops:
+      fp32: 47.5
+      fp16: 190
+      int8: 380
+    tdpWatts: 200
+    formFactor: oam
+    releaseYear: 2022
+    notes: AWS custom training silicon
+
+  - id: aws-trainium2
+    vendor: aws
+    name: Trainium2 (Trn2)
+    category: datacenter
+    memoryGB: 96
+    memoryBandwidthGBs: 2900
+    flops:
+      fp32: 181
+      fp16: 667
+      fp8: 1299
+      int8: 1299
+    tdpWatts: 500
+    formFactor: oam
+    releaseYear: 2024
+    notes: 4x compute / 3x memory over Trainium
+
+  - id: aws-inferentia2
+    vendor: aws
+    name: Inferentia2 (Inf2)
+    category: datacenter
+    memoryGB: 32
+    memoryBandwidthGBs: 820
+    flops:
+      fp32: 47.5
+      fp16: 190
+      int8: 380
+    tdpWatts: 175
+    formFactor: oam
+    releaseYear: 2023
+    notes: Inference-optimized, same silicon family as Trainium
+
+  # ══════════════════════════════════════════════════════════════════════
+  # HUAWEI ASCEND
+  # ══════════════════════════════════════════════════════════════════════
+  - id: huawei-ascend-910b
+    vendor: huawei
+    name: Ascend 910B
+    category: datacenter
+    memoryGB: 64
+    memoryBandwidthGBs: 1600
+    flops:
+      fp32: 75
+      fp16: 320
+      int8: 640
+    tdpWatts: 400
+    formFactor: oam
+    releaseYear: 2023
+    notes: Primary China domestic AI accelerator
+
+  - id: huawei-ascend-910c
+    vendor: huawei
+    name: Ascend 910C
+    category: datacenter
+    memoryGB: 128
+    memoryBandwidthGBs: 3200
+    flops:
+      fp32: 150
+      fp16: 800
+      int8: 1600
+    tdpWatts: 500
+    formFactor: oam
+    releaseYear: 2025
+    notes: Dual-die 910B successor, ~2x performance. Placeholder specs.
+
+  # ══════════════════════════════════════════════════════════════════════
+  # CEREBRAS — Wafer-scale
+  # ══════════════════════════════════════════════════════════════════════
+  - id: cerebras-wse-2
+    vendor: cerebras
+    name: Cerebras WSE-2 (CS-2)
+    category: wafer-scale
+    memoryGB: 40
+    memoryBandwidthGBs: 20000
+    flops:
+      fp32: 7500
+      fp16: 7500
+      int8: 7500
+    tdpWatts: 23000
+    formFactor: integrated
+    releaseYear: 2021
+    notes: "Full-wafer chip: 2.6T transistors, 850K cores, 40GB SRAM on-chip"
+
+  - id: cerebras-wse-3
+    vendor: cerebras
+    name: Cerebras WSE-3 (CS-3)
+    category: wafer-scale
+    memoryGB: 44
+    memoryBandwidthGBs: 21000
+    flops:
+      fp32: 15000
+      fp16: 15000
+      int8: 15000
+    tdpWatts: 23000
+    formFactor: integrated
+    releaseYear: 2024
+    notes: "4T transistors, 900K cores, 44GB SRAM; fastest inference for LLMs"
+
+  # ══════════════════════════════════════════════════════════════════════
+  # GROQ — LPU
+  # ══════════════════════════════════════════════════════════════════════
+  - id: groq-lpu-v1
+    vendor: groq
+    name: Groq LPU v1
+    category: datacenter
+    memoryGB: 0.23
+    memoryBandwidthGBs: 80000
+    flops:
+      fp32: 188
+      fp16: 750
+      int8: 750
+    tdpWatts: 300
+    formFactor: pcie
+    releaseYear: 2024
+    notes: "LPU: 230MB on-chip SRAM, deterministic scheduling, extremely high memory bandwidth. Designed for inference only."
+
   - id: groq-lpu-gen2
-    vendor: nvidia
+    vendor: groq
     name: Groq LPU Gen2
     category: datacenter
-    memoryGB: 230
+    memoryGB: 0.23
     memoryBandwidthGBs: 80000
     flops:
       fp32: 188
@@ -734,21 +2310,121 @@ gpus:
       int8: 1500
     tdpWatts: 300
     formFactor: pcie
-    releaseYear: 2024
-    notes: "Groq LPU: deterministic inference, extremely high memory bandwidth. Placeholder specs."
+    releaseYear: 2025
+    notes: "Groq LPU Gen2 placeholder specs. Built for deterministic LLM inference."
 
-  # Tenstorrent Blackhole (placeholder)
-  - id: tenstorrent-blackhole
-    vendor: intel
-    name: Tenstorrent Blackhole
+  # ══════════════════════════════════════════════════════════════════════
+  # SAMBANOVA
+  # ══════════════════════════════════════════════════════════════════════
+  - id: sambanova-sn40l
+    vendor: sambanova
+    name: SambaNova SN40L
     category: datacenter
-    memoryGB: 32
-    memoryBandwidthGBs: 768
+    memoryGB: 520
+    memoryBandwidthGBs: 1638
     flops:
-      fp32: 32
-      fp16: 256
-      int8: 512
+      fp32: 125
+      fp16: 638
+      int8: 1276
+    tdpWatts: 700
+    formFactor: oam
+    releaseYear: 2024
+    notes: "Three-tier memory: 64GB HBM3 + 1.5TB DDR + on-chip SRAM; reconfigurable dataflow"
+
+  # ══════════════════════════════════════════════════════════════════════
+  # TENSTORRENT
+  # ══════════════════════════════════════════════════════════════════════
+  - id: tenstorrent-grayskull-e150
+    vendor: tenstorrent
+    name: Tenstorrent Grayskull e150
+    category: datacenter
+    memoryGB: 8
+    memoryBandwidthGBs: 118
+    flops:
+      fp32: 12
+      fp16: 92
+      int8: 368
+    tdpWatts: 75
+    formFactor: pcie
+    streetUSD: 599
+    releaseYear: 2022
+    notes: First-gen Tenstorrent RISC-V AI card
+
+  - id: tenstorrent-wormhole-n150
+    vendor: tenstorrent
+    name: Tenstorrent Wormhole n150
+    category: datacenter
+    memoryGB: 12
+    memoryBandwidthGBs: 288
+    flops:
+      fp32: 74
+      fp16: 148
+      int8: 262
+    tdpWatts: 160
+    formFactor: pcie
+    streetUSD: 999
+    releaseYear: 2024
+
+  - id: tenstorrent-wormhole-n300
+    vendor: tenstorrent
+    name: Tenstorrent Wormhole n300
+    category: datacenter
+    memoryGB: 24
+    memoryBandwidthGBs: 576
+    flops:
+      fp32: 131
+      fp16: 262
+      int8: 466
     tdpWatts: 300
     formFactor: pcie
+    streetUSD: 1399
+    releaseYear: 2024
+
+  - id: tenstorrent-blackhole-p150
+    vendor: tenstorrent
+    name: Tenstorrent Blackhole p150
+    category: datacenter
+    memoryGB: 32
+    memoryBandwidthGBs: 512
+    flops:
+      fp32: 45
+      fp16: 366
+      int8: 732
+    tdpWatts: 300
+    formFactor: pcie
+    streetUSD: 1299
     releaseYear: 2025
-    notes: "Tenstorrent Blackhole: RISC-V based AI accelerator. Placeholder specs."
+    notes: Blackhole RISC-V AI accelerator; Tensix cores + RISC-V compute
+
+  # ══════════════════════════════════════════════════════════════════════
+  # QUALCOMM CLOUD AI
+  # ══════════════════════════════════════════════════════════════════════
+  - id: qualcomm-cloud-ai-100
+    vendor: qualcomm
+    name: Qualcomm Cloud AI 100
+    category: datacenter
+    memoryGB: 16
+    memoryBandwidthGBs: 137
+    flops:
+      fp32: 0
+      fp16: 140
+      int8: 350
+    tdpWatts: 75
+    formFactor: pcie
+    releaseYear: 2021
+    notes: Power-efficient inference accelerator
+
+  - id: qualcomm-cloud-ai-100-ultra
+    vendor: qualcomm
+    name: Qualcomm Cloud AI 100 Ultra
+    category: datacenter
+    memoryGB: 128
+    memoryBandwidthGBs: 548
+    flops:
+      fp32: 0
+      fp16: 340
+      int8: 870
+    tdpWatts: 150
+    formFactor: pcie
+    releaseYear: 2024
+    notes: "128GB LPDDR, targets LLM inference workloads"

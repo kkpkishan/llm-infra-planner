@@ -97,8 +97,15 @@ export function GPUSpecSchema(data: unknown): ValidationResult {
     return { valid: false, errors: ["data must be an object"] };
   }
 
-  const VALID_VENDORS = ["nvidia", "amd", "apple", "intel", "google-tpu"];
-  const VALID_CATEGORIES = ["consumer", "workstation", "datacenter", "apple-silicon", "tpu"];
+  const VALID_VENDORS = [
+    "nvidia", "amd", "apple", "intel", "google-tpu",
+    "aws", "huawei", "cerebras", "groq", "sambanova",
+    "tenstorrent", "qualcomm",
+  ];
+  const VALID_CATEGORIES = [
+    "consumer", "workstation", "datacenter", "apple-silicon", "tpu",
+    "edge", "wafer-scale",
+  ];
   const VALID_FORM_FACTORS = ["pcie", "sxm", "oam", "integrated", "mxm"];
 
   if (!isString(d.id)) errors.push("id: required string");
@@ -110,8 +117,9 @@ export function GPUSpecSchema(data: unknown): ValidationResult {
     errors.push(`category: must be one of ${VALID_CATEGORIES.join(", ")}`);
   }
 
-  if (!isNumber(d.memoryGB) || (d.memoryGB as number) < 1 || (d.memoryGB as number) > 1024) {
-    errors.push("memoryGB: must be in range [1, 1024]");
+  // memoryGB: allow 0.01+ for LPU on-chip SRAM, up to 1M for rack-scale systems
+  if (!isNumber(d.memoryGB) || (d.memoryGB as number) < 0.01 || (d.memoryGB as number) > 1_000_000) {
+    errors.push("memoryGB: must be in range [0.01, 1000000]");
   }
   if (!isNumber(d.memoryBandwidthGBs) || (d.memoryBandwidthGBs as number) < 1) {
     errors.push("memoryBandwidthGBs: must be >= 1");
@@ -121,13 +129,17 @@ export function GPUSpecSchema(data: unknown): ValidationResult {
   if (!flops || typeof flops !== "object") {
     errors.push("flops: required object");
   } else {
-    if (!isNumber(flops.fp32) || (flops.fp32 as number) < 0) errors.push("flops.fp32: must be >= 0");
+    // fp32 is optional for inference-only chips (Qualcomm, some Groq configs)
+    if (flops.fp32 !== undefined && (!isNumber(flops.fp32) || (flops.fp32 as number) < 0)) {
+      errors.push("flops.fp32: must be >= 0");
+    }
     if (!isNumber(flops.fp16) || (flops.fp16 as number) < 0) errors.push("flops.fp16: must be >= 0");
     if (!isNumber(flops.int8) || (flops.int8 as number) < 0) errors.push("flops.int8: must be >= 0");
   }
 
-  if (!isNumber(d.tdpWatts) || (d.tdpWatts as number) < 1 || (d.tdpWatts as number) > 5000) {
-    errors.push("tdpWatts: must be in range [1, 5000]");
+  // tdpWatts: allow up to 200,000W for rack-scale systems (GB200 NVL72 = 120kW)
+  if (!isNumber(d.tdpWatts) || (d.tdpWatts as number) < 1 || (d.tdpWatts as number) > 200_000) {
+    errors.push("tdpWatts: must be in range [1, 200000]");
   }
   if (!isString(d.formFactor) || !VALID_FORM_FACTORS.includes(d.formFactor as string)) {
     errors.push(`formFactor: must be one of ${VALID_FORM_FACTORS.join(", ")}`);

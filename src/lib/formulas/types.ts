@@ -45,9 +45,9 @@ export interface ModelSpec {
 
 export interface GPUSpec {
   id: string;
-  vendor: "nvidia" | "amd" | "apple" | "intel" | "google-tpu";
+  vendor: "nvidia" | "amd" | "apple" | "intel" | "google-tpu" | "aws" | "huawei" | "cerebras" | "groq" | "sambanova" | "tenstorrent" | "qualcomm";
   name: string;
-  category: "consumer" | "workstation" | "datacenter" | "apple-silicon" | "tpu";
+  category: "consumer" | "workstation" | "datacenter" | "apple-silicon" | "tpu" | "edge" | "wafer-scale";
   memoryGB: number;
   memoryBandwidthGBs: number;
   flops: {
