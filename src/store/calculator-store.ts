@@ -296,13 +296,15 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
       const { selectedModel, precision, kvPrecision, contextLength, batchSize, mode, trainingOptions,
         concurrentUsers, avgPromptTokens, avgOutputTokens, sloTTFTMs, sloTPOTMs, batchMode } = get();
       if (!selectedModel) return window.location.href;
+      // Never serialize 'reverse' as a mode — it's a separate page/route
+      const safeMode = (mode === 'reverse' as any) ? 'inference' : mode;
       const state: CalculatorState = {
         model: selectedModel.id,
         precision,
         kvPrecision,
         ctx: contextLength,
         batch: batchSize,
-        mode,
+        mode: safeMode,
         trainingMethod: trainingOptions.trainingMethodId,
         users: concurrentUsers !== 10 ? concurrentUsers : undefined,
         avgPrompt: avgPromptTokens !== 1024 ? avgPromptTokens : undefined,

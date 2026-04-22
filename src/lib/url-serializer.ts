@@ -5,7 +5,8 @@ const DEFAULT_CTX = 4096;
 const DEFAULT_BATCH = 1;
 const DEFAULT_MODE: WorkloadMode = 'inference';
 
-const VALID_MODES: WorkloadMode[] = ['inference', 'scale', 'finetune', 'train', 'reverse'];
+// 'reverse' is a separate page/route, not a calculator mode — exclude it here
+const VALID_MODES: WorkloadMode[] = ['inference', 'scale', 'finetune', 'train'];
 
 /**
  * Serialize calculator state to a URL query string.
