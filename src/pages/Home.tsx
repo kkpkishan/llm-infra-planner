@@ -667,14 +667,6 @@ export function Home() {
         )}
       </div>
 
-      {/* ── Cluster + Stack ───────────────────────────────────────────── */}
-      {(clusterRecommendation || stackRecommendation) && (
-        <section className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-          {clusterRecommendation && <ClusterPanel cluster={clusterRecommendation} />}
-          {stackRecommendation && <StackPanel stack={stackRecommendation} />}
-        </section>
-      )}
-
       {/* ── Advanced Panels — Tabbed ─────────────────────────────────── */}
       {selectedModel && (
         <AdvancedTabs
@@ -706,6 +698,14 @@ export function Home() {
           batchMode={batchMode}
           setBatchMode={setBatchMode}
         />
+      )}
+
+      {/* ── Cluster + Stack — shown last ─────────────────────────────── */}
+      {(clusterRecommendation || stackRecommendation) && (
+        <section className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+          {clusterRecommendation && <ClusterPanel cluster={clusterRecommendation} />}
+          {stackRecommendation && <StackPanel stack={stackRecommendation} />}
+        </section>
       )}
 
       {/* ── Mobile sticky bottom action bar ──────────────────────────── */}
