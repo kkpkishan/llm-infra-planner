@@ -388,11 +388,56 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
       );
 
       // Cloud recommendations — based on total VRAM (multi-GPU instances)
-      const cloudRecommendations = recommendCloudInstances(
+      const rawCloudRecs = recommendCloudInstances(
         breakdown.totalGB,
         cloudDb,
         gpuDb
       );
+
+      // Build a GPU bandwidth lookup for enriching cloud cost per million tokens
+      const gpuBandwidthMap = new Map<string, number>(
+        gpuDb.map(g => [g.id, g.memoryBandwidthGBs])
+      );
+
+      // Enrich each cloud recommendation with costPerMillionTokens based on
+      // the instance's own GPU bandwidth (total across all GPUs in the instance)
+      const enrichedCloudRecs: CloudRecommendation[] = rawCloudRecs.map(rec => {
+        const totalBandwidthGBs = rec.instance.gpus.reduce((sum, g) => {
+          const bw = gpuBandwidthMap.get(g.id) ?? 0;
+          return sum + bw * g.count;
+        }, 0);
+
+        let costPerMillionTokens: number | undefined;
+        if (totalBandwidthGBs > 0 && rec.onDemandPerHour > 0) {
+          const instanceThroughput = computeThroughput({
+            memoryBandwidthGBs: totalBandwidthGBs,
+            activeWeightsGB: activeWeightsGB,
+            efficiencyFactor: DEFAULT_EFFICIENCY,
+          });
+          const metrics = computeCostMetrics({
+            tokensPerSecond: instanceThroughput.tokensPerSecond,
+            hourlyCloudCost: rec.onDemandPerHour,
+            contextLength,
+            activeWeightsGB,
+            computeTFLOPS: 0,
+          });
+          costPerMillionTokens = metrics.costPerMillionTokens;
+        }
+
+        return { ...rec, costPerMillionTokens };
+      });
+
+      // Re-sort by costPerMillionTokens (cheapest first), fall back to $/h
+      enrichedCloudRecs.sort((a, b) => {
+        const aCost = a.costPerMillionTokens ?? a.onDemandPerHour * 1e6;
+        const bCost = b.costPerMillionTokens ?? b.onDemandPerHour * 1e6;
+        return aCost - bCost;
+      });
+
+      // Re-mark best price after sort
+      enrichedCloudRecs.forEach((r, i) => { r.isBestPrice = i === 0; });
+
+      const cloudRecommendations = enrichedCloudRecs;
 
       // Cost metrics (use cheapest cloud instance, scale throughput by numGPUs)
       const cheapestCloud = cloudRecommendations[0];
