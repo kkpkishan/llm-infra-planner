@@ -15,6 +15,14 @@ export function classifyGPUFit(totalVRAMGB: number, gpuMemoryGB: number): FitSta
 }
 
 /**
+ * Categories excluded from standard recommendations.
+ * wafer-scale: Cerebras WSE — not purchasable, no standard pricing
+ * tpu:         Google TPU — cloud-only, handled by cloud recommender
+ * edge:        Jetson etc — too small for most LLM workloads
+ */
+const EXCLUDED_CATEGORIES = new Set(['wafer-scale', 'tpu', 'edge']);
+
+/**
  * Recommend GPUs from the database for a given VRAM requirement.
  * Returns all fits sorted by utilization, plus Budget/Balanced/Performance tier picks.
  *
@@ -22,13 +30,21 @@ export function classifyGPUFit(totalVRAMGB: number, gpuMemoryGB: number): FitSta
  *   Budget:      price < $1000, VRAM ≥ 12 GB
  *   Balanced:    price $1000–$3000, VRAM 16–48 GB
  *   Performance: price > $3000 or datacenter category
+ *
+ * Excluded from recommendations (still shown in hardware catalog):
+ *   - wafer-scale (Cerebras WSE): not purchasable individually
+ *   - tpu (Google TPU): cloud-only, covered by cloud recommender
+ *   - edge (Jetson etc): too small for LLM workloads
  */
 export function recommendGPUs(
   totalVRAMGB: number,
   gpus: GPUSpec[],
   throughputInput?: Omit<ThroughputInput, 'memoryBandwidthGBs'>
 ): GPURecommendations {
-  const allFits: GPUFitResult[] = gpus.map(gpu => {
+  // Filter out categories that aren't practical for standard deployment
+  const eligibleGPUs = gpus.filter(gpu => !EXCLUDED_CATEGORIES.has(gpu.category));
+
+  const allFits: GPUFitResult[] = eligibleGPUs.map(gpu => {
     const fitStatus = classifyGPUFit(totalVRAMGB, gpu.memoryGB);
     const utilizationPercent = Math.round((totalVRAMGB / gpu.memoryGB) * 100);
     const freeVRAMGB = Math.max(0, gpu.memoryGB - totalVRAMGB);

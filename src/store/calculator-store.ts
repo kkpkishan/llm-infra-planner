@@ -317,7 +317,7 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
     recompute: () => {
       const {
         selectedModel, precision, kvPrecision, contextLength, batchSize,
-        mode, trainingOptions, gpuDb, cloudDb, numGPUs,
+        mode, trainingOptions, gpuDb, cloudDb, numGPUs, parallelismType,
       } = get();
 
       if (!selectedModel) return;
@@ -336,8 +336,28 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
         trainingOptions
       );
 
-      // Per-GPU VRAM needed (tensor parallelism splits weights evenly)
-      const vramPerGPU = breakdown.totalGB / Math.max(1, numGPUs);
+      // Per-GPU VRAM split depends on parallelism strategy:
+      //   tp    — tensor parallel: weights + KV cache split evenly across all GPUs
+      //   pp    — pipeline parallel: weights split by layers, KV cache per stage
+      //   zero3 — ZeRO-3: weights sharded, activations replicated → same as TP for VRAM
+      //   moe   — MoE expert parallel: expert weights sharded, attention replicated
+      // For VRAM estimation purposes TP/PP/ZeRO-3 all divide total evenly.
+      // MoE keeps attention weights on every GPU; only expert weights are sharded.
+      let vramPerGPU: number;
+      if (parallelismType === 'moe' && selectedModel.moe && selectedModel.paramsActive) {
+        // Attention + shared weights stay on every GPU; expert weights are sharded
+        const activeParams = selectedModel.paramsActive;
+        const totalParams = selectedModel.paramsTotal;
+        const expertParams = totalParams - activeParams;
+        const bytesPerParam = precisionConfig.bytesPerParam;
+        const sharedWeightsGB = (activeParams * bytesPerParam) / 1e9;
+        const expertWeightsPerGPU = (expertParams * bytesPerParam) / 1e9 / Math.max(1, numGPUs);
+        const kvAndOverheadGB = breakdown.totalGB - (totalParams * bytesPerParam) / 1e9;
+        vramPerGPU = sharedWeightsGB + expertWeightsPerGPU + Math.max(0, kvAndOverheadGB) / Math.max(1, numGPUs);
+      } else {
+        // TP / PP / ZeRO-3: divide total evenly
+        vramPerGPU = breakdown.totalGB / Math.max(1, numGPUs);
+      }
 
       // Active weights for throughput (use paramsActive for MoE)
       const activeParams = selectedModel.paramsActive ?? selectedModel.paramsTotal;
