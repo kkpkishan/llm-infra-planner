@@ -574,6 +574,25 @@ export function Home() {
                 sourceUrl="https://arxiv.org/abs/2205.05198" />
             )}
           </div>
+
+          {/* ── Cloud Instances — shown inline whenever a model is selected ── */}
+          {cloudRecommendations && cloudRecommendations.length > 0 && (
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex flex-col gap-0.5">
+                  <h2 className="text-xs font-semibold uppercase tracking-wider text-fg-muted">Cloud Deployment Options</h2>
+                  <p className="text-[11px] text-fg-muted">
+                    Instances that fit {selectedModel?.displayName} ({breakdown.totalGB.toFixed(1)} GB VRAM required)
+                  </p>
+                </div>
+                <CurrencyPicker />
+              </div>
+              <CloudTable recommendations={cloudRecommendations} />
+            </div>
+          )}
+          {cloudRecommendations?.length === 0 && (
+            <EmptyState icon={<Cpu size={32} />} title="No cloud instances found" description="Try reducing context length or using a smaller model." />
+          )}
         </>
       ) : <SkeletonVRAMBreakdown />}
     </div>
@@ -687,22 +706,6 @@ export function Home() {
           batchMode={batchMode}
           setBatchMode={setBatchMode}
         />
-      )}
-
-      {/* ── Cloud Table ───────────────────────────────────────────────── */}
-      {cloudRecommendations && cloudRecommendations.length > 0 && (
-        <section className="mt-8">
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="text-xs font-semibold uppercase tracking-wider text-fg-muted">Cloud Instances</h2>
-            <CurrencyPicker />
-          </div>
-          <CloudTable recommendations={cloudRecommendations} />
-        </section>
-      )}
-      {cloudRecommendations?.length === 0 && (
-        <section className="mt-8">
-          <EmptyState icon={<Cpu size={32} />} title="No cloud instances found" description="Try reducing context length or using a smaller model." />
-        </section>
       )}
 
       {/* ── Mobile sticky bottom action bar ──────────────────────────── */}
