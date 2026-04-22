@@ -61,7 +61,7 @@ export function ModelSuggestions({ gpu, models, onSelectModel, contextLength = 4
 
       <div className="flex flex-col gap-1 max-h-[300px] overflow-y-auto border border-border-subtle rounded-lg">
         {displayed.map(({ model, vram, fitStatus }) => {
-          const { Icon, color, label } = FIT_ICON[fitStatus];
+          const { Icon, color } = FIT_ICON[fitStatus];
           return (
             <button
               key={model.id}
