@@ -45,39 +45,38 @@ export function GPUCard({ fit, isRecommended, className }: GPUCardProps) {
     : null;
 
   return (
-    <div
-      className={cn(
-        'rounded-lg border p-4 flex flex-col gap-3 transition-colors',
-        isRecommended
-          ? 'border-accent/40 bg-accent/5'
-          : 'border-border-subtle bg-bg-muted hover:border-border-default',
-        className
-      )}
-    >
+    <div className={cn(
+      'rounded-lg border p-3 flex flex-col gap-2 transition-colors',
+      isRecommended
+        ? 'border-accent/40 bg-accent/5'
+        : 'border-border-subtle bg-bg-muted hover:border-border-default',
+      className
+    )}>
       {/* Header: fit badge + name + price */}
-      <div className="flex items-start justify-between gap-2">
-        <div className="flex flex-col gap-1 min-w-0">
-          {/* Fit badge — icon + text, not color alone */}
-          <div className={cn('flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-md w-fit', config.badgeBg)}>
-            <FitIcon size={12} className={config.iconColor} aria-hidden="true" />
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center gap-1.5 min-w-0">
+          <div className={cn('flex items-center gap-1 text-[10px] font-medium px-1.5 py-0.5 rounded flex-shrink-0', config.badgeBg)}>
+            <FitIcon size={10} className={config.iconColor} aria-hidden="true" />
             <span>{config.label}</span>
           </div>
-          <h3 className="text-sm font-semibold text-fg-primary leading-tight truncate">
+          <h3 className="text-xs font-semibold text-fg-primary leading-tight truncate">
             {gpu.name}
           </h3>
-          <p className="text-[11px] text-fg-muted font-mono">
-            {gpu.memoryGB} GB · {gpu.vendor.toUpperCase()}
-          </p>
         </div>
         {priceLabel && (
-          <span className="text-sm font-mono font-semibold text-fg-primary flex-shrink-0">
+          <span className="text-xs font-mono font-semibold text-fg-primary flex-shrink-0">
             {priceLabel}
           </span>
         )}
       </div>
 
-      {/* Utilization bar — 4px */}
-      <div className="flex flex-col gap-1">
+      {/* VRAM + vendor */}
+      <p className="text-[10px] text-fg-muted font-mono">
+        {gpu.memoryGB} GB · {gpu.vendor.toUpperCase()}
+      </p>
+
+      {/* Utilization bar */}
+      <div className="flex flex-col gap-0.5">
         <div className="flex justify-between text-[10px] font-mono text-fg-muted">
           <span>{Math.min(utilizationPercent, 100)}% used</span>
           <span>{freeVRAMGB.toFixed(1)} GB free</span>
@@ -96,34 +95,26 @@ export function GPUCard({ fit, isRecommended, className }: GPUCardProps) {
       </div>
 
       {/* Stats row */}
-      <div className="grid grid-cols-3 gap-2 text-center">
+      <div className="grid grid-cols-3 gap-1 text-center">
         <div className="flex flex-col gap-0.5">
-          <span className="text-[10px] text-fg-muted uppercase tracking-wide">BW</span>
-          <span className="text-xs font-mono font-medium text-fg-default">
-            {gpu.memoryBandwidthGBs} GB/s
-          </span>
+          <span className="text-[9px] text-fg-muted uppercase tracking-wide">BW</span>
+          <span className="text-[10px] font-mono font-medium text-fg-default">{gpu.memoryBandwidthGBs} GB/s</span>
         </div>
         <div className="flex flex-col gap-0.5">
-          <span className="text-[10px] text-fg-muted uppercase tracking-wide">FP16</span>
-          <span className="text-xs font-mono font-medium text-fg-default">
-            {gpu.flops.fp16} TF
-          </span>
+          <span className="text-[9px] text-fg-muted uppercase tracking-wide">FP16</span>
+          <span className="text-[10px] font-mono font-medium text-fg-default">{gpu.flops.fp16} TF</span>
         </div>
         <div className="flex flex-col gap-0.5">
-          <span className="text-[10px] text-fg-muted uppercase tracking-wide">TDP</span>
-          <span className="text-xs font-mono font-medium text-fg-default">
-            {gpu.tdpWatts}W
-          </span>
+          <span className="text-[9px] text-fg-muted uppercase tracking-wide">TDP</span>
+          <span className="text-[10px] font-mono font-medium text-fg-default">{gpu.tdpWatts}W</span>
         </div>
       </div>
 
       {/* Throughput estimate */}
       {tokensPerSecond != null && (
-        <div className="flex items-center justify-between text-xs border-t border-border-subtle pt-2">
+        <div className="flex items-center justify-between text-[10px] border-t border-border-subtle pt-1.5">
           <span className="text-fg-muted">Est. throughput</span>
-          <span className="font-mono font-semibold text-fg-primary">
-            ~{tokensPerSecond.toLocaleString()} tok/s
-          </span>
+          <span className="font-mono font-semibold text-fg-primary">~{tokensPerSecond.toLocaleString()} tok/s</span>
         </div>
       )}
     </div>

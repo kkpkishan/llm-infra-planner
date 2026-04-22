@@ -63,7 +63,7 @@ export function GPUList({ recommendations, numGPUs = 1, className }: GPUListProp
             <span className="hidden group-open:inline">▼</span>
             All GPUs ({recommendations.allFits.length})
           </summary>
-          <div className="mt-3 flex flex-col gap-2">
+          <div className="mt-3 flex flex-col gap-2 max-h-[480px] overflow-y-auto pr-1">
             {recommendations.allFits.map(fit => (
               <GPUCard key={fit.gpu.id} fit={fit} />
             ))}

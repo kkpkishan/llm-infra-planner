@@ -151,85 +151,66 @@ function CloudCard({ rec }: { rec: CloudRecommendation }) {
 
   return (
     <div className={cn(
-      'rounded-lg border transition-colors p-4 flex flex-col gap-3',
+      'rounded-lg border transition-colors p-3 flex flex-col gap-2',
       isBestPrice ? 'border-accent/50 bg-accent/5' : 'border-border-subtle bg-bg-default hover:bg-bg-subtle'
     )}>
-      {/* Top row: provider + instance + best badge + fit */}
-      <div className="flex items-start justify-between gap-3 flex-wrap">
-        <div className="flex items-center gap-3 min-w-0">
+      {/* Top row: provider + instance + badges */}
+      <div className="flex items-start justify-between gap-2">
+        <div className="flex items-center gap-2 min-w-0">
           <ProviderBadge provider={instance.provider} />
           <div className="flex flex-col min-w-0">
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-sm font-mono font-semibold text-fg-primary">{instance.instanceType}</span>
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="text-xs font-mono font-semibold text-fg-primary truncate">{instance.instanceType}</span>
               {isBestPrice && (
-                <span className="flex items-center gap-1 text-[10px] font-medium px-1.5 py-0.5 rounded bg-yellow-500/10 text-yellow-500">
-                  <Star size={9} className="fill-yellow-500" /> Best Value
+                <span className="flex items-center gap-0.5 text-[9px] font-medium px-1 py-0.5 rounded bg-yellow-500/10 text-yellow-500 flex-shrink-0">
+                  <Star size={8} className="fill-yellow-500" /> Best
                 </span>
               )}
               {fitStatus === 'yellow' && (
-                <span className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-yellow-500/10 text-yellow-500">Tight Fit</span>
+                <span className="text-[9px] font-medium px-1 py-0.5 rounded bg-yellow-500/10 text-yellow-500 flex-shrink-0">Tight</span>
               )}
             </div>
-            <span className="text-xs text-fg-muted mt-0.5">{gpuSummary} · {totalGPUMemoryGB} GB VRAM</span>
+            <span className="text-[10px] text-fg-muted">{gpuSummary} · {totalGPUMemoryGB} GB</span>
           </div>
         </div>
 
-        {/* Pricing block */}
-        <div className="flex items-center gap-4 flex-shrink-0 flex-wrap">
+        {/* Pricing */}
+        <div className="flex items-center gap-3 flex-shrink-0">
           <div className="flex flex-col items-end">
-            <span className="text-[10px] text-fg-muted">On-demand</span>
-            <span className="text-sm font-mono font-bold text-fg-primary tabular-nums">${onDemandPerHour.toFixed(2)}<span className="text-xs font-normal text-fg-muted">/hr</span></span>
+            <span className="text-[9px] text-fg-muted">On-demand</span>
+            <span className="text-xs font-mono font-bold text-fg-primary tabular-nums">${onDemandPerHour.toFixed(2)}<span className="text-[9px] font-normal text-fg-muted">/hr</span></span>
           </div>
           {spotPerHour != null && (
             <div className="flex flex-col items-end">
-              <span className="text-[10px] text-fg-muted">Spot</span>
-              <span className="text-sm font-mono font-semibold text-green-400 tabular-nums">${spotPerHour.toFixed(2)}<span className="text-xs font-normal text-fg-muted">/hr</span></span>
+              <span className="text-[9px] text-fg-muted">Spot</span>
+              <span className="text-xs font-mono font-semibold text-green-400 tabular-nums">${spotPerHour.toFixed(2)}<span className="text-[9px] font-normal text-fg-muted">/hr</span></span>
             </div>
           )}
           {costPerMillionTokens != null && (
             <div className="flex flex-col items-end">
-              <span className="text-[10px] text-fg-muted">$/M tokens</span>
-              <span className="text-sm font-mono font-semibold text-accent tabular-nums">${costPerMillionTokens.toFixed(2)}</span>
+              <span className="text-[9px] text-fg-muted">$/M tok</span>
+              <span className="text-xs font-mono font-semibold text-accent tabular-nums">${costPerMillionTokens.toFixed(2)}</span>
             </div>
           )}
         </div>
       </div>
 
       {/* Specs row */}
-      <div className="flex items-center gap-4 flex-wrap text-[11px] text-fg-muted border-t border-border-subtle pt-2.5">
-        <span className="flex items-center gap-1">
-          <Cpu size={11} className="flex-shrink-0" />
-          {instance.vcpus} vCPUs
-        </span>
-        <span className="flex items-center gap-1">
-          <MemoryStick size={11} className="flex-shrink-0" />
-          {instance.ramGB} GB RAM
-        </span>
-        {instance.storageGB > 0 && (
-          <span className="flex items-center gap-1">
-            <HardDrive size={11} className="flex-shrink-0" />
-            {instance.storageGB} GB
-          </span>
-        )}
-        <span className="flex items-center gap-1">
-          <Network size={11} className="flex-shrink-0" />
-          {instance.networkGbps} Gbps
-        </span>
+      <div className="flex items-center gap-3 flex-wrap text-[10px] text-fg-muted border-t border-border-subtle pt-2">
+        <span className="flex items-center gap-0.5"><Cpu size={10} />{instance.vcpus} vCPU</span>
+        <span className="flex items-center gap-0.5"><MemoryStick size={10} />{instance.ramGB} GB</span>
+        {instance.storageGB > 0 && <span className="flex items-center gap-0.5"><HardDrive size={10} />{instance.storageGB} GB</span>}
+        <span className="flex items-center gap-0.5"><Network size={10} />{instance.networkGbps} Gbps</span>
         {interconnect && (
-          <span className={cn('flex items-center gap-1 px-1.5 py-0.5 rounded font-medium', interconnect.color)}>
-            <Zap size={10} className="flex-shrink-0" />
-            {interconnect.label}
+          <span className={cn('flex items-center gap-0.5 px-1 py-0.5 rounded font-medium', interconnect.color)}>
+            <Zap size={9} />{interconnect.label}
           </span>
         )}
-        <span className="flex items-center gap-1 ml-auto">
-          <MapPin size={11} className="flex-shrink-0" />
-          {regionCount} region{regionCount !== 1 ? 's' : ''}
-        </span>
+        <span className="flex items-center gap-0.5 ml-auto"><MapPin size={10} />{regionCount} region{regionCount !== 1 ? 's' : ''}</span>
       </div>
 
-      {/* Notes */}
       {instance.notes && (
-        <p className="text-[11px] text-fg-muted italic">{instance.notes}</p>
+        <p className="text-[10px] text-fg-muted italic truncate">{instance.notes}</p>
       )}
     </div>
   );
