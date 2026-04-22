@@ -8,6 +8,7 @@ import { useToast } from '@/components/feedback/Toast';
 import { ModelPicker } from '@/components/calculator/ModelPicker';
 import { GPUPicker } from '@/components/calculator/GPUPicker';
 import { ModelSuggestions } from '@/components/calculator/ModelSuggestions';
+import { CloudInstanceSuggestions } from '@/components/calculator/CloudInstanceSuggestions';
 import { PrecisionPicker } from '@/components/calculator/PrecisionPicker';
 import { KVPrecisionPicker } from '@/components/calculator/KVPrecisionPicker';
 import { ContextSlider } from '@/components/calculator/ContextSlider';
@@ -283,7 +284,7 @@ function AdvancedTabs({
 
 export function Home() {
   const {
-    modelDb, gpuDb, selectedModel, selectedGPU, precision, kvPrecision, contextLength, batchSize,
+    modelDb, gpuDb, cloudDb, selectedModel, selectedGPU, precision, kvPrecision, contextLength, batchSize,
     mode, trainingOptions, advancedSettings, breakdown, gpuRecommendations,
     cloudRecommendations, costMetrics, clusterRecommendation, stackRecommendation,
     setModel, setGPU, setPrecision, setKVPrecision, setContextLength, setBatchSize,
@@ -435,15 +436,21 @@ export function Home() {
       <Section title="Hardware-First Selection" defaultOpen={false}>
         <GPUPicker gpus={gpuDb} value={selectedGPU} onSelect={setGPU} />
         {selectedGPU && (
-          <ModelSuggestions
-            gpu={selectedGPU}
-            models={modelDb}
-            onSelectModel={(model) => {
-              setModel(model);
-              setGPU(null); // Clear GPU selection after picking a model
-            }}
-            contextLength={contextLength}
-          />
+          <>
+            <ModelSuggestions
+              gpu={selectedGPU}
+              models={modelDb}
+              onSelectModel={(model) => {
+                setModel(model);
+                setGPU(null);
+              }}
+              contextLength={contextLength}
+            />
+            <CloudInstanceSuggestions
+              gpu={selectedGPU}
+              cloudInstances={cloudDb}
+            />
+          </>
         )}
       </Section>
 
