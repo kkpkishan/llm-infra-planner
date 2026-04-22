@@ -129,8 +129,8 @@ export function CloudTable({ recommendations, className }: CloudTableProps) {
         <SortBtn label="$/M tokens" col="costPerMillionTokens" sortKey={sortKey} sortDir={sortDir} onSort={handleSort} ariaLabel="Sort by cost per million tokens" />
       </div>
 
-      {/* Cards — top 3 always visible, rest scrollable */}
-      <div className="flex flex-col gap-2 max-h-[600px] overflow-y-auto pr-1">
+      {/* Cards — 2-column grid, scrollable */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-[600px] overflow-y-auto pr-1">
         {sorted.map(rec => (
           <CloudCard key={rec.instance.id} rec={rec} />
         ))}
