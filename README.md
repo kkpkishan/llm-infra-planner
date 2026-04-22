@@ -20,6 +20,7 @@ LLMcalc answers the questions you actually have before deploying or training a l
 - **How do I set up the software stack?** — OS, driver, CUDA, PyTorch, container, and monitoring recommendations
 
 Everything runs in the browser. No backend, no telemetry, no account required.
+<img width="2936" height="1668" alt="image" src="https://github.com/user-attachments/assets/072b10f6-7a8d-4537-ab32-3a06078e0a0a" />
 
 ---
 
