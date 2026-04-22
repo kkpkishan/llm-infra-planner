@@ -136,7 +136,9 @@ export function CloudTable({ recommendations, className }: CloudTableProps) {
         ))}
       </div>
 
-    
+      <p className="text-[10px] text-fg-muted px-1">
+        {sorted.length} instance{sorted.length !== 1 ? 's' : ''} · Prices may vary by region
+      </p>
     </div>
   );
 }
