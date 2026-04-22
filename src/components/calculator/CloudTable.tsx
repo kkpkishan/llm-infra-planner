@@ -70,7 +70,6 @@ export function CloudTable({ recommendations, className }: CloudTableProps) {
   const [sortKey, setSortKey] = React.useState<SortKey | null>(null);
   const [sortDir, setSortDir] = React.useState<SortDir>('asc');
   const [providerFilter, setProviderFilter] = React.useState('All');
-  const [showAll, setShowAll] = React.useState(false);
 
   const handleSort = (key: SortKey) => {
     if (sortKey === key) setSortDir(d => d === 'asc' ? 'desc' : 'asc');
@@ -130,34 +129,12 @@ export function CloudTable({ recommendations, className }: CloudTableProps) {
         <SortBtn label="$/M tokens" col="costPerMillionTokens" sortKey={sortKey} sortDir={sortDir} onSort={handleSort} ariaLabel="Sort by cost per million tokens" />
       </div>
 
-      {/* Cards */}
-      <div className="flex flex-col gap-2">
-        {sorted.slice(0, 3).map(rec => (
+      {/* Cards — top 3 always visible, rest scrollable */}
+      <div className="flex flex-col gap-2 max-h-[600px] overflow-y-auto pr-1">
+        {sorted.map(rec => (
           <CloudCard key={rec.instance.id} rec={rec} />
         ))}
       </div>
-
-      {/* Remaining cards in a scrollable container */}
-      {sorted.length > 3 && (
-        <>
-          {showAll && (
-            <div className="flex flex-col gap-2 max-h-[520px] overflow-y-auto pr-1">
-              {sorted.slice(3).map(rec => (
-                <CloudCard key={rec.instance.id} rec={rec} />
-              ))}
-            </div>
-          )}
-          <button
-            type="button"
-            onClick={() => setShowAll(v => !v)}
-            className="text-xs text-accent hover:text-accent/80 font-medium transition-colors text-left"
-          >
-            {showAll
-              ? 'Show less ↑'
-              : `Show ${sorted.length - 3} more instance${sorted.length - 3 !== 1 ? 's' : ''} ↓`}
-          </button>
-        </>
-      )}
 
       <p className="text-[10px] text-fg-muted px-1">
         {sorted.length} instance{sorted.length !== 1 ? 's' : ''} · Prices may vary by region · Last updated {sorted[0]?.instance.lastPriceUpdate ?? '—'}
