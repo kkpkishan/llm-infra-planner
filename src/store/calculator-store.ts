@@ -229,14 +229,20 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
 
     setConcurrentUsers: (n) => {
       set({ concurrentUsers: Math.max(1, Math.min(10000, n)) });
+      // Recompute to update VRAM with new concurrent user count
+      get().recompute();
     },
 
     setAvgPromptTokens: (n) => {
       set({ avgPromptTokens: Math.max(32, Math.min(131072, n)) });
+      // Recompute to update KV cache with new prompt length
+      get().recompute();
     },
 
     setAvgOutputTokens: (n) => {
       set({ avgOutputTokens: Math.max(16, Math.min(8192, n)) });
+      // Recompute to update KV cache with new output length
+      get().recompute();
     },
 
     setSloTTFT: (ms) => {
