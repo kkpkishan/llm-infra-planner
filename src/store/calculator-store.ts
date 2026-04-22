@@ -34,6 +34,7 @@ export interface CalculatorStore {
 
   // ── Inputs
   selectedModel: ModelSpec | null;
+  selectedGPU: GPUSpec | null;
   precision: string;
   kvPrecision: string;
   contextLength: number;
@@ -67,6 +68,7 @@ export interface CalculatorStore {
 
   // ── Actions
   setModel: (model: ModelSpec) => void;
+  setGPU: (gpu: GPUSpec | null) => void;
   setPrecision: (precision: string) => void;
   setKVPrecision: (kvPrecision: string) => void;
   setContextLength: (ctx: number) => void;
@@ -126,6 +128,7 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
 
     // Inputs
     selectedModel: initialModel,
+    selectedGPU: null,
     precision: initialState.precision,
     kvPrecision: initialState.kvPrecision,
     contextLength: initialState.ctx,
@@ -165,6 +168,11 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
       const clampedCtx = Math.min(contextLength, model.architecture.maxContextLength);
       set({ selectedModel: model, contextLength: clampedCtx });
       get().recompute();
+    },
+
+    setGPU: (gpu) => {
+      set({ selectedGPU: gpu });
+      // Don't recompute - GPU selection is for suggestions only
     },
 
     setPrecision: (precision) => {

@@ -6,6 +6,8 @@ import { useToast } from '@/components/feedback/Toast';
 
 // ── Input components ──────────────────────────────────────────────────────────
 import { ModelPicker } from '@/components/calculator/ModelPicker';
+import { GPUPicker } from '@/components/calculator/GPUPicker';
+import { ModelSuggestions } from '@/components/calculator/ModelSuggestions';
 import { PrecisionPicker } from '@/components/calculator/PrecisionPicker';
 import { KVPrecisionPicker } from '@/components/calculator/KVPrecisionPicker';
 import { ContextSlider } from '@/components/calculator/ContextSlider';
@@ -281,10 +283,10 @@ function AdvancedTabs({
 
 export function Home() {
   const {
-    modelDb, selectedModel, precision, kvPrecision, contextLength, batchSize,
+    modelDb, gpuDb, selectedModel, selectedGPU, precision, kvPrecision, contextLength, batchSize,
     mode, trainingOptions, advancedSettings, breakdown, gpuRecommendations,
     cloudRecommendations, costMetrics, clusterRecommendation, stackRecommendation,
-    setModel, setPrecision, setKVPrecision, setContextLength, setBatchSize,
+    setModel, setGPU, setPrecision, setKVPrecision, setContextLength, setBatchSize,
     setTrainingOptions, setAdvancedSettings, recompute,
     addCompareConfig, compareConfigs, getShareURL,
     numGPUs, setNumGPUs,
@@ -428,6 +430,23 @@ export function Home() {
   const InputPanel = (
     <div className="flex flex-col gap-5">
       <ModelPicker models={modelDb} value={selectedModel} onSelect={setModel} />
+      
+      {/* GPU Picker + Model Suggestions */}
+      <Section title="Hardware-First Selection" defaultOpen={false}>
+        <GPUPicker gpus={gpuDb} value={selectedGPU} onSelect={setGPU} />
+        {selectedGPU && (
+          <ModelSuggestions
+            gpu={selectedGPU}
+            models={modelDb}
+            onSelectModel={(model) => {
+              setModel(model);
+              setGPU(null); // Clear GPU selection after picking a model
+            }}
+            contextLength={contextLength}
+          />
+        )}
+      </Section>
+
       <PrecisionPicker value={precision} onChange={setPrecision} />
 
       {/* KV precision + curve — inference only */}
