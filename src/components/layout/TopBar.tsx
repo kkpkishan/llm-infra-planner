@@ -21,10 +21,6 @@ export function TopBar({ currentPath = '/', onOpenShortcuts }: TopBarProps) {
   const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
-  const builtAt = '2026-04-16T04:00:00Z';
-  const hoursAgo = Math.floor((Date.now() - new Date(builtAt).getTime()) / 3_600_000);
-  const freshnessLabel = hoursAgo < 1 ? 'just now' : `${hoursAgo}h ago`;
-
   return (
     <>
       <header
