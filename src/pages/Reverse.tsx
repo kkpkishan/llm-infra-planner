@@ -104,7 +104,7 @@ export function Reverse() {
   const sorted = [...filtered].sort((a, b) => FIT_ORDER[a.fitStatus] - FIT_ORDER[b.fitStatus]);
 
   return (
-    <div className="max-w-[1760px] mx-auto px-4 md:px-6 py-6 flex flex-col gap-6 overflow-x-hidden w-full">
+    <div className="max-w-[1760px] mx-auto px-4 md:px-6 py-6 flex flex-col gap-6">
 
       {/* ── Inputs ─────────────────────────────────────────────────── */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -179,15 +179,11 @@ export function Reverse() {
       </div>
 
       {/* ── Filters ────────────────────────────────────────────────── */}
-      <div className="flex flex-col gap-2">
-        <div className="overflow-x-auto pb-1">
-          <div className="flex items-center gap-4 w-max">
-            <FilterGroup label="Family" options={families} value={familyFilter} onChange={setFamilyFilter} />
-            <FilterGroup label="Size" options={SIZE_BUCKETS} value={sizeFilter} onChange={setSizeFilter} />
-            <FilterGroup label="License" options={licenses} value={licenseFilter} onChange={setLicenseFilter} />
-            <span className="text-xs text-fg-muted font-mono whitespace-nowrap">{sorted.length} models</span>
-          </div>
-        </div>
+      <div className="flex flex-wrap gap-4 items-center text-xs">
+        <FilterGroup label="Family" options={families} value={familyFilter} onChange={setFamilyFilter} />
+        <FilterGroup label="Size" options={SIZE_BUCKETS} value={sizeFilter} onChange={setSizeFilter} />
+        <FilterGroup label="License" options={licenses} value={licenseFilter} onChange={setLicenseFilter} />
+        <span className="ml-auto text-fg-muted font-mono">{sorted.length} models</span>
       </div>
 
       {/* ── Results grid ───────────────────────────────────────────── */}
@@ -253,15 +249,15 @@ export function Reverse() {
 
 function FilterGroup({ label, options, value, onChange }: { label: string; options: string[]; value: string; onChange: (v: string) => void }) {
   return (
-    <div className="flex items-center gap-1.5 flex-shrink-0">
-      <span className="text-xs text-fg-muted whitespace-nowrap">{label}:</span>
+    <div className="flex items-center gap-1.5">
+      <span className="text-fg-muted">{label}:</span>
       <div className="flex gap-1">
         {options.map(opt => (
           <button
             key={opt}
             onClick={() => onChange(opt)}
             className={cn(
-              'px-2 py-0.5 rounded border text-xs transition-colors whitespace-nowrap',
+              'px-2 py-0.5 rounded border text-xs transition-colors',
               value === opt
                 ? 'bg-accent text-white border-accent'
                 : 'border-border-subtle text-fg-muted hover:text-fg-default hover:border-border-default'

@@ -61,13 +61,13 @@ export function Models() {
   ];
 
   return (
-    <div className="max-w-[1760px] mx-auto px-4 md:px-6 py-6 flex flex-col gap-4 min-w-0 w-full overflow-x-hidden">
+    <div className="max-w-[1760px] mx-auto px-4 md:px-6 py-6 flex flex-col gap-4 min-w-0 w-full">
       <div className="flex flex-col gap-3">
         <h1 className="text-xl font-semibold text-fg-primary">
           Models <span className="text-fg-muted font-mono text-sm">({sorted.length})</span>
         </h1>
         {/* Family filter — horizontally scrollable, no wrapping */}
-        <div className="overflow-x-auto pb-1">
+        <div className="overflow-x-auto pb-1 -mx-4 px-4 md:-mx-6 md:px-6">
           <div className="flex items-center gap-1.5 w-max">
             {families.map(f => (
               <button key={f} onClick={() => setFamilyFilter(f)}
