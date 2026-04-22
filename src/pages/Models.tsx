@@ -61,24 +61,28 @@ export function Models() {
   ];
 
   return (
-    <div className="max-w-[1760px] mx-auto px-4 md:px-6 py-6 flex flex-col gap-4">
-      <div className="flex items-center justify-between flex-wrap gap-3">
-        <h1 className="text-xl font-semibold text-fg-primary">Models <span className="text-fg-muted font-mono text-sm">({sorted.length})</span></h1>
-        {/* Family filter */}
-        <div className="flex items-center gap-1.5 flex-wrap">
-          {families.map(f => (
-            <button key={f} onClick={() => setFamilyFilter(f)}
-              className={cn('text-xs px-2.5 py-1 rounded-md border transition-colors capitalize',
-                familyFilter === f ? 'bg-accent text-white border-accent' : 'border-border-subtle text-fg-muted hover:text-fg-default hover:border-border-default'
-              )}>
-              {f}
-            </button>
-          ))}
+    <div className="max-w-[1760px] mx-auto px-4 md:px-6 py-6 flex flex-col gap-4 min-w-0 w-full">
+      <div className="flex flex-col gap-3">
+        <h1 className="text-xl font-semibold text-fg-primary">
+          Models <span className="text-fg-muted font-mono text-sm">({sorted.length})</span>
+        </h1>
+        {/* Family filter — horizontally scrollable, no wrapping */}
+        <div className="overflow-x-auto pb-1 -mx-4 px-4 md:-mx-6 md:px-6">
+          <div className="flex items-center gap-1.5 w-max">
+            {families.map(f => (
+              <button key={f} onClick={() => setFamilyFilter(f)}
+                className={cn('text-xs px-2.5 py-1 rounded-md border transition-colors capitalize whitespace-nowrap',
+                  familyFilter === f ? 'bg-accent text-white border-accent' : 'border-border-subtle text-fg-muted hover:text-fg-default hover:border-border-default'
+                )}>
+                {f}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
-      <div className="overflow-x-auto rounded-lg border border-border-subtle">
-        <table className="w-full text-sm" aria-label="Models catalog">
+      <div className="w-full overflow-x-auto rounded-lg border border-border-subtle">
+        <table className="w-full min-w-[480px] text-sm" aria-label="Models catalog">
           <thead>
             <tr className="border-b border-border-subtle bg-bg-subtle">
               {cols.map(col => (
@@ -96,26 +100,26 @@ export function Models() {
           <tbody>
             {sorted.map(model => (
               <tr key={model.id} className="border-b border-border-subtle hover:bg-bg-subtle transition-colors">
-                <td className="px-4 py-3">
-                  <div className="flex items-center gap-2">
-                    <span className={cn('text-[10px] font-medium px-1.5 py-0.5 rounded capitalize',
+                <td className="px-4 py-3 max-w-[260px]">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className={cn('text-[10px] font-medium px-1.5 py-0.5 rounded capitalize flex-shrink-0',
                       FAMILY_COLORS[model.family] ?? 'bg-bg-muted text-fg-muted')}>
                       {model.family}
                     </span>
-                    <span className="text-sm font-medium text-fg-primary">{model.displayName}</span>
-                    {model.moe && <span className="text-[9px] font-medium px-1 py-0.5 rounded bg-bg-muted text-fg-muted">MoE</span>}
+                    <span className="text-sm font-medium text-fg-primary truncate">{model.displayName}</span>
+                    {model.moe && <span className="text-[9px] font-medium px-1 py-0.5 rounded bg-bg-muted text-fg-muted flex-shrink-0">MoE</span>}
                   </div>
                 </td>
-                <td className="px-4 py-3 text-right font-mono text-sm text-fg-default tabular-nums">
+                <td className="px-4 py-3 text-right font-mono text-sm text-fg-default tabular-nums whitespace-nowrap">
                   {(model.paramsTotal / 1e9).toFixed(1)}B
                 </td>
-                <td className="px-4 py-3 text-right font-mono text-sm text-fg-default tabular-nums">
+                <td className="px-4 py-3 text-right font-mono text-sm text-fg-default tabular-nums whitespace-nowrap">
                   {model.architecture.maxContextLength >= 1024
                     ? `${(model.architecture.maxContextLength / 1024).toFixed(0)}k`
                     : model.architecture.maxContextLength}
                 </td>
-                <td className="px-4 py-3 text-xs text-fg-muted font-mono">{model.releaseDate}</td>
-                <td className="px-4 py-3 text-xs text-fg-muted truncate max-w-[180px]">{model.license}</td>
+                <td className="px-4 py-3 text-xs text-fg-muted font-mono whitespace-nowrap">{model.releaseDate}</td>
+                <td className="px-4 py-3 text-xs text-fg-muted truncate max-w-[160px]">{model.license}</td>
               </tr>
             ))}
           </tbody>
