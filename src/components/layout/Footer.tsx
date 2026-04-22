@@ -6,7 +6,7 @@ export function Footer() {
         <span className="mx-1">·</span>
         <a href="/guides" className="hover:text-fg-primary transition-colors">methodology</a>
         <span className="mx-1">·</span>
-        <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-fg-primary transition-colors">github</a>
+        <a href="https://github.com/kkpkishan/llm-infra-planner" target="_blank" rel="noopener noreferrer" className="hover:text-fg-primary transition-colors">github</a>
         <span className="mx-1">·</span>
         <a href="#" className="hover:text-fg-primary transition-colors">changelog</a>
       </div>

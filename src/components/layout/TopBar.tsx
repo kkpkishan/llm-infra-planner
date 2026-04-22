@@ -71,7 +71,7 @@ export function TopBar({ currentPath = '/', onOpenShortcuts }: TopBarProps) {
             aria-label="Keyboard shortcuts (?)">
             <Keyboard size={16} aria-hidden="true" />
           </button>
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer"
+          <a href="https://github.com/kkpkishan/llm-infra-planner.git" target="_blank" rel="noopener noreferrer"
             className="hidden sm:flex w-8 h-8 rounded-md items-center justify-center text-fg-muted hover:text-fg-primary hover:bg-bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             aria-label="GitHub repository (opens in new tab)">
             <Github size={16} aria-hidden="true" />
