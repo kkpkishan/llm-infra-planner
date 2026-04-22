@@ -178,7 +178,6 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
     },
 
     setContextLength: (ctx) => {
-      const { selectedModel } = get();
       // Allow values beyond model's native max (user gets a warning in UI)
       // Hard cap at 10M tokens (largest step)
       const hardMax = 10_485_760;
