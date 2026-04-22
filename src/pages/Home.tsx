@@ -125,7 +125,7 @@ function AdvancedTabs({
   setSloTPOT: (n: number) => void; batchMode: boolean;
   setBatchMode: (b: boolean) => void;
 }) {
-  const [activeTab, setActiveTab] = React.useState('scale');
+  const [activeTab, setActiveTab] = React.useState('parallelism');
 
   // Reset to first available tab when mode changes
   React.useEffect(() => {
@@ -135,13 +135,13 @@ function AdvancedTabs({
   }, [mode]);
 
   const tabs = [
+    { id: 'parallelism', label: 'Parallelism', showFor: ['inference', 'train'] },
     { id: 'scale', label: 'Scale / QPS', showFor: ['inference'] },
+    { id: 'clustering', label: 'Clustering', showFor: ['inference', 'train'] },
     { id: 'concurrency', label: 'Concurrency', showFor: ['inference'] },
     { id: 'network', label: 'Network & Storage', showFor: ['inference', 'train'] },
     { id: 'power', label: 'Power & TCO', showFor: ['inference', 'train'] },
     { id: 'deployment', label: 'Deployment', showFor: ['inference'] },
-    { id: 'clustering', label: 'Clustering', showFor: ['inference', 'train'] },
-    { id: 'parallelism', label: 'Parallelism', showFor: ['inference', 'train'] },
   ].filter(t => t.showFor.includes(mode));
 
   return (
