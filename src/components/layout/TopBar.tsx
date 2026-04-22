@@ -58,9 +58,6 @@ export function TopBar({ currentPath = '/', onOpenShortcuts }: TopBarProps) {
 
         {/* Right side */}
         <div className="ml-auto flex items-center gap-1">
-          <span className="hidden sm:block text-[11px] text-fg-muted font-mono px-2 py-1 rounded-md bg-bg-muted mr-2" title={`Data last updated: ${builtAt}`}>
-            data · {freshnessLabel}
-          </span>
           <button onClick={toggleTheme}
             className="w-8 h-8 rounded-md flex items-center justify-center text-fg-muted hover:text-fg-primary hover:bg-bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode (⌘\\)`}>
