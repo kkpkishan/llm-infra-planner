@@ -18,6 +18,7 @@ const PROVIDER_CONFIG: Record<string, { label: string; url: string }> = {
   vast:       { label: 'Vast.ai',    url: 'https://vast.ai/' },
   coreweave:  { label: 'CoreWeave',  url: 'https://www.coreweave.com/gpu-cloud-computing' },
   together:   { label: 'Together',   url: 'https://www.together.ai/' },
+  nebius:     { label: 'Nebius',     url: 'https://nebius.com/services/gpu-cloud' },
 };
 
 function ProviderLogo({ provider, size = 28 }: { provider: string; size?: number }) {
@@ -77,6 +78,13 @@ function ProviderLogo({ provider, size = 28 }: { provider: string; size?: number
       <circle cx="30" cy="40" r="8" fill="white" fillOpacity="0.8"/>
       <circle cx="50" cy="40" r="8" fill="white" fillOpacity="0.8"/>
       <ellipse cx="40" cy="40" rx="6" ry="8" fill="white"/>
+    </svg>
+  );
+  if (p === 'nebius') return (
+    <svg width={size} height={size} viewBox="0 0 80 80" fill="none" aria-label="Nebius">
+      <rect width="80" height="80" rx="8" fill="#1A1A2E"/>
+      <path d="M20 52V28l20 24V28" stroke="#6366F1" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M44 28h16v24H44" stroke="#818CF8" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   );
   return (
