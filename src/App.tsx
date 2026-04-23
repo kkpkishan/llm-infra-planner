@@ -20,6 +20,16 @@ function AppContent() {
   const [shortcutsOpen, setShortcutsOpen] = React.useState(false);
   const [compareOpen, setCompareOpen] = React.useState(false);
 
+  // Fire GA page_view on every route change
+  React.useEffect(() => {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'page_view', {
+        page_path: location.pathname + location.search,
+        page_title: document.title,
+      });
+    }
+  }, [location]);
+
   useKeyboardShortcuts({
     onOpenModelSearch: () => document.dispatchEvent(new CustomEvent('llmcalc:open-model-search')),
     onOpenShortcutsModal: () => setShortcutsOpen(true),
