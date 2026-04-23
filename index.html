@@ -5,14 +5,57 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LLMcalc</title>
+
+    <!-- Step 1: Define dataLayer + gtag + consent defaults BEFORE the tag loads -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+
+      // Consent mode v2 — advanced implementation
+      // analytics_storage granted globally (developer tool, no personal data collected)
+      // ad_* denied by default; granted only if user explicitly opts in
+      gtag('consent', 'default', {
+        'analytics_storage':  'granted',
+        'ad_storage':         'denied',
+        'ad_user_data':       'denied',
+        'ad_personalization': 'denied',
+        'wait_for_update':    500
+      });
+
+      // EEA/UK regions: deny analytics too until consent is given
+      gtag('consent', 'default', {
+        'analytics_storage':  'denied',
+        'ad_storage':         'denied',
+        'ad_user_data':       'denied',
+        'ad_personalization': 'denied',
+        'region': ['AT','BE','BG','CY','CZ','DE','DK','EE','ES','FI','FR',
+                   'GR','HR','HU','IE','IT','LT','LU','LV','MT','NL','PL',
+                   'PT','RO','SE','SI','SK','GB','IS','LI','NO'],
+        'wait_for_update': 500
+      });
+
+      // Enable URL passthrough for better measurement without cookies
+      gtag('set', 'url_passthrough', true);
+      // Redact ads data when ad_storage is denied
+      gtag('set', 'ads_data_redaction', true);
+    </script>
+
+    <!-- Step 2: Load the Google tag -->
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-76YFDD4B1W"></script>
+
+    <!-- Step 3: Configure the tag -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-76YFDD4B1W', { send_page_view: false });
+      gtag('config', 'G-76YFDD4B1W', {
+        'send_page_view': false,
+        'cookie_flags': 'SameSite=None;Secure'
+      });
     </script>
+
+    <!-- Theme init (must run before render) -->
     <script>
       (function() {
         var stored = localStorage.getItem('theme');
