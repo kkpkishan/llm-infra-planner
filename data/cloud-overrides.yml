@@ -1,7 +1,7 @@
 # Cloud instance pricing overrides.
 # This file is the source of truth for all cloud provider pricing.
 # Run `npx tsx scripts/refresh-cloud-prices.ts` to update src/data/cloud.json.
-# Last updated: 2026-04-20
+# Last updated: 2026-04-22
 
 instances:
   # ─── AWS ────────────────────────────────────────────────────────────
@@ -206,6 +206,182 @@ instances:
     notes: Blackwell B200 instance, latest generation
     lastPriceUpdate: "2026-04-20"
 
+  # --- New AWS additions (2026-04-22) ---
+  - id: aws-p6-b300.48xlarge
+    provider: aws
+    instanceType: p6-b300.48xlarge
+    gpus:
+      - id: nvidia-b300-sxm
+        count: 8
+    vcpus: 192
+    ramGB: 4096
+    storageGB: 30000
+    networkGbps: 6400
+    interconnect: nvswitch
+    pricing:
+      onDemandUSDPerHour: 93.60
+      spotUSDPerHour: 34.00
+    regions:
+      - us-west-2
+      - us-east-1
+    notes: >-
+      Blackwell Ultra (B300) instance. 2x network bandwidth vs P6-B200
+      via PCIe Gen6, 1.5x GPU memory, 1.5x FP4 compute.
+    lastPriceUpdate: "2026-04-22"
+
+  - id: aws-p6e-gb200.36xlarge
+    provider: aws
+    instanceType: p6e-gb200.36xlarge
+    gpus:
+      - id: nvidia-b200-sxm
+        count: 4
+    vcpus: 144
+    ramGB: 960
+    storageGB: 22500
+    networkGbps: 1700
+    interconnect: nvlink
+    pricing:
+      onDemandUSDPerHour: 42.33
+    regions:
+      - us-east-1
+    notes: >-
+      Building block of P6e-GB200 UltraServer (Grace Blackwell, 2 GB200
+      Superchips per instance = 4 B200 GPUs + 2 Grace CPUs). Only
+      available via EC2 Capacity Blocks within an UltraServer in the
+      Dallas Local Zone (us-east-1-dfw-2a). Price is effective per-instance
+      rate derived from UltraServer x72 pricing.
+    lastPriceUpdate: "2026-04-22"
+
+  - id: aws-u-p6e-gb200x36
+    provider: aws
+    instanceType: u-p6e-gb200x36
+    gpus:
+      - id: nvidia-b200-sxm
+        count: 36
+    vcpus: 1296
+    ramGB: 8640
+    storageGB: 202500
+    networkGbps: 14400
+    interconnect: nvlink
+    pricing:
+      onDemandUSDPerHour: 380.95
+    regions:
+      - us-east-1
+    notes: >-
+      P6e-GB200 UltraServer, 36 Blackwell GPUs in a single NVLink domain
+      (9 × p6e-gb200.36xlarge). Liquid-cooled, purchased via EC2 Capacity
+      Blocks for ML. Dallas Local Zone only.
+    lastPriceUpdate: "2026-04-22"
+
+  - id: aws-u-p6e-gb200x72
+    provider: aws
+    instanceType: u-p6e-gb200x72
+    gpus:
+      - id: nvidia-b200-sxm
+        count: 72
+    vcpus: 2592
+    ramGB: 17280
+    storageGB: 405000
+    networkGbps: 28800
+    interconnect: nvlink
+    pricing:
+      onDemandUSDPerHour: 761.90
+    regions:
+      - us-east-1
+    notes: >-
+      P6e-GB200 UltraServer full rack (GB200 NVL72) — 72 Blackwell GPUs in
+      a single NVLink domain (18 × p6e-gb200.36xlarge). 360 PFLOPS FP8,
+      13.4 TB HBM3e, 28.8 Tbps EFAv4. Purchased via EC2 Capacity Blocks.
+    lastPriceUpdate: "2026-04-22"
+
+  - id: aws-p6e-gb300.36xlarge
+    provider: aws
+    instanceType: p6e-gb300.36xlarge
+    gpus:
+      - id: nvidia-b300-sxm
+        count: 4
+    vcpus: 144
+    ramGB: 960
+    storageGB: 22500
+    networkGbps: 1700
+    interconnect: nvlink
+    pricing:
+      onDemandUSDPerHour: 55.00
+    regions:
+      - us-east-1
+    notes: >-
+      Building block of P6e-GB300 UltraServer (Grace Blackwell Ultra, 2
+      GB300 Superchips per instance). ~1.5x GPU memory and ~1.5x FP4
+      compute vs P6e-GB200. Available only via Capacity Blocks within an
+      UltraServer. Pricing is preliminary (estimated ~30% premium over
+      P6e-GB200) — verify before production use.
+    lastPriceUpdate: "2026-04-22"
+
+  - id: aws-u-p6e-gb300x72
+    provider: aws
+    instanceType: u-p6e-gb300x72
+    gpus:
+      - id: nvidia-b300-sxm
+        count: 72
+    vcpus: 2592
+    ramGB: 17280
+    storageGB: 405000
+    networkGbps: 28800
+    interconnect: nvlink
+    pricing:
+      onDemandUSDPerHour: 990.00
+    regions:
+      - us-east-1
+    notes: >-
+      P6e-GB300 UltraServer full rack (GB300 NVL72) — 72 Blackwell Ultra
+      GPUs, ~20 TB GPU memory, 1.5x FP4 TFLOPS vs GB200 NVL72. Estimated
+      pricing; contact AWS for current Capacity Block rates.
+    lastPriceUpdate: "2026-04-22"
+
+  - id: aws-trn2.48xlarge
+    provider: aws
+    instanceType: trn2.48xlarge
+    gpus:
+      - id: aws-trainium2
+        count: 16
+    vcpus: 192
+    ramGB: 2048
+    storageGB: 7600
+    networkGbps: 3200
+    interconnect: neuronlink
+    pricing:
+      onDemandUSDPerHour: 16.0158
+      spotUSDPerHour: 5.50
+    regions:
+      - us-east-2
+      - us-west-2
+    notes: >-
+      AWS Trainium2 instance — 16 Trainium2 chips, 20.8 PFLOPS FP8,
+      1.5 TB HBM3. Claims 30-40% better price/perf vs P5e/P5en.
+      Used by Anthropic's Project Rainier.
+    lastPriceUpdate: "2026-04-22"
+
+  - id: aws-trn2-ultraserver
+    provider: aws
+    instanceType: trn2u.ultra
+    gpus:
+      - id: aws-trainium2
+        count: 64
+    vcpus: 768
+    ramGB: 8192
+    storageGB: 30400
+    networkGbps: 12800
+    interconnect: neuronlink
+    pricing:
+      onDemandUSDPerHour: 64.50
+    regions:
+      - us-east-2
+    notes: >-
+      Trn2 UltraServer — 4× Trn2 instances interconnected via NeuronLink,
+      64 Trainium2 chips total, 83.2 PFLOPS FP8, 6 TB HBM, 12.8 Tbps EFAv3.
+      Estimated pricing; contact AWS for availability.
+    lastPriceUpdate: "2026-04-22"
+
   # ─── Azure ──────────────────────────────────────────────────────────
   - id: azure-nc24ads-a100-v4
     provider: azure
@@ -306,6 +482,54 @@ instances:
       - westus2
     notes: Blackwell B200 Azure instance
     lastPriceUpdate: "2026-04-20"
+
+  # --- New Azure additions (2026-04-22) ---
+  - id: azure-nd-gb200-v6
+    provider: azure
+    instanceType: ND GB200 v6
+    gpus:
+      - id: nvidia-b200-sxm
+        count: 4
+    vcpus: 128
+    ramGB: 1440
+    storageGB: 14000
+    networkGbps: 1600
+    interconnect: nvlink
+    pricing:
+      onDemandUSDPerHour: 42.50
+    regions:
+      - eastus
+      - southcentralus
+    notes: >-
+      Azure Grace Blackwell VM — 2 GB200 Superchips per VM (4 B200 GPUs +
+      2 Grace CPUs). 18 VMs form one GB200 NVL72 rack (72 GPUs, 1.4
+      Exa-FLOPS FP4, 13.5 TB HBM3e). 4× 400 Gb/s Quantum-2 InfiniBand.
+      Per-VM price is estimated; actual pricing typically requires a
+      reservation / quota request.
+    lastPriceUpdate: "2026-04-22"
+
+  - id: azure-nd-gb300-v6
+    provider: azure
+    instanceType: ND GB300 v6
+    gpus:
+      - id: nvidia-b300-sxm
+        count: 4
+    vcpus: 128
+    ramGB: 1440
+    storageGB: 14000
+    networkGbps: 1600
+    interconnect: nvlink
+    pricing:
+      onDemandUSDPerHour: 56.00
+    regions:
+      - eastus
+      - southcentralus
+    notes: >-
+      Azure NDv6 GB300 VM — 2 GB300 Superchips per VM (4 B300 Ultra GPUs).
+      First at-scale production GB300 NVL72 cluster (4600+ Blackwell Ultra
+      GPUs) connected via NVIDIA Quantum-X800 InfiniBand. Estimated
+      pricing; contact Azure for reservation quotes.
+    lastPriceUpdate: "2026-04-22"
 
   # ─── GCP ────────────────────────────────────────────────────────────
   - id: gcp-g2-standard-4
@@ -427,6 +651,79 @@ instances:
     notes: H200-based GCP instance
     lastPriceUpdate: "2026-04-20"
 
+  # --- New GCP additions (2026-04-22) ---
+  # NOTE: per GCP docs, a4-highgpu-8g actually carries 8 B200 Blackwell GPUs
+  # (not H200). The existing a4-highgpu-8g entry above preserves prior data;
+  # review and reclassify if your source of truth is the GCP catalog.
+  - id: gcp-a4-highgpu-8g-b200
+    provider: gcp
+    instanceType: a4-highgpu-8g
+    gpus:
+      - id: nvidia-b200-sxm
+        count: 8
+    vcpus: 224
+    ramGB: 3968
+    storageGB: 12000
+    networkGbps: 3200
+    interconnect: nvswitch
+    pricing:
+      onDemandUSDPerHour: 115.00
+      spotUSDPerHour: 38.00
+    regions:
+      - us-central1
+      - us-east5
+      - europe-west4
+    notes: >-
+      A4 machine series — 8 NVIDIA B200 Blackwell GPUs. FP4 support,
+      5th-gen NVLink. Distinct from the legacy H200-configured entry
+      above; use this one for new Blackwell deployments.
+    lastPriceUpdate: "2026-04-22"
+
+  - id: gcp-a4x-highgpu-4g
+    provider: gcp
+    instanceType: a4x-highgpu-4g
+    gpus:
+      - id: nvidia-b200-sxm
+        count: 4
+    vcpus: 140
+    ramGB: 884
+    storageGB: 12000
+    networkGbps: 1600
+    interconnect: nvlink
+    pricing:
+      onDemandUSDPerHour: 45.00
+    regions:
+      - us-central1
+      - us-east5
+    notes: >-
+      A4X — NVIDIA GB200 NVL72 rack-scale platform. Each VM has 2
+      GB200 Grace Blackwell Superchips (4 B200 GPUs + 2 Grace CPUs)
+      with NVLink-C2C. 18 VMs form one NVL72 NVLink domain (72 GPUs).
+      Capacity reservation required.
+    lastPriceUpdate: "2026-04-22"
+
+  - id: gcp-a4x-max-highgpu-4g
+    provider: gcp
+    instanceType: a4x-max-highgpu-4g
+    gpus:
+      - id: nvidia-b300-sxm
+        count: 4
+    vcpus: 144
+    ramGB: 960
+    storageGB: 12000
+    networkGbps: 1600
+    interconnect: nvlink
+    pricing:
+      onDemandUSDPerHour: 60.00
+    regions:
+      - us-central1
+    notes: >-
+      A4X Max — NVIDIA GB300 NVL72 rack-scale platform (Blackwell Ultra).
+      Each bare-metal host has 2 GB300 Superchips (4 B300 GPUs + 2 Grace
+      CPUs). 18 hosts form one NVL72 domain. No Compute Engine SLA.
+      Estimated pricing; requires capacity reservation.
+    lastPriceUpdate: "2026-04-22"
+
   # ─── Lambda Labs ─────────────────────────────────────────────────────
   - id: lambda-1xh100
     provider: lambda
@@ -515,6 +812,84 @@ instances:
       - us-tx-3
     notes: Blackwell B200 cluster
     lastPriceUpdate: "2026-04-20"
+
+  # --- New Lambda Labs additions (2026-04-22) ---
+  - id: lambda-1xb300
+    provider: lambda
+    instanceType: "1x B300 288GB"
+    gpus:
+      - id: nvidia-b300-sxm
+        count: 1
+    vcpus: 28
+    ramGB: 288
+    storageGB: 1000
+    networkGbps: 100
+    pricing:
+      onDemandUSDPerHour: 5.49
+    regions:
+      - us-tx-3
+    notes: Blackwell Ultra (B300), 288 GB HBM3e. 1-Click cluster option available.
+    lastPriceUpdate: "2026-04-22"
+
+  - id: lambda-8xb300
+    provider: lambda
+    instanceType: "8x B300 288GB"
+    gpus:
+      - id: nvidia-b300-sxm
+        count: 8
+    vcpus: 208
+    ramGB: 2304
+    storageGB: 8000
+    networkGbps: 3200
+    interconnect: nvswitch
+    pricing:
+      onDemandUSDPerHour: 43.00
+    regions:
+      - us-tx-3
+    notes: HGX B300 cluster — 2.3 TB HBM3e, 1.5x FP4 throughput vs HGX B200.
+    lastPriceUpdate: "2026-04-22"
+
+  - id: lambda-gb200-nvl72
+    provider: lambda
+    instanceType: "GB200 NVL72"
+    gpus:
+      - id: nvidia-b200-sxm
+        count: 72
+    vcpus: 2592
+    ramGB: 17280
+    storageGB: 405000
+    networkGbps: 28800
+    interconnect: nvlink
+    pricing:
+      onDemandUSDPerHour: 720.00
+    regions:
+      - us-tx-3
+    notes: >-
+      Single-tenant NVIDIA GB200 NVL72 rack cluster with Quantum-2
+      InfiniBand. 1.4 Exa-FLOPS FP4. Typically sold as reserved / 1-Click
+      Cluster — contact Lambda for firm pricing.
+    lastPriceUpdate: "2026-04-22"
+
+  - id: lambda-gb300-nvl72
+    provider: lambda
+    instanceType: "GB300 NVL72"
+    gpus:
+      - id: nvidia-b300-sxm
+        count: 72
+    vcpus: 2592
+    ramGB: 17280
+    storageGB: 405000
+    networkGbps: 28800
+    interconnect: nvlink
+    pricing:
+      onDemandUSDPerHour: 950.00
+    regions:
+      - us-tx-3
+    notes: >-
+      Single-tenant NVIDIA GB300 NVL72 rack (Blackwell Ultra) with
+      Quantum-2 InfiniBand. ~20 TB GPU memory. Reservation-only;
+      contact Lambda for pricing. Listed rate is an estimate.
+    lastPriceUpdate: "2026-04-22"
 
   # ─── RunPod ──────────────────────────────────────────────────────────
   - id: runpod-1x4090
@@ -624,6 +999,60 @@ instances:
     notes: Blackwell B200, Secure Cloud
     lastPriceUpdate: "2026-04-20"
 
+  # --- New RunPod additions (2026-04-22) ---
+  - id: runpod-8xb200
+    provider: runpod
+    instanceType: "8x B200 192GB"
+    gpus:
+      - id: nvidia-b200-sxm
+        count: 8
+    vcpus: 128
+    ramGB: 2048
+    storageGB: 4000
+    networkGbps: 400
+    interconnect: nvswitch
+    pricing:
+      onDemandUSDPerHour: 39.92
+    regions:
+      - us-east
+    notes: Secure Cloud, HGX B200 node
+    lastPriceUpdate: "2026-04-22"
+
+  - id: runpod-1xb300
+    provider: runpod
+    instanceType: "1x B300 288GB"
+    gpus:
+      - id: nvidia-b300-sxm
+        count: 1
+    vcpus: 16
+    ramGB: 288
+    storageGB: 500
+    networkGbps: 25
+    pricing:
+      onDemandUSDPerHour: 5.99
+    regions:
+      - us-east
+    notes: Blackwell Ultra (B300), Secure Cloud
+    lastPriceUpdate: "2026-04-22"
+
+  - id: runpod-8xb300
+    provider: runpod
+    instanceType: "8x B300 288GB"
+    gpus:
+      - id: nvidia-b300-sxm
+        count: 8
+    vcpus: 128
+    ramGB: 2304
+    storageGB: 4000
+    networkGbps: 400
+    interconnect: nvswitch
+    pricing:
+      onDemandUSDPerHour: 47.92
+    regions:
+      - us-east
+    notes: HGX B300 Secure Cloud node
+    lastPriceUpdate: "2026-04-22"
+
   # ─── Vast.ai ─────────────────────────────────────────────────────────
   - id: vast-1xh100
     provider: vast
@@ -643,6 +1072,26 @@ instances:
       - eu-west
     notes: Marketplace pricing, varies by host
     lastPriceUpdate: "2026-04-16"
+
+  # --- New Vast.ai additions (2026-04-22) ---
+  - id: vast-1xb200
+    provider: vast
+    instanceType: "1x B200 192GB"
+    gpus:
+      - id: nvidia-b200-sxm
+        count: 1
+    vcpus: 16
+    ramGB: 192
+    storageGB: 500
+    networkGbps: 10
+    pricing:
+      onDemandUSDPerHour: 3.79
+    regions:
+      - us-east
+      - us-west
+      - eu-west
+    notes: Marketplace pricing — often the cheapest single-B200 on the market.
+    lastPriceUpdate: "2026-04-22"
 
   # ─── CoreWeave ───────────────────────────────────────────────────────
   - id: coreweave-8xh100
@@ -705,6 +1154,75 @@ instances:
     notes: Blackwell B200 cluster, latest generation
     lastPriceUpdate: "2026-04-20"
 
+  # --- New CoreWeave additions (2026-04-22) ---
+  - id: coreweave-8xb300
+    provider: coreweave
+    instanceType: "8x B300 288GB"
+    gpus:
+      - id: nvidia-b300-sxm
+        count: 8
+    vcpus: 192
+    ramGB: 2304
+    storageGB: 8000
+    networkGbps: 3200
+    interconnect: nvswitch
+    pricing:
+      onDemandUSDPerHour: 85.00
+      reserved1yUSDPerHour: 68.00
+    regions:
+      - us-east
+      - us-west
+    notes: >-
+      HGX B300 (Blackwell Ultra) cluster. CoreWeave was the first cloud
+      provider to take commercial delivery of Dell-built GB300 NVL72 in
+      mid-2025.
+    lastPriceUpdate: "2026-04-22"
+
+  - id: coreweave-gb200-nvl72
+    provider: coreweave
+    instanceType: "GB200 NVL72"
+    gpus:
+      - id: nvidia-b200-sxm
+        count: 72
+    vcpus: 2592
+    ramGB: 17280
+    storageGB: 405000
+    networkGbps: 28800
+    interconnect: nvlink
+    pricing:
+      onDemandUSDPerHour: 756.00
+      reserved1yUSDPerHour: 600.00
+    regions:
+      - us-east
+      - us-west
+    notes: >-
+      Rack-scale NVIDIA GB200 NVL72 — 72 Blackwell GPUs in one NVLink
+      domain, 13.4 TB HBM3e, 1.4 Exa-FLOPS FP4. Reservation-preferred;
+      rates are indicative.
+    lastPriceUpdate: "2026-04-22"
+
+  - id: coreweave-gb300-nvl72
+    provider: coreweave
+    instanceType: "GB300 NVL72"
+    gpus:
+      - id: nvidia-b300-sxm
+        count: 72
+    vcpus: 2592
+    ramGB: 17280
+    storageGB: 405000
+    networkGbps: 28800
+    interconnect: nvlink
+    pricing:
+      onDemandUSDPerHour: 990.00
+      reserved1yUSDPerHour: 792.00
+    regions:
+      - us-east
+      - us-west
+    notes: >-
+      Rack-scale NVIDIA GB300 NVL72 (Blackwell Ultra) — first commercial
+      deployment was to CoreWeave in mid-2025. Reservation-only.
+    lastPriceUpdate: "2026-04-22"
+
   # ─── Together AI ─────────────────────────────────────────────────────
   - id: together-llama-3.1-70b-serverless
     provider: together
@@ -722,3 +1240,112 @@ instances:
       - us
     notes: "Per-token pricing: $0.88/M tokens. No infrastructure management required."
     lastPriceUpdate: "2026-04-16"
+
+  # ─── Nebius ──────────────────────────────────────────────────────────
+  # New provider added 2026-04-22
+  - id: nebius-hgx-h100-1g
+    provider: nebius
+    instanceType: "HGX H100"
+    gpus:
+      - id: nvidia-h100-sxm-80gb
+        count: 1
+    vcpus: 16
+    ramGB: 200
+    storageGB: 500
+    networkGbps: 100
+    pricing:
+      onDemandUSDPerHour: 2.95
+    regions:
+      - eu-north1
+      - us-central1
+    notes: Nebius AI Cloud, per-GPU published rate
+    lastPriceUpdate: "2026-04-22"
+
+  - id: nebius-hgx-h200-1g
+    provider: nebius
+    instanceType: "HGX H200"
+    gpus:
+      - id: nvidia-h200-sxm-141gb
+        count: 1
+    vcpus: 16
+    ramGB: 200
+    storageGB: 500
+    networkGbps: 100
+    pricing:
+      onDemandUSDPerHour: 3.50
+    regions:
+      - eu-north1
+      - us-central1
+    lastPriceUpdate: "2026-04-22"
+
+  - id: nebius-hgx-b200-1g
+    provider: nebius
+    instanceType: "HGX B200"
+    gpus:
+      - id: nvidia-b200-sxm
+        count: 1
+    vcpus: 20
+    ramGB: 224
+    storageGB: 500
+    networkGbps: 100
+    pricing:
+      onDemandUSDPerHour: 5.50
+    regions:
+      - eu-north1
+      - us-central1
+    notes: Per-GPU published rate (node level is 8× this figure).
+    lastPriceUpdate: "2026-04-22"
+
+  - id: nebius-hgx-b300-1g
+    provider: nebius
+    instanceType: "HGX B300"
+    gpus:
+      - id: nvidia-b300-sxm
+        count: 1
+    vcpus: 24
+    ramGB: 346
+    storageGB: 500
+    networkGbps: 100
+    pricing:
+      onDemandUSDPerHour: 6.10
+    regions:
+      - eu-north1
+      - us-central1
+    notes: Blackwell Ultra, per-GPU published rate.
+    lastPriceUpdate: "2026-04-22"
+
+  - id: nebius-gb200-nvl72
+    provider: nebius
+    instanceType: "GB200 NVL72"
+    gpus:
+      - id: nvidia-b200-sxm
+        count: 72
+    vcpus: 2592
+    ramGB: 17280
+    storageGB: 405000
+    networkGbps: 28800
+    interconnect: nvlink
+    pricing:
+      onDemandUSDPerHour: 780.00
+    regions:
+      - eu-north1
+    notes: Contact Nebius sales — rack-scale, reservation-only.
+    lastPriceUpdate: "2026-04-22"
+
+  - id: nebius-gb300-nvl72
+    provider: nebius
+    instanceType: "GB300 NVL72"
+    gpus:
+      - id: nvidia-b300-sxm
+        count: 72
+    vcpus: 2592
+    ramGB: 17280
+    storageGB: 405000
+    networkGbps: 28800
+    interconnect: nvlink
+    pricing:
+      onDemandUSDPerHour: 1005.00
+    regions:
+      - eu-north1
+    notes: Contact Nebius sales — rack-scale, reservation-only.
+    lastPriceUpdate: "2026-04-22"
