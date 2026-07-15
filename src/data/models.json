@@ -8115,6 +8115,35 @@
     "huggingfaceId": "THUDM/GLM-Z1-Rumination-32B-0414"
   },
   {
+    "id": "zai-org/GLM-5.2",
+    "family": "glm",
+    "displayName": "GLM-5.2",
+    "releaseDate": "2026-06-01",
+    "license": "MIT",
+    "paramsTotal": 744000000000,
+    "paramsActive": 40000000000,
+    "architecture": {
+      "numLayers": 78,
+      "hiddenSize": 6144,
+      "intermediateSize": 12288,
+      "numAttentionHeads": 64,
+      "numKeyValueHeads": 64,
+      "headDim": 192,
+      "vocabSize": 154880,
+      "tieWordEmbeddings": false,
+      "attentionType": "mla",
+      "maxContextLength": 1048576,
+      "positionalEmbedding": "rope"
+    },
+    "moe": {
+      "numExperts": 256,
+      "expertsPerToken": 8,
+      "sharedExperts": 1
+    },
+    "mlaCompressedDim": 512,
+    "huggingfaceId": "zai-org/GLM-5.2"
+  },
+  {
     "id": "THUDM/cogvlm2-llama3-chat-19B",
     "family": "llama",
     "displayName": "cogvlm2-llama3-chat-19B",
