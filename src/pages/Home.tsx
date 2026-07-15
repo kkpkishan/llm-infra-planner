@@ -285,7 +285,7 @@ function AdvancedTabs({
 export function Home() {
   const {
     modelDb, gpuDb, cloudDb, selectedModel, selectedGPU, precision, kvPrecision, contextLength, batchSize,
-    mode, trainingOptions, advancedSettings, breakdown, gpuRecommendations,
+    mode, trainingOptions, advancedSettings, breakdown, gpuRecommendations, topGPU,
     cloudRecommendations, costMetrics, clusterRecommendation, stackRecommendation,
     setModel, setGPU, setPrecision, setKVPrecision, setContextLength, setBatchSize,
     setTrainingOptions, setAdvancedSettings, recompute,
@@ -299,7 +299,6 @@ export function Home() {
 
   React.useEffect(() => { if (!breakdown) recompute(); }, [breakdown, recompute]);
 
-  const topGPU = gpuRecommendations?.allFits.find(f => f.fitStatus !== 'red');
   const kvPrecisionLabel = kvPrecision.toUpperCase();
   const isTrainingMode = mode === 'train';
   const isVLM = !!(selectedModel as any)?.architecture?.visionConfig;
@@ -442,7 +441,6 @@ export function Home() {
               models={modelDb}
               onSelectModel={(model) => {
                 setModel(model);
-                setGPU(null);
               }}
               contextLength={contextLength}
             />
