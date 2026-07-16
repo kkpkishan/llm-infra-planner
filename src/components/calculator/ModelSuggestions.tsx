@@ -4,6 +4,8 @@ import { cn } from '@/lib/utils';
 import type { ModelSpec, GPUSpec } from '@/lib/formulas/types';
 import { getPrecisionConfig, getKVPrecisionConfig, computeTotalVRAM, classifyGPUFit } from '@/lib/formulas';
 
+import { useCalculatorStore } from '@/store/calculator-store';
+
 interface ModelSuggestionsProps {
   gpu: GPUSpec;
   models: ModelSpec[];
@@ -21,16 +23,17 @@ const FIT_ICON = {
 export function ModelSuggestions({ gpu, models, onSelectModel, contextLength = 4096, className }: ModelSuggestionsProps) {
   const [showAll, setShowAll] = React.useState(false);
   const [searchQuery, setSearchQuery] = React.useState('');
+  const { precision, kvPrecision, numGPUs, mode } = useCalculatorStore();
 
   const results = React.useMemo(() => {
-    const pc = getPrecisionConfig('fp16');
-    const kv = getKVPrecisionConfig('fp16');
+    const pc = getPrecisionConfig(precision);
+    const kv = getKVPrecisionConfig(kvPrecision);
     return models.map(model => {
-      const bd = computeTotalVRAM(model, pc, kv, contextLength, 1, 'inference');
-      const fitStatus = classifyGPUFit(bd.totalGB, gpu.memoryGB);
+      const bd = computeTotalVRAM(model, pc, kv, contextLength, 1, mode);
+      const fitStatus = classifyGPUFit(bd.totalGB, gpu.memoryGB * numGPUs);
       return { model, vram: bd.totalGB, fitStatus };
     });
-  }, [models, gpu.memoryGB, contextLength]);
+  }, [models, gpu.memoryGB, contextLength, precision, kvPrecision, numGPUs, mode]);
 
   const FIT_ORDER = { green: 0, yellow: 1, red: 2 };
   const sorted = [...results].sort((a, b) => {

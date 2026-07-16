@@ -11,7 +11,8 @@ import type { GPUSpec, ClusterRecommendation, WorkloadMode } from './types';
 export function recommendCluster(
   totalVRAMGB: number,
   mode: WorkloadMode,
-  gpus: GPUSpec[]
+  gpus: GPUSpec[],
+  numGPUs?: number
 ): ClusterRecommendation {
   const sortedByMemory = [...gpus].sort((a, b) => b.memoryGB - a.memoryGB);
   const largestGPU = sortedByMemory[0];
@@ -40,7 +41,9 @@ export function recommendCluster(
   }
 
   // ── Topology selection ────────────────────────────────────────────────────
-  if (totalVRAMGB <= largestMemory) {
+  const gpusNeeded = numGPUs ?? Math.ceil(totalVRAMGB / largestMemory);
+
+  if (gpusNeeded <= 1) {
     // Single GPU fits
     return {
       topology: `1× ${largestGPU?.name ?? 'GPU'} · no parallelism needed`,
@@ -49,9 +52,6 @@ export function recommendCluster(
       alternativeRuntime,
     };
   }
-
-  // Multi-GPU needed — find how many of the largest GPU we need
-  const gpusNeeded = Math.ceil(totalVRAMGB / largestMemory);
 
   if (gpusNeeded <= 8) {
     // Single node with Tensor Parallelism

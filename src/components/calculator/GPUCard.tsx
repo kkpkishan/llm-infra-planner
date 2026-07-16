@@ -1,6 +1,7 @@
 import { CheckCircle, AlertTriangle, XCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { GPUFitResult } from '@/lib/formulas/types';
+import { useCalculatorStore } from '@/store/calculator-store';
 
 interface GPUCardProps {
   fit: GPUFitResult;
@@ -34,6 +35,9 @@ const FIT_CONFIG = {
 
 export function GPUCard({ fit, isRecommended, className }: GPUCardProps) {
   const { gpu, fitStatus, utilizationPercent, freeVRAMGB, tokensPerSecond } = fit;
+  const { selectedGPU, setGPU } = useCalculatorStore();
+  const isSelected = selectedGPU?.id === gpu.id;
+
   const config = FIT_CONFIG[fitStatus];
   const FitIcon = config.icon;
 
@@ -45,13 +49,18 @@ export function GPUCard({ fit, isRecommended, className }: GPUCardProps) {
     : null;
 
   return (
-    <div className={cn(
-      'rounded-lg border p-3 flex flex-col gap-2 transition-colors',
-      isRecommended
-        ? 'border-accent/40 bg-accent/5'
-        : 'border-border-subtle bg-bg-muted hover:border-border-default',
-      className
-    )}>
+    <div
+      onClick={() => setGPU(gpu)}
+      className={cn(
+        'rounded-lg border p-3 flex flex-col gap-2 transition-all duration-150 cursor-pointer',
+        isSelected
+          ? 'border-accent bg-accent/10 ring-1 ring-accent'
+          : isRecommended
+            ? 'border-accent/40 bg-accent/5 hover:border-accent'
+            : 'border-border-subtle bg-bg-muted hover:border-border-default hover:bg-bg-emphasis',
+        className
+      )}
+    >
       {/* Header: fit badge + name + price */}
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-1.5 min-w-0">

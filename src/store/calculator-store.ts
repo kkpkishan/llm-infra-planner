@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import type {
   ModelSpec, GPUSpec, CloudInstance,
-  VRAMBreakdown, GPURecommendations, CloudRecommendation,
+  VRAMBreakdown, GPURecommendations, GPUFitResult, CloudRecommendation,
   CostMetricsResult, ClusterRecommendation, StackRecommendation,
   WorkloadMode, TrainingOptions, AdvancedSettings, CalculatorState,
 } from '@/lib/formulas/types';
@@ -50,6 +50,7 @@ export interface CalculatorStore {
   // ── Computed results
   breakdown: VRAMBreakdown | null;
   gpuRecommendations: GPURecommendations | null;
+  topGPU: GPUFitResult | null;
   cloudRecommendations: CloudRecommendation[] | null;
   costMetrics: CostMetricsResult | null;
   clusterRecommendation: ClusterRecommendation | null;
@@ -152,6 +153,7 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
     // Computed (null until first recompute)
     breakdown: null,
     gpuRecommendations: null,
+    topGPU: null,
     cloudRecommendations: null,
     costMetrics: null,
     clusterRecommendation: null,
@@ -172,7 +174,7 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
 
     setGPU: (gpu) => {
       set({ selectedGPU: gpu });
-      // Don't recompute - GPU selection is for suggestions only
+      get().recompute();
     },
 
     setPrecision: (precision) => {
@@ -280,8 +282,10 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
     loadFromURL: (queryString) => {
       const parsed = parseState(queryString, MODEL_DB);
       const model = MODEL_DB.find(m => m.id === parsed.model) ?? MODEL_DB[0] ?? null;
+      const gpu = GPU_DB.find(g => g.id === parsed.gpu) ?? null;
       set({
         selectedModel: model,
+        selectedGPU: gpu,
         precision: parsed.precision,
         kvPrecision: parsed.kvPrecision,
         contextLength: parsed.ctx,
@@ -307,7 +311,7 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
     },
 
     getShareURL: () => {
-      const { selectedModel, precision, kvPrecision, contextLength, batchSize, mode, trainingOptions,
+      const { selectedModel, selectedGPU, precision, kvPrecision, contextLength, batchSize, mode, trainingOptions,
         concurrentUsers, avgPromptTokens, avgOutputTokens, sloTTFTMs, sloTPOTMs, batchMode } = get();
       if (!selectedModel) return window.location.href;
       // Never serialize 'reverse' as a mode — it's a separate page/route
@@ -319,6 +323,7 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
         ctx: contextLength,
         batch: batchSize,
         mode: safeMode,
+        gpu: selectedGPU?.id,
         trainingMethod: trainingOptions.trainingMethodId,
         users: concurrentUsers !== 10 ? concurrentUsers : undefined,
         avgPrompt: avgPromptTokens !== 1024 ? avgPromptTokens : undefined,
@@ -332,7 +337,7 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
 
     recompute: () => {
       const {
-        selectedModel, precision, kvPrecision, contextLength, batchSize,
+        selectedModel, selectedGPU, precision, kvPrecision, contextLength, batchSize,
         mode, trainingOptions, gpuDb, cloudDb, numGPUs, parallelismType,
       } = get();
 
@@ -386,6 +391,33 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
         gpuDb,
         { activeWeightsGB: activeWeightsPerGPU, efficiencyFactor: DEFAULT_EFFICIENCY }
       );
+
+      // Find top GPU (prioritizing selected GPU)
+      let topGPU: GPUFitResult | undefined;
+      if (selectedGPU) {
+        topGPU = gpuRecommendations.allFits.find(f => f.gpu.id === selectedGPU.id);
+        if (!topGPU) {
+          const fitStatus = selectedGPU.memoryGB >= vramPerGPU ? 'green' : 'red';
+          const utilizationPercent = Math.round((vramPerGPU / selectedGPU.memoryGB) * 100);
+          const freeVRAMGB = Math.max(0, selectedGPU.memoryGB - vramPerGPU);
+          const throughput = computeThroughput({
+            memoryBandwidthGBs: selectedGPU.memoryBandwidthGBs,
+            activeWeightsGB: activeWeightsPerGPU,
+            efficiencyFactor: DEFAULT_EFFICIENCY,
+          });
+          topGPU = {
+            gpu: selectedGPU,
+            fitStatus,
+            utilizationPercent,
+            freeVRAMGB,
+            tokensPerSecond: throughput.tokensPerSecond,
+          };
+        }
+      } else {
+        topGPU = gpuRecommendations.allFits.find(f => f.fitStatus !== 'red');
+      }
+
+      const activeGPU = topGPU?.gpu ?? gpuDb[0];
 
       // Cloud recommendations — based on total VRAM (multi-GPU instances)
       const rawCloudRecs = recommendCloudInstances(
@@ -441,12 +473,11 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
 
       // Cost metrics (use cheapest cloud instance, scale throughput by numGPUs)
       const cheapestCloud = cloudRecommendations[0];
-      const topGPU = gpuRecommendations.allFits.find(f => f.fitStatus !== 'red');
       let costMetrics: CostMetricsResult | null = null;
 
       if (topGPU && cheapestCloud) {
         const throughput = computeThroughput({
-          memoryBandwidthGBs: topGPU.gpu.memoryBandwidthGBs,
+          memoryBandwidthGBs: activeGPU.memoryBandwidthGBs,
           activeWeightsGB: activeWeightsPerGPU,
           efficiencyFactor: DEFAULT_EFFICIENCY,
         });
@@ -457,15 +488,15 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
           hourlyCloudCost: cheapestCloud.onDemandPerHour,
           contextLength,
           activeWeightsGB,
-          computeTFLOPS: topGPU.gpu.flops.fp16 * numGPUs,
+          computeTFLOPS: activeGPU.flops.fp16 * numGPUs,
         });
       }
 
-      // Cluster recommendation
-      const clusterRecommendation = recommendCluster(breakdown.totalGB, mode, gpuDb);
+      // Cluster recommendation — recommend cluster based on activeGPU
+      const clusterRecommendation = recommendCluster(breakdown.totalGB, mode, [activeGPU], numGPUs);
 
-      // Stack recommendation (use top fitting GPU or first in DB)
-      const stackGPU = topGPU?.gpu ?? gpuDb[0];
+      // Stack recommendation (use active GPU)
+      const stackGPU = activeGPU;
       const stackRecommendation = stackGPU
         ? recommendStack(stackGPU, mode)
         : null;
@@ -473,6 +504,7 @@ export const useCalculatorStore = create<CalculatorStore>((set, get) => {
       set({
         breakdown,
         gpuRecommendations,
+        topGPU: topGPU ?? null,
         cloudRecommendations,
         costMetrics,
         clusterRecommendation,

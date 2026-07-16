@@ -304,7 +304,7 @@
     "id": "mistralai/Mistral-7B-v0.3",
     "family": "mistral",
     "displayName": "Mistral-7B-v0.3",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8053063680,
     "architecture": {
@@ -446,7 +446,7 @@
     "id": "Qwen/Qwen2.5-0.5B",
     "family": "qwen",
     "displayName": "Qwen2.5-0.5B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 526991360,
     "architecture": {
@@ -468,7 +468,7 @@
     "id": "Qwen/Qwen2.5-1.5B",
     "family": "qwen",
     "displayName": "Qwen2.5-1.5B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1653669888,
     "architecture": {
@@ -490,7 +490,7 @@
     "id": "Qwen/Qwen2.5-3B",
     "family": "qwen",
     "displayName": "Qwen2.5-3B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 3349938176,
     "architecture": {
@@ -512,7 +512,7 @@
     "id": "Qwen/Qwen2.5-7B",
     "family": "qwen",
     "displayName": "Qwen2.5-7B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8231845888,
     "architecture": {
@@ -534,7 +534,7 @@
     "id": "Qwen/Qwen2.5-14B",
     "family": "qwen",
     "displayName": "Qwen2.5-14B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 16782458880,
     "architecture": {
@@ -556,7 +556,7 @@
     "id": "Qwen/Qwen2.5-32B",
     "family": "qwen",
     "displayName": "Qwen2.5-32B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 35447111680,
     "architecture": {
@@ -578,7 +578,7 @@
     "id": "Qwen/Qwen2.5-72B",
     "family": "qwen",
     "displayName": "Qwen2.5-72B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 82099306496,
     "architecture": {
@@ -600,7 +600,7 @@
     "id": "Qwen/Qwen3-30B-A3B",
     "family": "qwen",
     "displayName": "Qwen3-30B-A3B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 30418665472,
     "architecture": {
@@ -627,7 +627,7 @@
     "id": "Qwen/Qwen3-235B-A22B",
     "family": "qwen",
     "displayName": "Qwen3-235B-A22B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 234649288704,
     "architecture": {
@@ -654,7 +654,7 @@
     "id": "deepseek-ai/DeepSeek-V2",
     "family": "deepseek",
     "displayName": "DeepSeek-V2",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 230246318080,
     "architecture": {
@@ -683,7 +683,7 @@
     "id": "deepseek-ai/DeepSeek-V3",
     "family": "deepseek",
     "displayName": "DeepSeek-V3",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 669487988736,
     "architecture": {
@@ -713,7 +713,7 @@
     "id": "deepseek-ai/DeepSeek-R1",
     "family": "deepseek",
     "displayName": "DeepSeek-R1",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 669487988736,
     "architecture": {
@@ -742,7 +742,7 @@
     "id": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
     "family": "qwen",
     "displayName": "DeepSeek-R1-Distill-Qwen-32B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 35447111680,
     "architecture": {
@@ -989,7 +989,7 @@
     "id": "microsoft/Phi-4",
     "family": "phi",
     "displayName": "Phi-4",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 16231956480,
     "architecture": {
@@ -1011,7 +1011,7 @@
     "id": "mistralai/Mixtral-8x7B-v0.1",
     "family": "mistral",
     "displayName": "Mixtral-8x7B-v0.1",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8046772224,
     "architecture": {
@@ -1039,7 +1039,7 @@
     "id": "mistralai/Mixtral-8x22B-v0.1",
     "family": "mistral",
     "displayName": "Mixtral-8x22B-v0.1",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 25760366592,
     "architecture": {
@@ -1067,7 +1067,7 @@
     "id": "microsoft/Phi-3.5-mini-instruct",
     "family": "phi",
     "displayName": "Phi-3.5-mini-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 3820879872,
     "architecture": {
@@ -1089,7 +1089,7 @@
     "id": "allenai/OLMo-2-1124-7B",
     "family": "olmo",
     "displayName": "OLMo-2-1124-7B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 7298088960,
     "architecture": {
@@ -1111,7 +1111,7 @@
     "id": "nvidia/Llama-3.1-Nemotron-70B-Instruct-HF",
     "family": "llama",
     "displayName": "Llama-3.1-Nemotron-70B-Instruct-HF",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 79947628544,
     "architecture": {
@@ -1133,7 +1133,7 @@
     "id": "mistralai/Mistral-Nemo-Base-2407",
     "family": "mistral",
     "displayName": "Mistral-Nemo-Base-2407",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 14344519680,
     "architecture": {
@@ -1155,7 +1155,7 @@
     "id": "Qwen/Qwen2.5-Coder-32B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2.5-Coder-32B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 35447111680,
     "architecture": {
@@ -1177,7 +1177,7 @@
     "id": "Qwen/QwQ-32B",
     "family": "qwen",
     "displayName": "QwQ-32B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 35447111680,
     "architecture": {
@@ -1199,7 +1199,7 @@
     "id": "deepseek-ai/DeepSeek-V2.5",
     "family": "deepseek",
     "displayName": "DeepSeek-V2.5",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 230246318080,
     "architecture": {
@@ -1250,7 +1250,7 @@
     "id": "allenai/OLMo-2-1124-13B",
     "family": "olmo",
     "displayName": "OLMo-2-1124-13B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 13715374080,
     "architecture": {
@@ -1272,7 +1272,7 @@
     "id": "01-ai/Yi-1.5-34B",
     "family": "yi",
     "displayName": "Yi-1.5-34B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 39672872960,
     "architecture": {
@@ -1294,7 +1294,7 @@
     "id": "01-ai/Yi-1.5-9B",
     "family": "yi",
     "displayName": "Yi-1.5-9B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 10238296064,
     "architecture": {
@@ -1316,7 +1316,7 @@
     "id": "tiiuae/falcon-40b",
     "family": "falcon",
     "displayName": "falcon-40b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 65489862656,
     "architecture": {
@@ -1338,7 +1338,7 @@
     "id": "tiiuae/falcon-mamba-7b-instruct",
     "family": "mamba",
     "displayName": "falcon-mamba-7b-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 11270094848,
     "architecture": {
@@ -1360,7 +1360,7 @@
     "id": "BAAI/bge-m3",
     "family": "bge",
     "displayName": "bge-m3",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 914657280,
     "architecture": {
@@ -1382,7 +1382,7 @@
     "id": "nomic-ai/nomic-embed-text-v1.5",
     "family": "nomic",
     "displayName": "nomic-embed-text-v1.5",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 160137216,
     "architecture": {
@@ -1404,7 +1404,7 @@
     "id": "mistralai/Mistral-7B-v0.1",
     "family": "mistral",
     "displayName": "Mistral-7B-v0.1",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8046772224,
     "architecture": {
@@ -1426,7 +1426,7 @@
     "id": "mistralai/Mistral-7B-Instruct-v0.3",
     "family": "mistral",
     "displayName": "Mistral-7B-Instruct-v0.3",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8053063680,
     "architecture": {
@@ -1448,7 +1448,7 @@
     "id": "mistralai/Mixtral-8x7B-Instruct-v0.1",
     "family": "mistral",
     "displayName": "Mixtral-8x7B-Instruct-v0.1",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8046772224,
     "architecture": {
@@ -1474,7 +1474,7 @@
     "id": "mistralai/Mixtral-8x22B-Instruct-v0.1",
     "family": "mistral",
     "displayName": "Mixtral-8x22B-Instruct-v0.1",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 25769803776,
     "architecture": {
@@ -1500,7 +1500,7 @@
     "id": "mistralai/Mistral-Nemo-Instruct-2407",
     "family": "mistral",
     "displayName": "Mistral-Nemo-Instruct-2407",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 14344519680,
     "architecture": {
@@ -1522,7 +1522,7 @@
     "id": "mistralai/Mistral-Small-3.1-24B-Base-2503",
     "family": "mistral",
     "displayName": "Mistral-Small-3.1-24B-Base-2503",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 25669140480,
     "architecture": {
@@ -1544,7 +1544,7 @@
     "id": "mistralai/Mistral-Small-3.1-24B-Instruct-2503",
     "family": "mistral",
     "displayName": "Mistral-Small-3.1-24B-Instruct-2503",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 25669140480,
     "architecture": {
@@ -1566,7 +1566,7 @@
     "id": "mistralai/Codestral-22B-v0.1",
     "family": "mistral",
     "displayName": "Codestral-22B-v0.1",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 25769803776,
     "architecture": {
@@ -1588,7 +1588,7 @@
     "id": "mistralai/Mathstral-7B-v0.1",
     "family": "mistral",
     "displayName": "Mathstral-7B-v0.1",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8053063680,
     "architecture": {
@@ -1610,7 +1610,7 @@
     "id": "Qwen/Qwen2.5-0.5B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2.5-0.5B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 526991360,
     "architecture": {
@@ -1632,7 +1632,7 @@
     "id": "Qwen/Qwen2.5-1.5B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2.5-1.5B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1653669888,
     "architecture": {
@@ -1654,7 +1654,7 @@
     "id": "Qwen/Qwen2.5-3B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2.5-3B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 3349938176,
     "architecture": {
@@ -1676,7 +1676,7 @@
     "id": "Qwen/Qwen2.5-7B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2.5-7B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8231845888,
     "architecture": {
@@ -1698,7 +1698,7 @@
     "id": "Qwen/Qwen2.5-14B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2.5-14B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 16782458880,
     "architecture": {
@@ -1720,7 +1720,7 @@
     "id": "Qwen/Qwen2.5-32B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2.5-32B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 35447111680,
     "architecture": {
@@ -1742,7 +1742,7 @@
     "id": "Qwen/Qwen2.5-72B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2.5-72B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 82099306496,
     "architecture": {
@@ -1764,7 +1764,7 @@
     "id": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2.5-Coder-1.5B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1653669888,
     "architecture": {
@@ -1786,7 +1786,7 @@
     "id": "Qwen/Qwen2.5-Coder-7B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2.5-Coder-7B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8231845888,
     "architecture": {
@@ -1808,7 +1808,7 @@
     "id": "Qwen/Qwen2.5-Coder-14B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2.5-Coder-14B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 16782458880,
     "architecture": {
@@ -1830,7 +1830,7 @@
     "id": "Qwen/Qwen2-7B",
     "family": "qwen",
     "displayName": "Qwen2-7B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8231845888,
     "architecture": {
@@ -1852,7 +1852,7 @@
     "id": "Qwen/Qwen2-7B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2-7B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8231845888,
     "architecture": {
@@ -1874,7 +1874,7 @@
     "id": "Qwen/Qwen2-72B",
     "family": "qwen",
     "displayName": "Qwen2-72B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 82099306496,
     "architecture": {
@@ -1896,7 +1896,7 @@
     "id": "Qwen/Qwen2-72B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2-72B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 82099306496,
     "architecture": {
@@ -1918,7 +1918,7 @@
     "id": "Qwen/Qwen2-Math-7B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2-Math-7B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8231845888,
     "architecture": {
@@ -1940,7 +1940,7 @@
     "id": "Qwen/Qwen2-Math-72B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2-Math-72B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 82099306496,
     "architecture": {
@@ -1962,7 +1962,7 @@
     "id": "Qwen/Qwen1.5-7B",
     "family": "qwen",
     "displayName": "Qwen1.5-7B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 7720665088,
     "architecture": {
@@ -1984,7 +1984,7 @@
     "id": "Qwen/Qwen1.5-14B",
     "family": "qwen",
     "displayName": "Qwen1.5-14B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 14166261760,
     "architecture": {
@@ -2006,7 +2006,7 @@
     "id": "Qwen/Qwen1.5-72B",
     "family": "qwen",
     "displayName": "Qwen1.5-72B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 72284635136,
     "architecture": {
@@ -2028,7 +2028,7 @@
     "id": "Qwen/Qwen1.5-110B",
     "family": "qwen",
     "displayName": "Qwen1.5-110B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 120603017216,
     "architecture": {
@@ -2050,7 +2050,7 @@
     "id": "deepseek-ai/DeepSeek-R1-Zero",
     "family": "deepseek",
     "displayName": "DeepSeek-R1-Zero",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 669487988736,
     "architecture": {
@@ -2079,7 +2079,7 @@
     "id": "deepseek-ai/DeepSeek-V2-Chat",
     "family": "deepseek",
     "displayName": "DeepSeek-V2-Chat",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 230246318080,
     "architecture": {
@@ -2108,7 +2108,7 @@
     "id": "deepseek-ai/DeepSeek-Coder-V2-Instruct",
     "family": "deepseek",
     "displayName": "DeepSeek-Coder-V2-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 230246318080,
     "architecture": {
@@ -2137,7 +2137,7 @@
     "id": "deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct",
     "family": "deepseek",
     "displayName": "DeepSeek-Coder-V2-Lite-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 15334506496,
     "architecture": {
@@ -2166,7 +2166,7 @@
     "id": "deepseek-ai/deepseek-coder-33b-instruct",
     "family": "deepseek",
     "displayName": "deepseek-coder-33b-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 38803079168,
     "architecture": {
@@ -2188,7 +2188,7 @@
     "id": "deepseek-ai/deepseek-coder-7b-instruct-v1.5",
     "family": "deepseek",
     "displayName": "deepseek-coder-7b-instruct-v1.5",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 6910115840,
     "architecture": {
@@ -2210,7 +2210,7 @@
     "id": "deepseek-ai/deepseek-llm-67b-chat",
     "family": "deepseek",
     "displayName": "deepseek-llm-67b-chat",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 78580285440,
     "architecture": {
@@ -2232,7 +2232,7 @@
     "id": "deepseek-ai/deepseek-llm-7b-chat",
     "family": "deepseek",
     "displayName": "deepseek-llm-7b-chat",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 6910115840,
     "architecture": {
@@ -2254,7 +2254,7 @@
     "id": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
     "family": "qwen",
     "displayName": "DeepSeek-R1-Distill-Qwen-7B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8231845888,
     "architecture": {
@@ -2276,7 +2276,7 @@
     "id": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
     "family": "qwen",
     "displayName": "DeepSeek-R1-Distill-Qwen-14B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 16782458880,
     "architecture": {
@@ -2298,7 +2298,7 @@
     "id": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
     "family": "llama",
     "displayName": "DeepSeek-R1-Distill-Llama-8B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8835301376,
     "architecture": {
@@ -2320,7 +2320,7 @@
     "id": "deepseek-ai/DeepSeek-R1-Distill-Llama-70B",
     "family": "llama",
     "displayName": "DeepSeek-R1-Distill-Llama-70B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 79947628544,
     "architecture": {
@@ -2342,7 +2342,7 @@
     "id": "microsoft/Phi-3.5-MoE-instruct",
     "family": "phi",
     "displayName": "Phi-3.5-MoE-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 4926734336,
     "architecture": {
@@ -2368,7 +2368,7 @@
     "id": "microsoft/Phi-3-mini-4k-instruct",
     "family": "phi",
     "displayName": "Phi-3-mini-4k-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 3820879872,
     "architecture": {
@@ -2390,7 +2390,7 @@
     "id": "microsoft/Phi-3-mini-128k-instruct",
     "family": "phi",
     "displayName": "Phi-3-mini-128k-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 3820879872,
     "architecture": {
@@ -2412,7 +2412,7 @@
     "id": "microsoft/Phi-3-small-8k-instruct",
     "family": "phi",
     "displayName": "Phi-3-small-8k-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 9412018176,
     "architecture": {
@@ -2434,7 +2434,7 @@
     "id": "microsoft/Phi-3-small-128k-instruct",
     "family": "phi",
     "displayName": "Phi-3-small-128k-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 9412018176,
     "architecture": {
@@ -2456,7 +2456,7 @@
     "id": "microsoft/Phi-3-medium-4k-instruct",
     "family": "phi",
     "displayName": "Phi-3-medium-4k-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 15532687360,
     "architecture": {
@@ -2478,7 +2478,7 @@
     "id": "microsoft/Phi-3-medium-128k-instruct",
     "family": "phi",
     "displayName": "Phi-3-medium-128k-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 15532687360,
     "architecture": {
@@ -2500,7 +2500,7 @@
     "id": "allenai/OLMo-2-1124-7B-Instruct",
     "family": "olmo",
     "displayName": "OLMo-2-1124-7B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 7298088960,
     "architecture": {
@@ -2522,7 +2522,7 @@
     "id": "allenai/OLMo-2-1124-13B-Instruct",
     "family": "olmo",
     "displayName": "OLMo-2-1124-13B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 13715374080,
     "architecture": {
@@ -2544,7 +2544,7 @@
     "id": "nvidia/Llama-3.1-Nemotron-51B-Instruct",
     "family": "llama",
     "displayName": "Llama-3.1-Nemotron-51B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 88000692224,
     "architecture": {
@@ -2566,7 +2566,7 @@
     "id": "nvidia/Mistral-NeMo-Minitron-8B-Base",
     "family": "mistral",
     "displayName": "Mistral-NeMo-Minitron-8B-Base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 9420406784,
     "architecture": {
@@ -2588,7 +2588,7 @@
     "id": "nvidia/Mistral-NeMo-Minitron-8B-Instruct",
     "family": "mistral",
     "displayName": "Mistral-NeMo-Minitron-8B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 9420406784,
     "architecture": {
@@ -2610,7 +2610,7 @@
     "id": "01-ai/Yi-1.5-6B",
     "family": "yi",
     "displayName": "Yi-1.5-6B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 7000293376,
     "architecture": {
@@ -2632,7 +2632,7 @@
     "id": "01-ai/Yi-1.5-6B-Chat",
     "family": "yi",
     "displayName": "Yi-1.5-6B-Chat",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 7000293376,
     "architecture": {
@@ -2654,7 +2654,7 @@
     "id": "01-ai/Yi-1.5-9B-Chat",
     "family": "yi",
     "displayName": "Yi-1.5-9B-Chat",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 10238296064,
     "architecture": {
@@ -2676,7 +2676,7 @@
     "id": "01-ai/Yi-1.5-34B-Chat",
     "family": "yi",
     "displayName": "Yi-1.5-34B-Chat",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 39672872960,
     "architecture": {
@@ -2698,7 +2698,7 @@
     "id": "01-ai/Yi-Coder-9B-Chat",
     "family": "yi",
     "displayName": "Yi-Coder-9B-Chat",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 10238296064,
     "architecture": {
@@ -2720,7 +2720,7 @@
     "id": "tiiuae/falcon-7b",
     "family": "falcon",
     "displayName": "falcon-7b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 11162681344,
     "architecture": {
@@ -2742,7 +2742,7 @@
     "id": "tiiuae/falcon-7b-instruct",
     "family": "falcon",
     "displayName": "falcon-7b-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 11162681344,
     "architecture": {
@@ -2764,7 +2764,7 @@
     "id": "tiiuae/falcon-40b-instruct",
     "family": "falcon",
     "displayName": "falcon-40b-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 65489862656,
     "architecture": {
@@ -2786,7 +2786,7 @@
     "id": "tiiuae/Falcon3-7B-Base",
     "family": "falcon3",
     "displayName": "Falcon3-7B-Base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 7807696896,
     "architecture": {
@@ -2808,7 +2808,7 @@
     "id": "tiiuae/Falcon3-7B-Instruct",
     "family": "falcon3",
     "displayName": "Falcon3-7B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 7807696896,
     "architecture": {
@@ -2830,7 +2830,7 @@
     "id": "tiiuae/Falcon3-10B-Base",
     "family": "falcon3",
     "displayName": "Falcon3-10B-Base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 10808721408,
     "architecture": {
@@ -2852,7 +2852,7 @@
     "id": "tiiuae/Falcon3-10B-Instruct",
     "family": "falcon3",
     "displayName": "Falcon3-10B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 10808721408,
     "architecture": {
@@ -2874,7 +2874,7 @@
     "id": "ibm-granite/granite-3.1-2b-instruct",
     "family": "granite",
     "displayName": "granite-3.1-2b-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 2785024000,
     "architecture": {
@@ -2896,7 +2896,7 @@
     "id": "ibm-granite/granite-3.1-8b-instruct",
     "family": "granite",
     "displayName": "granite-3.1-8b-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 9177149440,
     "architecture": {
@@ -2918,7 +2918,7 @@
     "id": "ibm-granite/granite-3.0-2b-instruct",
     "family": "granite",
     "displayName": "granite-3.0-2b-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 2785024000,
     "architecture": {
@@ -2940,7 +2940,7 @@
     "id": "ibm-granite/granite-3.0-8b-instruct",
     "family": "granite",
     "displayName": "granite-3.0-8b-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 9177149440,
     "architecture": {
@@ -2962,7 +2962,7 @@
     "id": "ibm-granite/granite-8b-code-instruct-128k",
     "family": "granite",
     "displayName": "granite-8b-code-instruct-128k",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8959033344,
     "architecture": {
@@ -2984,7 +2984,7 @@
     "id": "bigcode/starcoder2-3b",
     "family": "starcoder2",
     "displayName": "starcoder2-3b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 4831838208,
     "architecture": {
@@ -3006,7 +3006,7 @@
     "id": "bigcode/starcoder2-7b",
     "family": "starcoder2",
     "displayName": "starcoder2-7b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 11324620800,
     "architecture": {
@@ -3028,7 +3028,7 @@
     "id": "bigcode/starcoder2-15b",
     "family": "starcoder2",
     "displayName": "starcoder2-15b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 24763170816,
     "architecture": {
@@ -3050,7 +3050,7 @@
     "id": "bigcode/starcoder2-15b-instruct-v0.1",
     "family": "starcoder2",
     "displayName": "starcoder2-15b-instruct-v0.1",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 24763170816,
     "architecture": {
@@ -3072,7 +3072,7 @@
     "id": "Salesforce/xgen-7b-8k-base",
     "family": "xgen",
     "displayName": "xgen-7b-8k-base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 6895435776,
     "architecture": {
@@ -3094,7 +3094,7 @@
     "id": "Salesforce/codegen25-7b-instruct",
     "family": "codegen25",
     "displayName": "codegen25-7b-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 6895435776,
     "architecture": {
@@ -3116,7 +3116,7 @@
     "id": "EleutherAI/gpt-neox-20b",
     "family": "gpt",
     "displayName": "gpt-neox-20b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 27194818560,
     "architecture": {
@@ -3138,7 +3138,7 @@
     "id": "EleutherAI/pythia-12b",
     "family": "pythia",
     "displayName": "pythia-12b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 15618539520,
     "architecture": {
@@ -3160,7 +3160,7 @@
     "id": "EleutherAI/pythia-6.9b",
     "family": "pythia",
     "displayName": "pythia-6.9b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 9003073536,
     "architecture": {
@@ -3182,7 +3182,7 @@
     "id": "EleutherAI/pythia-2.8b",
     "family": "pythia",
     "displayName": "pythia-2.8b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 3612999680,
     "architecture": {
@@ -3204,7 +3204,7 @@
     "id": "EleutherAI/pythia-1b",
     "family": "pythia",
     "displayName": "pythia-1b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1279787008,
     "architecture": {
@@ -3226,7 +3226,7 @@
     "id": "togethercomputer/RedPajama-INCITE-7B-Base",
     "family": "redpajama",
     "displayName": "RedPajama-INCITE-7B-Base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 9003073536,
     "architecture": {
@@ -3248,7 +3248,7 @@
     "id": "togethercomputer/RedPajama-INCITE-7B-Chat",
     "family": "redpajama",
     "displayName": "RedPajama-INCITE-7B-Chat",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 9003073536,
     "architecture": {
@@ -3270,7 +3270,7 @@
     "id": "stabilityai/stablelm-2-12b",
     "family": "stablelm",
     "displayName": "stablelm-2-12b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 13715374080,
     "architecture": {
@@ -3292,7 +3292,7 @@
     "id": "stabilityai/stablelm-2-12b-chat",
     "family": "stablelm",
     "displayName": "stablelm-2-12b-chat",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 13715374080,
     "architecture": {
@@ -3314,7 +3314,7 @@
     "id": "stabilityai/stablelm-2-1_6b",
     "family": "stablelm",
     "displayName": "stablelm-2-1_6b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1644167168,
     "architecture": {
@@ -3336,7 +3336,7 @@
     "id": "stabilityai/stablelm-zephyr-3b",
     "family": "stablelm",
     "displayName": "stablelm-zephyr-3b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 2795110400,
     "architecture": {
@@ -3358,7 +3358,7 @@
     "id": "HuggingFaceH4/zephyr-7b-beta",
     "family": "zephyr",
     "displayName": "zephyr-7b-beta",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8046772224,
     "architecture": {
@@ -3380,7 +3380,7 @@
     "id": "HuggingFaceH4/zephyr-7b-alpha",
     "family": "zephyr",
     "displayName": "zephyr-7b-alpha",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8046772224,
     "architecture": {
@@ -3402,7 +3402,7 @@
     "id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
     "family": "smollm2",
     "displayName": "SmolLM2-1.7B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1711276032,
     "architecture": {
@@ -3424,7 +3424,7 @@
     "id": "HuggingFaceTB/SmolLM2-360M-Instruct",
     "family": "smollm2",
     "displayName": "SmolLM2-360M-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 401080320,
     "architecture": {
@@ -3446,7 +3446,7 @@
     "id": "HuggingFaceTB/SmolLM2-135M-Instruct",
     "family": "smollm2",
     "displayName": "SmolLM2-135M-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 147750912,
     "architecture": {
@@ -3468,7 +3468,7 @@
     "id": "NousResearch/Hermes-3-Llama-3.1-8B",
     "family": "llama",
     "displayName": "Hermes-3-Llama-3.1-8B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8835301376,
     "architecture": {
@@ -3490,7 +3490,7 @@
     "id": "NousResearch/Hermes-3-Llama-3.1-70B",
     "family": "llama",
     "displayName": "Hermes-3-Llama-3.1-70B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 79947628544,
     "architecture": {
@@ -3512,7 +3512,7 @@
     "id": "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO",
     "family": "mistral",
     "displayName": "Nous-Hermes-2-Mixtral-8x7B-DPO",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8046788608,
     "architecture": {
@@ -3538,7 +3538,7 @@
     "id": "NousResearch/Nous-Hermes-2-Yi-34B",
     "family": "nous",
     "displayName": "Nous-Hermes-2-Yi-34B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 39672872960,
     "architecture": {
@@ -3560,7 +3560,7 @@
     "id": "teknium/OpenHermes-2.5-Mistral-7B",
     "family": "mistral",
     "displayName": "OpenHermes-2.5-Mistral-7B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8046788608,
     "architecture": {
@@ -3582,7 +3582,7 @@
     "id": "upstage/SOLAR-10.7B-Instruct-v1.0",
     "family": "solar",
     "displayName": "SOLAR-10.7B-Instruct-v1.0",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 11939086336,
     "architecture": {
@@ -3604,7 +3604,7 @@
     "id": "upstage/solar-pro-preview-instruct",
     "family": "solar",
     "displayName": "solar-pro-preview-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 24655953920,
     "architecture": {
@@ -3626,7 +3626,7 @@
     "id": "internlm/internlm2_5-7b-chat",
     "family": "internlm2_5",
     "displayName": "internlm2_5-7b-chat",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8542748672,
     "architecture": {
@@ -3648,7 +3648,7 @@
     "id": "internlm/internlm2_5-20b-chat",
     "family": "internlm2_5",
     "displayName": "internlm2_5-20b-chat",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 22880452608,
     "architecture": {
@@ -3670,7 +3670,7 @@
     "id": "internlm/internlm3-8b-instruct",
     "family": "internlm3",
     "displayName": "internlm3-8b-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 10313793536,
     "architecture": {
@@ -3692,7 +3692,7 @@
     "id": "baichuan-inc/Baichuan2-13B-Chat",
     "family": "baichuan2",
     "displayName": "Baichuan2-13B-Chat",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 13896253440,
     "architecture": {
@@ -3714,7 +3714,7 @@
     "id": "baichuan-inc/Baichuan2-7B-Chat",
     "family": "baichuan2",
     "displayName": "Baichuan2-7B-Chat",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 7505707008,
     "architecture": {
@@ -3736,7 +3736,7 @@
     "id": "Snowflake/snowflake-arctic-instruct",
     "family": "snowflake",
     "displayName": "snowflake-arctic-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 11312824320,
     "architecture": {
@@ -3762,7 +3762,7 @@
     "id": "cognitivecomputations/dolphin-2.9.2-qwen2-72b",
     "family": "qwen",
     "displayName": "dolphin-2.9.2-qwen2-72b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 82099306496,
     "architecture": {
@@ -3784,7 +3784,7 @@
     "id": "cognitivecomputations/dolphin-2.9-llama3-8b",
     "family": "llama",
     "displayName": "dolphin-2.9-llama3-8b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8835317760,
     "architecture": {
@@ -3806,7 +3806,7 @@
     "id": "lmsys/vicuna-13b-v1.5",
     "family": "vicuna",
     "displayName": "vicuna-13b-v1.5",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 13015449600,
     "architecture": {
@@ -3828,7 +3828,7 @@
     "id": "lmsys/vicuna-7b-v1.5",
     "family": "vicuna",
     "displayName": "vicuna-7b-v1.5",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 6738149376,
     "architecture": {
@@ -3850,7 +3850,7 @@
     "id": "garage-bAInd/Platypus2-70B-instruct",
     "family": "platypus2",
     "displayName": "Platypus2-70B-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 78370570240,
     "architecture": {
@@ -3872,7 +3872,7 @@
     "id": "BAAI/bge-large-en-v1.5",
     "family": "bge",
     "displayName": "bge-large-en-v1.5",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 465162240,
     "architecture": {
@@ -3894,7 +3894,7 @@
     "id": "BAAI/bge-base-en-v1.5",
     "family": "bge",
     "displayName": "bge-base-en-v1.5",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 160128000,
     "architecture": {
@@ -3916,7 +3916,7 @@
     "id": "BAAI/bge-small-en-v1.5",
     "family": "bge",
     "displayName": "bge-small-en-v1.5",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 51752448,
     "architecture": {
@@ -3938,7 +3938,7 @@
     "id": "nomic-ai/nomic-embed-text-v1",
     "family": "nomic",
     "displayName": "nomic-embed-text-v1",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 160137216,
     "architecture": {
@@ -3960,7 +3960,7 @@
     "id": "sentence-transformers/all-MiniLM-L6-v2",
     "family": "all",
     "displayName": "all-MiniLM-L6-v2",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 37596672,
     "architecture": {
@@ -3982,7 +3982,7 @@
     "id": "sentence-transformers/all-mpnet-base-v2",
     "family": "all",
     "displayName": "all-mpnet-base-v2",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 160135680,
     "architecture": {
@@ -4004,7 +4004,7 @@
     "id": "intfloat/multilingual-e5-large-instruct",
     "family": "multilingual",
     "displayName": "multilingual-e5-large-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 914657280,
     "architecture": {
@@ -4026,7 +4026,7 @@
     "id": "intfloat/e5-mistral-7b-instruct",
     "family": "mistral",
     "displayName": "e5-mistral-7b-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8046772224,
     "architecture": {
@@ -4048,7 +4048,7 @@
     "id": "thenlper/gte-large",
     "family": "gte",
     "displayName": "gte-large",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 465162240,
     "architecture": {
@@ -4070,7 +4070,7 @@
     "id": "Alibaba-NLP/gte-Qwen2-7B-instruct",
     "family": "qwen",
     "displayName": "gte-Qwen2-7B-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8228849664,
     "architecture": {
@@ -4092,7 +4092,7 @@
     "id": "Alibaba-NLP/gte-Qwen2-1.5B-instruct",
     "family": "qwen",
     "displayName": "gte-Qwen2-1.5B-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1886152704,
     "architecture": {
@@ -4114,7 +4114,7 @@
     "id": "mistralai/Mistral-Small-24B-Instruct-2501",
     "family": "mistral",
     "displayName": "Mistral-Small-24B-Instruct-2501",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 25669140480,
     "architecture": {
@@ -4136,7 +4136,7 @@
     "id": "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
     "family": "mistral",
     "displayName": "Mistral-Small-3.2-24B-Instruct-2506",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 25669140480,
     "architecture": {
@@ -4158,7 +4158,7 @@
     "id": "mistralai/Magistral-Small-2506",
     "family": "mistral",
     "displayName": "Magistral-Small-2506",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 25669140480,
     "architecture": {
@@ -4180,7 +4180,7 @@
     "id": "Qwen/Qwen3-0.6B",
     "family": "qwen",
     "displayName": "Qwen3-0.6B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 537264128,
     "architecture": {
@@ -4202,7 +4202,7 @@
     "id": "Qwen/Qwen3-1.7B",
     "family": "qwen",
     "displayName": "Qwen3-1.7B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1837891584,
     "architecture": {
@@ -4224,7 +4224,7 @@
     "id": "Qwen/Qwen3-4B",
     "family": "qwen",
     "displayName": "Qwen3-4B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 4022272000,
     "architecture": {
@@ -4246,7 +4246,7 @@
     "id": "Qwen/Qwen3-8B",
     "family": "qwen",
     "displayName": "Qwen3-8B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 9096396800,
     "architecture": {
@@ -4268,7 +4268,7 @@
     "id": "Qwen/Qwen3-14B",
     "family": "qwen",
     "displayName": "Qwen3-14B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 16445603840,
     "architecture": {
@@ -4290,7 +4290,7 @@
     "id": "Qwen/Qwen3-32B",
     "family": "qwen",
     "displayName": "Qwen3-32B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 33432535040,
     "architecture": {
@@ -4429,7 +4429,7 @@
     "id": "microsoft/Phi-4-reasoning",
     "family": "phi",
     "displayName": "Phi-4-reasoning",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 16231956480,
     "architecture": {
@@ -4451,7 +4451,7 @@
     "id": "microsoft/Phi-4-reasoning-plus",
     "family": "phi",
     "displayName": "Phi-4-reasoning-plus",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 16231956480,
     "architecture": {
@@ -4473,7 +4473,7 @@
     "id": "codellama/CodeLlama-7b-hf",
     "family": "llama",
     "displayName": "CodeLlama-7b-hf",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 6738280448,
     "architecture": {
@@ -4495,7 +4495,7 @@
     "id": "codellama/CodeLlama-13b-hf",
     "family": "llama",
     "displayName": "CodeLlama-13b-hf",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 13015613440,
     "architecture": {
@@ -4517,7 +4517,7 @@
     "id": "codellama/CodeLlama-34b-hf",
     "family": "llama",
     "displayName": "CodeLlama-34b-hf",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 39380320256,
     "architecture": {
@@ -4539,7 +4539,7 @@
     "id": "codellama/CodeLlama-70b-hf",
     "family": "llama",
     "displayName": "CodeLlama-70b-hf",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 78370832384,
     "architecture": {
@@ -4561,7 +4561,7 @@
     "id": "codellama/CodeLlama-7b-Instruct-hf",
     "family": "llama",
     "displayName": "CodeLlama-7b-Instruct-hf",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 6738280448,
     "architecture": {
@@ -4583,7 +4583,7 @@
     "id": "codellama/CodeLlama-13b-Instruct-hf",
     "family": "llama",
     "displayName": "CodeLlama-13b-Instruct-hf",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 13015613440,
     "architecture": {
@@ -4605,7 +4605,7 @@
     "id": "codellama/CodeLlama-34b-Instruct-hf",
     "family": "llama",
     "displayName": "CodeLlama-34b-Instruct-hf",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 39380320256,
     "architecture": {
@@ -4627,7 +4627,7 @@
     "id": "codellama/CodeLlama-70b-Instruct-hf",
     "family": "llama",
     "displayName": "CodeLlama-70b-Instruct-hf",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 78370832384,
     "architecture": {
@@ -4649,7 +4649,7 @@
     "id": "codellama/CodeLlama-7b-Python-hf",
     "family": "llama",
     "displayName": "CodeLlama-7b-Python-hf",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 6738149376,
     "architecture": {
@@ -4671,7 +4671,7 @@
     "id": "codellama/CodeLlama-13b-Python-hf",
     "family": "llama",
     "displayName": "CodeLlama-13b-Python-hf",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 13015449600,
     "architecture": {
@@ -4693,7 +4693,7 @@
     "id": "codellama/CodeLlama-34b-Python-hf",
     "family": "llama",
     "displayName": "CodeLlama-34b-Python-hf",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 39380320256,
     "architecture": {
@@ -4715,7 +4715,7 @@
     "id": "codellama/CodeLlama-70b-Python-hf",
     "family": "llama",
     "displayName": "CodeLlama-70b-Python-hf",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 78370832384,
     "architecture": {
@@ -4737,7 +4737,7 @@
     "id": "mistralai/Mistral-7B-Instruct-v0.1",
     "family": "mistral",
     "displayName": "Mistral-7B-Instruct-v0.1",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8046772224,
     "architecture": {
@@ -4759,7 +4759,7 @@
     "id": "mistralai/Mistral-7B-Instruct-v0.2",
     "family": "mistral",
     "displayName": "Mistral-7B-Instruct-v0.2",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8046772224,
     "architecture": {
@@ -4781,7 +4781,7 @@
     "id": "mistralai/Ministral-8B-Instruct-2410",
     "family": "mistral",
     "displayName": "Ministral-8B-Instruct-2410",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8925478912,
     "architecture": {
@@ -4803,7 +4803,7 @@
     "id": "mistralai/Mistral-Small-24B-Base-2501",
     "family": "mistral",
     "displayName": "Mistral-Small-24B-Base-2501",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 25669140480,
     "architecture": {
@@ -4825,7 +4825,7 @@
     "id": "mistralai/Mistral-Large-Instruct-2411",
     "family": "mistral",
     "displayName": "Mistral-Large-Instruct-2411",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 146968412160,
     "architecture": {
@@ -4847,7 +4847,7 @@
     "id": "mistralai/Devstral-Small-2505",
     "family": "mistral",
     "displayName": "Devstral-Small-2505",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 25669140480,
     "architecture": {
@@ -4869,7 +4869,7 @@
     "id": "mistralai/Devstral-Small-2507",
     "family": "mistral",
     "displayName": "Devstral-Small-2507",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 25669140480,
     "architecture": {
@@ -4891,7 +4891,7 @@
     "id": "Qwen/Qwen3-4B-Instruct-2507",
     "family": "qwen",
     "displayName": "Qwen3-4B-Instruct-2507",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 4022272000,
     "architecture": {
@@ -4913,7 +4913,7 @@
     "id": "Qwen/Qwen3-4B-Thinking-2507",
     "family": "qwen",
     "displayName": "Qwen3-4B-Thinking-2507",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 4022272000,
     "architecture": {
@@ -4935,7 +4935,7 @@
     "id": "Qwen/Qwen3-30B-A3B-Instruct-2507",
     "family": "qwen",
     "displayName": "Qwen3-30B-A3B-Instruct-2507",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 30418665472,
     "architecture": {
@@ -4962,7 +4962,7 @@
     "id": "Qwen/Qwen3-30B-A3B-Thinking-2507",
     "family": "qwen",
     "displayName": "Qwen3-30B-A3B-Thinking-2507",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 30418665472,
     "architecture": {
@@ -4989,7 +4989,7 @@
     "id": "Qwen/Qwen3-235B-A22B-Instruct-2507",
     "family": "qwen",
     "displayName": "Qwen3-235B-A22B-Instruct-2507",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 234649288704,
     "architecture": {
@@ -5016,7 +5016,7 @@
     "id": "Qwen/Qwen3-235B-A22B-Thinking-2507",
     "family": "qwen",
     "displayName": "Qwen3-235B-A22B-Thinking-2507",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 234649288704,
     "architecture": {
@@ -5043,7 +5043,7 @@
     "id": "Qwen/Qwen3-Coder-30B-A3B-Instruct",
     "family": "qwen",
     "displayName": "Qwen3-Coder-30B-A3B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 30418665472,
     "architecture": {
@@ -5070,7 +5070,7 @@
     "id": "Qwen/Qwen3-Coder-480B-A35B-Instruct",
     "family": "qwen",
     "displayName": "Qwen3-Coder-480B-A35B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 479313002496,
     "architecture": {
@@ -5097,7 +5097,7 @@
     "id": "Qwen/Qwen3-VL-4B-Instruct",
     "family": "qwen",
     "displayName": "Qwen3-VL-4B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 4022272000,
     "architecture": {
@@ -5119,7 +5119,7 @@
     "id": "Qwen/Qwen3-VL-8B-Instruct",
     "family": "qwen",
     "displayName": "Qwen3-VL-8B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 9096396800,
     "architecture": {
@@ -5141,7 +5141,7 @@
     "id": "Qwen/Qwen3-VL-30B-A3B-Instruct",
     "family": "qwen",
     "displayName": "Qwen3-VL-30B-A3B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 30418665472,
     "architecture": {
@@ -5163,7 +5163,7 @@
     "id": "Qwen/Qwen3-VL-235B-A22B-Instruct",
     "family": "qwen",
     "displayName": "Qwen3-VL-235B-A22B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 234649288704,
     "architecture": {
@@ -5185,7 +5185,7 @@
     "id": "Qwen/Qwen3-Next-80B-A3B-Instruct",
     "family": "qwen",
     "displayName": "Qwen3-Next-80B-A3B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 78888042496,
     "architecture": {
@@ -5212,7 +5212,7 @@
     "id": "Qwen/Qwen3-Next-80B-A3B-Thinking",
     "family": "qwen",
     "displayName": "Qwen3-Next-80B-A3B-Thinking",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 78888042496,
     "architecture": {
@@ -5239,7 +5239,7 @@
     "id": "Qwen/Qwen3Guard-Gen-8B",
     "family": "qwen",
     "displayName": "Qwen3Guard-Gen-8B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 9096396800,
     "architecture": {
@@ -5261,7 +5261,7 @@
     "id": "Qwen/Qwen3Guard-Stream-8B",
     "family": "qwen",
     "displayName": "Qwen3Guard-Stream-8B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 9096396800,
     "architecture": {
@@ -5283,7 +5283,7 @@
     "id": "Qwen/QwQ-32B-Preview",
     "family": "qwen",
     "displayName": "QwQ-32B-Preview",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 35447111680,
     "architecture": {
@@ -5305,7 +5305,7 @@
     "id": "Qwen/Qwen2.5-Coder-0.5B",
     "family": "qwen",
     "displayName": "Qwen2.5-Coder-0.5B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 526991360,
     "architecture": {
@@ -5327,7 +5327,7 @@
     "id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2.5-Coder-0.5B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 526991360,
     "architecture": {
@@ -5349,7 +5349,7 @@
     "id": "Qwen/Qwen2.5-Coder-1.5B",
     "family": "qwen",
     "displayName": "Qwen2.5-Coder-1.5B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1653669888,
     "architecture": {
@@ -5371,7 +5371,7 @@
     "id": "Qwen/Qwen2.5-Coder-3B",
     "family": "qwen",
     "displayName": "Qwen2.5-Coder-3B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 3349938176,
     "architecture": {
@@ -5393,7 +5393,7 @@
     "id": "Qwen/Qwen2.5-Coder-3B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2.5-Coder-3B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 3349938176,
     "architecture": {
@@ -5415,7 +5415,7 @@
     "id": "Qwen/Qwen2.5-Coder-7B",
     "family": "qwen",
     "displayName": "Qwen2.5-Coder-7B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8231845888,
     "architecture": {
@@ -5437,7 +5437,7 @@
     "id": "Qwen/Qwen2.5-Coder-14B",
     "family": "qwen",
     "displayName": "Qwen2.5-Coder-14B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 16782458880,
     "architecture": {
@@ -5459,7 +5459,7 @@
     "id": "Qwen/Qwen2.5-Coder-32B",
     "family": "qwen",
     "displayName": "Qwen2.5-Coder-32B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 35447111680,
     "architecture": {
@@ -5481,7 +5481,7 @@
     "id": "Qwen/Qwen2.5-Math-1.5B",
     "family": "qwen",
     "displayName": "Qwen2.5-Math-1.5B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1653669888,
     "architecture": {
@@ -5503,7 +5503,7 @@
     "id": "Qwen/Qwen2.5-Math-1.5B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2.5-Math-1.5B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1653669888,
     "architecture": {
@@ -5525,7 +5525,7 @@
     "id": "Qwen/Qwen2.5-Math-7B",
     "family": "qwen",
     "displayName": "Qwen2.5-Math-7B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8231845888,
     "architecture": {
@@ -5547,7 +5547,7 @@
     "id": "Qwen/Qwen2.5-Math-7B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2.5-Math-7B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8231845888,
     "architecture": {
@@ -5569,7 +5569,7 @@
     "id": "Qwen/Qwen2.5-Math-72B",
     "family": "qwen",
     "displayName": "Qwen2.5-Math-72B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 82099306496,
     "architecture": {
@@ -5591,7 +5591,7 @@
     "id": "Qwen/Qwen2.5-Math-72B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2.5-Math-72B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 82099306496,
     "architecture": {
@@ -5613,7 +5613,7 @@
     "id": "Qwen/Qwen2-VL-2B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2-VL-2B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1653669888,
     "architecture": {
@@ -5635,7 +5635,7 @@
     "id": "Qwen/Qwen2-VL-7B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2-VL-7B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8231845888,
     "architecture": {
@@ -5657,7 +5657,7 @@
     "id": "Qwen/Qwen2-VL-72B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2-VL-72B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 82099306496,
     "architecture": {
@@ -5679,7 +5679,7 @@
     "id": "Qwen/Qwen2.5-VL-3B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2.5-VL-3B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 3349938176,
     "architecture": {
@@ -5701,7 +5701,7 @@
     "id": "Qwen/Qwen2.5-VL-7B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2.5-VL-7B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8231845888,
     "architecture": {
@@ -5723,7 +5723,7 @@
     "id": "Qwen/Qwen2.5-VL-32B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2.5-VL-32B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 35447111680,
     "architecture": {
@@ -5745,7 +5745,7 @@
     "id": "Qwen/Qwen2.5-VL-72B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2.5-VL-72B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 82099306496,
     "architecture": {
@@ -5767,7 +5767,7 @@
     "id": "Qwen/Qwen2-0.5B",
     "family": "qwen",
     "displayName": "Qwen2-0.5B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 526991360,
     "architecture": {
@@ -5789,7 +5789,7 @@
     "id": "Qwen/Qwen2-0.5B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2-0.5B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 526991360,
     "architecture": {
@@ -5811,7 +5811,7 @@
     "id": "Qwen/Qwen2-1.5B",
     "family": "qwen",
     "displayName": "Qwen2-1.5B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1653669888,
     "architecture": {
@@ -5833,7 +5833,7 @@
     "id": "Qwen/Qwen2-1.5B-Instruct",
     "family": "qwen",
     "displayName": "Qwen2-1.5B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1653669888,
     "architecture": {
@@ -5855,7 +5855,7 @@
     "id": "Qwen/Qwen3-Embedding-0.6B",
     "family": "qwen",
     "displayName": "Qwen3-Embedding-0.6B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 536990720,
     "architecture": {
@@ -5877,7 +5877,7 @@
     "id": "Qwen/Qwen3-Embedding-4B",
     "family": "qwen",
     "displayName": "Qwen3-Embedding-4B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 4021578240,
     "architecture": {
@@ -5899,7 +5899,7 @@
     "id": "Qwen/Qwen3-Embedding-8B",
     "family": "qwen",
     "displayName": "Qwen3-Embedding-8B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 9094176768,
     "architecture": {
@@ -5921,7 +5921,7 @@
     "id": "Qwen/Qwen3-Reranker-0.6B",
     "family": "qwen",
     "displayName": "Qwen3-Reranker-0.6B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 536990720,
     "architecture": {
@@ -5943,7 +5943,7 @@
     "id": "Qwen/Qwen3-Reranker-4B",
     "family": "qwen",
     "displayName": "Qwen3-Reranker-4B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 4021588480,
     "architecture": {
@@ -5965,7 +5965,7 @@
     "id": "Qwen/Qwen3-Reranker-8B",
     "family": "qwen",
     "displayName": "Qwen3-Reranker-8B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 9094209536,
     "architecture": {
@@ -5987,7 +5987,7 @@
     "id": "deepseek-ai/DeepSeek-V3-0324",
     "family": "deepseek",
     "displayName": "DeepSeek-V3-0324",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 669487988736,
     "architecture": {
@@ -6016,7 +6016,7 @@
     "id": "deepseek-ai/DeepSeek-V3.1",
     "family": "deepseek",
     "displayName": "DeepSeek-V3.1",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 669487988736,
     "architecture": {
@@ -6045,7 +6045,7 @@
     "id": "deepseek-ai/DeepSeek-V3.1-Base",
     "family": "deepseek",
     "displayName": "DeepSeek-V3.1-Base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 669487988736,
     "architecture": {
@@ -6074,7 +6074,7 @@
     "id": "deepseek-ai/DeepSeek-V3.1-Terminus",
     "family": "deepseek",
     "displayName": "DeepSeek-V3.1-Terminus",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 669487988736,
     "architecture": {
@@ -6103,7 +6103,7 @@
     "id": "deepseek-ai/DeepSeek-V3.2-Exp",
     "family": "deepseek",
     "displayName": "DeepSeek-V3.2-Exp",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 669487988736,
     "architecture": {
@@ -6132,7 +6132,7 @@
     "id": "deepseek-ai/DeepSeek-V3.2-Exp-Base",
     "family": "deepseek",
     "displayName": "DeepSeek-V3.2-Exp-Base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 669487988736,
     "architecture": {
@@ -6161,7 +6161,7 @@
     "id": "deepseek-ai/DeepSeek-R1-0528",
     "family": "deepseek",
     "displayName": "DeepSeek-R1-0528",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 669487988736,
     "architecture": {
@@ -6190,7 +6190,7 @@
     "id": "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
     "family": "qwen",
     "displayName": "DeepSeek-R1-Distill-Qwen-1.5B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1887043584,
     "architecture": {
@@ -6212,7 +6212,7 @@
     "id": "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B",
     "family": "qwen",
     "displayName": "DeepSeek-R1-0528-Qwen3-8B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 9096396800,
     "architecture": {
@@ -6234,7 +6234,7 @@
     "id": "deepseek-ai/DeepSeek-V2-Lite",
     "family": "deepseek",
     "displayName": "DeepSeek-V2-Lite",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 15334506496,
     "architecture": {
@@ -6263,7 +6263,7 @@
     "id": "deepseek-ai/DeepSeek-V2-Lite-Chat",
     "family": "deepseek",
     "displayName": "DeepSeek-V2-Lite-Chat",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 15334506496,
     "architecture": {
@@ -6292,7 +6292,7 @@
     "id": "deepseek-ai/DeepSeek-V2.5-1210",
     "family": "deepseek",
     "displayName": "DeepSeek-V2.5-1210",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 230246318080,
     "architecture": {
@@ -6321,7 +6321,7 @@
     "id": "deepseek-ai/DeepSeek-Coder-V2-Base",
     "family": "deepseek",
     "displayName": "DeepSeek-Coder-V2-Base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 230246318080,
     "architecture": {
@@ -6350,7 +6350,7 @@
     "id": "deepseek-ai/DeepSeek-Coder-V2-Lite-Base",
     "family": "deepseek",
     "displayName": "DeepSeek-Coder-V2-Lite-Base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 15334506496,
     "architecture": {
@@ -6379,7 +6379,7 @@
     "id": "deepseek-ai/deepseek-coder-1.3b-instruct",
     "family": "deepseek",
     "displayName": "deepseek-coder-1.3b-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1346371584,
     "architecture": {
@@ -6401,7 +6401,7 @@
     "id": "deepseek-ai/deepseek-coder-6.7b-instruct",
     "family": "deepseek",
     "displayName": "deepseek-coder-6.7b-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 6740246528,
     "architecture": {
@@ -6423,7 +6423,7 @@
     "id": "deepseek-ai/deepseek-math-7b-instruct",
     "family": "deepseek",
     "displayName": "deepseek-math-7b-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 6910115840,
     "architecture": {
@@ -6445,7 +6445,7 @@
     "id": "deepseek-ai/deepseek-math-7b-rl",
     "family": "deepseek",
     "displayName": "deepseek-math-7b-rl",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 6910115840,
     "architecture": {
@@ -6467,7 +6467,7 @@
     "id": "deepseek-ai/DeepSeek-Prover-V2-7B",
     "family": "deepseek",
     "displayName": "DeepSeek-Prover-V2-7B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 6910115840,
     "architecture": {
@@ -6489,7 +6489,7 @@
     "id": "deepseek-ai/DeepSeek-Prover-V2-671B",
     "family": "deepseek",
     "displayName": "DeepSeek-Prover-V2-671B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 669487988736,
     "architecture": {
@@ -6518,7 +6518,7 @@
     "id": "deepseek-ai/deepseek-vl2-tiny",
     "family": "deepseek",
     "displayName": "deepseek-vl2-tiny",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 2858106880,
     "architecture": {
@@ -6540,7 +6540,7 @@
     "id": "deepseek-ai/deepseek-llm-7b-base",
     "family": "deepseek",
     "displayName": "deepseek-llm-7b-base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 6910115840,
     "architecture": {
@@ -6562,7 +6562,7 @@
     "id": "deepseek-ai/deepseek-llm-67b-base",
     "family": "deepseek",
     "displayName": "deepseek-llm-67b-base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 78580285440,
     "architecture": {
@@ -6584,7 +6584,7 @@
     "id": "microsoft/phi-1",
     "family": "phi",
     "displayName": "phi-1",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1820327936,
     "architecture": {
@@ -6606,7 +6606,7 @@
     "id": "microsoft/phi-1_5",
     "family": "phi",
     "displayName": "phi-1_5",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1820327936,
     "architecture": {
@@ -6628,7 +6628,7 @@
     "id": "microsoft/phi-2",
     "family": "phi",
     "displayName": "phi-2",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 3617587200,
     "architecture": {
@@ -6650,7 +6650,7 @@
     "id": "microsoft/Phi-3-vision-128k-instruct",
     "family": "phi",
     "displayName": "Phi-3-vision-128k-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 3820879872,
     "architecture": {
@@ -6672,7 +6672,7 @@
     "id": "microsoft/Phi-3.5-vision-instruct",
     "family": "phi",
     "displayName": "Phi-3.5-vision-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 3820879872,
     "architecture": {
@@ -6694,7 +6694,7 @@
     "id": "microsoft/Phi-4-mini-instruct",
     "family": "phi",
     "displayName": "Phi-4-mini-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 4238475264,
     "architecture": {
@@ -6716,7 +6716,7 @@
     "id": "microsoft/Phi-4-mini-reasoning",
     "family": "phi",
     "displayName": "Phi-4-mini-reasoning",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 4238475264,
     "architecture": {
@@ -6738,7 +6738,7 @@
     "id": "microsoft/Phi-4-multimodal-instruct",
     "family": "phi",
     "displayName": "Phi-4-multimodal-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 4238475264,
     "architecture": {
@@ -6760,7 +6760,7 @@
     "id": "allenai/OLMo-2-0325-32B",
     "family": "olmo",
     "displayName": "OLMo-2-0325-32B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 34917580800,
     "architecture": {
@@ -6782,7 +6782,7 @@
     "id": "allenai/OLMo-2-0325-32B-Instruct",
     "family": "olmo",
     "displayName": "OLMo-2-0325-32B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 34917580800,
     "architecture": {
@@ -6804,7 +6804,7 @@
     "id": "allenai/OLMoE-1B-7B-0924",
     "family": "olmo",
     "displayName": "OLMoE-1B-7B-0924",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 575143936,
     "architecture": {
@@ -6830,7 +6830,7 @@
     "id": "allenai/OLMoE-1B-7B-0924-Instruct",
     "family": "olmo",
     "displayName": "OLMoE-1B-7B-0924-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 575143936,
     "architecture": {
@@ -6856,7 +6856,7 @@
     "id": "allenai/Llama-3.1-Tulu-3-8B",
     "family": "llama",
     "displayName": "Llama-3.1-Tulu-3-8B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8835366912,
     "architecture": {
@@ -6878,7 +6878,7 @@
     "id": "allenai/Llama-3.1-Tulu-3-70B",
     "family": "llama",
     "displayName": "Llama-3.1-Tulu-3-70B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 79947759616,
     "architecture": {
@@ -6900,7 +6900,7 @@
     "id": "allenai/Llama-3.1-Tulu-3-405B",
     "family": "llama",
     "displayName": "Llama-3.1-Tulu-3-405B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 469267382272,
     "architecture": {
@@ -6922,7 +6922,7 @@
     "id": "allenai/Llama-3.1-Tulu-3.1-8B",
     "family": "llama",
     "displayName": "Llama-3.1-Tulu-3.1-8B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8835366912,
     "architecture": {
@@ -6944,7 +6944,7 @@
     "id": "allenai/Molmo-7B-D-0924",
     "family": "olmo",
     "displayName": "Molmo-7B-D-0924",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 13935050752,
     "architecture": {
@@ -6966,7 +6966,7 @@
     "id": "allenai/Molmo-7B-O-0924",
     "family": "olmo",
     "displayName": "Molmo-7B-O-0924",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 11626004480,
     "architecture": {
@@ -6988,7 +6988,7 @@
     "id": "allenai/Molmo-72B-0924",
     "family": "olmo",
     "displayName": "Molmo-72B-0924",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 140232359936,
     "architecture": {
@@ -7010,7 +7010,7 @@
     "id": "nvidia/Llama-3_3-Nemotron-Super-49B-v1",
     "family": "llama",
     "displayName": "Llama-3_3-Nemotron-Super-49B-v1",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 88000692224,
     "architecture": {
@@ -7032,7 +7032,7 @@
     "id": "nvidia/Llama-3_1-Nemotron-Ultra-253B-v1",
     "family": "llama",
     "displayName": "Llama-3_1-Nemotron-Ultra-253B-v1",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 699987394560,
     "architecture": {
@@ -7054,7 +7054,7 @@
     "id": "nvidia/Llama-3.1-Nemotron-Nano-8B-v1",
     "family": "llama",
     "displayName": "Llama-3.1-Nemotron-Nano-8B-v1",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8835301376,
     "architecture": {
@@ -7076,7 +7076,7 @@
     "id": "nvidia/Llama-3.1-Nemotron-Nano-4B-v1.1",
     "family": "llama",
     "displayName": "Llama-3.1-Nemotron-Nano-4B-v1.1",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 4713873408,
     "architecture": {
@@ -7098,7 +7098,7 @@
     "id": "nvidia/Nemotron-Mini-4B-Instruct",
     "family": "llama",
     "displayName": "Nemotron-Mini-4B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 5498732544,
     "architecture": {
@@ -7120,7 +7120,7 @@
     "id": "nvidia/NV-Embed-v2",
     "family": "nv",
     "displayName": "NV-Embed-v2",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8046772224,
     "architecture": {
@@ -7142,7 +7142,7 @@
     "id": "01-ai/Yi-Coder-1.5B-Chat",
     "family": "yi",
     "displayName": "Yi-Coder-1.5B-Chat",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1476395008,
     "architecture": {
@@ -7164,7 +7164,7 @@
     "id": "01-ai/Yi-VL-6B",
     "family": "yi",
     "displayName": "Yi-VL-6B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 7000293376,
     "architecture": {
@@ -7186,7 +7186,7 @@
     "id": "01-ai/Yi-VL-34B",
     "family": "yi",
     "displayName": "Yi-VL-34B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 39672872960,
     "architecture": {
@@ -7208,7 +7208,7 @@
     "id": "tiiuae/falcon-mamba-7b",
     "family": "mamba",
     "displayName": "falcon-mamba-7b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 11270094848,
     "architecture": {
@@ -7230,7 +7230,7 @@
     "id": "tiiuae/Falcon3-1B-Base",
     "family": "falcon3",
     "displayName": "Falcon3-1B-Base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1744830464,
     "architecture": {
@@ -7252,7 +7252,7 @@
     "id": "tiiuae/Falcon3-1B-Instruct",
     "family": "falcon3",
     "displayName": "Falcon3-1B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1744830464,
     "architecture": {
@@ -7274,7 +7274,7 @@
     "id": "tiiuae/Falcon3-3B-Base",
     "family": "falcon3",
     "displayName": "Falcon3-3B-Base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 3504340992,
     "architecture": {
@@ -7296,7 +7296,7 @@
     "id": "tiiuae/Falcon3-3B-Instruct",
     "family": "falcon3",
     "displayName": "Falcon3-3B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 3504340992,
     "architecture": {
@@ -7318,7 +7318,7 @@
     "id": "tiiuae/Falcon-H1-0.5B-Instruct",
     "family": "falcon",
     "displayName": "Falcon-H1-0.5B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 444628992,
     "architecture": {
@@ -7340,7 +7340,7 @@
     "id": "tiiuae/Falcon-H1-1.5B-Instruct",
     "family": "falcon",
     "displayName": "Falcon-H1-1.5B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1350569984,
     "architecture": {
@@ -7362,7 +7362,7 @@
     "id": "tiiuae/Falcon-H1-3B-Instruct",
     "family": "falcon",
     "displayName": "Falcon-H1-3B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 2684359680,
     "architecture": {
@@ -7384,7 +7384,7 @@
     "id": "tiiuae/Falcon-H1-7B-Instruct",
     "family": "falcon",
     "displayName": "Falcon-H1-7B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 7442798592,
     "architecture": {
@@ -7406,7 +7406,7 @@
     "id": "tiiuae/Falcon-H1-34B-Instruct",
     "family": "falcon",
     "displayName": "Falcon-H1-34B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 34005319680,
     "architecture": {
@@ -7428,7 +7428,7 @@
     "id": "xai-org/grok-2",
     "family": "grok",
     "displayName": "grok-2",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 225485783040,
     "architecture": {
@@ -7455,7 +7455,7 @@
     "id": "ibm-granite/granite-3.0-2b-base",
     "family": "granite",
     "displayName": "granite-3.0-2b-base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 2785017856,
     "architecture": {
@@ -7477,7 +7477,7 @@
     "id": "ibm-granite/granite-3.0-8b-base",
     "family": "granite",
     "displayName": "granite-3.0-8b-base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 9177137152,
     "architecture": {
@@ -7499,7 +7499,7 @@
     "id": "ibm-granite/granite-3.1-2b-base",
     "family": "granite",
     "displayName": "granite-3.1-2b-base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 2785017856,
     "architecture": {
@@ -7521,7 +7521,7 @@
     "id": "ibm-granite/granite-3.1-8b-base",
     "family": "granite",
     "displayName": "granite-3.1-8b-base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 9177137152,
     "architecture": {
@@ -7543,7 +7543,7 @@
     "id": "ibm-granite/granite-3.2-2b-instruct",
     "family": "granite",
     "displayName": "granite-3.2-2b-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 2785024000,
     "architecture": {
@@ -7565,7 +7565,7 @@
     "id": "ibm-granite/granite-3.2-8b-instruct",
     "family": "granite",
     "displayName": "granite-3.2-8b-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 9177149440,
     "architecture": {
@@ -7587,7 +7587,7 @@
     "id": "ibm-granite/granite-3.3-2b-instruct",
     "family": "granite",
     "displayName": "granite-3.3-2b-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 2785032192,
     "architecture": {
@@ -7609,7 +7609,7 @@
     "id": "ibm-granite/granite-3.3-8b-instruct",
     "family": "granite",
     "displayName": "granite-3.3-8b-instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 9177165824,
     "architecture": {
@@ -7631,7 +7631,7 @@
     "id": "ibm-granite/granite-vision-3.2-2b",
     "family": "granite",
     "displayName": "granite-vision-3.2-2b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 2785026048,
     "architecture": {
@@ -7653,7 +7653,7 @@
     "id": "ibm-granite/granite-3b-code-instruct-128k",
     "family": "granite",
     "displayName": "granite-3b-code-instruct-128k",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 3481272320,
     "architecture": {
@@ -7675,7 +7675,7 @@
     "id": "ibm-granite/granite-embedding-30m-english",
     "family": "granite",
     "displayName": "granite-embedding-30m-english",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 52759296,
     "architecture": {
@@ -7697,7 +7697,7 @@
     "id": "ibm-granite/granite-embedding-107m-multilingual",
     "family": "granite",
     "displayName": "granite-embedding-107m-multilingual",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 206157312,
     "architecture": {
@@ -7719,7 +7719,7 @@
     "id": "ibm-granite/granite-embedding-125m-english",
     "family": "granite",
     "displayName": "granite-embedding-125m-english",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 190453248,
     "architecture": {
@@ -7741,7 +7741,7 @@
     "id": "ibm-granite/granite-embedding-278m-multilingual",
     "family": "granite",
     "displayName": "granite-embedding-278m-multilingual",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 497249280,
     "architecture": {
@@ -7763,7 +7763,7 @@
     "id": "ai21labs/Jamba-v0.1",
     "family": "jamba",
     "displayName": "Jamba-v0.1",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8321499136,
     "architecture": {
@@ -7789,7 +7789,7 @@
     "id": "openai/gpt-oss-20b",
     "family": "gpt",
     "displayName": "gpt-oss-20b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 2551726080,
     "architecture": {
@@ -7815,7 +7815,7 @@
     "id": "openai/gpt-oss-120b",
     "family": "gpt",
     "displayName": "gpt-oss-120b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 3248455680,
     "architecture": {
@@ -7841,7 +7841,7 @@
     "id": "moonshotai/Moonlight-16B-A3B",
     "family": "moonlight",
     "displayName": "Moonlight-16B-A3B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 15588130816,
     "architecture": {
@@ -7870,7 +7870,7 @@
     "id": "moonshotai/Moonlight-16B-A3B-Instruct",
     "family": "moonlight",
     "displayName": "Moonlight-16B-A3B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 15588130816,
     "architecture": {
@@ -7899,7 +7899,7 @@
     "id": "moonshotai/Kimi-K2-Base",
     "family": "kimi",
     "displayName": "Kimi-K2-Base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1029967970304,
     "architecture": {
@@ -7928,7 +7928,7 @@
     "id": "moonshotai/Kimi-K2-Instruct",
     "family": "kimi",
     "displayName": "Kimi-K2-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1029967970304,
     "architecture": {
@@ -7957,7 +7957,7 @@
     "id": "moonshotai/Kimi-K2-Instruct-0905",
     "family": "kimi",
     "displayName": "Kimi-K2-Instruct-0905",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1029967970304,
     "architecture": {
@@ -7986,7 +7986,7 @@
     "id": "moonshotai/Kimi-VL-A3B-Instruct",
     "family": "kimi",
     "displayName": "Kimi-VL-A3B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 15588130816,
     "architecture": {
@@ -8008,7 +8008,7 @@
     "id": "moonshotai/Kimi-VL-A3B-Thinking",
     "family": "kimi",
     "displayName": "Kimi-VL-A3B-Thinking",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 15588130816,
     "architecture": {
@@ -8030,7 +8030,7 @@
     "id": "THUDM/GLM-4-9B-0414",
     "family": "glm",
     "displayName": "GLM-4-9B-0414",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 10657726464,
     "architecture": {
@@ -8052,7 +8052,7 @@
     "id": "THUDM/GLM-Z1-32B-0414",
     "family": "glm",
     "displayName": "GLM-Z1-32B-0414",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 36978032640,
     "architecture": {
@@ -8074,7 +8074,7 @@
     "id": "THUDM/GLM-Z1-9B-0414",
     "family": "glm",
     "displayName": "GLM-Z1-9B-0414",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 10657726464,
     "architecture": {
@@ -8096,7 +8096,7 @@
     "id": "THUDM/GLM-Z1-Rumination-32B-0414",
     "family": "glm",
     "displayName": "GLM-Z1-Rumination-32B-0414",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 36978032640,
     "architecture": {
@@ -8115,10 +8115,39 @@
     "huggingfaceId": "THUDM/GLM-Z1-Rumination-32B-0414"
   },
   {
+    "id": "zai-org/GLM-5.2",
+    "family": "glm",
+    "displayName": "GLM-5.2",
+    "releaseDate": "2026-06-01",
+    "license": "MIT",
+    "paramsTotal": 744000000000,
+    "paramsActive": 40000000000,
+    "architecture": {
+      "numLayers": 78,
+      "hiddenSize": 6144,
+      "intermediateSize": 12288,
+      "numAttentionHeads": 64,
+      "numKeyValueHeads": 64,
+      "headDim": 192,
+      "vocabSize": 154880,
+      "tieWordEmbeddings": false,
+      "attentionType": "mla",
+      "maxContextLength": 1048576,
+      "positionalEmbedding": "rope"
+    },
+    "moe": {
+      "numExperts": 256,
+      "expertsPerToken": 8,
+      "sharedExperts": 1
+    },
+    "mlaCompressedDim": 512,
+    "huggingfaceId": "zai-org/GLM-5.2"
+  },
+  {
     "id": "THUDM/cogvlm2-llama3-chat-19B",
     "family": "llama",
     "displayName": "cogvlm2-llama3-chat-19B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8835301376,
     "architecture": {
@@ -8140,7 +8169,7 @@
     "id": "RekaAI/reka-flash-3",
     "family": "reka",
     "displayName": "reka-flash-3",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 23811588096,
     "architecture": {
@@ -8162,7 +8191,7 @@
     "id": "RekaAI/reka-flash-3.1",
     "family": "reka",
     "displayName": "reka-flash-3.1",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 23811588096,
     "architecture": {
@@ -8184,7 +8213,7 @@
     "id": "Snowflake/snowflake-arctic-base",
     "family": "snowflake",
     "displayName": "snowflake-arctic-base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 11312824320,
     "architecture": {
@@ -8210,7 +8239,7 @@
     "id": "Snowflake/snowflake-arctic-embed-m",
     "family": "snowflake",
     "displayName": "snowflake-arctic-embed-m",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 160128000,
     "architecture": {
@@ -8232,7 +8261,7 @@
     "id": "Snowflake/snowflake-arctic-embed-l",
     "family": "snowflake",
     "displayName": "snowflake-arctic-embed-l",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 465162240,
     "architecture": {
@@ -8254,7 +8283,7 @@
     "id": "Snowflake/snowflake-arctic-embed-l-v2.0",
     "family": "snowflake",
     "displayName": "snowflake-arctic-embed-l-v2.0",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 914657280,
     "architecture": {
@@ -8276,7 +8305,7 @@
     "id": "Salesforce/xgen-7b-8k-inst",
     "family": "xgen",
     "displayName": "xgen-7b-8k-inst",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 6895435776,
     "architecture": {
@@ -8298,7 +8327,7 @@
     "id": "Salesforce/xLAM-7b-r",
     "family": "xlam",
     "displayName": "xLAM-7b-r",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8046772224,
     "architecture": {
@@ -8320,7 +8349,7 @@
     "id": "Salesforce/xLAM-8x7b-r",
     "family": "xlam",
     "displayName": "xLAM-8x7b-r",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8046772224,
     "architecture": {
@@ -8346,7 +8375,7 @@
     "id": "togethercomputer/RedPajama-INCITE-7B-Instruct",
     "family": "redpajama",
     "displayName": "RedPajama-INCITE-7B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 9003073536,
     "architecture": {
@@ -8368,7 +8397,7 @@
     "id": "stabilityai/stable-code-3b",
     "family": "stable",
     "displayName": "stable-code-3b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 2795110400,
     "architecture": {
@@ -8390,7 +8419,7 @@
     "id": "stabilityai/stable-code-instruct-3b",
     "family": "stable",
     "displayName": "stable-code-instruct-3b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 2795110400,
     "architecture": {
@@ -8412,7 +8441,7 @@
     "id": "HuggingFaceTB/SmolLM-135M",
     "family": "smollm",
     "displayName": "SmolLM-135M",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 147750912,
     "architecture": {
@@ -8434,7 +8463,7 @@
     "id": "HuggingFaceTB/SmolLM-360M",
     "family": "smollm",
     "displayName": "SmolLM-360M",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 401080320,
     "architecture": {
@@ -8456,7 +8485,7 @@
     "id": "HuggingFaceTB/SmolLM-1.7B",
     "family": "smollm",
     "displayName": "SmolLM-1.7B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1711276032,
     "architecture": {
@@ -8478,7 +8507,7 @@
     "id": "HuggingFaceTB/SmolLM3-3B",
     "family": "smollm3",
     "displayName": "SmolLM3-3B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 3301441536,
     "architecture": {
@@ -8500,7 +8529,7 @@
     "id": "HuggingFaceTB/SmolLM3-3B-Base",
     "family": "smollm3",
     "displayName": "SmolLM3-3B-Base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 3301441536,
     "architecture": {
@@ -8522,7 +8551,7 @@
     "id": "HuggingFaceTB/SmolVLM-256M-Instruct",
     "family": "smolvlm",
     "displayName": "SmolVLM-256M-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 176209920,
     "architecture": {
@@ -8544,7 +8573,7 @@
     "id": "HuggingFaceTB/SmolVLM-500M-Instruct",
     "family": "smolvlm",
     "displayName": "SmolVLM-500M-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 448512000,
     "architecture": {
@@ -8566,7 +8595,7 @@
     "id": "HuggingFaceTB/SmolVLM-Instruct",
     "family": "smolvlm",
     "displayName": "SmolVLM-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1811951616,
     "architecture": {
@@ -8588,7 +8617,7 @@
     "id": "HuggingFaceTB/SmolVLM2-256M-Video-Instruct",
     "family": "smolvlm2",
     "displayName": "SmolVLM2-256M-Video-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 176209920,
     "architecture": {
@@ -8610,7 +8639,7 @@
     "id": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
     "family": "smolvlm2",
     "displayName": "SmolVLM2-500M-Video-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 448512000,
     "architecture": {
@@ -8632,7 +8661,7 @@
     "id": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
     "family": "smolvlm2",
     "displayName": "SmolVLM2-2.2B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1812463616,
     "architecture": {
@@ -8654,7 +8683,7 @@
     "id": "NousResearch/Hermes-3-Llama-3.1-405B",
     "family": "llama",
     "displayName": "Hermes-3-Llama-3.1-405B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 469267120128,
     "architecture": {
@@ -8676,7 +8705,7 @@
     "id": "NousResearch/Hermes-3-Llama-3.2-3B",
     "family": "llama",
     "displayName": "Hermes-3-Llama-3.2-3B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 3564896256,
     "architecture": {
@@ -8698,7 +8727,7 @@
     "id": "NousResearch/Hermes-4-70B",
     "family": "hermes",
     "displayName": "Hermes-4-70B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 79947628544,
     "architecture": {
@@ -8720,7 +8749,7 @@
     "id": "NousResearch/Hermes-4-405B",
     "family": "hermes",
     "displayName": "Hermes-4-405B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 469267120128,
     "architecture": {
@@ -8742,7 +8771,7 @@
     "id": "NousResearch/DeepHermes-3-Llama-3-8B-Preview",
     "family": "llama",
     "displayName": "DeepHermes-3-Llama-3-8B-Preview",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8835301376,
     "architecture": {
@@ -8764,7 +8793,7 @@
     "id": "upstage/SOLAR-10.7B-v1.0",
     "family": "solar",
     "displayName": "SOLAR-10.7B-v1.0",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 11939086336,
     "architecture": {
@@ -8786,7 +8815,7 @@
     "id": "internlm/internlm2-chat-7b",
     "family": "internlm2",
     "displayName": "internlm2-chat-7b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8542748672,
     "architecture": {
@@ -8808,7 +8837,7 @@
     "id": "internlm/internlm2-chat-20b",
     "family": "internlm2",
     "displayName": "internlm2-chat-20b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 22880452608,
     "architecture": {
@@ -8830,7 +8859,7 @@
     "id": "internlm/internlm2_5-7b",
     "family": "internlm2_5",
     "displayName": "internlm2_5-7b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8542748672,
     "architecture": {
@@ -8852,7 +8881,7 @@
     "id": "internlm/internlm2_5-20b",
     "family": "internlm2_5",
     "displayName": "internlm2_5-20b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 22880452608,
     "architecture": {
@@ -8874,7 +8903,7 @@
     "id": "baichuan-inc/Baichuan2-7B-Base",
     "family": "baichuan2",
     "displayName": "Baichuan2-7B-Base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 7505707008,
     "architecture": {
@@ -8896,7 +8925,7 @@
     "id": "baichuan-inc/Baichuan2-13B-Base",
     "family": "baichuan2",
     "displayName": "Baichuan2-13B-Base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 13896253440,
     "architecture": {
@@ -8918,7 +8947,7 @@
     "id": "baichuan-inc/Baichuan-M1-14B-Base",
     "family": "baichuan",
     "displayName": "Baichuan-M1-14B-Base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 16252928000,
     "architecture": {
@@ -8940,7 +8969,7 @@
     "id": "baichuan-inc/Baichuan-M1-14B-Instruct",
     "family": "baichuan",
     "displayName": "Baichuan-M1-14B-Instruct",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 16252928000,
     "architecture": {
@@ -8962,7 +8991,7 @@
     "id": "openbmb/MiniCPM-2B-sft-bf16",
     "family": "minicpm",
     "displayName": "MiniCPM-2B-sft-bf16",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 3007517184,
     "architecture": {
@@ -8984,7 +9013,7 @@
     "id": "openbmb/MiniCPM-2B-dpo-bf16",
     "family": "minicpm",
     "displayName": "MiniCPM-2B-dpo-bf16",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 3007517184,
     "architecture": {
@@ -9006,7 +9035,7 @@
     "id": "openbmb/MiniCPM3-4B",
     "family": "minicpm3",
     "displayName": "MiniCPM3-4B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 5048770560,
     "architecture": {
@@ -9029,7 +9058,7 @@
     "id": "openbmb/MiniCPM-Llama3-V-2_5",
     "family": "llama",
     "displayName": "MiniCPM-Llama3-V-2_5",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8835301376,
     "architecture": {
@@ -9051,7 +9080,7 @@
     "id": "openbmb/MiniCPM-o-2_6",
     "family": "minicpm",
     "displayName": "MiniCPM-o-2_6",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8229236736,
     "architecture": {
@@ -9073,7 +9102,7 @@
     "id": "openbmb/MiniCPM4-8B",
     "family": "minicpm4",
     "displayName": "MiniCPM4-8B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 9191620608,
     "architecture": {
@@ -9095,7 +9124,7 @@
     "id": "openbmb/MiniCPM4-0.5B",
     "family": "minicpm4",
     "displayName": "MiniCPM4-0.5B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 553074688,
     "architecture": {
@@ -9117,7 +9146,7 @@
     "id": "WizardLMTeam/WizardCoder-Python-34B-V1.0",
     "family": "wizardcoder",
     "displayName": "WizardCoder-Python-34B-V1.0",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 39380336640,
     "architecture": {
@@ -9139,7 +9168,7 @@
     "id": "WizardLMTeam/WizardMath-70B-V1.0",
     "family": "wizardmath",
     "displayName": "WizardMath-70B-V1.0",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 78370603008,
     "architecture": {
@@ -9161,7 +9190,7 @@
     "id": "cognitivecomputations/dolphin-2.9.3-mistral-nemo-12b",
     "family": "mistral",
     "displayName": "dolphin-2.9.3-mistral-nemo-12b",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 14344540160,
     "architecture": {
@@ -9183,7 +9212,7 @@
     "id": "cognitivecomputations/Dolphin3.0-Mistral-24B",
     "family": "mistral",
     "displayName": "Dolphin3.0-Mistral-24B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 25669160960,
     "architecture": {
@@ -9205,7 +9234,7 @@
     "id": "Nexusflow/Starling-LM-7B-beta",
     "family": "starling",
     "displayName": "Starling-LM-7B-beta",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8046788608,
     "architecture": {
@@ -9227,7 +9256,7 @@
     "id": "berkeley-nest/Starling-LM-7B-alpha",
     "family": "starling",
     "displayName": "Starling-LM-7B-alpha",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8046788608,
     "architecture": {
@@ -9249,7 +9278,7 @@
     "id": "ise-uiuc/Magicoder-S-DS-6.7B",
     "family": "magicoder",
     "displayName": "Magicoder-S-DS-6.7B",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 6740246528,
     "architecture": {
@@ -9271,7 +9300,7 @@
     "id": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
     "family": "llama",
     "displayName": "TinyLlama-1.1B-Chat-v1.0",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1261436928,
     "architecture": {
@@ -9293,7 +9322,7 @@
     "id": "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T",
     "family": "llama",
     "displayName": "TinyLlama-1.1B-intermediate-step-1431k-3T",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1261436928,
     "architecture": {
@@ -9315,7 +9344,7 @@
     "id": "llava-hf/llava-1.5-13b-hf",
     "family": "llava",
     "displayName": "llava-1.5-13b-hf",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 13016104960,
     "architecture": {
@@ -9337,7 +9366,7 @@
     "id": "llava-hf/llava-v1.6-vicuna-13b-hf",
     "family": "llava",
     "displayName": "llava-v1.6-vicuna-13b-hf",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 13016104960,
     "architecture": {
@@ -9359,7 +9388,7 @@
     "id": "llava-hf/llava-v1.6-34b-hf",
     "family": "llava",
     "displayName": "llava-v1.6-34b-hf",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 39673790464,
     "architecture": {
@@ -9381,7 +9410,7 @@
     "id": "llava-hf/llava-onevision-qwen2-0.5b-ov-hf",
     "family": "qwen",
     "displayName": "llava-onevision-qwen2-0.5b-ov-hf",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 527048704,
     "architecture": {
@@ -9403,7 +9432,7 @@
     "id": "llava-hf/llava-onevision-qwen2-7b-ov-hf",
     "family": "qwen",
     "displayName": "llava-onevision-qwen2-7b-ov-hf",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 8232304640,
     "architecture": {
@@ -9425,7 +9454,7 @@
     "id": "llava-hf/llava-onevision-qwen2-72b-ov-hf",
     "family": "qwen",
     "displayName": "llava-onevision-qwen2-72b-ov-hf",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 82100355072,
     "architecture": {
@@ -9447,7 +9476,7 @@
     "id": "facebook/seamless-m4t-v2-large",
     "family": "seamless",
     "displayName": "seamless-m4t-v2-large",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 927150080,
     "architecture": {
@@ -9469,7 +9498,7 @@
     "id": "facebook/hf-seamless-m4t-medium",
     "family": "hf",
     "displayName": "hf-seamless-m4t-medium",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 726036480,
     "architecture": {
@@ -9491,7 +9520,7 @@
     "id": "facebook/hf-seamless-m4t-large",
     "family": "hf",
     "displayName": "hf-seamless-m4t-large",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 927150080,
     "architecture": {
@@ -9513,7 +9542,7 @@
     "id": "BAAI/bge-large-zh-v1.5",
     "family": "bge",
     "displayName": "bge-large-zh-v1.5",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 445923328,
     "architecture": {
@@ -9535,7 +9564,7 @@
     "id": "BAAI/bge-multilingual-gemma2",
     "family": "gemma",
     "displayName": "bge-multilingual-gemma2",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 10466899968,
     "architecture": {
@@ -9557,7 +9586,7 @@
     "id": "sentence-transformers/all-MiniLM-L12-v2",
     "family": "all",
     "displayName": "all-MiniLM-L12-v2",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 51752448,
     "architecture": {
@@ -9579,7 +9608,7 @@
     "id": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
     "family": "paraphrase",
     "displayName": "paraphrase-multilingual-MiniLM-L12-v2",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 220339968,
     "architecture": {
@@ -9601,7 +9630,7 @@
     "id": "sentence-transformers/paraphrase-multilingual-mpnet-base-v2",
     "family": "paraphrase",
     "displayName": "paraphrase-multilingual-mpnet-base-v2",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 497249280,
     "architecture": {
@@ -9623,7 +9652,7 @@
     "id": "intfloat/e5-small-v2",
     "family": "e5",
     "displayName": "e5-small-v2",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 51752448,
     "architecture": {
@@ -9645,7 +9674,7 @@
     "id": "intfloat/e5-base-v2",
     "family": "e5",
     "displayName": "e5-base-v2",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 160128000,
     "architecture": {
@@ -9667,7 +9696,7 @@
     "id": "intfloat/e5-large-v2",
     "family": "e5",
     "displayName": "e5-large-v2",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 465162240,
     "architecture": {
@@ -9689,7 +9718,7 @@
     "id": "intfloat/multilingual-e5-small",
     "family": "multilingual",
     "displayName": "multilingual-e5-small",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 220339968,
     "architecture": {
@@ -9711,7 +9740,7 @@
     "id": "intfloat/multilingual-e5-base",
     "family": "multilingual",
     "displayName": "multilingual-e5-base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 497249280,
     "architecture": {
@@ -9733,7 +9762,7 @@
     "id": "intfloat/multilingual-e5-large",
     "family": "multilingual",
     "displayName": "multilingual-e5-large",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 914657280,
     "architecture": {
@@ -9755,7 +9784,7 @@
     "id": "thenlper/gte-small",
     "family": "gte",
     "displayName": "gte-small",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 51752448,
     "architecture": {
@@ -9777,7 +9806,7 @@
     "id": "thenlper/gte-base",
     "family": "gte",
     "displayName": "gte-base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 160128000,
     "architecture": {
@@ -9799,7 +9828,7 @@
     "id": "Alibaba-NLP/gte-base-en-v1.5",
     "family": "gte",
     "displayName": "gte-base-en-v1.5",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 160137216,
     "architecture": {
@@ -9821,7 +9850,7 @@
     "id": "Alibaba-NLP/gte-large-en-v1.5",
     "family": "gte",
     "displayName": "gte-large-en-v1.5",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 465174528,
     "architecture": {
@@ -9843,7 +9872,7 @@
     "id": "Alibaba-NLP/gte-multilingual-base",
     "family": "gte",
     "displayName": "gte-multilingual-base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 497319936,
     "architecture": {
@@ -9865,7 +9894,7 @@
     "id": "jinaai/jina-embeddings-v2-small-en",
     "family": "jina",
     "displayName": "jina-embeddings-v2-small-en",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 48037888,
     "architecture": {
@@ -9887,7 +9916,7 @@
     "id": "jinaai/jina-embeddings-v2-base-en",
     "family": "jina",
     "displayName": "jina-embeddings-v2-base-en",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 160137216,
     "architecture": {
@@ -9909,7 +9938,7 @@
     "id": "jinaai/jina-embeddings-v2-base-code",
     "family": "jina",
     "displayName": "jina-embeddings-v2-base-code",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 207028224,
     "architecture": {
@@ -9931,7 +9960,7 @@
     "id": "jinaai/jina-embeddings-v3",
     "family": "jina",
     "displayName": "jina-embeddings-v3",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 914657280,
     "architecture": {
@@ -9953,7 +9982,7 @@
     "id": "mixedbread-ai/mxbai-embed-large-v1",
     "family": "mxbai",
     "displayName": "mxbai-embed-large-v1",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 465162240,
     "architecture": {
@@ -9975,7 +10004,7 @@
     "id": "mixedbread-ai/mxbai-embed-xsmall-v1",
     "family": "mxbai",
     "displayName": "mxbai-embed-xsmall-v1",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 37596672,
     "architecture": {
@@ -9997,7 +10026,7 @@
     "id": "dunzhang/stella_en_400M_v5",
     "family": "stella_en_400m_v5",
     "displayName": "stella_en_400M_v5",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 465174528,
     "architecture": {
@@ -10019,7 +10048,7 @@
     "id": "dunzhang/stella_en_1.5B_v5",
     "family": "stella_en_1.5b_v5",
     "displayName": "stella_en_1.5B_v5",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1886152704,
     "architecture": {
@@ -10041,7 +10070,7 @@
     "id": "openai/clip-vit-base-patch32",
     "family": "clip",
     "displayName": "clip-vit-base-patch32",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 75628544,
     "architecture": {
@@ -10063,7 +10092,7 @@
     "id": "openai/clip-vit-large-patch14",
     "family": "clip",
     "displayName": "clip-vit-large-patch14",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 151191552,
     "architecture": {
@@ -10085,7 +10114,7 @@
     "id": "openai/clip-vit-large-patch14-336",
     "family": "clip",
     "displayName": "clip-vit-large-patch14-336",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 151191552,
     "architecture": {
@@ -10107,7 +10136,7 @@
     "id": "google/siglip2-so400m-patch14-384",
     "family": "siglip2",
     "displayName": "siglip2-so400m-patch14-384",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1134766080,
     "architecture": {
@@ -10129,7 +10158,7 @@
     "id": "BAAI/bge-reranker-base",
     "family": "bge",
     "displayName": "bge-reranker-base",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 497249280,
     "architecture": {
@@ -10151,7 +10180,7 @@
     "id": "BAAI/bge-reranker-large",
     "family": "bge",
     "displayName": "bge-reranker-large",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 914657280,
     "architecture": {
@@ -10173,7 +10202,7 @@
     "id": "BAAI/bge-reranker-v2-m3",
     "family": "bge",
     "displayName": "bge-reranker-v2-m3",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 914657280,
     "architecture": {
@@ -10195,7 +10224,7 @@
     "id": "BAAI/bge-reranker-v2-gemma",
     "family": "gemma",
     "displayName": "bge-reranker-v2-gemma",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 3162505216,
     "architecture": {
@@ -10217,7 +10246,7 @@
     "id": "jinaai/jina-reranker-v2-base-multilingual",
     "family": "jina",
     "displayName": "jina-reranker-v2-base-multilingual",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 497249280,
     "architecture": {
@@ -10239,7 +10268,7 @@
     "id": "mixedbread-ai/mxbai-rerank-base-v1",
     "family": "mxbai",
     "displayName": "mxbai-rerank-base-v1",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 310007808,
     "architecture": {
@@ -10261,7 +10290,7 @@
     "id": "mixedbread-ai/mxbai-rerank-large-v1",
     "family": "mxbai",
     "displayName": "mxbai-rerank-large-v1",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 665001984,
     "architecture": {
@@ -10283,7 +10312,7 @@
     "id": "mixedbread-ai/mxbai-rerank-large-v2",
     "family": "mxbai",
     "displayName": "mxbai-rerank-large-v2",
-    "releaseDate": "2026-04-21",
+    "releaseDate": "2026-07-16",
     "license": "unknown",
     "paramsTotal": 1653669888,
     "architecture": {
@@ -11620,5 +11649,401 @@
       "positionalEmbedding": "rope"
     },
     "huggingfaceId": "meta-llama/Prompt-Guard-86M"
+  },
+  {
+    "id": "allenai/OLMo-1B",
+    "family": "olmo",
+    "displayName": "OLMo-1B",
+    "releaseDate": "2026-07-16",
+    "license": "unknown",
+    "paramsTotal": 1279688704,
+    "architecture": {
+      "numLayers": 16,
+      "hiddenSize": 2048,
+      "intermediateSize": 0,
+      "numAttentionHeads": 16,
+      "numKeyValueHeads": 16,
+      "headDim": 128,
+      "vocabSize": 50280,
+      "tieWordEmbeddings": false,
+      "attentionType": "mha",
+      "maxContextLength": 0,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "allenai/OLMo-1B"
+  },
+  {
+    "id": "allenai/OLMo-7B",
+    "family": "olmo",
+    "displayName": "OLMo-7B",
+    "releaseDate": "2026-07-16",
+    "license": "unknown",
+    "paramsTotal": 9001828352,
+    "architecture": {
+      "numLayers": 32,
+      "hiddenSize": 4096,
+      "intermediateSize": 0,
+      "numAttentionHeads": 32,
+      "numKeyValueHeads": 32,
+      "headDim": 128,
+      "vocabSize": 50280,
+      "tieWordEmbeddings": false,
+      "attentionType": "mha",
+      "maxContextLength": 0,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "allenai/OLMo-7B"
+  },
+  {
+    "id": "allenai/OLMo-7B-Instruct",
+    "family": "olmo",
+    "displayName": "OLMo-7B-Instruct",
+    "releaseDate": "2026-07-16",
+    "license": "unknown",
+    "paramsTotal": 9001828352,
+    "architecture": {
+      "numLayers": 32,
+      "hiddenSize": 4096,
+      "intermediateSize": 0,
+      "numAttentionHeads": 32,
+      "numKeyValueHeads": 32,
+      "headDim": 128,
+      "vocabSize": 50280,
+      "tieWordEmbeddings": false,
+      "attentionType": "mha",
+      "maxContextLength": 0,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "allenai/OLMo-7B-Instruct"
+  },
+  {
+    "id": "allenai/MolmoE-1B-0924",
+    "family": "olmo",
+    "displayName": "MolmoE-1B-0924",
+    "releaseDate": "2026-07-16",
+    "license": "unknown",
+    "paramsTotal": 1279688704,
+    "architecture": {
+      "numLayers": 16,
+      "hiddenSize": 2048,
+      "intermediateSize": 0,
+      "numAttentionHeads": 16,
+      "numKeyValueHeads": 16,
+      "headDim": 128,
+      "vocabSize": 50280,
+      "tieWordEmbeddings": false,
+      "attentionType": "mha",
+      "maxContextLength": 32768,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "allenai/MolmoE-1B-0924"
+  },
+  {
+    "id": "THUDM/chatglm3-6b",
+    "family": "chatglm3",
+    "displayName": "chatglm3-6b",
+    "releaseDate": "2026-07-16",
+    "license": "unknown",
+    "paramsTotal": 7124025344,
+    "architecture": {
+      "numLayers": 28,
+      "hiddenSize": 4096,
+      "intermediateSize": 13696,
+      "numAttentionHeads": 32,
+      "numKeyValueHeads": 2,
+      "headDim": 128,
+      "vocabSize": 65024,
+      "tieWordEmbeddings": false,
+      "attentionType": "gqa",
+      "maxContextLength": 8192,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "THUDM/chatglm3-6b"
+  },
+  {
+    "id": "THUDM/glm-4-9b",
+    "family": "glm",
+    "displayName": "glm-4-9b",
+    "releaseDate": "2026-07-16",
+    "license": "unknown",
+    "paramsTotal": 10657726464,
+    "architecture": {
+      "numLayers": 40,
+      "hiddenSize": 4096,
+      "intermediateSize": 13696,
+      "numAttentionHeads": 32,
+      "numKeyValueHeads": 2,
+      "headDim": 128,
+      "vocabSize": 151552,
+      "tieWordEmbeddings": false,
+      "attentionType": "gqa",
+      "maxContextLength": 8192,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "THUDM/glm-4-9b"
+  },
+  {
+    "id": "THUDM/glm-4-9b-chat",
+    "family": "glm",
+    "displayName": "glm-4-9b-chat",
+    "releaseDate": "2026-07-16",
+    "license": "unknown",
+    "paramsTotal": 10657726464,
+    "architecture": {
+      "numLayers": 40,
+      "hiddenSize": 4096,
+      "intermediateSize": 13696,
+      "numAttentionHeads": 32,
+      "numKeyValueHeads": 2,
+      "headDim": 128,
+      "vocabSize": 151552,
+      "tieWordEmbeddings": false,
+      "attentionType": "gqa",
+      "maxContextLength": 131072,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "THUDM/glm-4-9b-chat"
+  },
+  {
+    "id": "THUDM/glm-4-9b-chat-1m",
+    "family": "glm",
+    "displayName": "glm-4-9b-chat-1m",
+    "releaseDate": "2026-07-16",
+    "license": "unknown",
+    "paramsTotal": 10657726464,
+    "architecture": {
+      "numLayers": 40,
+      "hiddenSize": 4096,
+      "intermediateSize": 13696,
+      "numAttentionHeads": 32,
+      "numKeyValueHeads": 4,
+      "headDim": 128,
+      "vocabSize": 151552,
+      "tieWordEmbeddings": false,
+      "attentionType": "gqa",
+      "maxContextLength": 1048576,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "THUDM/glm-4-9b-chat-1m"
+  },
+  {
+    "id": "EleutherAI/gpt-neo-1.3B",
+    "family": "gpt",
+    "displayName": "gpt-neo-1.3B",
+    "releaseDate": "2026-07-16",
+    "license": "unknown",
+    "paramsTotal": 1816465408,
+    "architecture": {
+      "numLayers": 24,
+      "hiddenSize": 2048,
+      "intermediateSize": 0,
+      "numAttentionHeads": 0,
+      "numKeyValueHeads": 0,
+      "headDim": 0,
+      "vocabSize": 50257,
+      "tieWordEmbeddings": false,
+      "attentionType": "mha",
+      "maxContextLength": 2048,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "EleutherAI/gpt-neo-1.3B"
+  },
+  {
+    "id": "EleutherAI/gpt-neo-2.7B",
+    "family": "gpt",
+    "displayName": "gpt-neo-2.7B",
+    "releaseDate": "2026-07-16",
+    "license": "unknown",
+    "paramsTotal": 3612759040,
+    "architecture": {
+      "numLayers": 32,
+      "hiddenSize": 2560,
+      "intermediateSize": 0,
+      "numAttentionHeads": 0,
+      "numKeyValueHeads": 0,
+      "headDim": 0,
+      "vocabSize": 50257,
+      "tieWordEmbeddings": false,
+      "attentionType": "mha",
+      "maxContextLength": 2048,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "EleutherAI/gpt-neo-2.7B"
+  },
+  {
+    "id": "openai/whisper-tiny",
+    "family": "whisper",
+    "displayName": "whisper-tiny",
+    "releaseDate": "2026-07-16",
+    "license": "unknown",
+    "paramsTotal": 49269504,
+    "architecture": {
+      "numLayers": 4,
+      "hiddenSize": 384,
+      "intermediateSize": 0,
+      "numAttentionHeads": 0,
+      "numKeyValueHeads": 0,
+      "headDim": 0,
+      "vocabSize": 51865,
+      "tieWordEmbeddings": false,
+      "attentionType": "mha",
+      "maxContextLength": 0,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "openai/whisper-tiny"
+  },
+  {
+    "id": "openai/whisper-base",
+    "family": "whisper",
+    "displayName": "whisper-base",
+    "releaseDate": "2026-07-16",
+    "license": "unknown",
+    "paramsTotal": 78275584,
+    "architecture": {
+      "numLayers": 6,
+      "hiddenSize": 512,
+      "intermediateSize": 0,
+      "numAttentionHeads": 0,
+      "numKeyValueHeads": 0,
+      "headDim": 0,
+      "vocabSize": 51865,
+      "tieWordEmbeddings": false,
+      "attentionType": "mha",
+      "maxContextLength": 0,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "openai/whisper-base"
+  },
+  {
+    "id": "openai/whisper-small",
+    "family": "whisper",
+    "displayName": "whisper-small",
+    "releaseDate": "2026-07-16",
+    "license": "unknown",
+    "paramsTotal": 192910848,
+    "architecture": {
+      "numLayers": 12,
+      "hiddenSize": 768,
+      "intermediateSize": 0,
+      "numAttentionHeads": 0,
+      "numKeyValueHeads": 0,
+      "headDim": 0,
+      "vocabSize": 51865,
+      "tieWordEmbeddings": false,
+      "attentionType": "mha",
+      "maxContextLength": 0,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "openai/whisper-small"
+  },
+  {
+    "id": "openai/whisper-medium",
+    "family": "whisper",
+    "displayName": "whisper-medium",
+    "releaseDate": "2026-07-16",
+    "license": "unknown",
+    "paramsTotal": 508872704,
+    "architecture": {
+      "numLayers": 24,
+      "hiddenSize": 1024,
+      "intermediateSize": 0,
+      "numAttentionHeads": 0,
+      "numKeyValueHeads": 0,
+      "headDim": 0,
+      "vocabSize": 51865,
+      "tieWordEmbeddings": false,
+      "attentionType": "mha",
+      "maxContextLength": 0,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "openai/whisper-medium"
+  },
+  {
+    "id": "openai/whisper-large-v2",
+    "family": "whisper",
+    "displayName": "whisper-large-v2",
+    "releaseDate": "2026-07-16",
+    "license": "unknown",
+    "paramsTotal": 971635200,
+    "architecture": {
+      "numLayers": 32,
+      "hiddenSize": 1280,
+      "intermediateSize": 0,
+      "numAttentionHeads": 0,
+      "numKeyValueHeads": 0,
+      "headDim": 0,
+      "vocabSize": 51865,
+      "tieWordEmbeddings": false,
+      "attentionType": "mha",
+      "maxContextLength": 0,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "openai/whisper-large-v2"
+  },
+  {
+    "id": "openai/whisper-large-v3",
+    "family": "whisper",
+    "displayName": "whisper-large-v3",
+    "releaseDate": "2026-07-16",
+    "license": "unknown",
+    "paramsTotal": 971637760,
+    "architecture": {
+      "numLayers": 32,
+      "hiddenSize": 1280,
+      "intermediateSize": 0,
+      "numAttentionHeads": 0,
+      "numKeyValueHeads": 0,
+      "headDim": 0,
+      "vocabSize": 51866,
+      "tieWordEmbeddings": false,
+      "attentionType": "mha",
+      "maxContextLength": 0,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "openai/whisper-large-v3"
+  },
+  {
+    "id": "openai/whisper-large-v3-turbo",
+    "family": "whisper",
+    "displayName": "whisper-large-v3-turbo",
+    "releaseDate": "2026-07-16",
+    "license": "unknown",
+    "paramsTotal": 971637760,
+    "architecture": {
+      "numLayers": 32,
+      "hiddenSize": 1280,
+      "intermediateSize": 0,
+      "numAttentionHeads": 0,
+      "numKeyValueHeads": 0,
+      "headDim": 0,
+      "vocabSize": 51866,
+      "tieWordEmbeddings": false,
+      "attentionType": "mha",
+      "maxContextLength": 0,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "openai/whisper-large-v3-turbo"
+  },
+  {
+    "id": "distil-whisper/distil-large-v3",
+    "family": "distil",
+    "displayName": "distil-large-v3",
+    "releaseDate": "2026-07-16",
+    "license": "unknown",
+    "paramsTotal": 971637760,
+    "architecture": {
+      "numLayers": 32,
+      "hiddenSize": 1280,
+      "intermediateSize": 0,
+      "numAttentionHeads": 0,
+      "numKeyValueHeads": 0,
+      "headDim": 0,
+      "vocabSize": 51866,
+      "tieWordEmbeddings": false,
+      "attentionType": "mha",
+      "maxContextLength": 0,
+      "positionalEmbedding": "rope"
+    },
+    "huggingfaceId": "distil-whisper/distil-large-v3"
   }
 ]
