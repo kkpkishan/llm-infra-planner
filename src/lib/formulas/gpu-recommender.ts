@@ -62,13 +62,13 @@ export function recommendGPUs(
     return { gpu, fitStatus, utilizationPercent, freeVRAMGB, tokensPerSecond };
   });
 
-  // Sort: green first (by utilization asc), then yellow, then red
+  // Sort: green first, then yellow, then red. Within each fit status, sort by utilization descending (smallest memory capacity that fits first)
   allFits.sort((a, b) => {
     const order = { green: 0, yellow: 1, red: 2 };
     if (order[a.fitStatus] !== order[b.fitStatus]) {
       return order[a.fitStatus] - order[b.fitStatus];
     }
-    return a.utilizationPercent - b.utilizationPercent;
+    return b.utilizationPercent - a.utilizationPercent;
   });
 
   // Tier picks — only from green/yellow fits

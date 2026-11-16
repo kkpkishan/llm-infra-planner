@@ -6,7 +6,8 @@ describe('project setup', () => {
   })
 
   it('should resolve @/ path alias', async () => {
-    const app = await import('@/App')
-    expect(app.default).toBeDefined()
+    const precision = await import('@/lib/formulas/precision')
+    expect(precision.DEFAULT_PRECISION).toBeDefined()
   })
 })
+

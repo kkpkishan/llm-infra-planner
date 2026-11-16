@@ -94,17 +94,18 @@ function resolveActiveConfig(raw: RawConfig): RawConfig {
 export function parseConfig(configJson: RawConfig, _modelId: string): ParsedConfig | null {
   const active = resolveActiveConfig(configJson);
 
-  const hiddenSize = num(active["hidden_size"]);
-  const numLayers = num(active["num_hidden_layers"]);
-  const vocabSize = num(active["vocab_size"]);
+  const hiddenSize = num(active["hidden_size"]) ?? num(active["d_model"]) ?? num(active["dim"]);
+  const numLayers = num(active["num_hidden_layers"]) ?? num(active["num_layers"]) ?? num(active["n_layers"]);
+  const vocabSize = num(active["vocab_size"]) ?? num(active["padded_vocab_size"]);
 
   // Required fields
   if (hiddenSize === undefined || numLayers === undefined || vocabSize === undefined) {
     return null;
   }
 
-  const numAttentionHeads = num(active["num_attention_heads"]);
-  const numKeyValueHeads = num(active["num_key_value_heads"]) ?? numAttentionHeads;
+  const numAttentionHeads = num(active["num_attention_heads"]) ?? num(active["n_heads"]);
+  const numKeyValueHeads = num(active["num_key_value_heads"]) ?? 
+    (active["multi_query_attention"] === true ? (num(active["multi_query_group_num"]) ?? 1) : numAttentionHeads);
 
   // Compute headDim: explicit or derived
   let headDim = num(active["head_dim"]);
@@ -112,8 +113,8 @@ export function parseConfig(configJson: RawConfig, _modelId: string): ParsedConf
     headDim = Math.floor(hiddenSize / numAttentionHeads);
   }
 
-  const intermediateSize = num(active["intermediate_size"]);
-  const maxPositionEmbeddings = num(active["max_position_embeddings"]);
+  const intermediateSize = num(active["intermediate_size"]) ?? num(active["ffn_hidden_size"]) ?? num(active["d_ff"]);
+  const maxPositionEmbeddings = num(active["max_position_embeddings"]) ?? num(active["seq_length"]) ?? num(active["max_seq_len"]);
   const modelType = str(active["model_type"]);
   const tieWordEmbeddings = bool(active["tie_word_embeddings"]);
   const torchDtype = str(active["torch_dtype"]);

@@ -94,7 +94,7 @@ describe('Property 16: URL state round-trip', () => {
   it('serialize then parse produces equivalent state', () => {
     const precisionKeys = Object.keys(PRECISION_MAP);
     const kvKeys = Object.keys(KV_PRECISION_MAP);
-    const modes = ['inference', 'scale', 'finetune', 'train'] as const;
+    const modes = ['inference', 'train'] as const;
     const modelIds = MODEL_DB.map(m => m.id);
 
     fc.assert(

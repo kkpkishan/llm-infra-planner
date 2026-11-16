@@ -35,7 +35,33 @@ function computeConfig(state: CalculatorState, modelDb: ModelSpec[], gpuDb: GPUS
   const activeWeightsGB = (activeParams * precisionConfig.bytesPerParam) / 1e9;
 
   const gpuRecs = recommendGPUs(breakdown.totalGB, gpuDb, { activeWeightsGB, efficiencyFactor: DEFAULT_EFFICIENCY });
-  const topGPU = gpuRecs.allFits.find(f => f.fitStatus !== 'red');
+  
+  let topGPU: any;
+  if (state.gpu) {
+    topGPU = gpuRecs.allFits.find(f => f.gpu.id === state.gpu);
+    if (!topGPU) {
+      const selectedGPU = gpuDb.find(g => g.id === state.gpu);
+      if (selectedGPU) {
+        const fitStatus = selectedGPU.memoryGB >= breakdown.totalGB ? 'green' : 'red';
+        const utilizationPercent = Math.round((breakdown.totalGB / selectedGPU.memoryGB) * 100);
+        topGPU = {
+          gpu: selectedGPU,
+          fitStatus,
+          utilizationPercent,
+          freeVRAMGB: Math.max(0, selectedGPU.memoryGB - breakdown.totalGB),
+          tokensPerSecond: computeThroughput({
+            memoryBandwidthGBs: selectedGPU.memoryBandwidthGBs,
+            activeWeightsGB,
+            efficiencyFactor: DEFAULT_EFFICIENCY,
+          }).tokensPerSecond,
+        };
+      }
+    }
+  }
+  if (!topGPU) {
+    topGPU = gpuRecs.allFits.find(f => f.fitStatus !== 'red');
+  }
+
   const fitLabel = topGPU ? `${topGPU.gpu.name} (${topGPU.fitStatus})` : 'No fit';
 
   const tokensPerSecond = topGPU
